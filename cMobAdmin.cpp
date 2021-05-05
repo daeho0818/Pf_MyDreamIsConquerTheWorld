@@ -2,7 +2,8 @@
 #include "cBoss.h"
 #include "cMobAdmin.h"
 
-cMobAdmin::cMobAdmin()
+cMobAdmin::cMobAdmin(vector<cBullet*>& bullet)
+	:m_bullets(bullet)
 {
 	m_mobs.push_back(new cBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
 }

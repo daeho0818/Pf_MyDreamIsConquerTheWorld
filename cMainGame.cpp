@@ -93,5 +93,7 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("Speed+", "Speed+");
 	IMAGE->AddImage("Invincibility", "Invincibility");
 
+	IMAGE->AddImage("bullet_enemy", "bullet_enemy");
+
 	IMAGE->AddImage("expl", "explosion/expl", 24);
 }

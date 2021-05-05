@@ -45,11 +45,16 @@ void cBoss::CircleBullet()
 void cBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (!isStop) t_Pattern1 = new cTimer(7, [&]()->void {
+
+	if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(7, [&]()->void {
 		isStop = true;
 		t_Pattern1 = nullptr;
 		});
+
 	if (isStop) { isStop = false; CircleBullet(); }
+
+	if (INPUT->KeyDown(VK_RETURN)) CircleBullet();
+
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
 		dir_x *= -1;

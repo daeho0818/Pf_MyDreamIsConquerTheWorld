@@ -4,6 +4,7 @@
 #include "cItemAdmin.h"
 #include "cCollision.h"
 #include "cMobAdmin.h"
+#include "cBulletAdmin.h"
 class cIngameScene
 	:public cScene
 {
@@ -15,6 +16,7 @@ public:
 	cMobAdmin* mob = nullptr;
 	cItemAdmin* item = nullptr;
 	cCollision* coll = nullptr;
+	cBulletAdmin* bullet = nullptr;
 
 	virtual void Init() override;
 	virtual void Update() override;

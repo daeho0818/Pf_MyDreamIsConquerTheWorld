@@ -25,7 +25,8 @@ void cIngameScene2::Init()
 	IMAGE->AddImage("bg4", "bg4");
 	cTexture* ptr[2] = { IMAGE->FindImage("bg3"), IMAGE->FindImage("bg4") };
 	player = new cPlayer(ptr);
-	mob = new cMobAdmin();
+	bullet = new cBulletAdmin();
+	mob = new cMobAdmin(bullet->m_bullets);
 	item = new cItemAdmin(player);
 	coll = new cCollision(mob->m_mobs, player, item);
 }
@@ -59,6 +60,7 @@ void cIngameScene2::Update()
 			});
 	}
 	player->Update(mob->bossPos);
+	bullet->Update();
 	mob->Update();
 	item->Update();
 	coll->Update();
@@ -68,6 +70,7 @@ void cIngameScene2::Update()
 void cIngameScene2::Render()
 {
 	player->Render();
+	bullet->Render();
 	mob->Render();
 	item->Update();
 	coll->Update();
@@ -84,6 +87,7 @@ void cIngameScene2::UIRender()
 void cIngameScene2::Release()
 {
 	SAFE_DELETE(player);
+	SAFE_DELETE(bullet);
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);

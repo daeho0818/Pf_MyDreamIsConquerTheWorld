@@ -2,7 +2,7 @@
 class cMobAdmin
 {
 public:
-	cMobAdmin();
+	cMobAdmin(vector<cBullet*>& bullet);
 	~cMobAdmin();
 
 	vector<cMob*> m_mobs;
