@@ -8,27 +8,37 @@ public:
 
 	int Stage;
 	int index = 0;
+
 	Vec2 m_pos = { 0, 0 };
 	Vec2 bossPos;
 	Vec2 startDrawPos;
+
 	RECT hRc;
+
 	cTexture* BG[2];
+
 	vector<cTexture*> player;
+
 	string itemName;
+
 	cTimer* t_Speed = nullptr;
 	cTimer* t_Invincibility = nullptr;
 	cTimer* t_Ani = nullptr;
-	DWORD* imgColor;
 
-	bool left, right, up, down;
+	DWORD* imgColor;
 
 	int hp = 5;
 	int coloring_cells = 0;
 	int last_x = 0, last_y = 0;
 	int speed = 3;
 	int real_cells = (1600 - 1) * (900 - 1);
+	int saveHp = 0;
+
 	float coloring_per = 0;
+
 	char perText[128] = "";
+
+	bool left, right, up, down;
 	bool draw_line = false;
 	bool draw_mode = false;
 	bool returning = false;

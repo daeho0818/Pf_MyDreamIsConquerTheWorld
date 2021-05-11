@@ -49,17 +49,24 @@ void cPlayer::Init()
 void cPlayer::Update(Vec2 bossPos)
 {
 	ItemUpdate();
+
 	hRc = {
 		0,
 		0,
 		(LONG)IMAGE->FindImage("hpBar")->info.Width / 10 * hp,
 		(LONG)IMAGE->FindImage("hpBar")->info.Height / 2
 	};
+
 	this->bossPos = bossPos;
+
 	sprintf(perText, "%.3fÆÛ¼¾Æ®", coloring_per);
+
 	KeyEvent();
+
 	//if (returning) Returning();
+
 	Move();
+
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
 
