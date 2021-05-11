@@ -405,6 +405,7 @@
     <ClCompile Include="cMBullet.cpp" />
     <ClCompile Include="cMob.cpp" />
     <ClCompile Include="cMobAdmin.cpp" />
+    <ClCompile Include="cMouseManager.cpp" />
     <ClCompile Include="cParticle.cpp" />
     <ClCompile Include="cParticleAni.cpp" />
     <ClCompile Include="cParticleManager.cpp" />
@@ -438,6 +439,7 @@
     <ClInclude Include="cMBullet.h" />
     <ClInclude Include="cMob.h" />
     <ClInclude Include="cMobAdmin.h" />
+    <ClInclude Include="cMouseManager.h" />
     <ClInclude Include="cParticle.h" />
     <ClInclude Include="cParticleAni.h" />
     <ClInclude Include="cParticleManager.h" />

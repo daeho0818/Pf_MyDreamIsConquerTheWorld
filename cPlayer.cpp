@@ -87,7 +87,7 @@ void cPlayer::Render()
 {
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
-	RENDER->CenterRender(player[index], m_pos);
+	RENDER->CenterRender(player[index], m_pos, 0.1);
 }
 
 void cPlayer::UIRender()

@@ -20,7 +20,7 @@ void cMainGame::Init()
 	SCENE->AddScene("cIngameScene", new cIngameScene);
 	SCENE->AddScene("cIngameScene2", new cIngameScene2);
 	SCENE->AddScene("cTitleScene", new cTitleScene);
-	SCENE->ChangeScene("cIntroScene");
+	SCENE->ChangeScene("cTitleScene");
 }
 
 void cMainGame::Update()
@@ -29,6 +29,7 @@ void cMainGame::Update()
 	PART->Update();
 	SCENE->Update();
 	SOUND->Update();
+	MOUSE->Update();
 }
 
 void cMainGame::Render()
@@ -49,6 +50,7 @@ void cMainGame::Release()
 	cSceneManager::ReleaseInstance();
 	cUIManager::ReleaseInstance();
 	cSoundManager::ReleaseInstance();
+	cMouseManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()
@@ -63,7 +65,20 @@ void cMainGame::LostDevice()
 
 void cMainGame::AddResource()
 {
-	IMAGE->AddImage("TitleBG", "TitleBG");
+	// title
+	IMAGE->AddImage("TitleBG", "title/TitleBG");
+	IMAGE->AddImage("Logo", "title/Logo");
+	IMAGE->AddImage("start_note", "title/start_note");
+	IMAGE->AddImage("start_button", "title/start_button");
+	IMAGE->AddImage("guide_note", "title/guide_note");
+	IMAGE->AddImage("guide_button", "title/guide_button");
+	IMAGE->AddImage("adven_note", "title/adven_note");
+	IMAGE->AddImage("adven_button", "title/adven_button");
+	IMAGE->AddImage("develop_note", "title/develop_note");
+	IMAGE->AddImage("develop_button", "title/develop_button");
+	IMAGE->AddImage("quit_note", "title/quit_note");
+	IMAGE->AddImage("pattern", "title/pattern");
+
 	IMAGE->AddImage("Start", "Start");
 	IMAGE->AddImage("hStart", "hStart");
 	IMAGE->AddImage("HowTo", "HowTo");
@@ -78,7 +93,6 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("player", "player");
 	IMAGE->AddImage("Boss", "Boss");
 
-	IMAGE->AddImage("Logo", "Logo");
 	IMAGE->AddImage("intro1", "intro1");
 	IMAGE->AddImage("intro2", "intro2");
 	IMAGE->AddImage("intro3", "intro3");

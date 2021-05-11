@@ -21,8 +21,8 @@ using namespace std;
 using Vec2 = D3DXVECTOR2;
 using Vec3 = D3DXVECTOR3;
 
-const int WINSIZEX = 1600;
-const int WINSIZEY = 900;
+const int WINSIZEX = 1920;
+const int WINSIZEY = 1080;
 
 #include "cTexture.h"
 #include "cParticle.h"
@@ -39,6 +39,7 @@ const int WINSIZEY = 900;
 #include "cUIManager.h"
 #include "cSoundManager.h"
 #include "cSceneManager.h"
+#include "cMouseManager.h"
 
 
 #ifdef _DEBUG
