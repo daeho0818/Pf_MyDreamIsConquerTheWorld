@@ -23,7 +23,6 @@ void cTitleScene::Init()
 
 void cTitleScene::Update()
 {
-	//CBColl();
 	if (INPUT->KeyDown(VK_DOWN))
 	{
 		if (!htUI)
@@ -59,16 +58,19 @@ void cTitleScene::Update()
 
 void cTitleScene::Render()
 {
-	RENDER->CenterRender(IMAGE->FindImage("TitleBG"), { WINSIZEX / 2, WINSIZEY / 2 });
-	RENDER->CenterRender(IMAGE->FindImage("Logo"), { WINSIZEX / 2, 300 }, 0.2);
+	RENDER->CenterRender(IMAGE->FindImage("TitleBG"), { WINSIZEX / 2, WINSIZEY / 2 }, 0.5);
 	if (htUI)
 	{
 		RENDER->CenterRender(IMAGE->FindImage("HowToUI"), { WINSIZEX / 2, WINSIZEY / 2 });
 	}
+	RENDER->CenterRender(IMAGE->FindImage("player"), { (float)MOUSE->mousePos.x, (float)MOUSE->mousePos.y }, 0.2);
 }
 
 void cTitleScene::UIRender()
 {
+	UI->CenterRender(IMAGE->FindImage("Logo"), { WINSIZEX / 3 + 100, 150 });
+	UI->CenterRender(IMAGE->FindImage("pattern"), {150, 0});
+	UI->CenterRender(IMAGE->FindImage("start_note"), {70, 100});
 	if (!htUI)
 	{
 		for (auto iter : m_buttons)

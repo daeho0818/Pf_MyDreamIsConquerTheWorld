@@ -14,6 +14,7 @@ public:
 	bool htUI = false;
 
 	vector<cButton*> m_buttons;
+	map<string, Vec2> buttonPos;
 
 	virtual void Init() override;
 	virtual void Update() override;
