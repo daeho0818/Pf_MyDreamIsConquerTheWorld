@@ -5245,85 +5245,89 @@ int DXUTMapButtonToArrayIndex( BYTE vButton )
 //--------------------------------------------------------------------------------------
 HRESULT WINAPI DXUTToggleFullScreen()
 {
-    HRESULT hr;
+    isWindowed = !isWindowed;
+    DXUTCreateDevice(isWindowed, WINSIZEX, WINSIZEY);
 
-    // Get the current device settings and flip the windowed state then
-    // find the closest valid device settings with this change
-    DXUTDeviceSettings deviceSettings = DXUTGetDeviceSettings();
-    DXUTDeviceSettings orginalDeviceSettings = DXUTGetDeviceSettings();
+    return S_OK;
+    //HRESULT hr;
 
-    // Togggle windowed/fullscreen bit
-    if( DXUTIsD3D9( &deviceSettings ) )
-        deviceSettings.d3d9.pp.Windowed = !deviceSettings.d3d9.pp.Windowed;
-    else
-        deviceSettings.d3d10.sd.Windowed = !deviceSettings.d3d10.sd.Windowed;
+    //// Get the current device settings and flip the windowed state then
+    //// find the closest valid device settings with this change
+    //DXUTDeviceSettings deviceSettings = DXUTGetDeviceSettings();
+    //DXUTDeviceSettings orginalDeviceSettings = DXUTGetDeviceSettings();
 
-    DXUTMatchOptions matchOptions;
-    matchOptions.eAPIVersion = DXUTMT_PRESERVE_INPUT;
-    matchOptions.eAdapterOrdinal = DXUTMT_PRESERVE_INPUT;
-    matchOptions.eDeviceType = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eWindowed = DXUTMT_PRESERVE_INPUT;
-    matchOptions.eAdapterFormat = DXUTMT_IGNORE_INPUT;
-    matchOptions.eVertexProcessing = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eBackBufferFormat = DXUTMT_IGNORE_INPUT;
-    matchOptions.eBackBufferCount = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eMultiSample = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eSwapEffect = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eDepthFormat = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eStencilFormat = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.ePresentFlags = DXUTMT_CLOSEST_TO_INPUT;
-    matchOptions.eRefreshRate = DXUTMT_IGNORE_INPUT;
-    matchOptions.ePresentInterval = DXUTMT_CLOSEST_TO_INPUT;
+    //// Togggle windowed/fullscreen bit
+    //if( DXUTIsD3D9( &deviceSettings ) )
+    //    deviceSettings.d3d9.pp.Windowed = !deviceSettings.d3d9.pp.Windowed;
+    //else
+    //    deviceSettings.d3d10.sd.Windowed = !deviceSettings.d3d10.sd.Windowed;
 
-    // Go back to previous state
+    //DXUTMatchOptions matchOptions;
+    //matchOptions.eAPIVersion = DXUTMT_PRESERVE_INPUT;
+    //matchOptions.eAdapterOrdinal = DXUTMT_PRESERVE_INPUT;
+    //matchOptions.eDeviceType = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eWindowed = DXUTMT_PRESERVE_INPUT;
+    //matchOptions.eAdapterFormat = DXUTMT_IGNORE_INPUT;
+    //matchOptions.eVertexProcessing = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eBackBufferFormat = DXUTMT_IGNORE_INPUT;
+    //matchOptions.eBackBufferCount = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eMultiSample = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eSwapEffect = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eDepthFormat = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eStencilFormat = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.ePresentFlags = DXUTMT_CLOSEST_TO_INPUT;
+    //matchOptions.eRefreshRate = DXUTMT_IGNORE_INPUT;
+    //matchOptions.ePresentInterval = DXUTMT_CLOSEST_TO_INPUT;
 
-    BOOL bIsWindowed = DXUTGetIsWindowedFromDS( &deviceSettings );
-    UINT nWidth = ( bIsWindowed ) ? GetDXUTState().GetWindowBackBufferWidthAtModeChange() :
-        GetDXUTState().GetFullScreenBackBufferWidthAtModeChange();
-    UINT nHeight = ( bIsWindowed ) ? GetDXUTState().GetWindowBackBufferHeightAtModeChange() :
-        GetDXUTState().GetFullScreenBackBufferHeightAtModeChange();
+    //// Go back to previous state
 
-    if( nWidth > 0 && nHeight > 0 )
-    {
-        matchOptions.eResolution = DXUTMT_CLOSEST_TO_INPUT;
-        if( DXUTIsD3D9( &deviceSettings ) )
-        {
-            deviceSettings.d3d9.pp.BackBufferWidth = nWidth;
-            deviceSettings.d3d9.pp.BackBufferHeight = nHeight;
-        }
-        else
-        {
-            deviceSettings.d3d10.sd.BufferDesc.Width = nWidth;
-            deviceSettings.d3d10.sd.BufferDesc.Height = nHeight;
-        }
-    }
-    else
-    {
-        // No previous data, so just switch to defaults
-        matchOptions.eResolution = DXUTMT_IGNORE_INPUT;
-    }
+    //BOOL bIsWindowed = DXUTGetIsWindowedFromDS( &deviceSettings );
+    //UINT nWidth = ( bIsWindowed ) ? GetDXUTState().GetWindowBackBufferWidthAtModeChange() :
+    //    GetDXUTState().GetFullScreenBackBufferWidthAtModeChange();
+    //UINT nHeight = ( bIsWindowed ) ? GetDXUTState().GetWindowBackBufferHeightAtModeChange() :
+    //    GetDXUTState().GetFullScreenBackBufferHeightAtModeChange();
 
-    hr = DXUTFindValidDeviceSettings( &deviceSettings, &deviceSettings, &matchOptions );
-    if( SUCCEEDED( hr ) )
-    {
-        // Create a Direct3D device using the new device settings.  
-        // If there is an existing device, then it will either reset or recreate the scene.
-        hr = DXUTChangeDevice( &deviceSettings, NULL, NULL, false, false );
+    //if( nWidth > 0 && nHeight > 0 )
+    //{
+    //    matchOptions.eResolution = DXUTMT_CLOSEST_TO_INPUT;
+    //    if( DXUTIsD3D9( &deviceSettings ) )
+    //    {
+    //        deviceSettings.d3d9.pp.BackBufferWidth = nWidth;
+    //        deviceSettings.d3d9.pp.BackBufferHeight = nHeight;
+    //    }
+    //    else
+    //    {
+    //        deviceSettings.d3d10.sd.BufferDesc.Width = nWidth;
+    //        deviceSettings.d3d10.sd.BufferDesc.Height = nHeight;
+    //    }
+    //}
+    //else
+    //{
+    //    // No previous data, so just switch to defaults
+    //    matchOptions.eResolution = DXUTMT_IGNORE_INPUT;
+    //}
 
-        // If hr == E_ABORT, this means the app rejected the device settings in the ModifySettingsCallback so nothing changed
-        if( FAILED( hr ) && ( hr != E_ABORT ) )
-        {
-            // Failed creating device, try to switch back.
-            HRESULT hr2 = DXUTChangeDevice( &orginalDeviceSettings, NULL, NULL, false, false );
-            if( FAILED( hr2 ) )
-            {
-                // If this failed, then shutdown
-                DXUTShutdown();
-            }
-        }
-    }
+    //hr = DXUTFindValidDeviceSettings( &deviceSettings, &deviceSettings, &matchOptions );
+    //if( SUCCEEDED( hr ) )
+    //{
+    //    // Create a Direct3D device using the new device settings.  
+    //    // If there is an existing device, then it will either reset or recreate the scene.
+    //    hr = DXUTChangeDevice( &deviceSettings, NULL, NULL, false, false );
 
-    return hr;
+    //    // If hr == E_ABORT, this means the app rejected the device settings in the ModifySettingsCallback so nothing changed
+    //    if( FAILED( hr ) && ( hr != E_ABORT ) )
+    //    {
+    //        // Failed creating device, try to switch back.
+    //        HRESULT hr2 = DXUTChangeDevice( &orginalDeviceSettings, NULL, NULL, false, false );
+    //        if( FAILED( hr2 ) )
+    //        {
+    //            // If this failed, then shutdown
+    //            DXUTShutdown();
+    //        }
+    //    }
+    //}
+
+    //return hr;
 }
 
 //--------------------------------------------------------------------------------------

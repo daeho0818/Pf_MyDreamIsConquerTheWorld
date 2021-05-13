@@ -21,8 +21,9 @@ using namespace std;
 using Vec2 = D3DXVECTOR2;
 using Vec3 = D3DXVECTOR3;
 
-const int WINSIZEX = 1920;
-const int WINSIZEY = 1080;
+const int WINSIZEX = 4000;
+const int WINSIZEY = 2250;
+static bool isWindowed = false;
 
 #include "cTexture.h"
 #include "cParticle.h"
@@ -30,6 +31,7 @@ const int WINSIZEY = 1080;
 #include "cTimer.h"
 #include "cItem.h"
 #include "cBullet.h"
+#include "cButton.h"
 #include "DebugLog.h"
 
 #include "cImageManager.h"
@@ -40,6 +42,7 @@ const int WINSIZEY = 1080;
 #include "cSoundManager.h"
 #include "cSceneManager.h"
 #include "cMouseManager.h"
+#include "cButtonManager.h"
 
 
 #ifdef _DEBUG

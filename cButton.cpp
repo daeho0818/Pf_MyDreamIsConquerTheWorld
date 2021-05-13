@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cButton.h"
 
-cButton::cButton(cTexture* ptr, Vec2 pos, string tag)
-	:m_ptr(ptr), m_pos(pos), m_tag(tag)
+cButton::cButton(cTexture* ptr, Vec2 pos, string tag, float size)
+	:m_ptr(ptr), m_pos(pos), m_tag(tag), m_size(size)
 {
 	Init();
 }
@@ -15,7 +15,11 @@ void cButton::Init()
 {
 }
 
+void cButton::Render()
+{
+	RENDER->CenterRender(m_ptr, m_pos, m_size);
+}
+
 void cButton::UIRender()
 {
-	UI->CenterRender(m_ptr, m_pos);
 }

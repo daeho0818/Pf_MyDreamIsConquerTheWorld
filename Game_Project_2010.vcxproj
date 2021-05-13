@@ -391,6 +391,7 @@
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cButton.cpp" />
+    <ClCompile Include="cButtonManager.cpp" />
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cHeal.cpp" />
     <ClCompile Include="cImageManager.cpp" />
@@ -410,11 +411,10 @@
     <ClCompile Include="cParticleManager.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cRenderManager.cpp" />
-    <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="cSpeed.cpp" />
-    <ClCompile Include="cTexture.cpp" />
+    <ClCompile Include="cTimer.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="DXUT\Optional\SDKsound.cpp" />
@@ -424,6 +424,7 @@
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cButton.h" />
+    <ClInclude Include="cButtonManager.h" />
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cHeal.h" />
     <ClInclude Include="cImageManager.h" />
@@ -444,15 +445,12 @@
     <ClInclude Include="cParticleManager.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cRenderManager.h" />
-    <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="cSpeed.h" />
-    <ClInclude Include="cTexture.h" />
     <ClInclude Include="cTimer.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="cUIManager.h" />
-    <ClInclude Include="DebugLog.h" />
     <ClInclude Include="DXUT\Optional\SDKsound.h" />
     <ClInclude Include="DXUT\Optional\SDKwavefile.h" />
     <ClInclude Include="singleton.h" />
@@ -462,7 +460,6 @@
     <ClInclude Include="DXUT\Core\DXUTenum.h" />
     <ClInclude Include="DXUT\Core\DXUTmisc.h" />
     <ClCompile Include="cMainGame.cpp" />
-    <ClCompile Include="cTimer.cpp" />
     <ClCompile Include="DXUT\Core\DXUT.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

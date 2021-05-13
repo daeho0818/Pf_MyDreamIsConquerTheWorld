@@ -11,10 +11,8 @@ public:
 	~cTitleScene();
 
 	int select = 1;
-	bool htUI = false;
 
-	vector<cButton*> m_buttons;
-	map<string, Vec2> buttonPos;
+	bool guideUI = false;
 
 	virtual void Init() override;
 	virtual void Update() override;

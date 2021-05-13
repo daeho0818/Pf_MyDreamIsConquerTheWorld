@@ -25,11 +25,11 @@ void cMainGame::Init()
 
 void cMainGame::Update()
 {
+	MOUSE->Update();
 	INPUT->Update();
 	PART->Update();
 	SCENE->Update();
 	SOUND->Update();
-	MOUSE->Update();
 }
 
 void cMainGame::Render()
@@ -51,6 +51,7 @@ void cMainGame::Release()
 	cUIManager::ReleaseInstance();
 	cSoundManager::ReleaseInstance();
 	cMouseManager::ReleaseInstance();
+	cButtonManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()
@@ -77,7 +78,15 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("develop_note", "title/develop_note");
 	IMAGE->AddImage("develop_button", "title/develop_button");
 	IMAGE->AddImage("quit_note", "title/quit_note");
+	IMAGE->AddImage("quit_button", "title/quit_button");
 	IMAGE->AddImage("pattern", "title/pattern");
+
+	// guide
+	IMAGE->AddImage("guide_BG", "title/GuideBook/BG");
+	IMAGE->AddImage("guide_Arrow", "title/GuideBook/arrow");
+	IMAGE->AddImage("guide_close", "title/GuideBook/close");
+	IMAGE->AddImage("guide_text1", "title/GuideBook/text1");
+	IMAGE->AddImage("guide_text2", "title/GuideBook/text2");
 
 	IMAGE->AddImage("Start", "Start");
 	IMAGE->AddImage("hStart", "hStart");

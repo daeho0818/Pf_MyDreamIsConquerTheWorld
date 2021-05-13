@@ -13,6 +13,8 @@ public:
 	bool KeyPress(int key);
 	bool KeyDown(int key);
 	bool KeyUp(int key);
+
+	void SetMousePos();
 };
 
 #define INPUT cInputManager::GetInstance()

@@ -95,8 +95,8 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
     switch (uMsg)
     {
     case WM_MOUSEMOVE:
-        MOUSE->mousePos.x = LOWORD(lParam);
-        MOUSE->mousePos.y = HIWORD(lParam);
+        //MOUSE->mousePos.x = LOWORD(lParam);
+        //MOUSE->mousePos.y = HIWORD(lParam);
         break;
     case WM_LBUTTONDOWN:
         MOUSE->LButtonDown();
@@ -155,7 +155,7 @@ INT WINAPI wWinMain( HINSTANCE, HINSTANCE, LPWSTR, int )
     DXUTSetHotkeyHandling( true, true, true );  // handle the default hotkeys
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
     DXUTCreateWindow( L"Game_Project" );
-    DXUTCreateDevice( true, WINSIZEX, WINSIZEY );
+    DXUTCreateDevice(isWindowed, WINSIZEX, WINSIZEY);
 
     // Start the render loop
     DXUTMainLoop();
