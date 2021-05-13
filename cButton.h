@@ -13,7 +13,5 @@ public:
 	void Init();
 	void Render();
 	void UIRender();
-
-	void AddButton();
 };
 

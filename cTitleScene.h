@@ -13,6 +13,7 @@ public:
 	int select = 1;
 
 	bool guideUI = false;
+	bool advenUI = false;
 
 	virtual void Init() override;
 	virtual void Update() override;

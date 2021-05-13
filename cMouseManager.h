@@ -13,9 +13,11 @@ public:
 	bool CBColl(RECT rc, Vec2 pos, cTexture* ptr);
 
 	void Update();
+	void Render();
 	void LButtonDown();
 	void LButtonUp();
 
+	bool render = false; Vec2 temp;
 	bool lUp = false, lDown = false, rUp = false, rDown = false;
 	POINT mousePos;
 

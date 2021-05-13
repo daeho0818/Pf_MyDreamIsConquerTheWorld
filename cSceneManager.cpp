@@ -57,7 +57,7 @@ void cSceneManager::PlayerInit()
 
 void cSceneManager::Cheat()
 {
-	if (INPUT->KeyDown(VK_F4)) ChangeScene("cTitleScene");
-	if (INPUT->KeyDown(VK_F5)) ChangeScene("cIngameScene");
-	if (INPUT->KeyDown(VK_F6)) ChangeScene("cIngameScene2");
+	if (INPUT->KeyDown(VK_F5)) ChangeScene("cTitleScene");
+	if (INPUT->KeyDown(VK_F6)) ChangeScene("cIngameScene");
+	if (INPUT->KeyDown(VK_F7)) ChangeScene("cIngameScene2");
 }

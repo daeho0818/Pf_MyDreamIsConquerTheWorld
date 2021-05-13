@@ -11,39 +11,53 @@ cTitleScene::~cTitleScene()
 
 void cTitleScene::Init()
 {
-	BUTTON->AddButton("start_button", Vec2(600, 250), "title");
-	BUTTON->AddButton("guide_button", Vec2(600, 650), "title");
-	BUTTON->AddButton("adven_button", Vec2(600, 1050), "title");
-	BUTTON->AddButton("develop_button", Vec2(600, 1450), "title");
-	BUTTON->AddButton("quit_button", Vec2(600, 1850), "title");
+	BUTTON->AddButton("start_button", Vec2(600, 250), "titleB");
+	BUTTON->AddButton("guide_button", Vec2(600, 650), "titleB");
+	BUTTON->AddButton("adven_button", Vec2(600, 1050), "titleB");
+	BUTTON->AddButton("develop_button", Vec2(600, 1450), "titleB");
+	BUTTON->AddButton("quit_button", Vec2(600, 1850), "titleB");
 
+	BUTTON->AddButton("guide_close", Vec2(3000, WINSIZEY / 2 - 1000), "guideB");
+	BUTTON->AddButton("adven_Back", Vec2(660, WINSIZEY / 2 - 670), "advenB");
 	guideUI = false;
 }
 
 void cTitleScene::Update()
 {
+	if (guideUI) if (INPUT->KeyDown(VK_ESCAPE)) guideUI = false;
+	if (advenUI) if (INPUT->KeyDown(VK_ESCAPE)) advenUI = false;
 	if (MOUSE->lUp)
 	{
 		if (MOUSE->Collider("start_button"))
 		{
-			SCENE->ChangeScene("cIntroScene");
+			if (!guideUI && !advenUI)
+				SCENE->ChangeScene("cIntroScene");
 		}
 		else if (MOUSE->Collider("guide_button"))
 		{
-			if (!guideUI)
+			if (!guideUI && !advenUI)
 				guideUI = true;
 		}
 		else if (MOUSE->Collider("adven_button"))
 		{
-
+			if (!advenUI && !guideUI)
+				advenUI = true;
 		}
 		else if (MOUSE->Collider("develop_button"))
 		{
-
 		}
 		else if (MOUSE->Collider("quit_button"))
 		{
-
+		}
+		else if (MOUSE->Collider("guide_close"))
+		{
+			if (guideUI)
+				guideUI = false;
+		}
+		else if (MOUSE->Collider("adven_Back"))
+		{
+			if (advenUI)
+				advenUI = false;
 		}
 	}
 }
@@ -56,7 +70,7 @@ void cTitleScene::Render()
 
 	for (auto iter : BUTTON->m_buttons)
 	{
-		if (iter->m_tag == "title")
+		if (iter->m_tag == "titleB")
 			iter->Render();
 	}
 
@@ -68,7 +82,26 @@ void cTitleScene::Render()
 
 	if (guideUI)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("guide_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
+		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
+		RENDER->CenterRender(IMAGE->FindImage("guide_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("guide_text1"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("guide_close"), Vec2(3000, WINSIZEY / 2 - 1000));
+	}
+	else if (advenUI)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
+		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2) , 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 430), 0.6);
+		RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 430), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 430) * 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 430) * 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(3000, WINSIZEY / 2 - 900), 0.8);
+
+		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(500, WINSIZEY - 350), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CircleDown"), Vec2(500, WINSIZEY - 350), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(500, WINSIZEY - 350), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(500, WINSIZEY - 350), 0.5);
 	}
 
 	RENDER->CenterRender(IMAGE->FindImage("player"),

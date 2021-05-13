@@ -81,12 +81,32 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("quit_button", "title/quit_button");
 	IMAGE->AddImage("pattern", "title/pattern");
 
-	// guide
+	// guide Note
 	IMAGE->AddImage("guide_BG", "title/GuideBook/BG");
 	IMAGE->AddImage("guide_Arrow", "title/GuideBook/arrow");
 	IMAGE->AddImage("guide_close", "title/GuideBook/close");
 	IMAGE->AddImage("guide_text1", "title/GuideBook/text1");
 	IMAGE->AddImage("guide_text2", "title/GuideBook/text2");
+
+	//adventure Note
+	IMAGE->AddImage("adven_Back", "title/AdvenBook/back");
+	IMAGE->AddImage("adven_BG", "title/AdvenBook/BG");
+	IMAGE->AddImage("adven_BGRect", "title/AdvenBook/BGRect");
+	IMAGE->AddImage("adven_Chain", "title/AdvenBook/chains");
+	IMAGE->AddImage("adven_Lock", "title/AdvenBook/lock");
+	IMAGE->AddImage("adven_CircleDown", "title/AdvenBook/circleDown");
+	IMAGE->AddImage("adven_CircleUp", "title/AdvenBook/circleUp");
+	IMAGE->AddImage("adven_CollectionPer", "title/AdvenBook/collectionPer");
+	IMAGE->AddImage("adven_CollectionPerBG", "title/AdvenBook/collectionPerBG");
+	IMAGE->AddImage("adven_CollectionPerRect", "title/AdvenBook/collectionPerRect");
+	IMAGE->AddImage("adven_ContentRect", "title/AdvenBook/contentRect");
+	IMAGE->AddImage("adven_ContentBG", "title/AdvenBook/contentBG");
+	IMAGE->AddImage("adven_Handle", "title/AdvenBook/handle");
+	IMAGE->AddImage("adven_HandleBG", "title/AdvenBook/handleBG");
+	IMAGE->AddImage("adven_ItemRect", "title/AdvenBook/itemRect");
+
+
+	IMAGE->AddImage("Blur", "Blur");
 
 	IMAGE->AddImage("Start", "Start");
 	IMAGE->AddImage("hStart", "hStart");
