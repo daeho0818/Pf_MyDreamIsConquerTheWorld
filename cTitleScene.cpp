@@ -18,7 +18,7 @@ void cTitleScene::Init()
 	BUTTON->AddButton("quit_button", Vec2(600, 1850), "titleB");
 
 	BUTTON->AddButton("guide_close", Vec2(3000, WINSIZEY / 2 - 1000), "guideB");
-	BUTTON->AddButton("adven_Back", Vec2(660, WINSIZEY / 2 - 670), "advenB");
+	BUTTON->AddButton("adven_Back", Vec2(3300, WINSIZEY / 2 - 970), "advenB");
 	guideUI = false;
 }
 
@@ -31,7 +31,7 @@ void cTitleScene::Update()
 		if (MOUSE->Collider("start_button"))
 		{
 			if (!guideUI && !advenUI)
-				SCENE->ChangeScene("cIntroScene");
+				SCENE->ChangeScene("cSelectStageScene");
 		}
 		else if (MOUSE->Collider("guide_button"))
 		{
@@ -48,13 +48,14 @@ void cTitleScene::Update()
 		}
 		else if (MOUSE->Collider("quit_button"))
 		{
+			PostQuitMessage(0);
 		}
-		else if (MOUSE->Collider("guide_close"))
+		if (MOUSE->Collider("guide_close"))
 		{
 			if (guideUI)
 				guideUI = false;
 		}
-		else if (MOUSE->Collider("adven_Back"))
+		if (MOUSE->Collider("adven_Back"))
 		{
 			if (advenUI)
 				advenUI = false;
@@ -91,23 +92,29 @@ void cTitleScene::Render()
 	{
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
 		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2) , 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 430), 0.6);
-		RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 430), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 430) * 2), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 430) * 2), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(3000, WINSIZEY / 2 - 900), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+		
+		for (int i = 1; i < 5; i++)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(875, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1500, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1500, 400 * i), 0.3);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(500, WINSIZEY - 350), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CircleDown"), Vec2(500, WINSIZEY - 350), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(500, WINSIZEY - 350), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(500, WINSIZEY - 350), 0.5);
+		for (int i = 1; i < 4; i++)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(2175, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2800, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2800, 400 * i), 0.3);
+		}
+
+		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CircleDown"), Vec2(350, WINSIZEY - 420), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(350, WINSIZEY - 420), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.5);
+
+		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(3300, WINSIZEY / 2 - 970), 0.6);
 	}
-
-	RENDER->CenterRender(IMAGE->FindImage("player"),
-		{ float(MOUSE->mousePos.x * 2.1),
-		 float(MOUSE->mousePos.y * 2.1)
-		}, 0.2);
 }
 
 void cTitleScene::UIRender()

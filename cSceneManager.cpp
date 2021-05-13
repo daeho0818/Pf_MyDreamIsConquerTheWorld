@@ -26,6 +26,10 @@ void cSceneManager::Update()
 void cSceneManager::Render()
 {
 	if (nowScene) nowScene->Render();
+	RENDER->CenterRender(IMAGE->FindImage("player"),
+		{ float(MOUSE->mousePos.x * 2.1),
+		 float(MOUSE->mousePos.y * 2.1)
+		}, 0.2);
 }
 
 void cSceneManager::UIRender()

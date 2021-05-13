@@ -24,9 +24,6 @@
     <Filter Include="4. Scene\Title">
       <UniqueIdentifier>{93a3e866-37f6-48dc-9ebb-51962b543117}</UniqueIdentifier>
     </Filter>
-    <Filter Include="4. Scene\Intro">
-      <UniqueIdentifier>{8c7d1fa5-7044-40bc-be0d-1d45bed71278}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Manager">
       <UniqueIdentifier>{45985e2f-615f-43e9-b674-a24abbd9a20a}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     <Filter Include="3. Object\Item\Admin">
       <UniqueIdentifier>{461d5b2c-69ab-4b35-a442-af72cb2c4656}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Scene\SelectStage">
+      <UniqueIdentifier>{47e025b6-59a0-4c0a-9348-98fa82984bcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -174,9 +174,6 @@
     </ClCompile>
     <ClCompile Include="cTitleScene.cpp">
       <Filter>4. Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="cIntroScene.cpp">
-      <Filter>4. Scene\Intro</Filter>
     </ClCompile>
     <ClCompile Include="cIngameScene2.cpp">
       <Filter>4. Scene\Ingame</Filter>
@@ -262,6 +259,9 @@
     <ClCompile Include="cParticleAni.cpp">
       <Filter>2. Manager\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="cSelectStageScene.cpp">
+      <Filter>4. Scene\SelectStage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -275,9 +275,6 @@
     </ClInclude>
     <ClInclude Include="cTitleScene.h">
       <Filter>4. Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="cIntroScene.h">
-      <Filter>4. Scene\Intro</Filter>
     </ClInclude>
     <ClInclude Include="cIngameScene2.h">
       <Filter>4. Scene\Ingame</Filter>
@@ -362,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="cParticleAni.h">
       <Filter>2. Manager\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="cSelectStageScene.h">
+      <Filter>4. Scene\SelectStage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

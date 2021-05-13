@@ -1,16 +1,12 @@
 #pragma once
-class cIntroScene
+class cSelectStageScene
 	:public cScene
 {
 public:
-	cIntroScene();
-	~cIntroScene();
+	cSelectStageScene();
+	~cSelectStageScene();
 
-	cTexture* intro[3];
-	int index = 0;
-	cTimer* ani = nullptr;
-	bool once = true;
-	float renderSize = 1;
+	bool isFirst = true;
 
 	// cScene을(를) 통해 상속됨
 	virtual void Init() override;

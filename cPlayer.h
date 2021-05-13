@@ -31,7 +31,7 @@ public:
 	int coloring_cells = 0;
 	int last_x = 0, last_y = 0;
 	int speed = 3;
-	int real_cells = (1600 - 1) * (900 - 1);
+	int real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	int saveHp = 0;
 
 	float coloring_per = 0;

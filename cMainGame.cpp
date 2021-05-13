@@ -1,6 +1,6 @@
 #include "DXUT.h"
 #include "cMainGame.h"
-#include "cIntroScene.h"
+#include "cSelectStageScene.h"
 #include "cIngameScene.h"
 #include "cIngameScene2.h"
 #include "cTitleScene.h"
@@ -16,10 +16,10 @@ cMainGame::~cMainGame()
 void cMainGame::Init()
 {
 	AddResource();
-	SCENE->AddScene("cIntroScene", new cIntroScene);
+	SCENE->AddScene("cTitleScene", new cTitleScene);
+	SCENE->AddScene("cSelectStageScene", new cSelectStageScene);
 	SCENE->AddScene("cIngameScene", new cIngameScene);
 	SCENE->AddScene("cIngameScene2", new cIngameScene2);
-	SCENE->AddScene("cTitleScene", new cTitleScene);
 	SCENE->ChangeScene("cTitleScene");
 }
 
@@ -105,6 +105,30 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("adven_HandleBG", "title/AdvenBook/handleBG");
 	IMAGE->AddImage("adven_ItemRect", "title/AdvenBook/itemRect");
 
+	// world map
+	IMAGE->AddImage("WorldMap", "WorldMap/map");
+	IMAGE->AddImage("WorldEmblem", "WorldMap/Emblem");
+	IMAGE->AddImage("church_button", "WorldMap/church_button");
+	IMAGE->AddImage("church_complete", "WorldMap/church_complete");
+	IMAGE->AddImage("church_lock", "WorldMap/church_lock");
+	IMAGE->AddImage("city(night)_button", "WorldMap/city(night)_button");
+	IMAGE->AddImage("city(night)_complete", "WorldMap/city(night)_complete");
+	IMAGE->AddImage("city(night)_lock", "WorldMap/city(night)_lock");
+	IMAGE->AddImage("city_button", "WorldMap/city_button");
+	IMAGE->AddImage("city_complete", "WorldMap/city_complete");
+	IMAGE->AddImage("city_lock", "WorldMap/city_lock");
+	IMAGE->AddImage("desert_button", "WorldMap/desert_button");
+	IMAGE->AddImage("desert_complete", "WorldMap/desert_complete");
+	IMAGE->AddImage("desert_lock", "WorldMap/desert_lock");
+	IMAGE->AddImage("ice_button", "WorldMap/ice_button");
+	IMAGE->AddImage("ice_complete", "WorldMap/ice_complete");
+	IMAGE->AddImage("ice_lock", "WorldMap/ice_lock");
+	IMAGE->AddImage("jungle_button", "WorldMap/jungle_button");
+	IMAGE->AddImage("jungle_complete", "WorldMap/jungle_complete");
+	IMAGE->AddImage("jungle_lock", "WorldMap/jungle_lock");
+	IMAGE->AddImage("ocean_button", "WorldMap/ocean_button");
+	IMAGE->AddImage("ocean_complete", "WorldMap/ocean_complete");
+	IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
 
 	IMAGE->AddImage("Blur", "Blur");
 
