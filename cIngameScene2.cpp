@@ -28,7 +28,7 @@ void cIngameScene2::Init()
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets);
 	item = new cItemAdmin(player);
-	coll = new cCollision(mob->m_mobs, player, item);
+	coll = new cCollision(mob->m_bullets, mob->m_mobs, player, item);
 }
 
 void cIngameScene2::Update()
@@ -40,12 +40,12 @@ void cIngameScene2::Update()
 		if (t_Delay == nullptr)
 		{
 			t_Delay = new cTimer(3, [&]()->void {
-				SCENE->ChangeScene("cIngameScene2");
+				SCENE->ChangeScene("cTitleScene");
 				t_Delay = nullptr;
 				});
 		}
 		player->stop = true;
-		player->BG[0] = IMAGE->FindImage("bg2");
+		player->BG[0] = IMAGE->FindImage("bg4");
 	}
 
 	for (int i = 0; i < 5; i++) if (Expl[i] != nullptr) Expl[i]->Update();
@@ -72,8 +72,7 @@ void cIngameScene2::Render()
 	player->Render();
 	bullet->Render();
 	mob->Render();
-	item->Update();
-	coll->Update();
+	item->Render();
 }
 
 void cIngameScene2::UIRender()

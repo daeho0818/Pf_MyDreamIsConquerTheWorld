@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cCollision.h"
 
-cCollision::cCollision(vector<cMob*>& m_mobs, cPlayer* player, cItemAdmin* itemAd)
-	:m_player(player), m_mobs(m_mobs), m_itemAd(itemAd), m_item(m_itemAd->m_items)
+cCollision::cCollision(vector<cBullet*>& bullet, vector<cMob*>& m_mobs, cPlayer* player, cItemAdmin* itemAd)
+	:m_bullets(bullet), m_player(player), m_mobs(m_mobs), m_itemAd(itemAd), m_item(m_itemAd->m_items)
 {
 }
 
@@ -14,6 +14,7 @@ void cCollision::Update()
 {
 	MPColl();
 	MPBColl();
+	MBPColl();
 	IPColl();
 }
 
@@ -44,6 +45,26 @@ void cCollision::MPColl()
 
 void cCollision::MPBColl()
 {
+}
+
+void cCollision::MBPColl()
+{
+	for (auto iter = m_bullets.begin(); iter != m_bullets.end();)
+	{
+		if ((*iter)->bulletType == "mob")
+		{
+			if (7 + (*iter)->size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+			{
+				if (!m_player->invincibility)
+				{
+					m_player->hp -= (*iter)->m_Damage;
+					(*iter)->isDestroy = true;
+					m_player->EatItem("Invincibility");
+				}
+			}
+		}
+		iter++;
+	}
 }
 
 void cCollision::IPColl()

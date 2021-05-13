@@ -8,6 +8,8 @@ cBoss::cBoss(Vec2 pos, vector<cBullet*>& bullet)
 	mobType = "Boss";
 	m_damage = 1;
 	isStop = false;
+	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
+	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
 }
 
 cBoss::~cBoss()
@@ -33,7 +35,7 @@ void cBoss::CircleBullet()
 	float angle = 0;
 	float rad = D3DX_PI * 2 / 25;
 
-	for (int i = 0; i < 25; i++, angle += rad)
+	for (int i = 0; i < 100; i++, angle += rad)
 	{
 		Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
 		direction = direction - m_pos;

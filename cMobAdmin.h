@@ -6,7 +6,7 @@ public:
 	~cMobAdmin();
 
 	vector<cMob*> m_mobs;
-	vector<cBullet*> m_bullets;
+	vector<cBullet*>& m_bullets;
 	Vec2 bossPos;
 
 	void Update();

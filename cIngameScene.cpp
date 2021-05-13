@@ -28,7 +28,7 @@ void cIngameScene::Init()
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets);
 	item = new cItemAdmin(player);
-	coll = new cCollision(mob->m_mobs, player, item);
+	coll = new cCollision(mob->m_bullets, mob->m_mobs, player, item);
 }
 
 void cIngameScene::Update()
