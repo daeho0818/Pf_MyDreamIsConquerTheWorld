@@ -262,6 +262,9 @@
     <ClCompile Include="cSelectStageScene.cpp">
       <Filter>4. Scene\SelectStage</Filter>
     </ClCompile>
+    <ClCompile Include="cScene.cpp">
+      <Filter>2. Manager\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -362,6 +365,9 @@
     </ClInclude>
     <ClInclude Include="cSelectStageScene.h">
       <Filter>4. Scene\SelectStage</Filter>
+    </ClInclude>
+    <ClInclude Include="cScene.h">
+      <Filter>2. Manager\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

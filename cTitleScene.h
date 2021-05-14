@@ -20,5 +20,4 @@ public:
 	virtual void Render() override;
 	virtual void UIRender() override;
 	virtual void Release() override;
-
 };

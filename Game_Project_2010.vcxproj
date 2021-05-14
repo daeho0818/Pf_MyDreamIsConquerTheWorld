@@ -411,6 +411,7 @@
     <ClCompile Include="cParticleManager.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cRenderManager.cpp" />
+    <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSelectStageScene.cpp" />
     <ClCompile Include="cSoundManager.cpp" />
@@ -445,6 +446,7 @@
     <ClInclude Include="cParticleManager.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cRenderManager.h" />
+    <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSelectStageScene.h" />
     <ClInclude Include="cSoundManager.h" />

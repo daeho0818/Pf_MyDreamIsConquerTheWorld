@@ -18,7 +18,7 @@ void cTitleScene::Init()
 	BUTTON->AddButton("quit_button", Vec2(600, 1850), "titleB");
 
 	BUTTON->AddButton("guide_close", Vec2(3000, WINSIZEY / 2 - 1000), "guideB");
-	BUTTON->AddButton("adven_Back", Vec2(3300, WINSIZEY / 2 - 970), "advenB");
+	BUTTON->AddButton("adven_Back", Vec2(350, WINSIZEY / 2 - 923), "advenB");
 	guideUI = false;
 }
 
@@ -45,20 +45,28 @@ void cTitleScene::Update()
 		}
 		else if (MOUSE->Collider("develop_button"))
 		{
+			// 개발 노트 내용
 		}
 		else if (MOUSE->Collider("quit_button"))
 		{
 			PostQuitMessage(0);
 		}
+
 		if (MOUSE->Collider("guide_close"))
 		{
 			if (guideUI)
+			{
 				guideUI = false;
+				MOUSE->lUp = false;
+			}
 		}
 		if (MOUSE->Collider("adven_Back"))
 		{
 			if (advenUI)
+			{
 				advenUI = false;
+				MOUSE->lUp = false;
+			}
 		}
 	}
 }
@@ -91,8 +99,8 @@ void cTitleScene::Render()
 	else if (advenUI)
 	{
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
-		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2 + 25, WINSIZEY / 2), 0.8);
+		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2 + 25, WINSIZEY / 2), 0.8);
 		
 		for (int i = 1; i < 5; i++)
 		{
@@ -113,7 +121,7 @@ void cTitleScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(350, WINSIZEY - 420), 0.5);
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.5);
 
-		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(3300, WINSIZEY / 2 - 970), 0.6);
+		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(350, WINSIZEY / 2 - 923), 0.6);
 	}
 }
 
