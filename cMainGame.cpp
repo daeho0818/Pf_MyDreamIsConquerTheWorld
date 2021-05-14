@@ -131,11 +131,42 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
 
 	// ingame
-	IMAGE->AddImage("player", "Ingame/player");
-	IMAGE->AddImage("start_1", "Ingame/Start/1");
-	IMAGE->AddImage("start_2", "Ingame/Start/2");
-	IMAGE->AddImage("start_3", "Ingame/Start/3");
-	IMAGE->AddImage("start_start", "Ingame/Start/start");
+	{
+		IMAGE->AddImage("player", "Ingame/player");
+		
+		//  start
+		IMAGE->AddImage("start_1", "Ingame/Start/1");
+		IMAGE->AddImage("start_2", "Ingame/Start/2");
+		IMAGE->AddImage("start_3", "Ingame/Start/3");
+		IMAGE->AddImage("start_start", "Ingame/Start/start");
+		IMAGE->AddImage("start_game", "Ingame/Start/game");
+
+		//  stop
+		IMAGE->AddImage("stop_BG", "Ingame/Stop/BG");
+		IMAGE->AddImage("stop_text", "Ingame/Stop/text");
+		IMAGE->AddImage("stop_back", "Ingame/Stop/back");
+		IMAGE->AddImage("stop_restart", "Ingame/Stop/restart");
+		IMAGE->AddImage("stop_worldmap", "Ingame/Stop/worldmap");
+		IMAGE->AddImage("stop_pointline", "Ingame/Stop/pointline");
+
+		// clear / fail
+		IMAGE->AddImage("CFgetItem", "Ingame/Clear,Fail/getItem");
+		IMAGE->AddImage("CFpercent", "Ingame/Clear,Fail/percent");
+		IMAGE->AddImage("CFscore", "Ingame/Clear,Fail/score");
+		IMAGE->AddImage("CFtime", "Ingame/Clear,Fail/time");
+		IMAGE->AddImage("CFBG", "Ingame/Clear,Fail/BG");
+		IMAGE->AddImage("CFnext", "Ingame/Clear,Fail/next");
+
+		// clear
+		{
+			IMAGE->AddImage("Clear", "Ingame/Clear,Fail/Clear/clear");
+		}
+
+		// fail
+		{
+			IMAGE->AddImage("Over", "Ingame/Clear,Fail/Fail/over");
+		}
+	}
 
 	IMAGE->AddImage("Blur", "Blur");
 
@@ -148,6 +179,8 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("goIntro", "goIntro");
 	IMAGE->AddImage("hgoIntro", "hgoIntro");
 
+	IMAGE->AddImage("bg1", "bg1");
+	IMAGE->AddImage("bg2", "bg2");
 	IMAGE->AddImage("bg3", "bg3");
 	IMAGE->AddImage("bg4", "bg4");
 	IMAGE->AddImage("Boss", "Boss");

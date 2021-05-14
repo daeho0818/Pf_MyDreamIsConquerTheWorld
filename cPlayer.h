@@ -44,7 +44,7 @@ public:
 	bool returning = false;
 	bool stop = false;
 	bool invincibility = false;
-
+	
 	void Init();
 	void Update(Vec2 bossPos);
 	void Render();

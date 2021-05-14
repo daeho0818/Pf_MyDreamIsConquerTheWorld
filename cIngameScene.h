@@ -26,23 +26,8 @@ public:
 	virtual void Release() override;
 
 	void PrintStageTxt();
-	void Explosion();
 	bool left , right;
 	float pos_x;
-	bool isClearScene = false;
-	bool delay = false;
 
-	int textCount = 1;
 	cTimer* AS = nullptr;
-	cTimer* t_Delay = nullptr;
-	cTimer* t_TextAni = nullptr;
-	cTimer* Expl[5] = { nullptr, };
-
-	Vec2 textPos[4][3] = {
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}}
-	};
-	// cParentScene을(를) 통해 상속됨
 };

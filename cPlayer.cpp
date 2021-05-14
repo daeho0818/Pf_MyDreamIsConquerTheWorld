@@ -81,6 +81,7 @@ void cPlayer::Update(Vec2 bossPos)
 	//		temp = 1;
 	//		index += temp;
 	//	});
+	if (INPUT->KeyDown(VK_F11)) coloring_per = 100;
 }
 
 void cPlayer::Render()
@@ -92,7 +93,6 @@ void cPlayer::Render()
 
 void cPlayer::UIRender()
 {
-	UI->CropRender(IMAGE->FindImage("hpBar"), { m_pos.x + 13, m_pos.y + 13 }, hRc);
 	UI->PrintText(perText, { 1500, 30 }, 50);
 }
 
