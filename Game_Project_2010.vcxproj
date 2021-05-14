@@ -421,6 +421,7 @@
     <ClCompile Include="cUIManager.cpp" />
     <ClCompile Include="DXUT\Optional\SDKsound.cpp" />
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp" />
+    <ClCompile Include="cParentScene.cpp" />
     <ClCompile Include="singleton.cpp" />
     <ClInclude Include="cBoss.h" />
     <ClInclude Include="cBullet.h" />
@@ -456,6 +457,7 @@
     <ClInclude Include="cUIManager.h" />
     <ClInclude Include="DXUT\Optional\SDKsound.h" />
     <ClInclude Include="DXUT\Optional\SDKwavefile.h" />
+    <ClInclude Include="cParentScene.h" />
     <ClInclude Include="singleton.h" />
     <ClInclude Include="stdafx.h" />
     <None Include="DXUT\Optional\directx.ico" />

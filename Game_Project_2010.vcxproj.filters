@@ -102,6 +102,9 @@
     <Filter Include="4. Scene\SelectStage">
       <UniqueIdentifier>{47e025b6-59a0-4c0a-9348-98fa82984bcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Manager\Scene\IngameScene">
+      <UniqueIdentifier>{721cfb18-3fc0-48a1-96dc-c00468dcaad9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -265,6 +268,9 @@
     <ClCompile Include="cScene.cpp">
       <Filter>2. Manager\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="cParentScene.cpp">
+      <Filter>2. Manager\Scene\IngameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -368,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="cScene.h">
       <Filter>2. Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="cParentScene.h">
+      <Filter>2. Manager\Scene\IngameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
