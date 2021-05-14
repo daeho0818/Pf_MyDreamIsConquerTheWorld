@@ -29,8 +29,8 @@ void cPlayer::Init()
 	hp = 5;
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
-	speed = 3;
-	real_cells = (1600 - 1) * (900 - 1);
+	speed = 10;
+	real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	coloring_per = 0;
 	draw_line = false;
 	draw_mode = false;

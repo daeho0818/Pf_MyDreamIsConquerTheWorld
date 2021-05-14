@@ -30,7 +30,7 @@ public:
 	int hp = 5;
 	int coloring_cells = 0;
 	int last_x = 0, last_y = 0;
-	int speed = 3;
+	int speed;
 	int real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	int saveHp = 0;
 

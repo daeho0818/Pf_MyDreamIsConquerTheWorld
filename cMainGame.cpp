@@ -130,6 +130,13 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("ocean_complete", "WorldMap/ocean_complete");
 	IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
 
+	// ingame
+	IMAGE->AddImage("player", "Ingame/player");
+	IMAGE->AddImage("start_1", "Ingame/Start/1");
+	IMAGE->AddImage("start_2", "Ingame/Start/2");
+	IMAGE->AddImage("start_3", "Ingame/Start/3");
+	IMAGE->AddImage("start_start", "Ingame/Start/start");
+
 	IMAGE->AddImage("Blur", "Blur");
 
 	IMAGE->AddImage("Start", "Start");
@@ -143,7 +150,6 @@ void cMainGame::AddResource()
 
 	IMAGE->AddImage("bg3", "bg3");
 	IMAGE->AddImage("bg4", "bg4");
-	IMAGE->AddImage("player", "player");
 	IMAGE->AddImage("Boss", "Boss");
 
 	IMAGE->AddImage("intro1", "intro1");

@@ -33,8 +33,21 @@ void cIngameScene::Init()
 
 void cIngameScene::Update()
 {
+	cParentScene::StageStart(&textPos[textCount - 1][0], &textPos[textCount - 1][0], &textPos[textCount - 1][1], 0.1);
+
+	if (t_TextAni == nullptr)
+	{
+		if (textCount < 4)
+		{
+			t_TextAni = new cTimer(1, [&]()->void {
+				t_TextAni = nullptr;
+				textCount++;
+				});
+		}
+	}
 	if (AS != nullptr) AS->Update();
 	if (t_Delay != nullptr) t_Delay->Update();
+	if (t_TextAni != nullptr) t_TextAni->Update();
 	if (delay)
 	{
 		if (t_Delay == nullptr)
@@ -72,6 +85,21 @@ void cIngameScene::Render()
 	bullet->Render();
 	mob->Render();
 	item->Render();
+	switch (textCount)
+	{
+	case 1:
+		RENDER->CenterRender(IMAGE->FindImage("start_3"), textPos[0][0]);
+		break;
+	case 2:
+		RENDER->CenterRender(IMAGE->FindImage("start_2"), textPos[1][0]);
+		break;
+	case 3:
+		RENDER->CenterRender(IMAGE->FindImage("start_1"), textPos[2][0]);
+		break;
+	case 4:
+		//RENDER->CenterRender(IMAGE->FindImage("start_start"), textPos[3][0]);
+		break;
+	}
 }
 
 void cIngameScene::UIRender()
@@ -90,6 +118,7 @@ void cIngameScene::Release()
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
 	SAFE_DELETE(AS);
+	SAFE_DELETE(t_TextAni);
 	SAFE_DELETE(t_Delay);
 	for (int i = 0; i < 5; i++)
 		SAFE_DELETE(Expl[i]);
