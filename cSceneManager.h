@@ -3,9 +3,6 @@
 class cSceneManager
 	:public singleton<cSceneManager>
 {
-	map< string, cScene*> m_scenes;
-	cScene* nowScene = nullptr;
-	cScene* nextScene = nullptr;
 public:
 	cSceneManager();
 	~cSceneManager();
@@ -20,6 +17,9 @@ public:
 	void PlayerInit();
 	void Cheat();
 
+	map< string, cScene*> m_scenes;
+	cScene* nowScene = nullptr;
+	cScene* nextScene = nullptr;
 	int Array[WINSIZEY][WINSIZEX];
 };
 

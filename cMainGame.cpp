@@ -1,9 +1,14 @@
 #include "DXUT.h"
 #include "cMainGame.h"
-#include "cSelectStageScene.h"
-#include "cIngameScene.h"
-#include "cIngameScene2.h"
 #include "cTitleScene.h"
+#include "cSelectStageScene.h"
+#include "cIceScene.h"
+#include "cCityScene.h"
+#include "cCityNightScene.h"
+#include "cChurchScene.h"
+#include "cJungleScene.h"
+#include "cDesertScene.h"
+#include "cOceanScene.h"
 
 cMainGame::cMainGame()
 {
@@ -18,8 +23,13 @@ void cMainGame::Init()
 	AddResource();
 	SCENE->AddScene("cTitleScene", new cTitleScene);
 	SCENE->AddScene("cSelectStageScene", new cSelectStageScene);
-	SCENE->AddScene("cIngameScene", new cIngameScene);
-	SCENE->AddScene("cIngameScene2", new cIngameScene2);
+	SCENE->AddScene("cIceScene", new cIceScene);
+	SCENE->AddScene("cCityScene", new cCityScene);
+	SCENE->AddScene("cCityNightScene", new cCityNightScene);
+	SCENE->AddScene("cChurchScene", new cChurchScene);
+	SCENE->AddScene("cDesertScene", new cDesertScene);
+	SCENE->AddScene("cOceanScene", new cOceanScene);
+	SCENE->AddScene("cJungleScene", new cJungleScene);
 	SCENE->ChangeScene("cTitleScene");
 }
 
@@ -133,7 +143,7 @@ void cMainGame::AddResource()
 	// ingame
 	{
 		IMAGE->AddImage("player", "Ingame/player");
-		
+
 		//  start
 		IMAGE->AddImage("start_1", "Ingame/Start/1");
 		IMAGE->AddImage("start_2", "Ingame/Start/2");
@@ -166,33 +176,64 @@ void cMainGame::AddResource()
 		{
 			IMAGE->AddImage("Over", "Ingame/Clear,Fail/Fail/over");
 		}
+
+		// ice
+		{
+			IMAGE->AddImage("ice_Under", "Ingame/Ice/under");
+			IMAGE->AddImage("ice_High", "Ingame/Ice/high");
+		}
+
+		// city
+		{
+			IMAGE->AddImage("city_Under", "Ingame/City/under");
+			IMAGE->AddImage("city_High", "Ingame/City/high");
+		}
+
+		// city(night)
+		{
+			IMAGE->AddImage("city(night)_Under", "Ingame/city(night)/under");
+			IMAGE->AddImage("city(night)_high", "Ingame/city(night)/high");
+		}
+
+		// ocean
+		{
+			IMAGE->AddImage("ocean_Under", "Ingame/Ocean/under");
+			IMAGE->AddImage("ocean_High", "Ingame/Ocean/high");
+		}
+
+		// desert
+		{
+			IMAGE->AddImage("desert_Under", "Ingame/Desert/under");
+			IMAGE->AddImage("desert_High", "Ingame/Desert/high");
+		}
+
+		// church
+		{
+			IMAGE->AddImage("church_Under", "Ingame/Church/under");
+			IMAGE->AddImage("church_high", "Ingame/Church/high");
+		}
+
+		// jungle
+		{
+			IMAGE->AddImage("jungle_Under", "Ingame/Jungle/under");
+			IMAGE->AddImage("jungle_High", "Ingame/Jungle/high");
+		}
 	}
+
+	// text
+	for (int i = 0; i < 10; i++)
+	{
+		char key[5] = "";
+		sprintf(key, "%d", i);
+		char path[128] = "";
+		sprintf(path, "Text/%d", i);
+		IMAGE->AddImage(key, path);
+	}
+	IMAGE->AddImage("percent", "Text/%");
 
 	IMAGE->AddImage("Blur", "Blur");
 
-	IMAGE->AddImage("Start", "Start");
-	IMAGE->AddImage("hStart", "hStart");
-	IMAGE->AddImage("HowTo", "HowTo");
-	IMAGE->AddImage("hHowTo", "hHowTo");
-	IMAGE->AddImage("End", "End");
-	IMAGE->AddImage("hEnd", "hEnd");
-	IMAGE->AddImage("goIntro", "goIntro");
-	IMAGE->AddImage("hgoIntro", "hgoIntro");
-
-	IMAGE->AddImage("bg1", "bg1");
-	IMAGE->AddImage("bg2", "bg2");
-	IMAGE->AddImage("bg3", "bg3");
-	IMAGE->AddImage("bg4", "bg4");
 	IMAGE->AddImage("Boss", "Boss");
-
-	IMAGE->AddImage("intro1", "intro1");
-	IMAGE->AddImage("intro2", "intro2");
-	IMAGE->AddImage("intro3", "intro3");
-	IMAGE->AddImage("HowToUI", "HowToUI");
-
-	IMAGE->AddImage("fireEffect", "fireEffect");
-	IMAGE->AddImage("angelEffect", "angelEffect");
-	IMAGE->AddImage("badEffect", "badEffect");
 
 	IMAGE->AddImage("hpBar", "hpBar");
 	IMAGE->AddImage("Hp+", "Hp+");
@@ -200,6 +241,4 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("Invincibility", "Invincibility");
 
 	IMAGE->AddImage("bullet_enemy", "bullet_enemy");
-
-	IMAGE->AddImage("expl", "explosion/expl", 24);
 }

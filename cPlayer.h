@@ -17,13 +17,11 @@ public:
 
 	cTexture* BG[2];
 
-	vector<cTexture*> player;
-
 	string itemName;
 
 	cTimer* t_Speed = nullptr;
 	cTimer* t_Invincibility = nullptr;
-	cTimer* t_Ani = nullptr;
+	cTimer* t_Timer = nullptr;
 
 	DWORD* imgColor;
 
@@ -33,8 +31,10 @@ public:
 	int speed;
 	int real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	int saveHp = 0;
+	int timer = 180;
 
 	float coloring_per = 0;
+	float score = 0;
 
 	char perText[128] = "";
 

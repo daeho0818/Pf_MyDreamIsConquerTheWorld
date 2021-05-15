@@ -10,8 +10,9 @@ cParentScene::~cParentScene()
 	SAFE_DELETE(t_TextAni);
 }
 
-void cParentScene::Init()
+void cParentScene::Init(string curScene)
 {
+	this->curScene = curScene;
 	textCount = 1;
 	isStart = false;
 	isStop = false;
@@ -33,6 +34,10 @@ void cParentScene::Init()
 	}
 
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540), "ingameB");
+
+	BUTTON->AddButton("stop_back", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 300), "stopB");
+	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 400), "stopB");
+	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500), "stopB");
 }
 
 void cParentScene::Update()
@@ -41,9 +46,24 @@ void cParentScene::Update()
 	{
 		if (MOUSE->Collider("CFnext"))
 		{
-			if(isClear) SCENE->ChangeScene("cTitleScene");
-			else if(isFail) SCENE->ChangeScene("cTitleScene");
+			if (isClear) SCENE->ChangeScene("cTitleScene");
+			else if (isFail) SCENE->ChangeScene("cTitleScene");
 			// 나중에 두 씬은 다르게
+		}
+
+		if (MOUSE->Collider("stop_back"))
+		{
+			isStop = false;
+		}
+
+		if (MOUSE->Collider("stop_restart"))
+		{
+			SCENE->ChangeScene(curScene);
+		}
+
+		if (MOUSE->Collider("stop_worldmap"))
+		{
+			SCENE->ChangeScene("cSelectStageScene");
 		}
 	}
 	if (!isStart)
@@ -116,7 +136,7 @@ void cParentScene::Render()
 
 		// 점령 확률, 스코어, 시간, 전리품 렌더하기
 
-		(isClear) ? RENDER->CenterRender(IMAGE->FindImage("Clear"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500)) : 
+		(isClear) ? RENDER->CenterRender(IMAGE->FindImage("Clear"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500)) :
 			RENDER->CenterRender(IMAGE->FindImage("Over"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500));
 
 		RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));

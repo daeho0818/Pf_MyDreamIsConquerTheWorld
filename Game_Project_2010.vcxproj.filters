@@ -105,6 +105,27 @@
     <Filter Include="2. Manager\Scene\Parent">
       <UniqueIdentifier>{721cfb18-3fc0-48a1-96dc-c00468dcaad9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Scene\Ingame\Ice">
+      <UniqueIdentifier>{be0faf25-71f2-4266-99ce-d2e9f92966c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\Church">
+      <UniqueIdentifier>{83ac4f15-b796-4903-8e9e-3b7da0c481c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\City">
+      <UniqueIdentifier>{f942d9f0-031f-4291-871f-5f40daa4da99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\Desert">
+      <UniqueIdentifier>{fb0b288d-33a2-4f87-a791-0450ad6f39af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\City%28night%29">
+      <UniqueIdentifier>{499a50cc-bd02-450b-9cd6-416421e6240c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\Ocean">
+      <UniqueIdentifier>{fbf4d1ca-ca67-4ea9-bded-8cc042c85e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Scene\Ingame\Jungle">
+      <UniqueIdentifier>{7583f011-8823-47e0-9663-925fe6f587eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -172,14 +193,8 @@
     </ClCompile>
     <ClCompile Include="DXUT\Optional\SDKsound.cpp" />
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp" />
-    <ClCompile Include="cIngameScene.cpp">
-      <Filter>4. Scene\Ingame</Filter>
-    </ClCompile>
     <ClCompile Include="cTitleScene.cpp">
       <Filter>4. Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="cIngameScene2.cpp">
-      <Filter>4. Scene\Ingame</Filter>
     </ClCompile>
     <ClCompile Include="cInputManager.cpp">
       <Filter>2. Manager\Input</Filter>
@@ -271,6 +286,27 @@
     <ClCompile Include="cParentScene.cpp">
       <Filter>2. Manager\Scene\Parent</Filter>
     </ClCompile>
+    <ClCompile Include="cIceScene.cpp">
+      <Filter>4. Scene\Ingame\Ice</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityScene.cpp">
+      <Filter>4. Scene\Ingame\City</Filter>
+    </ClCompile>
+    <ClCompile Include="cChurchScene.cpp">
+      <Filter>4. Scene\Ingame\Church</Filter>
+    </ClCompile>
+    <ClCompile Include="cDesertScene.cpp">
+      <Filter>4. Scene\Ingame\Desert</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityNightScene.cpp">
+      <Filter>4. Scene\Ingame\City%28night%29</Filter>
+    </ClCompile>
+    <ClCompile Include="cJungleScene.cpp">
+      <Filter>4. Scene\Ingame\Jungle</Filter>
+    </ClCompile>
+    <ClCompile Include="cOceanScene.cpp">
+      <Filter>4. Scene\Ingame\Ocean</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -279,14 +315,8 @@
     </ClInclude>
     <ClInclude Include="DXUT\Optional\SDKsound.h" />
     <ClInclude Include="DXUT\Optional\SDKwavefile.h" />
-    <ClInclude Include="cIngameScene.h">
-      <Filter>4. Scene\Ingame</Filter>
-    </ClInclude>
     <ClInclude Include="cTitleScene.h">
       <Filter>4. Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="cIngameScene2.h">
-      <Filter>4. Scene\Ingame</Filter>
     </ClInclude>
     <ClInclude Include="cInputManager.h">
       <Filter>2. Manager\Input</Filter>
@@ -377,6 +407,27 @@
     </ClInclude>
     <ClInclude Include="cParentScene.h">
       <Filter>2. Manager\Scene\Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="cIceScene.h">
+      <Filter>4. Scene\Ingame\Ice</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityScene.h">
+      <Filter>4. Scene\Ingame\City</Filter>
+    </ClInclude>
+    <ClInclude Include="cChurchScene.h">
+      <Filter>4. Scene\Ingame\Church</Filter>
+    </ClInclude>
+    <ClInclude Include="cDesertScene.h">
+      <Filter>4. Scene\Ingame\Desert</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityNightScene.h">
+      <Filter>4. Scene\Ingame\City%28night%29</Filter>
+    </ClInclude>
+    <ClInclude Include="cJungleScene.h">
+      <Filter>4. Scene\Ingame\Jungle</Filter>
+    </ClInclude>
+    <ClInclude Include="cOceanScene.h">
+      <Filter>4. Scene\Ingame\Ocean</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

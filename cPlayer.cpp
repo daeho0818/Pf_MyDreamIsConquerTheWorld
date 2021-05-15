@@ -24,7 +24,6 @@ void cPlayer::Init()
 
 	t_Speed = nullptr;
 	t_Invincibility = nullptr;
-	player.push_back(IMAGE->FindImage("player"));
 
 	hp = 5;
 	coloring_cells = 0;
@@ -32,6 +31,7 @@ void cPlayer::Init()
 	speed = 10;
 	real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	coloring_per = 0;
+	timer = 180;
 	draw_line = false;
 	draw_mode = false;
 	returning = false;
@@ -69,6 +69,7 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
+	if (t_Timer != nullptr) t_Timer->Update();
 
 	// 플레이어 애니메이션
 	//if(t_Ani != nullptr) t_Ani->Update();
@@ -82,23 +83,50 @@ void cPlayer::Update(Vec2 bossPos)
 	//		index += temp;
 	//	});
 	if (INPUT->KeyDown(VK_F11)) coloring_per = 100;
+
+	if (t_Timer == nullptr)
+	{
+		t_Timer = new cTimer(1, [&]()->void {
+			timer--;
+			t_Timer = nullptr;
+			});
+	}
 }
 
 void cPlayer::Render()
 {
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
-	RENDER->CenterRender(player[index], m_pos, 0.1);
+	RENDER->CenterRender(IMAGE->FindImage("player"), m_pos, 0.1);
+
+	char key[5] = "";
+	sprintf(key, "%d", (int)coloring_per / 10);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3000, 100));
+	sprintf(key, "%d", (int)coloring_per % 10);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3100, 100));
+	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3200, 100));
+
+	char time[5] = "";
+	sprintf(time, "%d", timer / 60);
+	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 150, 100));
+	sprintf(time, "%d", (timer % 60) / 10);
+	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2, 100));
+	sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
+	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 100, 100));
+
+	// 2분 40초
+	// 1분 20초
 }
 
 void cPlayer::UIRender()
 {
-	UI->PrintText(perText, { 1500, 30 }, 50);
 }
 
 void cPlayer::Release()
 {
 	SAFE_DELETE(t_Speed);
+	SAFE_DELETE(t_Invincibility);
+	SAFE_DELETE(t_Timer);
 }
 
 void cPlayer::KeyEvent()

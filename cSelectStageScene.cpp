@@ -12,6 +12,14 @@ cSelectStageScene::~cSelectStageScene()
 void cSelectStageScene::Init()
 {
 	BUTTON->AddButton("guide_close", Vec2(3000, WINSIZEY / 2 - 1000), "guideB");
+
+	BUTTON->AddButton("church_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("city_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("city(night)_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("desert_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("ice_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("ocean_button", Vec2(), "worldmapB");
+	BUTTON->AddButton("jungle_button", Vec2(), "worldmapB");
 }
 
 void cSelectStageScene::Update()

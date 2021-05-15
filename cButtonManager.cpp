@@ -17,8 +17,10 @@ void cButtonManager::AddButton(string key, Vec2 pos, string tag)
 		size = 0.6;
 		min = 200;
 	}
-	else if (tag == "guideB" || "ingameB")
+	else if (tag == "guideB" || "ingameB" || "stopB")
 		size = 1;
+	else if (tag == "worldmapB")
+		size = 0.6;
 	m_buttons.push_back(new cButton(IMAGE->FindImage(key), pos, tag, size));
 	buttonPos.insert(make_pair(key, pos));
 	RECT startButtonRect = {

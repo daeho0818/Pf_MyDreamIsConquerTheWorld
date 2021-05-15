@@ -5,7 +5,7 @@ public:
 	cParentScene();
 	~cParentScene();
 
-	virtual void Init();
+	virtual void Init(string curScene);
 	virtual void Update();
 	virtual void Render();
 
@@ -24,6 +24,7 @@ public:
 
 	float percent;
 	float score;
+	string curScene = "";
 
 	cTimer* t_TextAni = nullptr;
 	
