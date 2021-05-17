@@ -396,29 +396,32 @@ void cPlayer::ChkLine()
 
 void cPlayer::Returning()
 {
-	if (m_pos == startDrawPos) { draw_mode = true; DrawLine(true); returning = false; return; }
-	if (Near(VK_LEFT, 1))
+	for (int i = 0; i < speed; i++)
 	{
-		SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
-		m_pos.x--;
+		if (Near(VK_LEFT, 1))
+		{
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			m_pos.x--;
+		}
+		else if (Near(VK_RIGHT, 1))
+		{
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			m_pos.x++;
+		}
+		else if (Near(VK_UP, 1))
+		{
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			m_pos.y--;
+		}
+		else if (Near(VK_DOWN, 1))
+		{
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			m_pos.y++;
+		}
+		else
+			m_pos = startDrawPos;
+		if (m_pos == startDrawPos) { draw_mode = true; DrawLine(true); returning = false; return; }
 	}
-	else if (Near(VK_RIGHT, 1))
-	{
-		SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
-		m_pos.x++;
-	}
-	else if (Near(VK_UP, 1))
-	{
-		SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
-		m_pos.y--;
-	}
-	else if (Near(VK_DOWN, 1))
-	{
-		SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
-		m_pos.y++;
-	}
-	else
-		m_pos = startDrawPos;
 }
 
 void cPlayer::ItemUpdate()

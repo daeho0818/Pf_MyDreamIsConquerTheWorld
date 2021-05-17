@@ -114,6 +114,7 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("adven_Handle", "title/AdvenBook/handle");
 	IMAGE->AddImage("adven_HandleBG", "title/AdvenBook/handleBG");
 	IMAGE->AddImage("adven_ItemRect", "title/AdvenBook/itemRect");
+	IMAGE->AddImage("adven_DontClear", "title/AdvenBook/dontClear");
 
 	// world map
 	IMAGE->AddImage("WorldMap", "WorldMap/map");

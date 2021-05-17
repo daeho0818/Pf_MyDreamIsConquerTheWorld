@@ -31,7 +31,7 @@ void cCityNightScene::Init()
 
 void cCityNightScene::Update()
 {
-	if (player->timer <= 0)
+	if (player->timer <= 0 || player->hp <= 0)
 	{
 		isFail = true;
 		cParentScene::SetPercent(player->coloring_per);

@@ -15,6 +15,7 @@ cBoss::cBoss(Vec2 pos, vector<cBullet*>& bullet)
 cBoss::~cBoss()
 {
 	SAFE_DELETE(t_Pattern1);
+	SAFE_DELETE(t_Pattern2);
 }
 
 string cBoss::ChkOut()
@@ -35,25 +36,50 @@ void cBoss::CircleBullet()
 	float angle = 0;
 	float rad = D3DX_PI * 2 / 25;
 
-	for (int i = 0; i < 100; i++, angle += rad)
+	for (int i = 0; i < 365; i++, angle += rad)
 	{
-		Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
-		direction = direction - m_pos;
-		D3DXVec2Normalize(&direction, &direction);
-		m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+		if (i == rand() % 365)
+		{
+			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
+			direction = direction - m_pos;
+			D3DXVec2Normalize(&direction, &direction);
+			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+		}
 	}
 }
 
 void cBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
+	if (t_Pattern2 != nullptr) t_Pattern2->Update();
 
-	if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(7, [&]()->void {
-		isStop = true;
-		t_Pattern1 = nullptr;
-		});
+	if (pattern1)
+	{
+		if (count < 10)
+		{
+			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.5, [&]()->void {
+				isStop = true;
+				count++;
+				t_Pattern1 = nullptr;
+				});
+		}
+		else
+		{
+			count = 0;
+			pattern1 = false;
+			isStop = false;
+		}
+	}
+	else
+	{
+		if (t_Pattern2 == nullptr) t_Pattern2 = new cTimer(10, [&]()->void {
+			pattern1 = true;
+			t_Pattern2 = nullptr;
+			isStop = true;
+			});
+	}
 
-	if (isStop) { isStop = false; CircleBullet(); }
+	if (isStop) {CircleBullet(); }
 
 	if (INPUT->KeyDown(VK_RETURN)) CircleBullet();
 
@@ -65,7 +91,8 @@ void cBoss::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {1 * dir_x, 1 * dir_y};
+	if (!isStop)
+		m_pos += {1 * dir_x, 1 * dir_y};
 }
 
 void cBoss::Render()

@@ -78,7 +78,7 @@ void cParentScene::Update()
 			if (textCount < 6)
 			{
 				float time = 0;
-				if (textCount == 5) time = 2;
+				if (textCount == 1) time = 1;
 				t_TextAni = new cTimer(1 + time, [&]()->void {
 					t_TextAni = nullptr;
 					if (!isStop)
@@ -97,19 +97,19 @@ void cParentScene::Render()
 		switch (textCount)
 		{
 		case 1:
-			RENDER->CenterRender(IMAGE->FindImage("start_3"), textPos[0][0]);
+			RENDER->CenterRender(IMAGE->FindImage("start_game"), textPos[0][0]);
 			break;
 		case 2:
-			RENDER->CenterRender(IMAGE->FindImage("start_2"), textPos[1][0]);
+			RENDER->CenterRender(IMAGE->FindImage("start_3"), textPos[1][0]);
 			break;
 		case 3:
-			RENDER->CenterRender(IMAGE->FindImage("start_1"), textPos[2][0]);
+			RENDER->CenterRender(IMAGE->FindImage("start_2"), textPos[2][0]);
 			break;
 		case 4:
-			RENDER->CenterRender(IMAGE->FindImage("start_start"), textPos[3][0]);
+			RENDER->CenterRender(IMAGE->FindImage("start_1"), textPos[3][0]);
 			break;
 		case 5:
-			RENDER->CenterRender(IMAGE->FindImage("start_game"), textPos[4][0]);
+			RENDER->CenterRender(IMAGE->FindImage("start_start"), textPos[4][0]);
 			break;
 		default:
 			break;

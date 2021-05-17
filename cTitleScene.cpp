@@ -152,16 +152,22 @@ void cTitleScene::Render()
 
 		for (int i = 1; i < 5; i++)
 		{
-			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(875, 400 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1500, 400 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1500, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(900, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1525, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1525, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1525, 450 * i), 0.3);
 		}
 
 		for (int i = 1; i < 4; i++)
 		{
-			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(2175, 400 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2800, 400 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2800, 400 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(2180, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2805, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2805, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2805, 450 * i), 0.3);
 		}
 
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
