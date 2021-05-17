@@ -21,9 +21,11 @@ void cTitleScene::Init()
 	BUTTON->AddButton("adven_Back", Vec2(350, WINSIZEY / 2 - 923), "advenB");
 
 	BUTTON->AddButton("Arrow", Vec2(500, 2100), "arrowB");
+
 	guideUI = false;
 	buttonsMoved = false;
 	positiveBPress = true;
+	temp = 0;
 }
 
 void cTitleScene::Update()
@@ -39,16 +41,30 @@ void cTitleScene::Update()
 			t_Delay = new cTimer(0.02, [&]()->void {
 				for (auto iter : BUTTON->m_buttons)
 				{
-					iter->m_pos -= Vec2(0, 100);
+					if (positiveBPress)
+						iter->m_pos -= Vec2(0, 100);
+					else
+						iter->m_pos += Vec2(0, 100);
 				}
-				temp += 100;
+				if (positiveBPress)
+					temp += 100;
+				else
+					temp -= 100;
 
 				count++;
 				t_Delay = nullptr;
 				});
 		}
-		else
-			BUTTON->ChangeBtnInfo("Arrow", { 500, 200 }, "arrowB");
+		else if(count > 19)
+		{
+			if (positiveBPress)
+				BUTTON->ChangeBtnInfo("Arrow", { 500, 100 }, "arrowB");
+			else
+				BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, "arrowB");
+			positiveBPress = !positiveBPress;
+			buttonsMoved = false;
+			count = 0;
+		}
 	}
 
 	if (MOUSE->lUp)
@@ -97,7 +113,6 @@ void cTitleScene::Update()
 		}
 		if (MOUSE->Collider("Arrow") && !buttonsMoved)
 		{
-			positiveBPress = !positiveBPress;
 			buttonsMoved = true;
 		}
 	}
