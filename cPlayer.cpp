@@ -28,7 +28,7 @@ void cPlayer::Init()
 	hp = 5;
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
-	speed = 10;
+	speed = 20;
 	real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	coloring_per = 0;
 	timer = 180;
@@ -71,19 +71,6 @@ void cPlayer::Update(Vec2 bossPos)
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
 	if (t_Timer != nullptr) t_Timer->Update();
 
-	// 플레이어 애니메이션
-	//if(t_Ani != nullptr) t_Ani->Update();
-	//player = IMAGE->MakeVecImg("player");
-	//int temp;
-	//t_Ani = new cTimer(0.1, [&]()->void {
-	//	if (index >= player.size())
-	//		temp = -1;
-	//	if (index <= 0)
-	//		temp = 1;
-	//		index += temp;
-	//	});
-	if (INPUT->KeyDown(VK_F11)) coloring_per = 100;
-
 	if (t_Timer == nullptr)
 	{
 		t_Timer = new cTimer(1, [&]()->void {
@@ -97,7 +84,7 @@ void cPlayer::Render()
 {
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
-	RENDER->CenterRender(IMAGE->FindImage("player"), m_pos, 0.1);
+	RENDER->CenterRender(IMAGE->FindImage("player"), m_pos, 0.2);
 
 	char key[5] = "";
 	sprintf(key, "%d", (int)coloring_per / 10);

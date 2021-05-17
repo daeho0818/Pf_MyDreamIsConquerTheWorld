@@ -20,5 +20,5 @@ void cMBullet::Update()
 
 void cMBullet::Render()
 {
-	RENDER->CenterRender(IMAGE->FindImage("bullet_enemy"), m_pos, 1, -m_angle);
+	RENDER->CenterRender(IMAGE->FindImage("bullet_enemy"), m_pos, size, -m_angle);
 }

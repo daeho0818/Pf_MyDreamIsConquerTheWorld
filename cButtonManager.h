@@ -12,5 +12,6 @@ public:
 	map<string, Vec2> buttonPos;
 
 	void AddButton(string key, Vec2 pos, string tag);
+	void ChangeBtnInfo(string key, Vec2 pos, string tag);
 };
 #define BUTTON cButtonManager::GetInstance()

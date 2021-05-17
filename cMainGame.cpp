@@ -231,6 +231,8 @@ void cMainGame::AddResource()
 	}
 	IMAGE->AddImage("percent", "Text/%");
 
+	// public
+	IMAGE->AddImage("Arrow", "Public/Arrow");
 	IMAGE->AddImage("Blur", "Blur");
 
 	IMAGE->AddImage("Boss", "Boss");

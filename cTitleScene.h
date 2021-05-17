@@ -14,6 +14,14 @@ public:
 
 	bool guideUI = false;
 	bool advenUI = false;
+	bool buttonsMoved = false;
+	bool positiveBPress = true;
+
+	float temp = 0;
+
+	int count = 0;
+
+	cTimer* t_Delay = nullptr;
 
 	virtual void Init() override;
 	virtual void Update() override;

@@ -40,7 +40,7 @@ void cBoss::CircleBullet()
 		Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
 		direction = direction - m_pos;
 		D3DXVec2Normalize(&direction, &direction);
-		m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 10, 400));
+		m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
 	}
 }
 
