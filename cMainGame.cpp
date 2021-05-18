@@ -234,6 +234,7 @@ void cMainGame::AddResource()
 
 	// public
 	IMAGE->AddImage("Arrow", "Public/Arrow");
+	IMAGE->AddImage("_Arrow", "Public/_Arrow");
 	IMAGE->AddImage("Blur", "Blur");
 
 	IMAGE->AddImage("Boss", "Boss");

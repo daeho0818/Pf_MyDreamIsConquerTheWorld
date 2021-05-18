@@ -51,19 +51,22 @@ void cParentScene::Update()
 			// 나중에 두 씬은 다르게
 		}
 
-		if (MOUSE->Collider("stop_back"))
+		if (isStop)
 		{
-			isStop = false;
-		}
+			if (MOUSE->Collider("stop_back"))
+			{
+				isStop = false;
+			}
 
-		if (MOUSE->Collider("stop_restart"))
-		{
-			SCENE->ChangeScene(curScene);
-		}
+			if (MOUSE->Collider("stop_restart"))
+			{
+				SCENE->ChangeScene(curScene);
+			}
 
-		if (MOUSE->Collider("stop_worldmap"))
-		{
-			SCENE->ChangeScene("cSelectStageScene");
+			if (MOUSE->Collider("stop_worldmap"))
+			{
+				SCENE->ChangeScene("cSelectStageScene");
+			}
 		}
 	}
 	if (!isStart)
@@ -128,8 +131,14 @@ void cParentScene::Render()
 
 	if (isClear || isFail)
 	{
+		char key[5] = "";
 		RENDER->CenterRender(IMAGE->FindImage("CFBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 		RENDER->CenterRender(IMAGE->FindImage("CFpercent"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2 - 150));
+		sprintf(key, "%d", int(percent) / 10);
+		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 150));
+		sprintf(key, "%d", int(percent) % 10);
+		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 80, WINSIZEY / 2 - 150));
+		RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 180, WINSIZEY / 2 - 150));
 		RENDER->CenterRender(IMAGE->FindImage("CFscore"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2));
 		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
 		RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));

@@ -23,9 +23,13 @@ void cTitleScene::Init()
 	BUTTON->AddButton("Arrow", Vec2(500, 2100), "arrowB");
 
 	guideUI = false;
+	advenUI = false;
 	buttonsMoved = false;
-	positiveBPress = true;
+	movedEnd = true;
 	temp = 0;
+	logoPos = { WINSIZEX / 2, 500 };
+	memset(move, false, sizeof(move));
+	move[0] = true; speed = 1;
 }
 
 void cTitleScene::Update()
@@ -34,6 +38,9 @@ void cTitleScene::Update()
 	if (guideUI) if (INPUT->KeyDown(VK_ESCAPE)) guideUI = false;
 	if (advenUI) if (INPUT->KeyDown(VK_ESCAPE)) advenUI = false;
 
+	speed += 0.5;
+	logoPos.y += sin(0.1 * speed);
+
 	if (buttonsMoved)
 	{
 		if (t_Delay == nullptr && count <= 19)
@@ -41,12 +48,12 @@ void cTitleScene::Update()
 			t_Delay = new cTimer(0.02, [&]()->void {
 				for (auto iter : BUTTON->m_buttons)
 				{
-					if (positiveBPress)
+					if (movedEnd)
 						iter->m_pos -= Vec2(0, 100);
 					else
 						iter->m_pos += Vec2(0, 100);
 				}
-				if (positiveBPress)
+				if (movedEnd)
 					temp += 100;
 				else
 					temp -= 100;
@@ -55,13 +62,17 @@ void cTitleScene::Update()
 				t_Delay = nullptr;
 				});
 		}
-		else if(count > 19)
+		else if (count > 19)
 		{
-			if (positiveBPress)
+			if (movedEnd)
 				BUTTON->ChangeBtnInfo("Arrow", { 500, 100 }, "arrowB");
 			else
 				BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, "arrowB");
-			positiveBPress = !positiveBPress;
+			movedEnd = !movedEnd;
+			if (!movedEnd)
+				arrowKey = "_Arrow";
+			else
+				arrowKey = "Arrow";
 			buttonsMoved = false;
 			count = 0;
 		}
@@ -69,7 +80,7 @@ void cTitleScene::Update()
 
 	if (MOUSE->lUp)
 	{
-		if (positiveBPress)
+		if (!buttonsMoved && movedEnd)
 		{
 			if (MOUSE->Collider("start_button"))
 			{
@@ -121,10 +132,10 @@ void cTitleScene::Update()
 void cTitleScene::Render()
 {
 	RENDER->CenterRender(IMAGE->FindImage("TitleBG"), { WINSIZEX / 2, WINSIZEY / 2 });
-	RENDER->CenterRender(IMAGE->FindImage("Logo"), { WINSIZEX / 2, 600 }, 0.5);
+	RENDER->CenterRender(IMAGE->FindImage("Logo"), { logoPos.x, logoPos.y - temp }, 0.5);
 	RENDER->CenterRender(IMAGE->FindImage("pattern"), { 500, 1000 - temp });
 
-	RENDER->CenterRender(IMAGE->FindImage("Arrow"), Vec2(500, 2100 - temp), 1.5);
+	RENDER->CenterRender(IMAGE->FindImage(arrowKey), Vec2(500, 2100 - temp), 1.5);
 	for (auto iter : BUTTON->m_buttons)
 	{
 		if (iter->m_tag == "titleB")

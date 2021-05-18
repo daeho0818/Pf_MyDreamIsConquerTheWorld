@@ -15,13 +15,20 @@ public:
 	bool guideUI = false;
 	bool advenUI = false;
 	bool buttonsMoved = false;
-	bool positiveBPress = true;
+	bool movedEnd = true;
+
+	bool move[7] = { false, };
+	float speed = 0;
 
 	float temp = 0;
 
 	int count = 0;
 
 	cTimer* t_Delay = nullptr;
+
+	Vec2 logoPos = { WINSIZEX / 2, -500 };
+
+	string arrowKey = "Arrow";
 
 	virtual void Init() override;
 	virtual void Update() override;

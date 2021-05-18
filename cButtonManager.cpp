@@ -7,6 +7,10 @@ cButtonManager::cButtonManager()
 
 cButtonManager::~cButtonManager()
 {
+	for (auto iter : m_buttons) SAFE_DELETE(iter);
+	m_buttons.clear();
+	buttonPos.clear();
+	buttonRects.clear();
 }
 
 void cButtonManager::AddButton(string key, Vec2 pos, string tag)

@@ -28,7 +28,7 @@ void cPlayer::Init()
 	hp = 5;
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
-	speed = 20;
+	speed = 15;
 	real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	coloring_per = 0;
 	timer = 180;
@@ -39,17 +39,22 @@ void cPlayer::Init()
 	invincibility = false;
 
 	for (int y = WINSIZEY - 1; y != -1; --y)
+	{
 		for (int x = WINSIZEX - 1; x != -1; --x)
-			if (x == 0 || x == WINSIZEX - 1 || y == 0 + 1 || y == WINSIZEY - 2)
+		{
+			if (x == 0 || x == WINSIZEX - 1 || y == 1 || y == WINSIZEY - 2)
+			{
 				SCENE->Array[y][x] = 1;
+			}
+		}
+	}
 	draw_mode = true;
-	DrawLine();
+	DrawLine(true);
 }
 
 void cPlayer::Update(Vec2 bossPos)
 {
 	ItemUpdate();
-
 	hRc = {
 		0,
 		0,
@@ -100,9 +105,6 @@ void cPlayer::Render()
 	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2, 100));
 	sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
 	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 100, 100));
-
-	// 2분 40초
-	// 1분 20초
 }
 
 void cPlayer::UIRender()
@@ -154,8 +156,8 @@ void cPlayer::DrawTempLine()
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
-	int index = int(m_pos.y) * WINSIZEX + int(m_pos.x);
-	SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 1;
+	int index = int(m_pos.y * WINSIZEX + m_pos.x);
+	SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 1;
 	textureColor[index] = D3DCOLOR_RGBA(255, 0, 0, 255);
 	BG[0]->ptr->UnlockRect(0);
 }
@@ -174,9 +176,9 @@ void cPlayer::DrawLine(bool isFilled)
 			D3DXCOLOR targetPixel = textureColor[y * WINSIZEX + x];
 			switch (SCENE->Array[y][x])
 			{
-			case 0:
-				targetPixel = imgColor[y * WINSIZEX + x];
-				break;
+			//case 0:
+			//	targetPixel = imgColor[y * WINSIZEX + x];
+			//	break;
 			case 1:
 				targetPixel = D3DCOLOR_RGBA(0, 255, 0, 255);
 				last_x = x;
@@ -215,7 +217,7 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 {
 	if (target == change) return;
 	ChkLine();
-	if (m_pos.y < 899 && m_pos.x < 1599)
+	if (m_pos.y < WINSIZEY - 1 && m_pos.x < WINSIZEX - 1)
 		if (SCENE->Array[(int)pos.y + 1][(int)pos.x + 1] != target) return;
 	queue<Vec2> v2q;
 
@@ -390,8 +392,8 @@ void cPlayer::Move()
 
 void cPlayer::ChkLine()
 {
-	if (m_pos.x >= WINSIZEX) m_pos.x = WINSIZEX; if (m_pos.x <= 0) m_pos.x = 0;
-	if (m_pos.y >= WINSIZEY - 2) m_pos.y = WINSIZEY - 2; if (m_pos.y <= 0 + 1) m_pos.y = 0 + 1;
+	if (m_pos.x >= WINSIZEX - 1) m_pos.x = WINSIZEX - 1; if (m_pos.x <= 0) m_pos.x = 0;
+	if (m_pos.y >= WINSIZEY - 2) m_pos.y = WINSIZEY - 2; if (m_pos.y <= 1) m_pos.y = 1;
 }
 
 void cPlayer::Returning()
@@ -443,11 +445,11 @@ void cPlayer::EatItem(string key)
 
 	if (key == "Speed")
 	{
-		speed = 6;
+		speed = 25;
 		if (t_Speed == nullptr)
 		{
 			t_Speed = new cTimer(5, [&]()->void {
-				speed = 3;
+				speed = 15;
 				t_Speed = nullptr;
 				});
 		}
