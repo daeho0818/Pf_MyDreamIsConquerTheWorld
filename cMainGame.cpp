@@ -9,6 +9,7 @@
 #include "cJungleScene.h"
 #include "cDesertScene.h"
 #include "cOceanScene.h"
+#include "cEndScene.h"
 
 cMainGame::cMainGame()
 {
@@ -30,6 +31,7 @@ void cMainGame::Init()
 	SCENE->AddScene("cDesertScene", new cDesertScene);
 	SCENE->AddScene("cOceanScene", new cOceanScene);
 	SCENE->AddScene("cJungleScene", new cJungleScene);
+	SCENE->AddScene("cEndScene", new cEndScene);
 	SCENE->ChangeScene("cTitleScene");
 }
 
@@ -140,6 +142,11 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("ocean_button", "WorldMap/ocean_button");
 	IMAGE->AddImage("ocean_complete", "WorldMap/ocean_complete");
 	IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
+	IMAGE->AddImage("StageBG", "WorldMap/Details/public/BG");
+	IMAGE->AddImage("StageIllust", "WorldMap/Details/public/Illust");
+	IMAGE->AddImage("StageItem", "WorldMap/Details/public/Item");
+	IMAGE->AddImage("StageTextBG", "WorldMap/Details/public/TextBG");
+	IMAGE->AddImage("StageX", "WorldMap/Details/public/x");
 
 	// ingame
 	{
@@ -236,6 +243,11 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("Arrow", "Public/Arrow");
 	IMAGE->AddImage("_Arrow", "Public/_Arrow");
 	IMAGE->AddImage("Blur", "Blur");
+
+	// EndScene
+	IMAGE->AddImage("end_restart", "EndScene/restart");
+	IMAGE->AddImage("end_title", "EndScene/title");
+	IMAGE->AddImage("end_worldmap", "EndScene/worldmap");
 
 	IMAGE->AddImage("Boss", "Boss");
 

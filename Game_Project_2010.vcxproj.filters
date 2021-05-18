@@ -126,6 +126,9 @@
     <Filter Include="4. Scene\Ingame\Jungle">
       <UniqueIdentifier>{7583f011-8823-47e0-9663-925fe6f587eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Scene\End">
+      <UniqueIdentifier>{793d9e65-8352-4a75-8491-6356b0b09392}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -307,6 +310,9 @@
     <ClCompile Include="cOceanScene.cpp">
       <Filter>4. Scene\Ingame\Ocean</Filter>
     </ClCompile>
+    <ClCompile Include="cEndScene.cpp">
+      <Filter>4. Scene\End</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -428,6 +434,9 @@
     </ClInclude>
     <ClInclude Include="cOceanScene.h">
       <Filter>4. Scene\Ingame\Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="cEndScene.h">
+      <Filter>4. Scene\End</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

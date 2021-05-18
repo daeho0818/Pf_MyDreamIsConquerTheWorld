@@ -30,6 +30,35 @@ void cSelectStageScene::Update()
 		{
 			isFirst = false;
 		}
+
+		if (MOUSE->Collider("church_button"))
+		{
+
+		}
+		if (MOUSE->Collider("city_button"))
+		{
+
+		}
+		if (MOUSE->Collider("city(night)_button"))
+		{
+
+		}
+		if (MOUSE->Collider("desert_button"))
+		{
+
+		}
+		if (MOUSE->Collider("ice_button"))
+		{
+
+		}
+		if (MOUSE->Collider("ocean_button"))
+		{
+
+		}
+		if (MOUSE->Collider("jungle_button"))
+		{
+
+		}
 	}
 }
 
@@ -55,6 +84,9 @@ void cSelectStageScene::Render()
 
 	RENDER->CenterRender(IMAGE->FindImage("ocean_lock"), Vec2(3000, 1500), 0.6);
 	RENDER->CenterRender(IMAGE->FindImage("ocean_button"), Vec2(3000, 1800), 0.6);
+
+	RENDER->CenterRender(IMAGE->FindImage("jungle_lock"), Vec2(3000, 1500), 0.6);
+	RENDER->CenterRender(IMAGE->FindImage("jungle_button"), Vec2(1325, 90), 0.6);
 	if (isFirst)
 	{
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
@@ -70,4 +102,40 @@ void cSelectStageScene::UIRender()
 
 void cSelectStageScene::Release()
 {
+}
+
+void cSelectStageScene::StageInfo(Stage stage)
+{
+	if (stage == Stage::None) return;
+	RENDER->CenterRender(IMAGE->FindImage("StageBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
+
+	RENDER->CenterRender(IMAGE->FindImage("StageTextBG"), 
+		Vec2(WINSIZEX / 2 - IMAGE->FindImage("StageTextBG")->info.Width / 2, 800));
+
+	RENDER->CenterRender(IMAGE->FindImage("StageTextBG"), 
+		Vec2(WINSIZEX / 2 + IMAGE->FindImage("StageTextBG")->info.Width / 2, 800));
+
+	switch (stage)
+	{
+	case Stage::Church:
+		break;
+	case Stage::City:
+
+		break;
+	case Stage::City_Night:
+
+		break;
+	case Stage::Ice:
+
+		break;
+	case Stage::Desert:
+
+		break;
+	case Stage::Jungle:
+
+		break;
+	case Stage::Ocean:
+
+		break;
+	}
 }

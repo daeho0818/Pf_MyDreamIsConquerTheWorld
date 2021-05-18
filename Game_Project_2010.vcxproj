@@ -397,6 +397,7 @@
     <ClCompile Include="cCityNightScene.cpp" />
     <ClCompile Include="cCollision.cpp" />
     <ClCompile Include="cDesertScene.cpp" />
+    <ClCompile Include="cEndScene.cpp" />
     <ClCompile Include="cHeal.cpp" />
     <ClCompile Include="cImageManager.cpp" />
     <ClCompile Include="cIceScene.cpp" />
@@ -437,6 +438,7 @@
     <ClInclude Include="cCityNightScene.h" />
     <ClInclude Include="cCollision.h" />
     <ClInclude Include="cDesertScene.h" />
+    <ClInclude Include="cEndScene.h" />
     <ClInclude Include="cHeal.h" />
     <ClInclude Include="cImageManager.h" />
     <ClInclude Include="cIceScene.h" />

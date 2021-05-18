@@ -21,6 +21,7 @@ public:
 	cScene* nowScene = nullptr;
 	cScene* nextScene = nullptr;
 	int Array[WINSIZEY][WINSIZEX];
+	string curScene = "";
 };
 
 #define SCENE cSceneManager::GetInstance()

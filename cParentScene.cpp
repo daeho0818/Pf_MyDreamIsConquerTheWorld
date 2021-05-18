@@ -12,7 +12,7 @@ cParentScene::~cParentScene()
 
 void cParentScene::Init(string curScene)
 {
-	this->curScene = curScene;
+	SCENE->curScene = curScene;
 	textCount = 1;
 	isStart = false;
 	isStop = false;
@@ -46,9 +46,8 @@ void cParentScene::Update()
 	{
 		if (MOUSE->Collider("CFnext"))
 		{
-			if (isClear) SCENE->ChangeScene("cTitleScene");
-			else if (isFail) SCENE->ChangeScene("cTitleScene");
-			// 나중에 두 씬은 다르게
+			if (isClear) SCENE->ChangeScene("cEndScene");
+			else if (isFail) SCENE->ChangeScene("cEndScene");
 		}
 
 		if (isStop)
@@ -60,7 +59,7 @@ void cParentScene::Update()
 
 			if (MOUSE->Collider("stop_restart"))
 			{
-				SCENE->ChangeScene(curScene);
+				SCENE->ChangeScene(SCENE->curScene);
 			}
 
 			if (MOUSE->Collider("stop_worldmap"))

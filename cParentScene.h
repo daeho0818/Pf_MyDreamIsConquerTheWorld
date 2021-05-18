@@ -24,7 +24,6 @@ public:
 
 	float percent;
 	float score;
-	string curScene = "";
 
 	cTimer* t_TextAni = nullptr;
 	

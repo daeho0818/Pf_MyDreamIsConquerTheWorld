@@ -17,10 +17,10 @@ void cPlayer::Init()
 {
 	memset(SCENE->SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
-	D3DLOCKED_RECT lr;
-	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
-	imgColor = (DWORD*)lr.pBits;
-	BG[0]->ptr->UnlockRect(0);
+	//D3DLOCKED_RECT lr;
+	//BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
+	//imgColor = (DWORD*)lr.pBits;
+	//BG[0]->ptr->UnlockRect(0);
 
 	t_Speed = nullptr;
 	t_Invincibility = nullptr;
@@ -105,6 +105,10 @@ void cPlayer::Render()
 	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2, 100));
 	sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
 	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 100, 100));
+
+	char t_hp[5] = "";
+	sprintf(t_hp, "%d", hp);
+	RENDER->CenterRender(IMAGE->FindImage(t_hp), Vec2(100, 100));
 }
 
 void cPlayer::UIRender()
@@ -176,9 +180,9 @@ void cPlayer::DrawLine(bool isFilled)
 			D3DXCOLOR targetPixel = textureColor[y * WINSIZEX + x];
 			switch (SCENE->Array[y][x])
 			{
-			//case 0:
-			//	targetPixel = imgColor[y * WINSIZEX + x];
-			//	break;
+				//case 0:
+				//	targetPixel = imgColor[y * WINSIZEX + x];
+				//	break;
 			case 1:
 				targetPixel = D3DCOLOR_RGBA(0, 255, 0, 255);
 				last_x = x;

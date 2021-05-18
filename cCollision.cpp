@@ -55,7 +55,7 @@ void cCollision::MBPColl()
 		{
 			if (7 + (*iter)->size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 			{
-				if (!m_player->invincibility && !m_player->draw_mode)
+				if (!m_player->invincibility && m_player->draw_mode)
 				{
 					m_player->hp -= (*iter)->m_Damage;
 					(*iter)->isDestroy = true;

@@ -27,6 +27,8 @@ void cButtonManager::AddButton(string key, Vec2 pos, string tag)
 		size = 0.6;
 	else if (tag == "arrowB")
 		size = 1.5;
+	else if (tag == "endSceneB")
+		size = 0.8;
 	m_buttons.push_back(new cButton(IMAGE->FindImage(key), pos, tag, size));
 	buttonPos.insert(make_pair(key, pos));
 	RECT startButtonRect = {
