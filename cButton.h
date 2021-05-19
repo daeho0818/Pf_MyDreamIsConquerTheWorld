@@ -2,7 +2,7 @@
 class cButton
 {
 public:
-	cButton(cTexture* ptr, Vec2 pos, string tag, float size = 1);
+	cButton(cTexture* ptr, Vec2 pos, string tag, float size);
 	~cButton();
 
 	cTexture* m_ptr;

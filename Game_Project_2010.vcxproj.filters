@@ -129,6 +129,96 @@
     <Filter Include="4. Scene\End">
       <UniqueIdentifier>{793d9e65-8352-4a75-8491-6356b0b09392}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Object\Mob\Desert">
+      <UniqueIdentifier>{bff3a2a2-aaaf-4643-a2c6-3c7ce08794ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Desert\Mob1">
+      <UniqueIdentifier>{e26cc3dd-4991-4c75-a077-86c5345139fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Desert\Mob2">
+      <UniqueIdentifier>{a0b4d997-54af-4589-874b-0e5936296e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Desert\Boss1">
+      <UniqueIdentifier>{81b5dfaf-2c6f-49fb-bc26-ea70ba33e2af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Desert\Boss2">
+      <UniqueIdentifier>{8a5f62c3-fefa-4c15-87f6-4ac95867aee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City">
+      <UniqueIdentifier>{beaa220f-4e2c-4038-9ac0-06473c858624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City\Mob1">
+      <UniqueIdentifier>{1338e49a-d058-4688-a4c1-3c4c0a9a8ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City\Mob2">
+      <UniqueIdentifier>{6b99eb22-e78e-4af3-bcf3-61269c0cddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City\Boss">
+      <UniqueIdentifier>{aa376203-69fd-4ef6-b0f5-0008374800b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City%28Night%29">
+      <UniqueIdentifier>{6d915c22-91b3-423c-8ae8-4bc0a9d20f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City%28Night%29\Mob1">
+      <UniqueIdentifier>{f7d4361f-b844-4129-82c1-1477c321cdf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City%28Night%29\Mob2">
+      <UniqueIdentifier>{0bfc12d0-d7c6-49fd-8970-16f172703da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\City%28Night%29\Boss">
+      <UniqueIdentifier>{44c31205-f611-45e3-ae5d-bcf3d932da22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Church">
+      <UniqueIdentifier>{26f72c2b-2402-4e15-a6c5-fe4a09892f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Church\Mob1">
+      <UniqueIdentifier>{31411bac-9501-4d5d-9f35-797c2e6b41e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Church\Mob2">
+      <UniqueIdentifier>{cbd961d7-2861-4ed8-bcdc-288dc1b0091b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Church\Boss">
+      <UniqueIdentifier>{b5187623-e794-4795-a5af-fd698df63930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ocean">
+      <UniqueIdentifier>{d9135330-dbc4-40c3-9e1c-eb6e07519eee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ocean\Mob1">
+      <UniqueIdentifier>{7f27a73f-8fc1-4a1b-be3f-efea506178e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ocean\Mob2">
+      <UniqueIdentifier>{9bae6bff-cab5-418d-8d62-5dd5cc6d4da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ocean\Boss">
+      <UniqueIdentifier>{564f7192-70b8-434b-9bcb-9a9ac8bcd17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Jungle">
+      <UniqueIdentifier>{d001182a-7d2d-4f3d-9cdf-c1de31ccb863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Jungle\Mob1">
+      <UniqueIdentifier>{ffb7152d-a8df-4316-b762-ac68f1879d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Jungle\Mob2">
+      <UniqueIdentifier>{ab08ae6f-0382-4927-8d4c-45b52d292b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Jungle\Mob3">
+      <UniqueIdentifier>{ad0b4d85-0a23-420e-bd51-d94ab6510a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Jungle\Boss">
+      <UniqueIdentifier>{cdc531b8-57f0-412c-b5e6-9bd20adf04e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ice">
+      <UniqueIdentifier>{f44c5e16-1588-4e38-b7d9-baa799bdbf52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ice\Mob1">
+      <UniqueIdentifier>{3b057fd2-6a23-480d-998e-98fdfac79917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ice\Mob2">
+      <UniqueIdentifier>{5789e619-07fc-4c8a-82ef-811631c42e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Object\Mob\Ice\Boss">
+      <UniqueIdentifier>{dba3c2d9-070c-480d-961e-93d6f1e3048f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -313,6 +403,75 @@
     <ClCompile Include="cEndScene.cpp">
       <Filter>4. Scene\End</Filter>
     </ClCompile>
+    <ClCompile Include="cIceMob1.cpp">
+      <Filter>3. Object\Mob\Ice\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cIceMob2.cpp">
+      <Filter>3. Object\Mob\Ice\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cIceBoss.cpp">
+      <Filter>3. Object\Mob\Ice\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cChurchMob1.cpp">
+      <Filter>3. Object\Mob\Church\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cChurchMob2.cpp">
+      <Filter>3. Object\Mob\Church\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cChurchBoss.cpp">
+      <Filter>3. Object\Mob\Church\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityMob1.cpp">
+      <Filter>3. Object\Mob\City\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityMob2.cpp">
+      <Filter>3. Object\Mob\City\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityBoss.cpp">
+      <Filter>3. Object\Mob\City\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityNightMob1.cpp">
+      <Filter>3. Object\Mob\City%28Night%29\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityNightMob2.cpp">
+      <Filter>3. Object\Mob\City%28Night%29\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cCityNightBoss.cpp">
+      <Filter>3. Object\Mob\City%28Night%29\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cDesertMob1.cpp">
+      <Filter>3. Object\Mob\Desert\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cDesertMob2.cpp">
+      <Filter>3. Object\Mob\Desert\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cDesertBoss1.cpp">
+      <Filter>3. Object\Mob\Desert\Boss1</Filter>
+    </ClCompile>
+    <ClCompile Include="cDesertBoss2.cpp">
+      <Filter>3. Object\Mob\Desert\Boss2</Filter>
+    </ClCompile>
+    <ClCompile Include="cJungleMob1.cpp">
+      <Filter>3. Object\Mob\Jungle\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cJungleMob2.cpp">
+      <Filter>3. Object\Mob\Jungle\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cJungleMob3.cpp">
+      <Filter>3. Object\Mob\Jungle\Mob3</Filter>
+    </ClCompile>
+    <ClCompile Include="cJungleBoss.cpp">
+      <Filter>3. Object\Mob\Jungle\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cOceanMob1.cpp">
+      <Filter>3. Object\Mob\Ocean\Mob1</Filter>
+    </ClCompile>
+    <ClCompile Include="cOceanMob2.cpp">
+      <Filter>3. Object\Mob\Ocean\Mob2</Filter>
+    </ClCompile>
+    <ClCompile Include="cOceanBoss.cpp">
+      <Filter>3. Object\Mob\Ocean\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -437,6 +596,75 @@
     </ClInclude>
     <ClInclude Include="cEndScene.h">
       <Filter>4. Scene\End</Filter>
+    </ClInclude>
+    <ClInclude Include="cIceMob1.h">
+      <Filter>3. Object\Mob\Ice\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cIceMob2.h">
+      <Filter>3. Object\Mob\Ice\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cIceBoss.h">
+      <Filter>3. Object\Mob\Ice\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cChurchMob1.h">
+      <Filter>3. Object\Mob\Church\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cChurchMob2.h">
+      <Filter>3. Object\Mob\Church\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cChurchBoss.h">
+      <Filter>3. Object\Mob\Church\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityMob1.h">
+      <Filter>3. Object\Mob\City\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityMob2.h">
+      <Filter>3. Object\Mob\City\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityBoss.h">
+      <Filter>3. Object\Mob\City\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityNightMob1.h">
+      <Filter>3. Object\Mob\City%28Night%29\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityNightMob2.h">
+      <Filter>3. Object\Mob\City%28Night%29\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cCityNightBoss.h">
+      <Filter>3. Object\Mob\City%28Night%29\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cDesertMob1.h">
+      <Filter>3. Object\Mob\Desert\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cDesertMob2.h">
+      <Filter>3. Object\Mob\Desert\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cDesertBoss1.h">
+      <Filter>3. Object\Mob\Desert\Boss1</Filter>
+    </ClInclude>
+    <ClInclude Include="cDesertBoss2.h">
+      <Filter>3. Object\Mob\Desert\Boss2</Filter>
+    </ClInclude>
+    <ClInclude Include="cJungleMob1.h">
+      <Filter>3. Object\Mob\Jungle\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cJungleMob2.h">
+      <Filter>3. Object\Mob\Jungle\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cJungleMob3.h">
+      <Filter>3. Object\Mob\Jungle\Mob3</Filter>
+    </ClInclude>
+    <ClInclude Include="cJungleBoss.h">
+      <Filter>3. Object\Mob\Jungle\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cOceanMob1.h">
+      <Filter>3. Object\Mob\Ocean\Mob1</Filter>
+    </ClInclude>
+    <ClInclude Include="cOceanMob2.h">
+      <Filter>3. Object\Mob\Ocean\Mob2</Filter>
+    </ClInclude>
+    <ClInclude Include="cOceanBoss.h">
+      <Filter>3. Object\Mob\Ocean\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

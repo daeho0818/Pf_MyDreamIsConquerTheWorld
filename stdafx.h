@@ -31,6 +31,7 @@ static bool isWindowed = false;
 #include "cTimer.h"
 #include "cItem.h"
 #include "cBullet.h"
+#include "cMob.h"
 #include "cButton.h"
 #include "DebugLog.h"
 

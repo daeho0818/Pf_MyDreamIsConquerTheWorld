@@ -15,37 +15,42 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
-	memset(SCENE->SCENE->Array, 0, sizeof(SCENE->Array));
+	memset(SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
-	//D3DLOCKED_RECT lr;
-	//BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
-	//imgColor = (DWORD*)lr.pBits;
-	//BG[0]->ptr->UnlockRect(0);
+	D3DLOCKED_RECT lr;
+	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
+	imgColor = (DWORD*)lr.pBits;
+	BG[0]->ptr->UnlockRect(0);
 
 	t_Speed = nullptr;
 	t_Invincibility = nullptr;
 
-	hp = 5;
+	hp = 3;
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
 	speed = 15;
-	real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
 	coloring_per = 0;
-	timer = 180;
 	draw_line = false;
 	draw_mode = false;
 	returning = false;
 	stop = false;
 	invincibility = false;
 
-	for (int y = WINSIZEY - 1; y != -1; --y)
+	m_pos = { 40, 300 };
+	cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
+
+	for (int y = cellSize.bottom; y != cellSize.top - 1; --y)
 	{
-		for (int x = WINSIZEX - 1; x != -1; --x)
+		for (int x = cellSize.right; x != cellSize.left - 1; --x)
 		{
-			if (x == 0 || x == WINSIZEX - 1 || y == 1 || y == WINSIZEY - 2)
+			if (x == cellSize.left || x == cellSize.right || y == cellSize.top || y == cellSize.bottom)
 			{
+				SCENE->Array[y - 1][x - 1] = 1;
 				SCENE->Array[y][x] = 1;
+				SCENE->Array[y + 1][x + 1] = 1;
 			}
+			else if(x < cellSize.left || x > cellSize.right || y < cellSize.top || y > cellSize.bottom)
+				SCENE->Array[y][x] = 3;
 		}
 	}
 	draw_mode = true;
@@ -55,16 +60,8 @@ void cPlayer::Init()
 void cPlayer::Update(Vec2 bossPos)
 {
 	ItemUpdate();
-	hRc = {
-		0,
-		0,
-		(LONG)IMAGE->FindImage("hpBar")->info.Width / 10 * hp,
-		(LONG)IMAGE->FindImage("hpBar")->info.Height / 2
-	};
 
 	this->bossPos = bossPos;
-
-	sprintf(perText, "%.3fÆÛ¼¾Æ®", coloring_per);
 
 	KeyEvent();
 
@@ -74,15 +71,6 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
-	if (t_Timer != nullptr) t_Timer->Update();
-
-	if (t_Timer == nullptr)
-	{
-		t_Timer = new cTimer(1, [&]()->void {
-			timer--;
-			t_Timer = nullptr;
-			});
-	}
 }
 
 void cPlayer::Render()
@@ -90,21 +78,6 @@ void cPlayer::Render()
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(IMAGE->FindImage("player"), m_pos, 0.2);
-
-	char key[5] = "";
-	sprintf(key, "%d", (int)coloring_per / 10);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3000, 100));
-	sprintf(key, "%d", (int)coloring_per % 10);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3100, 100));
-	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3200, 100));
-
-	char time[5] = "";
-	sprintf(time, "%d", timer / 60);
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 150, 100));
-	sprintf(time, "%d", (timer % 60) / 10);
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2, 100));
-	sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 100, 100));
 
 	char t_hp[5] = "";
 	sprintf(t_hp, "%d", hp);
@@ -119,7 +92,6 @@ void cPlayer::Release()
 {
 	SAFE_DELETE(t_Speed);
 	SAFE_DELETE(t_Invincibility);
-	SAFE_DELETE(t_Timer);
 }
 
 void cPlayer::KeyEvent()
@@ -160,8 +132,16 @@ void cPlayer::DrawTempLine()
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
-	int index = int(m_pos.y * WINSIZEX + m_pos.x);
+
+	SCENE->Array[int(m_pos.y - 1)][int(m_pos.x - 1)] = 9;
 	SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 1;
+	SCENE->Array[int(m_pos.y + 1)][int(m_pos.x + 1)] = 9;
+
+	int index = int((m_pos.y - 1) * WINSIZEX + (m_pos.x - 1));
+	textureColor[index] = D3DCOLOR_RGBA(255, 0, 0, 255);
+	index = int(m_pos.y * WINSIZEX + m_pos.x);
+	textureColor[index] = D3DCOLOR_RGBA(255, 0, 0, 255);
+	index = int((m_pos.y + 1) * WINSIZEX + (m_pos.x + 1));
 	textureColor[index] = D3DCOLOR_RGBA(255, 0, 0, 255);
 	BG[0]->ptr->UnlockRect(0);
 }
@@ -173,41 +153,46 @@ void cPlayer::DrawLine(bool isFilled)
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
-	for (int y = WINSIZEY - 1; y != -1; --y)
+	for (int y = cellSize.bottom + 1; y != cellSize.top - 1; --y)
 	{
-		for (int x = WINSIZEX - 1; x != -1; --x)
+		for (int x = cellSize.right + 1; x != cellSize.left - 1; --x)
 		{
 			D3DXCOLOR targetPixel = textureColor[y * WINSIZEX + x];
 			switch (SCENE->Array[y][x])
 			{
-				//case 0:
-				//	targetPixel = imgColor[y * WINSIZEX + x];
-				//	break;
 			case 1:
 				targetPixel = D3DCOLOR_RGBA(0, 255, 0, 255);
+				SCENE->Array[y - 1][x - 1] = 2;
+				SCENE->Array[y][x] = 2;
+				SCENE->Array[y + 1][x + 1] = 2;
 				last_x = x;
 				last_y = y;
-				SCENE->Array[y][x] = 2;
+				textureColor[(y - 1) * WINSIZEX + (x - 1)] = targetPixel;
+				textureColor[y * WINSIZEX + x] = targetPixel;
+				textureColor[(y + 1) * WINSIZEX + (x + 1)] = targetPixel;
 				break;
 			case 3:
 				targetPixel = D3DCOLOR_RGBA(0, 0, 0, 0);
+				textureColor[y * WINSIZEX + x] = targetPixel;
+				break;
+			case 10:
+				targetPixel = imgColor[y * WINSIZEX + x];
 				break;
 			}
-			textureColor[y * WINSIZEX + x] = targetPixel;
 		}
 	}
 	BG[0]->ptr->UnlockRect(0);
 	if (isFilled) return;
-	if (last_x != 0 && last_y != 0)
+	if (last_x != cellSize.left && last_y != cellSize.top)
 	{
 		FillPlace({ (float)bossPos.x, (float)bossPos.y }, 0, 4, true);
-		for (int y = WINSIZEY - 2; y != 0; --y)
+		for (int y = cellSize.bottom - 1; y != cellSize.top; --y)
 		{
-			for (int x = WINSIZEX - 1; x != 0; --x)
+			for (int x = cellSize.right - 1; x != cellSize.left; --x)
 			{
 				if (SCENE->Array[y][x] == 0)
 				{
-					FillPlace({ (float)x - 1, (float)y - 1 }, 0, 3);
+					FillPlace({ (float)x, (float)y}, 0, 3);
 				}
 			}
 		}
@@ -221,8 +206,6 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 {
 	if (target == change) return;
 	ChkLine();
-	if (m_pos.y < WINSIZEY - 1 && m_pos.x < WINSIZEX - 1)
-		if (SCENE->Array[(int)pos.y + 1][(int)pos.x + 1] != target) return;
 	queue<Vec2> v2q;
 
 	SCENE->Array[(int)pos.y][(int)pos.x] = change;
@@ -235,28 +218,30 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 	{
 		Vec2 n = v2q.front();
 		v2q.pop();
-		if (SCENE->Array[(int)n.y][(int)n.x - 1] == target)
+
+		if (SCENE->Array[(int)n.y][(int)n.x - 1] == target && n.x - 1 > cellSize.left)
 		{
 			SCENE->Array[(int)n.y][(int)n.x - 1] = change;
 			v2q.push({ n.x - 1, n.y });
 			if (!isFilled)
 				coloring_cells++;
 		}
-		if (SCENE->Array[(int)n.y][(int)n.x + 1] == target)
+		if (SCENE->Array[(int)n.y][(int)n.x + 1] == target && n.x + 1 < cellSize.right)
 		{
 			SCENE->Array[(int)n.y][(int)n.x + 1] = change;
 			v2q.push({ n.x + 1, n.y });
 			if (!isFilled)
 				coloring_cells++;
 		}
-		if (SCENE->Array[(int)n.y - 1][(int)n.x] == target)
+
+		if (SCENE->Array[(int)n.y - 1][(int)n.x] == target && n.y - 1 > cellSize.top)
 		{
 			SCENE->Array[(int)n.y - 1][(int)n.x] = change;
 			v2q.push({ n.x, n.y - 1 });
 			if (!isFilled)
 				coloring_cells++;
 		}
-		if (SCENE->Array[(int)n.y + 1][(int)n.x] == target)
+		if (SCENE->Array[(int)n.y + 1][(int)n.x] == target && n.y + 1 < cellSize.bottom)
 		{
 			SCENE->Array[(int)n.y + 1][(int)n.x] = change;
 			v2q.push({ n.x, n.y + 1 });
@@ -269,6 +254,7 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 		float temp1 = coloring_cells * 100;
 		float temp2 = real_cells;
 		coloring_per = temp1 / temp2;
+		score += coloring_per * 10;
 
 		draw_mode = true;
 		DrawLine(true);
@@ -305,88 +291,76 @@ void cPlayer::Move()
 	{
 		if (left)
 		{
-			if (m_pos.x != 0 || draw_line)
+			for (int i = 0; i < speed; i++)
 			{
-				for (int i = 0; i < speed; i++)
+				ChkLine();
+				if (!Near(VK_LEFT, 1) && Near(VK_LEFT, 2) || draw_line)
 				{
-					ChkLine();
-					if (!Near(VK_LEFT, 1) && (Near(VK_LEFT, 2) || draw_line))
+					m_pos.x--;
+					if (Current() == 2)
+						DrawLine();
+					else
 					{
-						m_pos.x--;
-						if (Current() == 2)
-							DrawLine();
-						else
-						{
-							ChkLine();
-							if (!Near(VK_LEFT, 3))
-								DrawTempLine();
-						}
+						ChkLine();
+						if (!Near(VK_LEFT, 3))
+							DrawTempLine();
 					}
 				}
 			}
 		}
 		else if (right)
 		{
-			if (m_pos.x != WINSIZEX || draw_line)
+			for (int i = 0; i < speed; i++)
 			{
-				for (int i = 0; i < speed; i++)
+				ChkLine();
+				if (!Near(VK_RIGHT, 1) && Near(VK_RIGHT, 2) || draw_line)
 				{
-					ChkLine();
-					if (!Near(VK_RIGHT, 1) && (Near(VK_RIGHT, 2) || draw_line))
+					m_pos.x++;
+					if (Current() == 2)
+						DrawLine();
+					else
 					{
-						m_pos.x++;
-						if (Current() == 2)
-							DrawLine();
-						else
-						{
-							ChkLine();
-							if (!Near(VK_RIGHT, 3))
-								DrawTempLine();
-						}
+						ChkLine();
+						if (!Near(VK_RIGHT, 3))
+							DrawTempLine();
 					}
 				}
 			}
 		}
 		else if (up)
 		{
-			if (m_pos.y != 0 || draw_line)
+			for (int i = 0; i < speed; i++)
 			{
-				for (int i = 0; i < speed; i++)
+				ChkLine();
+				if (!Near(VK_UP, 1) && Near(VK_UP, 2) || draw_line)
 				{
-					ChkLine();
-					if (!Near(VK_UP, 1) && (Near(VK_UP, 2) || draw_line))
+					m_pos.y--;
+					if (Current() == 2)
+						DrawLine();
+					else
 					{
-						m_pos.y--;
-						if (Current() == 2)
-							DrawLine();
-						else
-						{
-							ChkLine();
-							if (!Near(VK_UP, 3))
-								DrawTempLine();
-						}
+						ChkLine();
+						if (!Near(VK_UP, 3))
+							DrawTempLine();
 					}
 				}
 			}
 		}
 		else if (down)
 		{
-			if (m_pos.y != WINSIZEY - 1 || draw_line)
+			for (int i = 0; i < speed; i++)
 			{
-				for (int i = 0; i < speed; i++)
+				ChkLine();
+				if (!Near(VK_DOWN, 1) && Near(VK_DOWN, 2) || draw_line)
 				{
-					ChkLine();
-					if (!Near(VK_DOWN, 1) && (Near(VK_DOWN, 2) || draw_line))
+					m_pos.y++;
+					if (Current() == 2)
+						DrawLine();
+					else
 					{
-						m_pos.y++;
-						if (Current() == 2)
-							DrawLine();
-						else
-						{
-							ChkLine();
-							if (!Near(VK_DOWN, 3))
-								DrawTempLine();
-						}
+						ChkLine();
+						if (!Near(VK_DOWN, 3))
+							DrawTempLine();
 					}
 				}
 			}
@@ -396,8 +370,8 @@ void cPlayer::Move()
 
 void cPlayer::ChkLine()
 {
-	if (m_pos.x >= WINSIZEX - 1) m_pos.x = WINSIZEX - 1; if (m_pos.x <= 0) m_pos.x = 0;
-	if (m_pos.y >= WINSIZEY - 2) m_pos.y = WINSIZEY - 2; if (m_pos.y <= 1) m_pos.y = 1;
+	if (m_pos.x >= cellSize.right) m_pos.x = cellSize.right; if (m_pos.x <= cellSize.left) m_pos.x = cellSize.left;
+	if (m_pos.y >= cellSize.bottom) m_pos.y = cellSize.bottom; if (m_pos.y <= cellSize.top) m_pos.y = cellSize.top;
 }
 
 void cPlayer::Returning()
@@ -406,22 +380,30 @@ void cPlayer::Returning()
 	{
 		if (Near(VK_LEFT, 1))
 		{
-			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			SCENE->Array[(int)m_pos.y - 1][(int)m_pos.x - 1] = 10;
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 10;
+			SCENE->Array[(int)m_pos.y + 1][(int)m_pos.x + 1] = 10;
 			m_pos.x--;
 		}
 		else if (Near(VK_RIGHT, 1))
 		{
-			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			SCENE->Array[(int)m_pos.y - 1][(int)m_pos.x - 1] = 10;
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 10;
+			SCENE->Array[(int)m_pos.y + 1][(int)m_pos.x + 1] = 10;
 			m_pos.x++;
 		}
 		else if (Near(VK_UP, 1))
 		{
-			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			SCENE->Array[(int)m_pos.y - 1][(int)m_pos.x - 1] = 10;
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 10;
+			SCENE->Array[(int)m_pos.y + 1][(int)m_pos.x + 1] = 10;
 			m_pos.y--;
 		}
 		else if (Near(VK_DOWN, 1))
 		{
-			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 0;
+			SCENE->Array[(int)m_pos.y - 1][(int)m_pos.x - 1] = 10;
+			SCENE->Array[(int)m_pos.y][(int)m_pos.x] = 10;
+			SCENE->Array[(int)m_pos.y + 1][(int)m_pos.x + 1] = 10;
 			m_pos.y++;
 		}
 		else
@@ -444,7 +426,8 @@ void cPlayer::EatItem(string key)
 {
 	if (key == "Heal")
 	{
-		if (hp < 5) hp += 1;
+		if (hp < 3) hp += 1;
+		score += 50;
 	}
 
 	if (key == "Speed")
@@ -457,6 +440,7 @@ void cPlayer::EatItem(string key)
 				t_Speed = nullptr;
 				});
 		}
+		score += 75;
 	}
 
 	if (key == "Invincibility")
@@ -466,6 +450,7 @@ void cPlayer::EatItem(string key)
 			invincibility = false;
 			t_Invincibility = nullptr;
 			});
+		score += 100;
 	}
 	itemName = "none";
 }

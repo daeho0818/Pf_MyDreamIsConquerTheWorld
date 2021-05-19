@@ -23,25 +23,27 @@ void cCityScene::Init()
 	cTexture* ptr[2] = { IMAGE->FindImage("city_High"), IMAGE->FindImage("city_Under") };
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
-	mob = new cMobAdmin(bullet->m_bullets);
+	mob = new cMobAdmin(bullet->m_bullets, "cCityScene");
 	item = new cItemAdmin(player);
 	coll = new cCollision(mob->m_bullets, mob->m_mobs, player, item);
 }
 
 void cCityScene::Update()
 {
-	if (player->timer <= 0 || player->hp <= 0)
+	cParentScene::SetPercent(player->coloring_per);
+	cParentScene::SetScore(player->score);
+	cParentScene::SetHP(player->hp);
+	if (isStart)
 	{
-		isFail = true;
-		cParentScene::SetPercent(player->coloring_per);
-		//cParentScene::SetScore(player->score);
-	}
+		if (timer <= 0 || player->hp <= 0)
+		{
+			isFail = true;
+		}
 
-	if (player->coloring_per >= 80)
-	{
-		isClear = true;
-		cParentScene::SetPercent(player->coloring_per);
-		//cParentScene::SetScore(player->score);
+		if (player->coloring_per >= 80/* || SCENE->Array[(int)mob->bossPos.x][(int)mob->bossPos.y]*/)
+		{
+			isClear = true;
+		}
 	}
 
 	if (isStart && !isStop && !isClear && !isFail)

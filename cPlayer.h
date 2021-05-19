@@ -6,14 +6,9 @@ public:
 	cPlayer(cTexture* ptr[2]);
 	~cPlayer();
 
-	int Stage;
-	int index = 0;
-
-	Vec2 m_pos = { 0, 0 };
+	Vec2 m_pos = { 500, 500 };
 	Vec2 bossPos;
 	Vec2 startDrawPos;
-
-	RECT hRc;
 
 	cTexture* BG[2];
 
@@ -21,22 +16,20 @@ public:
 
 	cTimer* t_Speed = nullptr;
 	cTimer* t_Invincibility = nullptr;
-	cTimer* t_Timer = nullptr;
 
 	DWORD* imgColor;
 
-	int hp = 5;
+	RECT cellSize = {40, 300, WINSIZEX - 40, WINSIZEY - 40};
+
+	int hp = 3;
 	int coloring_cells = 0;
+	int tempCount = 0;
 	int last_x = 0, last_y = 0;
 	int speed;
-	int real_cells = (WINSIZEX - 1) * (WINSIZEY - 1);
-	int saveHp = 0;
-	int timer = 180;
+	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
 
 	float coloring_per = 0;
 	float score = 0;
-
-	char perText[128] = "";
 
 	bool left, right, up, down;
 	bool draw_line = false;

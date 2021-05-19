@@ -117,10 +117,12 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("adven_HandleBG", "title/AdvenBook/handleBG");
 	IMAGE->AddImage("adven_ItemRect", "title/AdvenBook/itemRect");
 	IMAGE->AddImage("adven_DontClear", "title/AdvenBook/dontClear");
+	IMAGE->AddImage("adven_textBG", "title/AdvenBook/textBG");
 
 	// world map
 	IMAGE->AddImage("WorldMap", "WorldMap/map");
 	IMAGE->AddImage("WorldEmblem", "WorldMap/Emblem");
+	IMAGE->AddImage("X", "WorldMap/Details/public/x");
 	IMAGE->AddImage("church_button", "WorldMap/church_button");
 	IMAGE->AddImage("church_complete", "WorldMap/church_complete");
 	IMAGE->AddImage("church_lock", "WorldMap/church_lock");
@@ -142,11 +144,14 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("ocean_button", "WorldMap/ocean_button");
 	IMAGE->AddImage("ocean_complete", "WorldMap/ocean_complete");
 	IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
-	IMAGE->AddImage("StageBG", "WorldMap/Details/public/BG");
-	IMAGE->AddImage("StageIllust", "WorldMap/Details/public/Illust");
-	IMAGE->AddImage("StageItem", "WorldMap/Details/public/Item");
-	IMAGE->AddImage("StageTextBG", "WorldMap/Details/public/TextBG");
-	IMAGE->AddImage("StageX", "WorldMap/Details/public/x");
+	IMAGE->AddImage("church_All", "WorldMap/Details/Church/All");
+	IMAGE->AddImage("city_All", "WorldMap/Details/City/All");
+	IMAGE->AddImage("city(night)_All", "WorldMap/Details/City(night)/All");
+	IMAGE->AddImage("desert_All", "WorldMap/Details/Desert/All");
+	IMAGE->AddImage("ice_All", "WorldMap/Details/Ice/All");
+	IMAGE->AddImage("jungle_All", "WorldMap/Details/Jungle/All");
+	IMAGE->AddImage("ocean_All", "WorldMap/Details/Ocean/All");
+	IMAGE->AddImage("StageStartB", "WorldMap/Details/Public/Start");
 
 	// ingame
 	{
@@ -178,54 +183,125 @@ void cMainGame::AddResource()
 		// clear
 		{
 			IMAGE->AddImage("Clear", "Ingame/Clear,Fail/Clear/clear");
+			IMAGE->AddImage("C", "Ingame/Clear,Fail/Clear/1. c");
+			IMAGE->AddImage("L", "Ingame/Clear,Fail/Clear/2. l");
+			IMAGE->AddImage("E", "Ingame/Clear,Fail/Clear/3. e");
+			IMAGE->AddImage("A", "Ingame/Clear,Fail/Clear/4. a");
+			IMAGE->AddImage("R", "Ingame/Clear,Fail/Clear/5. r");
+			IMAGE->AddImage("!", "Ingame/Clear,Fail/Clear/6. !");
 		}
 
 		// fail
 		{
 			IMAGE->AddImage("Over", "Ingame/Clear,Fail/Fail/over");
+			IMAGE->AddImage("O", "Ingame/Clear,Fail/Fail/1. o");
+			IMAGE->AddImage("V", "Ingame/Clear,Fail/Fail/2. v");
+			IMAGE->AddImage("OVER_E", "Ingame/Clear,Fail/Fail/3. e");
+			IMAGE->AddImage("OVER_R", "Ingame/Clear,Fail/Fail/4. r");
 		}
 
 		// ice
 		{
 			IMAGE->AddImage("ice_Under", "Ingame/Ice/under");
 			IMAGE->AddImage("ice_High", "Ingame/Ice/high");
+
+			// mob
+			{
+				IMAGE->AddImage("ice_mob1", "Ingame/Ice/mob/mob1/mob1", 6);
+				IMAGE->AddImage("ice_mob2", "Ingame/Ice/mob/mob2/mob2", 6);
+				IMAGE->AddImage("ice_boss", "Ingame/Ice/mob/boss/boss", 11);
+			}
 		}
 
 		// city
 		{
 			IMAGE->AddImage("city_Under", "Ingame/City/under");
 			IMAGE->AddImage("city_High", "Ingame/City/high");
+
+			//mob
+			{
+				IMAGE->AddImage("city_mob1", "Ingame/City/mob/mob1/mob1", 15);
+				IMAGE->AddImage("city_mob2", "Ingame/City/mob/mob2/mob2", 6);
+				IMAGE->AddImage("city_boss", "Ingame/City/mob/boss/boss", 10);
+			}
 		}
 
 		// city(night)
 		{
 			IMAGE->AddImage("city(night)_Under", "Ingame/city(night)/under");
 			IMAGE->AddImage("city(night)_high", "Ingame/city(night)/high");
+
+			//mob
+			{
+				IMAGE->AddImage("city(night)_mob1", "Ingame/city(night)/mob/mob1/mob1", 11);
+				IMAGE->AddImage("city(night)_mob2", "Ingame/city(night)/mob/mob2/mob2", 8);
+				IMAGE->AddImage("city(night)_boss", "Ingame/city(night)/mob/boss/boss", 8);
+			}
 		}
 
 		// ocean
 		{
 			IMAGE->AddImage("ocean_Under", "Ingame/Ocean/under");
 			IMAGE->AddImage("ocean_High", "Ingame/Ocean/high");
+
+			//mob
+			{
+				IMAGE->AddImage("ocean_mob1", "Ingame/Ocean/mob/mob1/mob1", 7);
+				IMAGE->AddImage("ocean_mob2", "Ingame/Ocean/mob/mob2/mob2", 9);
+				IMAGE->AddImage("ocean_boss", "Ingame/Ocean/mob/boss/boss", 8);
+			}
 		}
 
 		// desert
 		{
 			IMAGE->AddImage("desert_Under", "Ingame/Desert/under");
 			IMAGE->AddImage("desert_High", "Ingame/Desert/high");
+
+			//mob
+			{
+				IMAGE->AddImage("desert_mob1", "Ingame/Desert/mob/mob1/mob1", 6);
+				IMAGE->AddImage("desert_mob2", "Ingame/Desert/mob/mob1/mob2", 6);
+				IMAGE->AddImage("desert_boss1", "Ingame/Desert/mob/boss/1/boss1", 8);
+				IMAGE->AddImage("desert_boss2", "Ingame/Desert/mob/boss/2/boss2", 8);
+			}
 		}
 
 		// church
 		{
 			IMAGE->AddImage("church_Under", "Ingame/Church/under");
 			IMAGE->AddImage("church_high", "Ingame/Church/high");
+
+			//mob
+			{
+				IMAGE->AddImage("church_mob1", "Ingame/Church/mob/mob1/mob1", 19);
+				IMAGE->AddImage("church_mob2", "Ingame/Church/mob/mob2/mob2", 17);
+				IMAGE->AddImage("church_boss", "Ingame/Church/mob/boss/boss", 10);
+			}
 		}
 
 		// jungle
 		{
 			IMAGE->AddImage("jungle_Under", "Ingame/Jungle/under");
 			IMAGE->AddImage("jungle_High", "Ingame/Jungle/high");
+
+			// mob
+			{
+				IMAGE->AddImage("jungle_mob1", "Ingame/Jungle/mob/mob1/mob1", 14);
+				IMAGE->AddImage("jungle_mob2", "Ingame/Jungle/mob/mob2/mob2", 10);
+				IMAGE->AddImage("jungle_mob3", "Ingame/Jungle/mob/mob3/mob3", 5);
+				IMAGE->AddImage("jungle_boss", "Ingame/Jungle/mob/boss/boss", 8);
+			}
 		}
+
+		// UI
+		IMAGE->AddImage("IngameBG", "Ingame/UI/AllBG");
+		IMAGE->AddImage("Ingame_HP", "Ingame/UI/HP");
+		IMAGE->AddImage("Ingame_HP0", "Ingame/UI/HP0");
+		IMAGE->AddImage("Ingame_HP1", "Ingame/UI/HP1");
+		IMAGE->AddImage("Ingame_HP2", "Ingame/UI/HP2");
+		IMAGE->AddImage("Ingame_HP3", "Ingame/UI/HP3");
+		IMAGE->AddImage("Ingame_Item", "Ingame/UI/item");
+		IMAGE->AddImage("colon", "Ingame/UI/colon");
 	}
 
 	// text
@@ -242,7 +318,8 @@ void cMainGame::AddResource()
 	// public
 	IMAGE->AddImage("Arrow", "Public/Arrow");
 	IMAGE->AddImage("_Arrow", "Public/_Arrow");
-	IMAGE->AddImage("Blur", "Blur");
+	IMAGE->AddImage("Cursor", "Public/Cursor");
+	IMAGE->AddImage("Blur", "Public/Blur");
 
 	// EndScene
 	IMAGE->AddImage("end_restart", "EndScene/restart");

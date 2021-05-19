@@ -15,24 +15,36 @@ public:
 
 	virtual void SetPercent(float percent);
 	virtual void SetScore(float score);
+	virtual void SetHP(int hp);
 	
-	int textCount = 1;
+	int textCount;
+	int timer;
+	int CFCount;
+	int delayCount;
+	int hp;
+	int score;
+
 	bool isStart;
 	bool isStop;
 	bool isClear;
 	bool isFail;
+	bool isClearEnd;
+	bool isFailEnd;
+	bool delay;
+
+	bool clear[7];
+	bool over[4];
+	bool textRender[7];
 
 	float percent;
-	float score;
+	float speed;
 
 	cTimer* t_TextAni = nullptr;
-	
-	Vec2 textPos[5][3] = {
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}},
-		{{-100, (float)WINSIZEY / 2} ,{(float)WINSIZEX / 2, (float)WINSIZEY / 2}, {(float)WINSIZEX + 500, (float)WINSIZEY / 2}}
-	};
+	cTimer* t_Timer = nullptr;
+	cTimer* t_Clear = nullptr;
+	cTimer* t_Over = nullptr;
+	cTimer* t_Delay = nullptr;
+
+	Vec2 textsPos[7];
 };
 

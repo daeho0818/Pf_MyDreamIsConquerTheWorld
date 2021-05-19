@@ -22,10 +22,10 @@ void cMouseManager::Render()
 
 bool cMouseManager::Collider(string key)
 {
-	return CBColl(BUTTON->buttonRects.find(key)->second, BUTTON->buttonPos.find(key)->second, IMAGE->FindImage(key));
+	return CBColl(BUTTON->buttonRects.find(key)->second, IMAGE->FindImage(key));
 }
 
-bool cMouseManager::CBColl(RECT rc, Vec2 pos, cTexture* ptr)
+bool cMouseManager::CBColl(RECT rc, cTexture* ptr)
 {
 	if (mousePos.x * 2.1 >= float(rc.left) && mousePos.x * 2.1 <= float(rc.right) &&
 		mousePos.y * 2.1 >= float(rc.top) && mousePos.y * 2.1 <= float(rc.bottom)) return true;

@@ -18,7 +18,7 @@ void cTitleScene::Init()
 	BUTTON->AddButton("quit_button", Vec2(600, 1850), "titleB");
 
 	BUTTON->AddButton("guide_close", Vec2(3000, WINSIZEY / 2 - 1000), "guideB");
-	BUTTON->AddButton("adven_Back", Vec2(350, WINSIZEY / 2 - 923), "advenB");
+	BUTTON->AddButton("X", Vec2(3330, WINSIZEY / 2 - 1023), "worldmapB");
 
 	BUTTON->AddButton("Arrow", Vec2(500, 2100), "arrowB");
 
@@ -114,7 +114,7 @@ void cTitleScene::Update()
 				MOUSE->lUp = false;
 			}
 		}
-		if (MOUSE->Collider("adven_Back"))
+		if (MOUSE->Collider("X"))
 		{
 			if (advenUI)
 			{
@@ -167,6 +167,7 @@ void cTitleScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1525, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(1525, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1525, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1525, 450 * i), 0.3);
 		}
@@ -177,6 +178,7 @@ void cTitleScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2805, 450 * i), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(2805, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2805, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2805, 450 * i), 0.3);
 		}
@@ -186,7 +188,7 @@ void cTitleScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(350, WINSIZEY - 420), 0.5);
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.5);
 
-		RENDER->CenterRender(IMAGE->FindImage("adven_Back"), Vec2(350, WINSIZEY / 2 - 923), 0.6);
+		RENDER->CenterRender(IMAGE->FindImage("X"), Vec2(3330, WINSIZEY / 2 - 1023), 0.6);
 	}
 
 }

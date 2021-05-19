@@ -5,6 +5,7 @@
 cBoss::cBoss(Vec2 pos, vector<cBullet*>& bullet)
 	: cMob(pos), m_bullets(bullet)
 {
+	m_image = IMAGE->MakeVecImg("church_boss");
 	mobType = "Boss";
 	m_damage = 1;
 	isStop = false;
@@ -45,7 +46,7 @@ void cBoss::CircleBullet(float interval, bool random)
 				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
 				direction = direction - m_pos;
 				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
 			}
 		}
 		else
@@ -53,7 +54,7 @@ void cBoss::CircleBullet(float interval, bool random)
 			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
 			direction = direction - m_pos;
 			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
 		}
 	}
 }
@@ -63,6 +64,9 @@ void cBoss::Update()
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (t_Pattern2 != nullptr) t_Pattern2->Update();
 	if (t_Pattern3 != nullptr) t_Pattern3->Update();
+	if (m_Ani != nullptr) m_Ani->Update();
+
+	if (INPUT->KeyDown(VK_RETURN)) CircleBullet(1);
 
 	if (pattern1)
 	{
@@ -111,9 +115,15 @@ void cBoss::Update()
 		}
 	}
 
-	if (isStop) {CircleBullet(0, true); }
+	if (m_Ani == nullptr)
+	{
+		m_Ani = new cTimer(0.1, [&]()->void {
+			index++;
+			if (index == m_image.size()) index = 0;
+			});
+	}
 
-	if (INPUT->KeyDown(VK_RETURN)) CircleBullet(0);
+	if (isStop) {CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
@@ -129,5 +139,5 @@ void cBoss::Update()
 
 void cBoss::Render()
 {
-	RENDER->CenterRender(IMAGE->FindImage("Boss"), m_pos);
+	RENDER->CenterRender(m_image[index], m_pos);
 }

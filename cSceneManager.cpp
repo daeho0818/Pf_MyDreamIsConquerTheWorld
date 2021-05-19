@@ -26,7 +26,7 @@ void cSceneManager::Update()
 void cSceneManager::Render()
 {
 	if (nowScene) nowScene->Render();
-	RENDER->CenterRender(IMAGE->FindImage("player"),
+	RENDER->CenterRender(IMAGE->FindImage("Cursor"),
 		{ float(MOUSE->mousePos.x * 2.1),
 		 float(MOUSE->mousePos.y * 2.1)
 		}, 0.2);
@@ -62,6 +62,5 @@ void cSceneManager::PlayerInit()
 void cSceneManager::Cheat()
 {
 	if (INPUT->KeyDown(VK_F5)) ChangeScene("cTitleScene");
-	if (INPUT->KeyDown(VK_F6)) ChangeScene("cIceScene");
-	if (INPUT->KeyDown(VK_F7)) ChangeScene("cCityScene");
+	if (INPUT->KeyDown(VK_F6)) ChangeScene("cSelectStageScene");
 }

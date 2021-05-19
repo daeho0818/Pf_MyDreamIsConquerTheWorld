@@ -19,6 +19,8 @@ public:
 		Jungle,
 		None
 	};
+	Stage stage = Stage::None;
+	bool stageOpen = false;
 
 	// cScene을(를) 통해 상속됨
 	virtual void Init() override;
@@ -28,5 +30,6 @@ public:
 	virtual void Release() override;
 
 	void StageInfo(Stage stage);
+	void SceneChange(Stage stage);
 };
 
