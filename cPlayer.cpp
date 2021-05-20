@@ -254,7 +254,7 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 		float temp1 = coloring_cells * 100;
 		float temp2 = real_cells;
 		coloring_per = temp1 / temp2;
-		score += coloring_per * 10;
+		SCENE->score += coloring_per * 10;
 
 		draw_mode = true;
 		DrawLine(true);
@@ -427,7 +427,7 @@ void cPlayer::EatItem(string key)
 	if (key == "Heal")
 	{
 		if (hp < 3) hp += 1;
-		score += 50;
+		SCENE->score += 50;
 	}
 
 	if (key == "Speed")
@@ -440,7 +440,7 @@ void cPlayer::EatItem(string key)
 				t_Speed = nullptr;
 				});
 		}
-		score += 75;
+		SCENE->score += 75;
 	}
 
 	if (key == "Invincibility")
@@ -450,7 +450,7 @@ void cPlayer::EatItem(string key)
 			invincibility = false;
 			t_Invincibility = nullptr;
 			});
-		score += 100;
+		SCENE->score += 100;
 	}
 	itemName = "none";
 }

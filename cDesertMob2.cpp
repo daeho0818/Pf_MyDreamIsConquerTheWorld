@@ -39,7 +39,7 @@ void cDesertMob2::Update()
 
 void cDesertMob2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos);
+	RENDER->CenterRender(m_image[index], m_pos, 1.5);
 }
 
 

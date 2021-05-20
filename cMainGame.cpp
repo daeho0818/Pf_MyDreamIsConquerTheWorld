@@ -152,6 +152,10 @@ void cMainGame::AddResource()
 	IMAGE->AddImage("jungle_All", "WorldMap/Details/Jungle/All");
 	IMAGE->AddImage("ocean_All", "WorldMap/Details/Ocean/All");
 	IMAGE->AddImage("StageStartB", "WorldMap/Details/Public/Start");
+	IMAGE->AddImage("cloud1", "WorldMap/cloud/cloud1");
+	IMAGE->AddImage("cloud2", "WorldMap/cloud/cloud2");
+	IMAGE->AddImage("cloud3", "WorldMap/cloud/cloud3");
+	IMAGE->AddImage("cloud4", "WorldMap/cloud/cloud4");
 
 	// ingame
 	{
@@ -254,8 +258,8 @@ void cMainGame::AddResource()
 
 		// desert
 		{
-			IMAGE->AddImage("desert_Under", "Ingame/Desert/under");
-			IMAGE->AddImage("desert_High", "Ingame/Desert/high");
+			IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_Under");
+			IMAGE->AddImage("desert_High", "Ingame/Desert/desert_High");
 
 			//mob
 			{

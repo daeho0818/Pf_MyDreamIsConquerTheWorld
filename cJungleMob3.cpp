@@ -39,7 +39,7 @@ void cJungleMob3::Update()
 
 void cJungleMob3::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos);
+	RENDER->CenterRender(m_image[index], m_pos, 1.5);
 }
 
 

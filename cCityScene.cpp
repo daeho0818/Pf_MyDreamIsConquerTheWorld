@@ -31,7 +31,7 @@ void cCityScene::Init()
 void cCityScene::Update()
 {
 	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(player->score);
+	cParentScene::SetScore(SCENE->score);
 	cParentScene::SetHP(player->hp);
 	if (isStart)
 	{

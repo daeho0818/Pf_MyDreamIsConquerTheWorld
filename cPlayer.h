@@ -29,7 +29,6 @@ public:
 	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
 
 	float coloring_per = 0;
-	float score = 0;
 
 	bool left, right, up, down;
 	bool draw_line = false;

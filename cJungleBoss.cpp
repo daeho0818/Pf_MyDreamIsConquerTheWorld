@@ -20,6 +20,7 @@ cJungleBoss::~cJungleBoss()
 {
 	SAFE_DELETE(t_Pattern1);
 	SAFE_DELETE(t_Pattern2);
+	SAFE_DELETE(m_Ani);
 }
 
 string cJungleBoss::ChkOut()
@@ -49,7 +50,7 @@ void cJungleBoss::CircleBullet(float interval, bool random)
 				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
 				direction = direction - m_pos;
 				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
 			}
 		}
 		else
@@ -57,7 +58,7 @@ void cJungleBoss::CircleBullet(float interval, bool random)
 			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
 			direction = direction - m_pos;
 			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 5, 400));
+			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
 		}
 	}
 }
@@ -67,8 +68,15 @@ void cJungleBoss::Update()
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (t_Pattern2 != nullptr) t_Pattern2->Update();
 	if (t_Pattern3 != nullptr) t_Pattern3->Update();
+	if (m_Ani == nullptr)
+	{
+		m_Ani = new cTimer(0.1, [&]()->void {
+			index++;
+			if (index == m_image.size()) index = 0;
+			m_Ani = nullptr;
+			});
+	}
 	if (m_Ani != nullptr) m_Ani->Update();
-
 	if (pattern1)
 	{
 		if (p1Count < 10)
@@ -116,15 +124,7 @@ void cJungleBoss::Update()
 		}
 	}
 
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			});
-	}
-
-	if (isStop) {CircleBullet(0, true); }
+	if (isStop) { CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
@@ -140,5 +140,5 @@ void cJungleBoss::Update()
 
 void cJungleBoss::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos);
+	RENDER->CenterRender(m_image[index], m_pos, 2);
 }

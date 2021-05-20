@@ -28,6 +28,7 @@
 cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 	:m_bullets(bullet)
 {
+	m_mobs.clear();
 	if (stage == "cChurchScene")
 	{
 		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }));
@@ -41,7 +42,7 @@ cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 		m_mobs.push_back(new cCityMob2({ WINSIZEX / 2, WINSIZEY / 2 }));
 		m_mobs.push_back(new cCityBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
 	}
-	else if (stage == "cCityNightSceme")
+	else if (stage == "cCityNightScene")
 	{
 		m_mobs.push_back(new cCityNightMob1({ WINSIZEX / 2, WINSIZEY / 2 }));
 		m_mobs.push_back(new cCityNightMob2({ WINSIZEX / 2, WINSIZEY / 2 }));

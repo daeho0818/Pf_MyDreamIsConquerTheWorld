@@ -39,7 +39,7 @@ void cCityMob1::Update()
 
 void cCityMob1::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos);
+	RENDER->CenterRender(m_image[index], m_pos, 1.5);
 }
 
 

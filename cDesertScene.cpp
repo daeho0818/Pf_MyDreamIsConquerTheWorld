@@ -19,8 +19,8 @@ void cDesertScene::Init()
 	isStop = false;
 	IMAGE->DeleteImage("desert_High");
 	IMAGE->DeleteImage("desert_Under");
-	IMAGE->AddImage("desert_High", "Ingame/Desert/high");
-	IMAGE->AddImage("desert_Under", "Ingame/Desert/under");
+	IMAGE->AddImage("desert_High", "Ingame/Desert/desert_High");
+	IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_Under");
 	cTexture* ptr[2] = {IMAGE->FindImage("desert_High"), IMAGE->FindImage("desert_Under") };
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
@@ -32,7 +32,7 @@ void cDesertScene::Init()
 void cDesertScene::Update()
 {
 	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(player->score);
+	cParentScene::SetScore(SCENE->score);
 	cParentScene::SetHP(player->hp);
 	if (isStart)
 	{

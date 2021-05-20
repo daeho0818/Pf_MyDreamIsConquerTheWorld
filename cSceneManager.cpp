@@ -3,6 +3,7 @@
 
 cSceneManager::cSceneManager()
 {
+	score = 0;
 }
 
 cSceneManager::~cSceneManager()

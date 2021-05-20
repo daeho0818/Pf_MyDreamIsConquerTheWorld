@@ -21,6 +21,7 @@ public:
 	cScene* nowScene = nullptr;
 	cScene* nextScene = nullptr;
 	int Array[WINSIZEY][WINSIZEX];
+	int score;
 	string curScene = "";
 };
 

@@ -7,6 +7,7 @@ public:
 	~cSelectStageScene();
 
 	bool isFirst = true;
+	int speed;
 
 	enum Stage
 	{
@@ -21,6 +22,8 @@ public:
 	};
 	Stage stage = Stage::None;
 	bool stageOpen = false;
+
+	Vec2 cloudsPos[4];
 
 	// cScene을(를) 통해 상속됨
 	virtual void Init() override;

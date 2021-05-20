@@ -329,7 +329,7 @@ void cParentScene::Render()
 	}
 	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250));
 
-	RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(500, 250));
+	RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1200, 75));
 
 	if (!isStart)
 	{

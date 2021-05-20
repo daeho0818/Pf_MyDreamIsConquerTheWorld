@@ -32,7 +32,7 @@ void cJungleScene::Init()
 void cJungleScene::Update()
 {
 	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(player->score);
+	cParentScene::SetScore(SCENE->score);
 	cParentScene::SetHP(player->hp);
 	if (isStart)
 	{

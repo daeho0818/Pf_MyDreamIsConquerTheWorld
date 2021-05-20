@@ -24,6 +24,12 @@ void cSelectStageScene::Init()
 	BUTTON->AddButton("X", Vec2(WINSIZEX / 2 + 1060, WINSIZEY / 2 - 780), "X");
 	stageOpen = false;
 	stage = Stage::None;
+	speed = 1;
+
+	cloudsPos[0] = { 500, 500 };
+	cloudsPos[1] = { WINSIZEX - 500, 500 };
+	cloudsPos[2] = { WINSIZEX - 500, WINSIZEY };
+	cloudsPos[3] = { 500, WINSIZEY };
 }
 
 void cSelectStageScene::Update()
@@ -85,12 +91,19 @@ void cSelectStageScene::Update()
 			}
 		}
 	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		cloudsPos[i].y += speed;
+		if (cloudsPos[i].y >= WINSIZEY + 1000) cloudsPos[i].y = -1000;
+	}
+
 }
 
 void cSelectStageScene::Render()
 {
 	RENDER->CenterRender(IMAGE->FindImage("WorldMap"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
-	RENDER->CenterRender(IMAGE->FindImage("WorldEmblem"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 800), 0.5);
+	//RENDER->CenterRender(IMAGE->FindImage("WorldEmblem"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 800), 0.5);
 
 	RENDER->CenterRender(IMAGE->FindImage("church_lock"), Vec2(3100, 300), 0.6);
 	RENDER->CenterRender(IMAGE->FindImage("church_button"), Vec2(3100, 600), 0.6);
@@ -121,6 +134,11 @@ void cSelectStageScene::Render()
 	}
 
 	StageInfo(stage);
+
+	RENDER->CenterRender(IMAGE->FindImage("cloud1"), cloudsPos[0]);
+	RENDER->CenterRender(IMAGE->FindImage("cloud2"), cloudsPos[1]);
+	RENDER->CenterRender(IMAGE->FindImage("cloud3"), cloudsPos[2]);
+	RENDER->CenterRender(IMAGE->FindImage("cloud4"), cloudsPos[3]);
 }
 
 void cSelectStageScene::UIRender()

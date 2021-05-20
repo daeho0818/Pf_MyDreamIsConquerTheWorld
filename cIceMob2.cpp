@@ -39,7 +39,7 @@ void cIceMob2::Update()
 
 void cIceMob2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos);
+	RENDER->CenterRender(m_image[index], m_pos, 1.5);
 }
 
 
