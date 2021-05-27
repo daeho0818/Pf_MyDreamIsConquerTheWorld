@@ -19,9 +19,9 @@ void cDesertScene::Init()
 	isStop = false;
 	IMAGE->DeleteImage("desert_High");
 	IMAGE->DeleteImage("desert_Under");
-	IMAGE->AddImage("desert_High", "Ingame/Desert/desert_High");
-	IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_Under");
-	cTexture* ptr[2] = {IMAGE->FindImage("desert_High"), IMAGE->FindImage("desert_Under") };
+	IMAGE->AddImage("desert_High", "Ingame/Desert/desert_high");
+	IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_under");
+	cTexture* ptr[2] = { IMAGE->FindImage("desert_High"), IMAGE->FindImage("desert_Under") };
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cDesertScene");

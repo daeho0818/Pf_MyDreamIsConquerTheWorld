@@ -294,7 +294,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_LEFT, 1) && Near(VK_LEFT, 2) || draw_line)
+				if (Near(VK_LEFT, 2) || !Near(VK_LEFT, 1) && draw_line)
 				{
 					m_pos.x--;
 					if (Current() == 2)
@@ -313,7 +313,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_RIGHT, 1) && Near(VK_RIGHT, 2) || draw_line)
+				if (Near(VK_RIGHT, 2) || !Near(VK_RIGHT, 1) && draw_line)
 				{
 					m_pos.x++;
 					if (Current() == 2)
@@ -332,7 +332,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_UP, 1) && Near(VK_UP, 2) || draw_line)
+				if (Near(VK_UP, 2) || !Near(VK_UP, 1) && draw_line)
 				{
 					m_pos.y--;
 					if (Current() == 2)
@@ -351,7 +351,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_DOWN, 1) && Near(VK_DOWN, 2) || draw_line)
+				if (Near(VK_DOWN, 2) || !Near(VK_DOWN, 1) && draw_line)
 				{
 					m_pos.y++;
 					if (Current() == 2)
@@ -414,6 +414,7 @@ void cPlayer::Returning()
 
 void cPlayer::ItemUpdate()
 {
+	if (hp <= 0) hp = 0;
 	string key;
 	if (itemName == "Heal" || itemName == "Speed" || itemName == "invincibility")
 	{
