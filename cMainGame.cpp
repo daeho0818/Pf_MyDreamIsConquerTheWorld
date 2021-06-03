@@ -264,12 +264,12 @@ void cMainGame::AddResource()
 			//mob
 			{
 				IMAGE->AddImage("desert_mob1", "Ingame/Desert/mob/mob1/mob1", 6);
-				IMAGE->AddImage("desert_mob2", "Ingame/Desert/mob/mob1/mob2", 6);
+				IMAGE->AddImage("desert_mob2", "Ingame/Desert/mob/mob2/mob2", 6);
 				IMAGE->AddImage("desert_boss1", "Ingame/Desert/mob/boss/1/boss1", 8);
 				IMAGE->AddImage("desert_boss2", "Ingame/Desert/mob/boss/2/boss2", 8);
 			}
 		}
-
+		    
 		// church
 		{
 			IMAGE->AddImage("church_Under", "Ingame/Church/under");

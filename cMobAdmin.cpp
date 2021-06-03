@@ -29,12 +29,12 @@ cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 	:m_bullets(bullet)
 {
 	m_mobs.clear();
+	string asdf = stage;
 	if (stage == "cChurchScene")
 	{
 		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }));
 		m_mobs.push_back(new cChurchMob2({ WINSIZEX / 2, WINSIZEY / 2 }));
 		m_mobs.push_back(new cChurchBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		//m_mobs.push_back(new cBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
 	}
 	else if (stage == "cCityScene")
 	{
