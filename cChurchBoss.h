@@ -15,15 +15,11 @@ public:
 	float dir_y = 1;
 
 	bool isStop;
-	bool pattern1 = false;
-	bool pattern2 = true;
-	bool pattern3 = false;
+	bool pattern1 = true;
 
 	vector<cBullet*>& m_bullets;
 
 	cTimer* t_Pattern1 = nullptr;
-	cTimer* t_Pattern2 = nullptr;
-	cTimer* t_Pattern3 = nullptr;
 
 	string ChkOut();
 	void CircleBullet(float interval, bool random = false);
