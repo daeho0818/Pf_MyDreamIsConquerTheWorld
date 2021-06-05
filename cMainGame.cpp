@@ -160,6 +160,7 @@ void cMainGame::AddResource()
 	// ingame
 	{
 		IMAGE->AddImage("player", "Ingame/player");
+		IMAGE->AddImage("h_player", "Ingame/h_player");
 
 		//  start
 		IMAGE->AddImage("start_1", "Ingame/Start/1");

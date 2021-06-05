@@ -1,1 +1,30 @@
-- ë¹¨ê°„ ì„  ì•ˆì—†ì–´ì§ (ëŒì•„ê°ˆ ë•Œ)
+returning...
+¾Ë¾Æ³½ »ç½Ç
+- DrawLine Switch¿¡¼­ ¹è¿­ÀÇ °ªÀÌ 3ÀÏ ¶§´Â imgColorÀÇ °ªÀÌ Àß µé¾î°¡ ÀÖ´Â µí ÇÏ´Ù.
+- ÇÏÁö¸¸ ArrayÀÇ °ªÀÌ 1ÀÌ°Å³ª 9ÀÏ ¶§´Â ¾ËÆÄ°ªÀÌ 0ÀÌ µÇ´Â °ÍÀ» Æ÷ÇÔÇØ °ªÀÌ ÀÌ»óÇØÁø´Ù.
+- ±×·¸´Ù°í 1ÀÌ³ª 9ÀÏ ¶§ targetPixel¿¡ imgColor[y * WINSIZEX + x] ³Ö´Â °ÍÀ» ´ë½ÅÇØ 
+D3DCOLOR_RGBA(255, 255, 255, 255); ³ÖÀ¸¸é ÇÏ¾á»ö ¾ÆÁÖ Àß µÈ´Ù  ¤»¤»
+-> ¹è¿­ ÀÎµ¦½º¿¡ ¹®Á¦ X, imgColor¿¡ ¹®Á¦ X
+±×·³ ¹¹°¡ ¹®Á¦¾ß ÁøÂ¥ Á¦¹ß
+
+- Ã¹¹øÂ° È®ÀÎµÈ °Í : 
+¹è¿­ ÀÎµ¦½º°¡ 1ÀÌ°Å³ª 9ÀÏ °æ¿ì ÇØ´ç ÀÎµ¦½º¿¡ ÇØ´çÇÏ´Â imgColor °ªÀº  1, 0, 0, 1 (»¡°­, ±×¸®´Â ¼± »ö)ÀÓ
+ÇØ´ç ÀÎµ¦½ºÀÇ imgColor°¡ DrawTempLine¿¡¼­ ¹Ù²ãÁØ »ö±ò°ªÀ» °®°í ÀÖ´Â °Í.
+
+- µÎ¹øÂ° È®ÀÎµÈ °Í : 
+¶È°°Àº ÀÌ¹ÌÁö¸¦ »õ·Î ¸¸µé°í ºÒ·¯¿ÔÀ» ¶§µµ °°Àº Çö»ó ¹ß»ý
+
+- ¼¼¹øÂ° È®ÀÎµÈ °Í : 
+ÀÌÁß for¹®À¸·Î È­¸é ÀüÃ¼¸¦ imgColor·Î ¹Ù²ãµµ ´Ù¸¥ °Ç ±×´ë·Î¿©µµ ¼±(ÀÎµ¦½º 1, 9)Àº ±×´ë·ÎÀÓ
+
+case 1:
+D3DXCOLOR ±¸Á¶Ã¼¿¡¼± 0~255 °ªÀÌÁö¸¸ D3DCOLOR_RGBA´Â 0~1 °ªÀÌ¶ó¼­..?
+±Ùµ¥ ÀÎµ¦½º°¡ 3ÀÏ ¶§´Â Àß µÊ
+
+case 2:
+imgColor°¡ ÇöÀç ¹è°æ Á¤º¸¸¦ ¹Þ¾Æ¿Í¼­ »¡°£ ¼± »ö±òÀÌ ±×´ë·Î ºÒ·Á¿À´Â °Í
+ÀÌ ÀÛ¾÷Àº Init()¿¡¼­ ÁøÇàµÇ´Âµ¥ ±×·² ¼ö ÀÖ³ª...?
+±×¸®°í ÀÌ°Ô ¸Â´Ù¸é ´Ù¸¥ ÀÎµ¦½º¿¡¼± ÀÌ·¯Áö ¾Ê´Â ÀÌÀ¯...?
+
+ÇÒ °Í
+- Å¸ÀÌÆ² ¾À UIµé ÀÌµ¿ÇÏ´Â°Å ¼±Çüº¸°£À¸·Î Àç±¸ÇöÇÏ±â

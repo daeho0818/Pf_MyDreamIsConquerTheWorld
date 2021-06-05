@@ -11,7 +11,7 @@ cChurchBoss::cChurchBoss(Vec2 pos, vector<cBullet*>& bullet)
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
-	pattern1 = false;
+	pattern1 = true;
 }
 
 cChurchBoss::~cChurchBoss()
@@ -60,7 +60,8 @@ void cChurchBoss::CircleBullet(float interval, bool random)
 	}
 }
 
-Vec2 rot = {0, 0};
+float angle = 0;
+float rad = D3DX_PI * 2 / 25;
 void cChurchBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
@@ -73,22 +74,25 @@ void cChurchBoss::Update()
 			});
 	}
 
-	rot.x += 0.1f;
-
 	if (m_Ani != nullptr) m_Ani->Update();
 
 	if (pattern1)
 	{
 		if (t_Pattern1 == nullptr)
 		{
+			float interval = 0.1;
+			angle += rad;
 			t_Pattern1 = new cTimer(0.05, [&]()->void {
-				m_bullets.push_back(new cMBullet(m_pos, rot, m_damage, 0.1, 400));
+				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
+				direction = direction - m_pos;
+				D3DXVec2Normalize(&direction, &direction);
+				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
 				t_Pattern1 = nullptr;
 				});
 		}
 	}
 
-	if (isStop) {CircleBullet(0, true); }
+	if (isStop) { CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

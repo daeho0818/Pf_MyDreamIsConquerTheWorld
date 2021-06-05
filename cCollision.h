@@ -15,8 +15,6 @@ public:
 	cItemAdmin* m_itemAd;
 	vector<cItem*>& m_item;
 
-	bool b_PMColl = true;
-
 	void Update();
 
 	void MPColl();

@@ -11,6 +11,7 @@ cOceanMob1::cOceanMob1(Vec2 pos)
 
 cOceanMob1::~cOceanMob1()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cOceanMob1::Update()

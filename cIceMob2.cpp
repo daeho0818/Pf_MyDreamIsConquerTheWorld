@@ -11,6 +11,7 @@ cIceMob2::cIceMob2(Vec2 pos)
 
 cIceMob2::~cIceMob2()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cIceMob2::Update()

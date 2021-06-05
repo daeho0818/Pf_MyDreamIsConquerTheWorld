@@ -11,6 +11,7 @@ cCityMob2::cCityMob2(Vec2 pos)
 
 cCityMob2::~cCityMob2()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cCityMob2::Update()

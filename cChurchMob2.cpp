@@ -11,6 +11,7 @@ cChurchMob2::cChurchMob2(Vec2 pos)
 
 cChurchMob2::~cChurchMob2()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cChurchMob2::Update()

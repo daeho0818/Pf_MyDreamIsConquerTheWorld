@@ -6,20 +6,23 @@ public:
 	cPlayer(cTexture* ptr[2]);
 	~cPlayer();
 
-	Vec2 m_pos = { 500, 500 };
+	Vec2 m_pos;
 	Vec2 bossPos;
 	Vec2 startDrawPos;
 
+	cTexture* player;
 	cTexture* BG[2];
 
 	string itemName;
 
 	cTimer* t_Speed = nullptr;
 	cTimer* t_Invincibility = nullptr;
+	cTimer* t_Fade = nullptr;
+	cTimer* t_Returning = nullptr;
 
 	DWORD* imgColor;
 
-	RECT cellSize = {40, 300, WINSIZEX - 40, WINSIZEY - 40};
+	RECT cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
 
 	int hp = 3;
 	int coloring_cells = 0;
@@ -27,6 +30,7 @@ public:
 	int last_x = 0, last_y = 0;
 	int speed;
 	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
+	int FadeCount;
 
 	float coloring_per = 0;
 
@@ -36,7 +40,8 @@ public:
 	bool returning = false;
 	bool stop = false;
 	bool invincibility = false;
-	
+	bool isAttacked;
+
 	void Init();
 	void Update(Vec2 bossPos);
 	void Render();
@@ -44,7 +49,7 @@ public:
 	void Release();
 
 	void KeyEvent();
-	void DrawTempLine();
+	void DrawTempLine(BYTE dir);
 	void DrawLine(bool isFilled = false);
 	void FillPlace(Vec2 pos, int target, int change, bool isFilled = false);
 	bool Near(BYTE dir, int target);

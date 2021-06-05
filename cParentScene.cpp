@@ -62,6 +62,14 @@ void cParentScene::Update()
 	if (INPUT->KeyDown('G')) isClear = true;
 	if (INPUT->KeyDown('H')) isFail = true;
 
+	if (INPUT->KeyDown(VK_ESCAPE))
+	{
+		if (!isClear && !isFail)
+		{
+			isStop = !isStop;
+		}
+	}
+
 	if (t_Timer != nullptr) t_Timer->Update();
 	if (t_Delay != nullptr) t_Delay->Update();
 

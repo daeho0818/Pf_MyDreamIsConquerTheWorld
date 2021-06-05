@@ -11,6 +11,7 @@ cDesertMob1::cDesertMob1(Vec2 pos)
 
 cDesertMob1::~cDesertMob1()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cDesertMob1::Update()

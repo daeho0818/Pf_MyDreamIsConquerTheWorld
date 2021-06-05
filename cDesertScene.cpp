@@ -56,8 +56,6 @@ void cDesertScene::Update()
 		coll->Update();
 	}
 
-	if (INPUT->KeyDown(VK_ESCAPE)) isStop = !isStop;
-
 	cParentScene::Update();
 }
 

@@ -56,8 +56,6 @@ void cCityNightScene::Update()
 		coll->Update();
 	}
 
-	if (INPUT->KeyDown(VK_ESCAPE)) isStop = !isStop;
-
 	cParentScene::Update();
 }
 

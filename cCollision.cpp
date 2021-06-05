@@ -24,19 +24,10 @@ void cCollision::MPColl()
 	{
 		if (50 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 		{
-			if (b_PMColl)
+			if (!m_player->invincibility && m_player->hp > 0)
 			{
-				if ((*iter)->mobType == "Boss")
-					b_PMColl = false;
-				if (!m_player->invincibility)
-				{
-					m_player->hp -= (*iter)->m_damage;
-					m_player->EatItem("Invincibility");
-				}
-			}
-			else
-			{
-				if ((*iter)->mobType == "Boss") b_PMColl = true;
+				m_player->hp -= (*iter)->m_damage;
+				m_player->returning = true;
 			}
 		}
 		iter++;
@@ -55,11 +46,12 @@ void cCollision::MBPColl()
 		{
 			if (50 + (*iter)->size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 			{
-				if (!m_player->invincibility && m_player->draw_mode)
+				if (!m_player->invincibility && m_player->draw_mode && m_player->hp > 0)
 				{
 					m_player->hp -= (*iter)->m_Damage;
+					m_player->returning = true;
 					(*iter)->isDestroy = true;
-					m_player->EatItem("Invincibility");
+					m_player->isAttacked = true;
 				}
 			}
 		}

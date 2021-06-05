@@ -11,6 +11,7 @@ cJungleMob3::cJungleMob3(Vec2 pos)
 
 cJungleMob3::~cJungleMob3()
 {
+	SAFE_DELETE(m_Ani);
 }
 
 void cJungleMob3::Update()
