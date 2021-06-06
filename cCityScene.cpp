@@ -15,7 +15,22 @@ void cCityScene::Init()
 	cParentScene::Init("cCityScene");
 	srand(time(NULL));
 	left = false; right = true; pos_x = 0;
+	textCount = 1;
+	percent = 0;
+	timer = 180;
+	CFCount = 0;
+	speed = 100;
+	delayCount = 0;
+	hp = 3;
+	SCENE->score = 0;
+
+	isStart = false;
 	isStop = false;
+	isClear = false;
+	isFail = false;
+	isClearEnd = false;
+	isFailEnd = false;
+	delay = false;
 	IMAGE->DeleteImage("city_High");
 	IMAGE->DeleteImage("city_Under");
 	IMAGE->AddImage("city_High", "Ingame/City/high");
@@ -43,6 +58,12 @@ void cCityScene::Update()
 		if (player->coloring_per >= 80/* || SCENE->Array[(int)mob->bossPos.x][(int)mob->bossPos.y]*/)
 		{
 			isClear = true;
+		}
+
+		if (mob->isDestroy)
+		{
+			SCENE->score += 300;
+			mob->isDestroy = false;
 		}
 	}
 

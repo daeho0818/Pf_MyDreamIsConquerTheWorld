@@ -32,6 +32,7 @@ void cEndScene::Update()
 		{
 			SCENE->ChangeScene("cSelectStageScene");
 		}
+		MOUSE->lUp = false;
 	}
 }
 

@@ -22,8 +22,11 @@ public:
 	int CFCount;
 	int delayCount;
 	int hp;
+
+private:
 	int score;
 
+public:
 	bool isStart;
 	bool isStop;
 	bool isClear;

@@ -16,7 +16,22 @@ void cDesertScene::Init()
 
 	srand(time(NULL));
 	left = false; right = true; pos_x = 0;
+	textCount = 1;
+	percent = 0;
+	timer = 180;
+	CFCount = 0;
+	speed = 100;
+	delayCount = 0;
+	hp = 3;
+	SCENE->score = 0;
+
+	isStart = false;
 	isStop = false;
+	isClear = false;
+	isFail = false;
+	isClearEnd = false;
+	isFailEnd = false;
+	delay = false;
 	IMAGE->DeleteImage("desert_High");
 	IMAGE->DeleteImage("desert_Under");
 	IMAGE->AddImage("desert_High", "Ingame/Desert/desert_high");
@@ -44,6 +59,12 @@ void cDesertScene::Update()
 		if (player->coloring_per >= 80/* || SCENE->Array[(int)mob->bossPos.x][(int)mob->bossPos.y]*/)
 		{
 			isClear = true;
+		}
+
+		if (mob->isDestroy)
+		{
+			SCENE->score += 300;
+			mob->isDestroy = false;
 		}
 	}
 

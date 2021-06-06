@@ -20,19 +20,6 @@ cChurchBoss::~cChurchBoss()
 	SAFE_DELETE(m_Ani);
 }
 
-string cChurchBoss::ChkOut()
-{
-	if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 1] == 2)
-		return "Right";
-	if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 1] == 2)
-		return "Left";
-	if (SCENE->Array[(int)m_pos.y + 1][(int)m_pos.x] == 2)
-		return "Down";
-	if (SCENE->Array[(int)m_pos.y - 1][(int)m_pos.x] == 2)
-		return "Up";
-	return "";
-}
-
 void cChurchBoss::CircleBullet(float interval, bool random)
 {
 	float angle = 0;
@@ -60,8 +47,6 @@ void cChurchBoss::CircleBullet(float interval, bool random)
 	}
 }
 
-float angle = 0;
-float rad = D3DX_PI * 2 / 25;
 void cChurchBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();

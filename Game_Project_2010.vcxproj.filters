@@ -219,6 +219,9 @@
     <Filter Include="3. Object\Mob\Ice\Boss">
       <UniqueIdentifier>{dba3c2d9-070c-480d-961e-93d6f1e3048f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="4. Scene\Loading">
+      <UniqueIdentifier>{2acd2952-bc51-4831-9c41-1008f8e896c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -472,6 +475,9 @@
     <ClCompile Include="cOceanBoss.cpp">
       <Filter>3. Object\Mob\Ocean\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="cLoadingScene.cpp">
+      <Filter>4. Scene\Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -665,6 +671,9 @@
     </ClInclude>
     <ClInclude Include="cOceanBoss.h">
       <Filter>3. Object\Mob\Ocean\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cLoadingScene.h">
+      <Filter>4. Scene\Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

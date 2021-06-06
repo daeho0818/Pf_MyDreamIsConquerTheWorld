@@ -18,12 +18,21 @@ void cParentScene::Init(string curScene)
 {
 	SCENE->curScene = curScene;
 
+	for (int i = 0; i < 7; i++)
+	{
+		textsPos[i] = Vec2(-100, WINSIZEY / 2);
+	}
+
+	memset(clear, false, sizeof(clear));
+	memset(over, false, sizeof(over));
+	memset(textRender, false, sizeof(textRender));
+
 	textCount = 1;
 	percent = 0;
-	score = 0;
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
+	score = 0;
 	delayCount = 0;
 	hp = 3;
 
@@ -34,15 +43,6 @@ void cParentScene::Init(string curScene)
 	isClearEnd = false;
 	isFailEnd = false;
 	delay = false;
-
-	for (int i = 0; i < 7; i++)
-	{
-		textsPos[i] = Vec2(-100, WINSIZEY / 2);
-	}
-
-	memset(clear, false, sizeof(clear));
-	memset(over, false, sizeof(over));
-	memset(textRender, false, sizeof(textRender));
 
 	t_TextAni = nullptr;
 	t_Timer = nullptr;

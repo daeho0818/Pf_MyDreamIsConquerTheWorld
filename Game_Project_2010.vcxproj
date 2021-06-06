@@ -427,6 +427,7 @@
     <ClCompile Include="cJungleMob2.cpp" />
     <ClCompile Include="cJungleMob3.cpp" />
     <ClCompile Include="cJungleScene.cpp" />
+    <ClCompile Include="cLoadingScene.cpp" />
     <ClCompile Include="cMBullet.cpp" />
     <ClCompile Include="cMob.cpp" />
     <ClCompile Include="cMobAdmin.cpp" />
@@ -491,6 +492,7 @@
     <ClInclude Include="cJungleMob2.h" />
     <ClInclude Include="cJungleMob3.h" />
     <ClInclude Include="cJungleScene.h" />
+    <ClInclude Include="cLoadingScene.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMBullet.h" />
     <ClInclude Include="cMob.h" />

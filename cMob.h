@@ -9,7 +9,7 @@ public:
 	Vec2 spawnPos;
 
 	float m_hp;
-	float m_damage;
+	float m_damage = 1;
 	float m_size;
 
 	int index = 0;
@@ -25,4 +25,6 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Render() = 0;
+
+	string ChkOut();
 };

@@ -16,7 +16,22 @@ void cOceanScene::Init()
 
 	srand(time(NULL));
 	left = false; right = true; pos_x = 0;
+	textCount = 1;
+	percent = 0;
+	timer = 180;
+	CFCount = 0;
+	speed = 100;
+	delayCount = 0;
+	hp = 3;
+	SCENE->score = 0;
+
+	isStart = false;
 	isStop = false;
+	isClear = false;
+	isFail = false;
+	isClearEnd = false;
+	isFailEnd = false;
+	delay = false;
 	IMAGE->DeleteImage("ocean_High");
 	IMAGE->DeleteImage("ocean_Under");
 	IMAGE->AddImage("ocean_High", "Ingame/Ocean/high");
@@ -45,6 +60,12 @@ void cOceanScene::Update()
 		{
 			isClear = true;
 		}
+	}
+
+	if (mob->isDestroy)
+	{
+		SCENE->score += 300;
+		mob->isDestroy = false;
 	}
 
 	if (isStart && !isStop && !isClear && !isFail)

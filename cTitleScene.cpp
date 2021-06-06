@@ -45,7 +45,7 @@ void cTitleScene::Update()
 	{
 		if (t_Delay == nullptr && count <= 19)
 		{
-			t_Delay = new cTimer(0.2, [&]()->void {
+			t_Delay = new cTimer(0.01, [&]()->void {
 				for (auto iter : BUTTON->m_buttons)
 				{
 					if (movedEnd)

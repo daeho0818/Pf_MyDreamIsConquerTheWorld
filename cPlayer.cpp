@@ -31,6 +31,7 @@ void cPlayer::Init()
 	speed = 15;
 	coloring_per = 0;
 	FadeCount = 0;
+	drawStart = false;
 	draw_line = false;
 	draw_mode = false;
 	returning = false;
@@ -47,11 +48,15 @@ void cPlayer::Init()
 		{
 			if (x == cellSize.left || x == cellSize.right || y == cellSize.top || y == cellSize.bottom)
 			{
+				SCENE->Array[y - 2][x] = 1;
 				SCENE->Array[y - 1][x] = 1;
-				SCENE->Array[y][x - 1] = 1;
-				SCENE->Array[y][x] = 1;
 				SCENE->Array[y + 1][x] = 1;
+				SCENE->Array[y + 2][x] = 1;
+				SCENE->Array[y][x] = 1;
+				SCENE->Array[y][x - 2] = 1;
+				SCENE->Array[y][x - 1] = 1;
 				SCENE->Array[y][x + 1] = 1;
+				SCENE->Array[y][x + 2] = 1;
 			}
 			else if (x < cellSize.left || x > cellSize.right || y < cellSize.top || y > cellSize.bottom)
 				SCENE->Array[y][x] = 3;
@@ -59,7 +64,10 @@ void cPlayer::Init()
 	}
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
-	imgColor = (DWORD*)lr.pBits;
+	DWORD* imgPixel = (DWORD*)lr.pBits;
+	for (int y = 0; y < WINSIZEY; y++)
+		for (int x = 0; x < WINSIZEX; x++)
+			imgColor[y][x] = (D3DXCOLOR)imgPixel[y * WINSIZEX + x];
 	BG[0]->ptr->UnlockRect(0);
 
 	draw_mode = true;
@@ -157,30 +165,29 @@ void cPlayer::KeyEvent()
 
 	if (INPUT->KeyDown(VK_SPACE))
 	{
-		D3DLOCKED_RECT lr;
-		BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
-		imgColor = (DWORD*)lr.pBits;
-		BG[0]->ptr->UnlockRect(0);
 		draw_line = true;
 		startDrawPos = m_pos;
 	}
 	else if (INPUT->KeyUp(VK_SPACE))
 	{
 		draw_line = false;
+		if (Current() == 1)
+		{
+			returning = true;
+		}
 	}
 
 	if (INPUT->KeyDown(VK_RETURN))
 	{
-		returning = true;
-		draw_mode = true;
-		DrawLine(true);
-		returning = false;
+
 	}
 }
 
 void cPlayer::DrawTempLine(BYTE dir)
 {
 	if (!draw_mode) draw_mode = true;
+	if (!drawStart) startDrawPos = m_pos;
+	drawStart = true;
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
@@ -234,36 +241,38 @@ void cPlayer::DrawLine(bool isFilled)
 			case 1:
 				if (returning)
 				{
-					targetPixel = imgColor[y * WINSIZEX + x];
+					targetPixel = imgColor[y][x];
 					SCENE->Array[y][x] = 0;
+					textureColor[y * WINSIZEX + x] = targetPixel;
 				}
 				else
 				{
-					targetPixel = D3DCOLOR_RGBA(0, 255, 0, 255);
+					targetPixel = D3DXCOLOR(0, 0, 0, 1);
 					SCENE->Array[y][x] = 2;
 					last_x = x;
 					last_y = y;
+					textureColor[y * WINSIZEX + x] = targetPixel;
 				}
-				textureColor[y * WINSIZEX + x] = targetPixel;
 				break;
 			case 3:
-				targetPixel = D3DCOLOR_RGBA(0, 0, 0, 0);
+				targetPixel = D3DXCOLOR(0, 0, 0, 0);
 				textureColor[y * WINSIZEX + x] = targetPixel;
 				break;
 			case 9:
 				if (returning)
 				{
-					targetPixel = imgColor[y * WINSIZEX + x];
+					targetPixel = imgColor[y][x];
 					SCENE->Array[y][x] = 0;
+					textureColor[y * WINSIZEX + x] = targetPixel;
 				}
 				else
 				{
-					targetPixel = D3DCOLOR_RGBA(0, 255, 0, 255);
+					targetPixel = D3DXCOLOR(0, 0, 0, 1);
 					SCENE->Array[y][x] = 2;
 					last_x = x;
 					last_y = y;
+					textureColor[y * WINSIZEX + x] = targetPixel;
 				}
-				textureColor[y * WINSIZEX + x] = targetPixel;
 				break;
 			}
 		}
@@ -272,6 +281,7 @@ void cPlayer::DrawLine(bool isFilled)
 	if (isFilled) return;
 	if (last_x != cellSize.left && last_y != cellSize.top)
 	{
+		drawStart = false;
 		FillPlace({ (float)bossPos.x, (float)bossPos.y }, 0, 4, true);
 		for (int y = cellSize.bottom - 1; y != cellSize.top; --y)
 		{
@@ -463,13 +473,80 @@ void cPlayer::ChkLine()
 
 void cPlayer::Returning()
 {
-	m_pos = startDrawPos;
+	D3DLOCKED_RECT lr;
+	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
+	DWORD* textureColor = (DWORD*)lr.pBits;
+	for (int i = 0; i < speed; i++)
+	{
+		D3DXCOLOR targetPixel;
+		if (Near(VK_LEFT, 1))
+		{
+			targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
+			textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
 
-	draw_mode = true;
-	DrawLine(true);
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
 
-	draw_line = false;
-	returning = false;
+			targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
+			textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
+			m_pos.x--;
+		}
+		else if (Near(VK_RIGHT, 1))
+		{
+			targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
+			textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
+			textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
+			m_pos.x++;
+		}
+		else if (Near(VK_DOWN, 1))
+		{
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
+			m_pos.y++;
+		}
+		else if (Near(VK_UP, 1))
+		{
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+
+			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
+			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
+			SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
+			m_pos.y--;
+		}
+		else
+		{
+			draw_line = false;
+			returning = false;
+			m_pos = startDrawPos;
+		}
+	}
+	BG[0]->ptr->UnlockRect(0);
 }
 
 void cPlayer::ItemUpdate()

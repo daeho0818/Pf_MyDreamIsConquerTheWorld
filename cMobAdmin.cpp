@@ -28,6 +28,7 @@
 cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 	:m_bullets(bullet)
 {
+	isDestroy = false;
 	m_mobs.clear();
 	string asdf = stage;
 	if (stage == "cChurchScene")
@@ -84,10 +85,22 @@ cMobAdmin::~cMobAdmin()
 
 void cMobAdmin::Update()
 {
-	for (auto iter : m_mobs)
+	for (auto iter = m_mobs.begin(); iter != m_mobs.end();)
 	{
-		iter->Update();
-		if (iter->mobType == "Boss") { bossPos = iter->m_pos; boss = iter; }
+		if (*iter)
+		{
+			(*iter)->Update();
+
+			if ((*iter)->mobType == "Boss") { bossPos = (*iter)->m_pos; boss = (*iter); }
+			if (SCENE->Array[int((*iter)->m_pos.y)][int((*iter)->m_pos.x)] == 3)
+			{
+				isDestroy = true;
+				(*iter)->isDestroy = true;
+				iter = m_mobs.erase(iter);
+				SAFE_DELETE(*iter);
+			}
+		}
+		iter++;
 	}
 }
 
@@ -95,7 +108,8 @@ void cMobAdmin::Render()
 {
 	for (auto iter : m_mobs)
 	{
-		iter->Render();
+		if (iter)
+			iter->Render();
 	}
 }
 

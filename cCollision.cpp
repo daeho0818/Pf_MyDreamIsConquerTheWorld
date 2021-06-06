@@ -22,12 +22,14 @@ void cCollision::MPColl()
 {
 	for (auto iter = m_mobs.begin(); iter != m_mobs.end();)
 	{
-		if (50 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+		if (250 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 		{
-			if (!m_player->invincibility && m_player->hp > 0)
+			if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 			{
+				DebugLog(L"heehee...?");
 				m_player->hp -= (*iter)->m_damage;
 				m_player->returning = true;
+				m_player->isAttacked = true;
 			}
 		}
 		iter++;
@@ -46,7 +48,7 @@ void cCollision::MBPColl()
 		{
 			if (50 + (*iter)->size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 			{
-				if (!m_player->invincibility && m_player->draw_mode && m_player->hp > 0)
+				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{
 					m_player->hp -= (*iter)->m_Damage;
 					m_player->returning = true;

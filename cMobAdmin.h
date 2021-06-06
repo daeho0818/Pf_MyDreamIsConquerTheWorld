@@ -14,5 +14,7 @@ public:
 	void UIRender();
 
 	cMob* boss;
+
+	bool isDestroy;
 };
 

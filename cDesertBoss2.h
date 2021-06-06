@@ -25,7 +25,6 @@ public:
 	cTimer* t_Pattern2 = nullptr;
 	cTimer* t_Pattern3 = nullptr;
 
-	string ChkOut();
 	void CircleBullet(float interval, bool random = false);
 
 	// cMob을(를) 통해 상속됨

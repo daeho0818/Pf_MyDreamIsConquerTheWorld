@@ -20,7 +20,7 @@ public:
 	cTimer* t_Fade = nullptr;
 	cTimer* t_Returning = nullptr;
 
-	DWORD* imgColor;
+	D3DXCOLOR imgColor[WINSIZEY][WINSIZEX];
 
 	RECT cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
 
@@ -35,6 +35,7 @@ public:
 	float coloring_per = 0;
 
 	bool left, right, up, down;
+	bool drawStart;
 	bool draw_line = false;
 	bool draw_mode = false;
 	bool returning = false;
