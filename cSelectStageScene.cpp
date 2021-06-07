@@ -80,7 +80,12 @@ void cSelectStageScene::Update()
 		}
 		else
 		{
-			if (MOUSE->Collider("X"))
+			Vec2 mousePos = Vec2(MOUSE->mousePos.x * 2.1, MOUSE->mousePos.y * 2.1);
+			Vec2 buttonPos = {WINSIZEX / 2 + 1060, WINSIZEY / 2 - 780};
+			if (mousePos.x >= buttonPos.x - (IMAGE->FindImage("X")->info.Width * 0.6 / 2) &&
+				mousePos.x <= buttonPos.x + (IMAGE->FindImage("X")->info.Width * 0.6 / 2)  &&
+				mousePos.y >= buttonPos.y - (IMAGE->FindImage("X")->info.Height * 0.6 / 2) &&
+				mousePos.y <= buttonPos.y + (IMAGE->FindImage("X")->info.Height * 0.6 / 2))
 			{
 				stage = Stage::None;
 				MOUSE->lUp = false;
