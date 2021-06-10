@@ -1,8 +1,9 @@
 #include "DXUT.h"
 #include "cJungleMob1.h"
+#include "cReflexBullet.h"
 
-cJungleMob1::cJungleMob1(Vec2 pos)
-	:cMob(pos)
+cJungleMob1::cJungleMob1(Vec2 pos, vector < cBullet*>& bullets)
+	:cMob(pos), m_bullets(bullets)
 {
 	m_image = IMAGE->MakeVecImg("jungle_mob1");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
@@ -27,6 +28,34 @@ void cJungleMob1::Update()
 			});
 	}
 
+	if (t_Pattern1 != nullptr) t_Pattern1->Update();
+	if (p1Count < 5)
+	{
+		if (t_Pattern1 == nullptr)
+		{
+			t_Pattern1 = new cTimer(0.4, [&]()->void {
+				Vec2 dir;
+				for (int i = -5; i <= 5; i++)
+				{
+					if (i != 0)
+					{
+						dir = { 1 * (float)i, 0 };
+						D3DXVec2Normalize(&dir, &dir);
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, IMAGE->FindImage("bullet_enemy1"), m_damage, 0.1, 400, true));
+					}
+				}
+				p1Count++;
+				t_Pattern1 = nullptr;
+				});
+
+		}
+	}
+	else
+	{
+		if (t_Pattern1 == nullptr)
+			t_Pattern1 = new cTimer(5, [&]() -> void { p1Count = 0; t_Pattern1 = nullptr; });
+	}
+
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
 		dir_x *= -1;
@@ -35,7 +64,7 @@ void cJungleMob1::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {1 * dir_x, 1 * dir_y};
+	m_pos += {3 * dir_x, 3 * dir_y};
 }
 
 void cJungleMob1::Render()

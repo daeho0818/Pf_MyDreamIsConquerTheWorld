@@ -7,7 +7,6 @@ public:
 	cJungleBoss(Vec2 pos, vector<cBullet*>& bullet);
 	~cJungleBoss();
 
-	int p1Count = 0;
 	int p2Count = 0;
 	int p3Count = 0;
 
@@ -21,7 +20,6 @@ public:
 
 	vector<cBullet*>& m_bullets;
 
-	cTimer* t_Pattern1 = nullptr;
 	cTimer* t_Pattern2 = nullptr;
 	cTimer* t_Pattern3 = nullptr;
 

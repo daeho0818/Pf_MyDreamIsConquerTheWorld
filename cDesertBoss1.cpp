@@ -11,15 +11,12 @@ cDesertBoss1::cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet)
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
-	pattern1 = false;
-	pattern2 = true;
-	pattern3 = false;
+	pattern1 = true;
 }
 
 cDesertBoss1::~cDesertBoss1()
 {
 	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(t_Pattern2);
 	SAFE_DELETE(m_Ani);
 }
 
@@ -53,8 +50,6 @@ void cDesertBoss1::CircleBullet(float interval, bool random)
 void cDesertBoss1::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (t_Pattern2 != nullptr) t_Pattern2->Update();
-	if (t_Pattern3 != nullptr) t_Pattern3->Update();
 	if (m_Ani == nullptr)
 	{
 		m_Ani = new cTimer(0.1, [&]()->void {
@@ -64,52 +59,19 @@ void cDesertBoss1::Update()
 			});
 	}
 	if (m_Ani != nullptr) m_Ani->Update();
+
 	if (pattern1)
 	{
-		if (p1Count < 10)
-		{
-			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.5, [&]()->void {
-				isStop = true;
-				p1Count++;
-				t_Pattern1 = nullptr;
-				});
-		}
-		else
-		{
-			p1Count = 0;
-			pattern1 = false;
-			isStop = false;
-			pattern3 = true;
-		}
+		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.02, [&]()->void {
+			angle += rad;
+			t_Pattern1 = nullptr;
+			});
 	}
-	else
-	{
-		if (pattern2)
-		{
-			if (t_Pattern2 == nullptr) t_Pattern2 = new cTimer(10, [&]()->void {
-				pattern1 = true;
-				t_Pattern2 = nullptr;
-				isStop = true;
-				});
-		}
-	}
-	if (pattern3)
-	{
-		if (p3Count < 3)
-		{
-			if (t_Pattern3 == nullptr) t_Pattern3 = new cTimer(1, [&]()->void {
-				float temp = 5;
-				p3Count++;
-				CircleBullet(temp * p3Count);
-				t_Pattern3 = nullptr;
-				});
-		}
-		else
-		{
-			pattern3 = false;
-			p3Count = 0;
-		}
-	}
+
+	Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5)), m_pos.y + (sinf(angle) * (5)));
+	direction = direction - m_pos;
+	D3DXVec2Normalize(&direction, &direction);
+	m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 2500));
 
 	if (isStop) { CircleBullet(0, true); }
 

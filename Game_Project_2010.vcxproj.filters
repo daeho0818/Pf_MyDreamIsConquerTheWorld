@@ -72,9 +72,6 @@
     <Filter Include="3. Object\Mob\Admin">
       <UniqueIdentifier>{c5e29fdb-5f3b-49fd-aa30-a958c7e4b180}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3. Object\Mob\Boss">
-      <UniqueIdentifier>{1325946a-67d8-4703-a989-078b4430fb69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3. Object\Bullet\BulletAdmin">
       <UniqueIdentifier>{32e58c4f-77b6-48cb-9656-bedcc79339ae}</UniqueIdentifier>
     </Filter>
@@ -222,6 +219,9 @@
     <Filter Include="4. Scene\Loading">
       <UniqueIdentifier>{2acd2952-bc51-4831-9c41-1008f8e896c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Object\Bullet\ReflexBullet">
+      <UniqueIdentifier>{b7e80057-096e-48fe-9a40-d3ef9fbd4392}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -321,9 +321,6 @@
     </ClCompile>
     <ClCompile Include="cMobAdmin.cpp">
       <Filter>3. Object\Mob\Admin</Filter>
-    </ClCompile>
-    <ClCompile Include="cBoss.cpp">
-      <Filter>3. Object\Mob\Boss</Filter>
     </ClCompile>
     <ClCompile Include="cBullet.cpp">
       <Filter>3. Object\Bullet</Filter>
@@ -478,6 +475,9 @@
     <ClCompile Include="cLoadingScene.cpp">
       <Filter>4. Scene\Loading</Filter>
     </ClCompile>
+    <ClCompile Include="cReflexBullet.cpp">
+      <Filter>3. Object\Bullet\ReflexBullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -518,9 +518,6 @@
     </ClInclude>
     <ClInclude Include="cMobAdmin.h">
       <Filter>3. Object\Mob\Admin</Filter>
-    </ClInclude>
-    <ClInclude Include="cBoss.h">
-      <Filter>3. Object\Mob\Boss</Filter>
     </ClInclude>
     <ClInclude Include="cBullet.h">
       <Filter>3. Object\Bullet</Filter>
@@ -674,6 +671,9 @@
     </ClInclude>
     <ClInclude Include="cLoadingScene.h">
       <Filter>4. Scene\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="cReflexBullet.h">
+      <Filter>3. Object\Bullet\ReflexBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

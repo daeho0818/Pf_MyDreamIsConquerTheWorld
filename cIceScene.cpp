@@ -36,7 +36,7 @@ void cIceScene::Init()
 	IMAGE->DeleteImage("ice_Under");
 	IMAGE->AddImage("ice_High", "Ingame/Ice/high");
 	IMAGE->AddImage("ice_Under", "Ingame/Ice/under");
-	cTexture* ptr[2] = {IMAGE->FindImage("ice_High"), IMAGE->FindImage("ice_Under") };
+	cTexture* ptr[2] = { IMAGE->FindImage("ice_High"), IMAGE->FindImage("ice_Under") };
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cIceScene");

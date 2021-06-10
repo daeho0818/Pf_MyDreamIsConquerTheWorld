@@ -12,6 +12,7 @@ public:
 	float m_damage = 1;
 	float m_size;
 
+	int p1Count = 0;
 	int index = 0;
 
 	bool isDestroy = false;
@@ -20,6 +21,7 @@ public:
 	string mobName;
 	
 	cTimer* m_Ani = nullptr;
+	cTimer* t_Pattern1 = nullptr;
 
 	vector<cTexture*> m_image;
 

@@ -388,7 +388,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cBoss.cpp" />
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cButton.cpp" />
@@ -440,6 +439,7 @@
     <ClCompile Include="cParticleAni.cpp" />
     <ClCompile Include="cParticleManager.cpp" />
     <ClCompile Include="cPlayer.cpp" />
+    <ClCompile Include="cReflexBullet.cpp" />
     <ClCompile Include="cRenderManager.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
@@ -453,7 +453,6 @@
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp" />
     <ClCompile Include="cParentScene.cpp" />
     <ClCompile Include="singleton.cpp" />
-    <ClInclude Include="cBoss.h" />
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cButton.h" />
@@ -506,6 +505,7 @@
     <ClInclude Include="cParticleAni.h" />
     <ClInclude Include="cParticleManager.h" />
     <ClInclude Include="cPlayer.h" />
+    <ClInclude Include="cReflexBullet.h" />
     <ClInclude Include="cRenderManager.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cSceneManager.h" />

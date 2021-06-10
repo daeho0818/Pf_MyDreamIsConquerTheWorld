@@ -13,8 +13,6 @@ public:
 	void Render();
 	void UIRender();
 
-	cMob* boss;
-
 	bool isDestroy;
 };
 

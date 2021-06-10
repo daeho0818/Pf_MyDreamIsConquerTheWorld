@@ -44,7 +44,7 @@ void cLoadingScene::Update()
 {
 	if (t_Delay != nullptr) t_Delay->Update();
 
-	if (loadCount == 170)
+	if (loadCount == 172)
 	SCENE->ChangeScene("cTitleScene");
 
 	if (loading) AddResource();
@@ -538,6 +538,12 @@ void cLoadingScene::AddResource()
 				loadCount++;
 
 				IMAGE->AddImage("bullet_enemy", "bullet_enemy");
+				loadCount++;
+				
+				IMAGE->AddImage("bullet_enemy1", "bullet_enemy1");
+				loadCount++;
+
+				IMAGE->AddImage("bullet_enemy2", "bullet_enemy2");
 				loadCount++;
 
 				t_Delay = nullptr;

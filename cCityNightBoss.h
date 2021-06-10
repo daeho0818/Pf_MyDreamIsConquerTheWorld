@@ -7,8 +7,6 @@ public:
 	cCityNightBoss(Vec2 pos, vector<cBullet*>& bullet);
 	~cCityNightBoss();
 
-	int p1Count = 0;
-
 	float dir_x = 1;
 	float dir_y = 1;
 	float angle = 0;
@@ -30,8 +28,6 @@ public:
 
 	vector<cBullet*>& m_bullets;
 
-	cTimer* t_Pattern1 = nullptr;
-	
 	void CircleBullet(float interval, bool random = false);
 
 	// cMob을(를) 통해 상속됨

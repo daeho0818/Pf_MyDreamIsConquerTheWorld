@@ -176,21 +176,16 @@ void cPlayer::KeyEvent()
 			returning = true;
 		}
 	}
-
-	if (INPUT->KeyDown(VK_RETURN))
-	{
-		
-	}
 }
 
+D3DLOCKED_RECT lr;
 void cPlayer::DrawTempLine(BYTE dir)
 {
 	if (!draw_mode) draw_mode = true;
 	if (!drawStart) startDrawPos = m_pos;
-	drawStart = true;
-	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
+	drawStart = true;
 
 	if (dir == VK_LEFT || dir == VK_RIGHT)
 	{
@@ -391,16 +386,19 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (Near(VK_LEFT, 2) || !Near(VK_LEFT, 1) && draw_line)
+				if (!Near(VK_LEFT, 3))
 				{
-					m_pos.x--;
-					if (Current() == 2 && m_pos != startDrawPos)
-						DrawLine();
-					else
+					if (Near(VK_LEFT, 2) || !Near(VK_LEFT, 1) && draw_line)
 					{
-						ChkLine();
-						if (!Near(VK_LEFT, 3))
-							DrawTempLine(VK_LEFT);
+						m_pos.x--;
+						if (Current() == 2 && m_pos != startDrawPos)
+							DrawLine();
+						else
+						{
+							ChkLine();
+							if (!Near(VK_LEFT, 3))
+								DrawTempLine(VK_LEFT);
+						}
 					}
 				}
 			}
@@ -410,16 +408,19 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (Near(VK_RIGHT, 2) || !Near(VK_RIGHT, 1) && draw_line)
+				if (!Near(VK_RIGHT, 3))
 				{
-					m_pos.x++;
-					if (Current() == 2 && m_pos != startDrawPos)
-						DrawLine();
-					else
+					if (Near(VK_RIGHT, 2) || !Near(VK_RIGHT, 1) && draw_line)
 					{
-						ChkLine();
-						if (!Near(VK_RIGHT, 3))
-							DrawTempLine(VK_RIGHT);
+						m_pos.x++;
+						if (Current() == 2 && m_pos != startDrawPos)
+							DrawLine();
+						else
+						{
+							ChkLine();
+							if (!Near(VK_RIGHT, 3))
+								DrawTempLine(VK_RIGHT);
+						}
 					}
 				}
 			}
@@ -429,16 +430,19 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (Near(VK_UP, 2) || !Near(VK_UP, 1) && draw_line)
+				if (!Near(VK_UP, 3))
 				{
-					m_pos.y--;
-					if (Current() == 2 && m_pos != startDrawPos)
-						DrawLine();
-					else
+					if (Near(VK_UP, 2) || !Near(VK_UP, 1) && draw_line)
 					{
-						ChkLine();
-						if (!Near(VK_UP, 3))
-							DrawTempLine(VK_UP);
+						m_pos.y--;
+						if (Current() == 2 && m_pos != startDrawPos)
+							DrawLine();
+						else
+						{
+							ChkLine();
+							if (!Near(VK_UP, 3))
+								DrawTempLine(VK_UP);
+						}
 					}
 				}
 			}
@@ -448,16 +452,19 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (Near(VK_DOWN, 2) || !Near(VK_DOWN, 1) && draw_line)
+				if (!Near(VK_DOWN, 3))
 				{
-					m_pos.y++;
-					if (Current() == 2 && m_pos != startDrawPos)
-						DrawLine();
-					else
+					if (Near(VK_DOWN, 2) || !Near(VK_DOWN, 1) && draw_line)
 					{
-						ChkLine();
-						if (!Near(VK_DOWN, 3))
-							DrawTempLine(VK_DOWN);
+						m_pos.y++;
+						if (Current() == 2 && m_pos != startDrawPos)
+							DrawLine();
+						else
+						{
+							ChkLine();
+							if (!Near(VK_DOWN, 3))
+								DrawTempLine(VK_DOWN);
+						}
 					}
 				}
 			}

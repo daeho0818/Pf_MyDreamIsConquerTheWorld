@@ -53,8 +53,8 @@ void cParentScene::Init(string curScene)
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540), "ingameB");
 
 	BUTTON->AddButton("stop_back", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 300), "stopB");
-	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 400), "stopB");
-	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500), "stopB");
+	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 400) + 400), "stopB");
+	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 500) + 800), "stopB");
 }
 
 void cParentScene::Update()
@@ -256,12 +256,11 @@ void cParentScene::Update()
 			}
 		}
 	}
-	if (MOUSE->lUp)
+	if (MOUSE->lDown)
 	{
 		if (MOUSE->Collider("CFnext"))
 		{
-			if (isClearEnd) SCENE->ChangeScene("cEndScene");
-			else if (isFailEnd) SCENE->ChangeScene("cEndScene");
+			SCENE->ChangeScene("cEndScene");
 		}
 
 		if (isStop)
@@ -274,11 +273,13 @@ void cParentScene::Update()
 			if (MOUSE->Collider("stop_restart"))
 			{
 				SCENE->ChangeScene(SCENE->curScene);
+				isStop = false;
 			}
 
 			if (MOUSE->Collider("stop_worldmap"))
 			{
 				SCENE->ChangeScene("cSelectStageScene");
+				isStop = false;
 			}
 		}
 	}

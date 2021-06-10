@@ -122,7 +122,7 @@ void cDesertBoss2::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {2 * dir_x, 2 * dir_y};
 }
 
 void cDesertBoss2::Render()

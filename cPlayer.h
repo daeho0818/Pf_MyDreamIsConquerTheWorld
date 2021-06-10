@@ -1,5 +1,4 @@
 #pragma once
-#include "cBoss.h"
 class cPlayer
 {
 public:
@@ -44,7 +43,7 @@ public:
 	bool isAttacked;
 
 	void Init();
-	void Update(Vec2 bossPos);
+	void Update(Vec2 bossPos = Vec2());
 	void Render();
 	void UIRender();
 	void Release();

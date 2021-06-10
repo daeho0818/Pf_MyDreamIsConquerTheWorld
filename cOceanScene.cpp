@@ -56,7 +56,7 @@ void cOceanScene::Update()
 			isFail = true;
 		}
 
-		if (player->coloring_per >= 80/* || SCENE->Array[(int)mob->bossPos.x][(int)mob->bossPos.y]*/)
+		if (player->coloring_per >= 80)
 		{
 			isClear = true;
 		}

@@ -21,8 +21,6 @@ public:
 
 	vector<cBullet*>& m_bullets;
 
-	cTimer* t_Pattern1 = nullptr;
-
 	void CircleBullet(float interval, bool random = false);
 
 	// cMob을(를) 통해 상속됨

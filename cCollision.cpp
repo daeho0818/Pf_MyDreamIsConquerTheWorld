@@ -26,7 +26,6 @@ void cCollision::MPColl()
 		{
 			if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 			{
-				DebugLog(L"heehee...?");
 				m_player->hp -= (*iter)->m_damage;
 				m_player->returning = true;
 				m_player->isAttacked = true;

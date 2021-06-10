@@ -21,7 +21,6 @@ public:
 
 	vector<cBullet*>& m_bullets;
 
-	cTimer* t_Pattern1 = nullptr;
 	cTimer* t_Pattern2 = nullptr;
 	cTimer* t_Pattern3 = nullptr;
 
