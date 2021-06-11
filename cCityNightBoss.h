@@ -15,14 +15,6 @@ public:
 	bool isStop;
 	bool pattern1 = true;
 
-	enum Direction
-	{
-		leftUp,
-		leftDown,
-		rightUp,
-		rightDown,
-		None
-	};
 	int dirIndex = 0;
 	int speed;
 

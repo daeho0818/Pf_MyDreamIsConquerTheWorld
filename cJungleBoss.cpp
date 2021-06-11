@@ -1,5 +1,6 @@
 #include  "DXUT.h"
 #include "cJungleBoss.h"
+#include "cReflexBullet.h"
 #include "cMBullet.h"
 
 cJungleBoss::cJungleBoss(Vec2 pos, vector<cBullet*>& bullet)
@@ -11,15 +12,12 @@ cJungleBoss::cJungleBoss(Vec2 pos, vector<cBullet*>& bullet)
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
-	pattern1 = false;
-	pattern2 = true;
-	pattern3 = false;
+	pattern1 = true;
 }
 
 cJungleBoss::~cJungleBoss()
 {
 	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(t_Pattern2);
 	SAFE_DELETE(m_Ani);
 }
 
@@ -53,8 +51,6 @@ void cJungleBoss::CircleBullet(float interval, bool random)
 void cJungleBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (t_Pattern2 != nullptr) t_Pattern2->Update();
-	if (t_Pattern3 != nullptr) t_Pattern3->Update();
 	if (m_Ani == nullptr)
 	{
 		m_Ani = new cTimer(0.1, [&]()->void {
@@ -66,48 +62,23 @@ void cJungleBoss::Update()
 	if (m_Ani != nullptr) m_Ani->Update();
 	if (pattern1)
 	{
-		if (p1Count < 10)
+		if (p1Count < 100)
 		{
-			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.5, [&]()->void {
+			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.005, [&]()->void {
 				isStop = true;
+				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, 0), IMAGE->FindImage("enemy_bullet"), m_damage, 0.1, 400, true));
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
 		}
 		else
 		{
-			p1Count = 0;
-			pattern1 = false;
 			isStop = false;
-			pattern3 = true;
-		}
-	}
-	else
-	{
-		if (pattern2)
-		{
-			if (t_Pattern2 == nullptr) t_Pattern2 = new cTimer(10, [&]()->void {
-				pattern1 = true;
-				t_Pattern2 = nullptr;
-				isStop = true;
-				});
-		}
-	}
-	if (pattern3)
-	{
-		if (p3Count < 3)
-		{
-			if (t_Pattern3 == nullptr) t_Pattern3 = new cTimer(1, [&]()->void {
-				float temp = 5;
-				p3Count++;
-				CircleBullet(temp * p3Count);
-				t_Pattern3 = nullptr;
-				});
-		}
-		else
-		{
-			pattern3 = false;
-			p3Count = 0;
+			if (t_Pattern1 == nullptr)
+				t_Pattern1 = new cTimer(5, [&]()->void {
+				p1Count = 0;
+				t_Pattern1 = nullptr;
+					});
 		}
 	}
 
