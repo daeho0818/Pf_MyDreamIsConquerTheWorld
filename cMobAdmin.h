@@ -13,6 +13,8 @@ public:
 	void Render();
 	void UIRender();
 
+	void IsDestroy();
+
 	bool isDestroy;
 };
 

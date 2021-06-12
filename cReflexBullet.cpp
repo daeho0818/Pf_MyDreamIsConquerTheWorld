@@ -20,7 +20,7 @@ void cReflexBullet::Update()
 	if (dead)
 	{
 		if (t_Dead == nullptr)
-			t_Dead = new cTimer(7, [&]()->void { t_Dead = nullptr; isDestroy = true; });
+			t_Dead = new cTimer(10, [&]()->void { t_Dead = nullptr; isDestroy = true; });
 	}
 	m_pos += m_Dir * m_speed * Delta;
 	m_angle = atan2(m_Dir.y, m_Dir.x);

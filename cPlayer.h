@@ -57,7 +57,7 @@ public:
 
 	void Move();
 	void ChkLine();
-	void Returning();
+	void Returning(bool isReturned = false );
 	void ItemUpdate();
 	void EatItem(string key);
 };

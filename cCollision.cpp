@@ -22,13 +22,16 @@ void cCollision::MPColl()
 {
 	for (auto iter = m_mobs.begin(); iter != m_mobs.end();)
 	{
-		if (250 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+		if ((*iter))
 		{
-			if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
+			if (250 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 			{
-				m_player->hp -= (*iter)->m_damage;
-				m_player->returning = true;
-				m_player->isAttacked = true;
+				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
+				{
+					m_player->hp -= (*iter)->m_damage;
+					m_player->returning = true;
+					m_player->isAttacked = true;
+				}
 			}
 		}
 		iter++;

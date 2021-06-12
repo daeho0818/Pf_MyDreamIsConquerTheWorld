@@ -64,9 +64,10 @@ void cJungleBoss::Update()
 	{
 		if (p1Count < 100)
 		{
-			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.005, [&]()->void {
+			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.05, [&]()->void {
 				isStop = true;
-				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, 0), IMAGE->FindImage("enemy_bullet"), m_damage, 0.1, 400, true));
+				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, -1), IMAGE->FindImage("bullet_enemy"), m_damage, 0.1, 400, true));
+				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(1, -1), IMAGE->FindImage("bullet_enemy"), m_damage, 0.1, 400, true));
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
@@ -81,8 +82,6 @@ void cJungleBoss::Update()
 					});
 		}
 	}
-
-	if (isStop) { CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

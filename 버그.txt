@@ -1,2 +1,3 @@
 할 것
-Debug모드로 바꿔서 버그 원인 파악하기
+몹 가뒀을 때 다른 몹 뒤짐
++ cMobAdmin 90번째 줄 iter가 nullptr 원인 파악

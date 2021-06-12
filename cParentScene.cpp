@@ -258,7 +258,7 @@ void cParentScene::Update()
 	}
 	if (MOUSE->lDown)
 	{
-		if (MOUSE->Collider("CFnext"))
+		if (MOUSE->Collider("CFnext") && (isClearEnd || isFailEnd))
 		{
 			SCENE->ChangeScene("cEndScene");
 		}
@@ -268,18 +268,21 @@ void cParentScene::Update()
 			if (MOUSE->Collider("stop_back"))
 			{
 				isStop = false;
+				MOUSE->lDown = false;
 			}
 
 			if (MOUSE->Collider("stop_restart"))
 			{
 				SCENE->ChangeScene(SCENE->curScene);
 				isStop = false;
+				MOUSE->lDown = false;
 			}
 
 			if (MOUSE->Collider("stop_worldmap"))
 			{
 				SCENE->ChangeScene("cSelectStageScene");
 				isStop = false;
+				MOUSE->lDown = false;
 			}
 		}
 	}
@@ -379,6 +382,7 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 130, 320), 1.3);
 
 	char t_score[5] = "";
+	if (score > 9999) score = 9999;
 	sprintf(t_score, "%d", score / 1000);
 	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 190));
 	sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);

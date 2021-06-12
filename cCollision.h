@@ -10,7 +10,7 @@ public:
 	~cCollision();
 
 	vector<cBullet*>& m_bullets;
-	vector<cMob*> m_mobs;
+	vector<cMob*>& m_mobs;
 	cPlayer* m_player;
 	cItemAdmin* m_itemAd;
 	vector<cItem*>& m_item;

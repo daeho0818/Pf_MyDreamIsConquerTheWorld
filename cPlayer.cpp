@@ -182,10 +182,10 @@ D3DLOCKED_RECT lr;
 void cPlayer::DrawTempLine(BYTE dir)
 {
 	if (!draw_mode) draw_mode = true;
+	if (SCENE->Array[(int)m_pos.y][(int)m_pos.x] == 0) 	drawStart = true;
 	if (!drawStart) startDrawPos = m_pos;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
-	drawStart = true;
 
 	if (dir == VK_LEFT || dir == VK_RIGHT)
 	{
@@ -478,7 +478,7 @@ void cPlayer::ChkLine()
 	if (m_pos.y >= cellSize.bottom) m_pos.y = cellSize.bottom; if (m_pos.y <= cellSize.top) m_pos.y = cellSize.top;
 }
 
-void cPlayer::Returning()
+void cPlayer::Returning(bool isReturned)
 {
 	D3DLOCKED_RECT lr;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
@@ -559,11 +559,9 @@ void cPlayer::Returning()
 void cPlayer::ItemUpdate()
 {
 	if (hp <= 0) hp = 0;
-	string key;
 	if (itemName == "Heal" || itemName == "Speed" || itemName == "invincibility")
 	{
-		key = itemName;
-		EatItem(key);
+		EatItem(itemName);
 	}
 }
 
