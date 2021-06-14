@@ -42,9 +42,9 @@ void cPlayer::Init()
 	m_pos = { 40, 300 };
 	cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
 
-	for (int y = cellSize.bottom; y != cellSize.top - 1; --y)
+	for (int y = WINSIZEY - 3; y != 1; --y)
 	{
-		for (int x = cellSize.right; x != cellSize.left - 1; --x)
+		for (int x = WINSIZEY -3; x != 1; --x)
 		{
 			if (x == cellSize.left || x == cellSize.right || y == cellSize.top || y == cellSize.bottom)
 			{
@@ -224,9 +224,9 @@ void cPlayer::DrawLine(bool isFilled)
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
 
-	for (int y = cellSize.bottom + 1; y != cellSize.top - 1; --y)
+	for (int y = WINSIZEY - 3; y != 1; --y)
 	{
-		for (int x = cellSize.right + 1; x != cellSize.left - 1; --x)
+		for (int x = WINSIZEX - 3; x != 1; --x)
 		{
 			D3DXCOLOR targetPixel;
 			switch (SCENE->Array[y][x])
