@@ -22,7 +22,10 @@ public:
 	cScene* nextScene = nullptr;
 	int Array[WINSIZEY][WINSIZEX];
 	int score;
+	int a_rewards[7];
 	string curScene = "";
+	map<string, int> m_rewards;
+	string mapNames[7];
 };
 
 #define SCENE cSceneManager::GetInstance()

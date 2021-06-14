@@ -94,6 +94,7 @@ void cTitleScene::Update()
 			}
 			else if (MOUSE->Collider("adven_button"))
 			{
+				DebugParam(L"%d", SCENE->a_rewards[0]);
 				if (!advenUI && !guideUI)
 					advenUI = true;
 			}
@@ -164,23 +165,33 @@ void cTitleScene::Render()
 		for (int i = 1; i < 5; i++)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(900, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1525, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(1525, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1525, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1525, 450 * i), 0.3);
+			if (SCENE->a_rewards[i - 1] == 1)
+				printf("heehee");
+			else
+			{
+				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1525, 450 * i), 0.3);
+			}
 		}
 
 		for (int i = 1; i < 4; i++)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(2180, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2805, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(2805, 450 * i), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2805, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2805, 450 * i), 0.3);
+			if (SCENE->a_rewards[(i - 1) + 4] == 1)
+				printf("heehee");
+			else
+			{
+				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2805, 450 * i), 0.3);
+			}
 		}
 
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);

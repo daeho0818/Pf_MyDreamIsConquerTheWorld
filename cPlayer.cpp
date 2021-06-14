@@ -182,8 +182,6 @@ D3DLOCKED_RECT lr;
 void cPlayer::DrawTempLine(BYTE dir)
 {
 	if (!draw_mode) draw_mode = true;
-	if (SCENE->Array[(int)m_pos.y][(int)m_pos.x] == 0) 	drawStart = true;
-	if (!drawStart) startDrawPos = m_pos;
 	BG[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
 
@@ -397,7 +395,11 @@ void cPlayer::Move()
 						{
 							ChkLine();
 							if (!Near(VK_LEFT, 3))
+							{
 								DrawTempLine(VK_LEFT);
+								if (!drawStart) startDrawPos = m_pos + Vec2(2, 0);
+								drawStart = true;
+							}
 						}
 					}
 				}
@@ -419,7 +421,11 @@ void cPlayer::Move()
 						{
 							ChkLine();
 							if (!Near(VK_RIGHT, 3))
+							{
 								DrawTempLine(VK_RIGHT);
+								if (!drawStart) startDrawPos = m_pos - Vec2(2, 0);
+								drawStart = true;
+							}
 						}
 					}
 				}
@@ -441,7 +447,11 @@ void cPlayer::Move()
 						{
 							ChkLine();
 							if (!Near(VK_UP, 3))
+							{
 								DrawTempLine(VK_UP);
+								if (!drawStart) startDrawPos = m_pos + Vec2(0, 2);
+								drawStart = true;
+							}
 						}
 					}
 				}
@@ -463,7 +473,11 @@ void cPlayer::Move()
 						{
 							ChkLine();
 							if (!Near(VK_DOWN, 3))
+							{
 								DrawTempLine(VK_DOWN);
+								if (!drawStart) startDrawPos = m_pos - Vec2(0, 2);
+								drawStart = true;
+							}
 						}
 					}
 				}

@@ -56,9 +56,10 @@ void cOceanScene::Update()
 			isFail = true;
 		}
 
-		if (player->coloring_per >= 80)
+		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
+			SCENE->m_rewards.find("Ocean")->second = 1;
 		}
 	}
 

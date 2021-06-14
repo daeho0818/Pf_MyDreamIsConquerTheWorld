@@ -55,9 +55,10 @@ void cCityScene::Update()
 			isFail = true;
 		}
 
-		if (player->coloring_per >= 80/* || SCENE->Array[(int)mob->bossPos.x][(int)mob->bossPos.y]*/)
+		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
+			SCENE->m_rewards.find("City")->second = 1;
 		}
 
 		if (mob->isDestroy)
