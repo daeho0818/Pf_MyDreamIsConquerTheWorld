@@ -18,6 +18,7 @@ public:
 
 	bool render = false; Vec2 temp;
 	bool lUp = false, lDown = false, rUp = false, rDown = false;
+	bool lStay = false, rStay = false;
 	POINT mousePos;
 
 	cTimer* AS = nullptr;

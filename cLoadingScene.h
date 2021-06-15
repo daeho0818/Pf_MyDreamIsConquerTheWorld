@@ -6,7 +6,7 @@ public:
 	cLoadingScene();
 	~cLoadingScene();
 
-	int loadCount = 0;
+	bool isLoaded = false;
 	int bundle = 0;
 
 	cTimer* t_Delay = nullptr;

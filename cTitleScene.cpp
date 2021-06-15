@@ -30,6 +30,32 @@ void cTitleScene::Init()
 	logoPos = { WINSIZEX / 2, 500 };
 	memset(move, false, sizeof(move));
 	move[0] = true; speed = 1;
+
+	tempFunc = [=](int index) -> void {
+		switch (index)
+		{
+		case 0:
+			RENDER->CenterRender(IMAGE->FindImage("start_button"), Vec2(600, 250 - temp), 0.6);
+			RENDER->CenterRender(IMAGE->FindImage("start_note"), { 170, 250 - temp });
+			break;
+		case 1:
+			RENDER->CenterRender(IMAGE->FindImage("guide_button"), Vec2(600, 650 - temp), 0.6);
+			RENDER->CenterRender(IMAGE->FindImage("guide_note"), { 170, 650 - temp });
+			break;
+		case 2:
+			RENDER->CenterRender(IMAGE->FindImage("adven_button"), Vec2(600, 1050 - temp), 0.6);
+			RENDER->CenterRender(IMAGE->FindImage("adven_note"), { 170, 1050 - temp });
+			break;
+		case 3:
+			RENDER->CenterRender(IMAGE->FindImage("develop_button"), Vec2(600, 1450 - temp), 0.6);
+			RENDER->CenterRender(IMAGE->FindImage("develop_note"), { 170, 1450 - temp });
+			break;
+		case 4:
+			RENDER->CenterRender(IMAGE->FindImage("quit_button"), Vec2(600, 1850 - temp), 0.6);
+			RENDER->CenterRender(IMAGE->FindImage("quit_note"), { 170, 1850 - temp });
+			break;
+		}
+	};
 }
 
 void cTitleScene::Update()
@@ -137,17 +163,36 @@ void cTitleScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage("pattern"), { 500, 1000 - temp });
 
 	RENDER->CenterRender(IMAGE->FindImage(arrowKey), Vec2(500, 2100 - temp), 1.5);
-	for (auto iter : BUTTON->m_buttons)
-	{
-		if (iter->m_tag == "titleB")
-			iter->Render();
-	}
 
-	RENDER->CenterRender(IMAGE->FindImage("start_note"), { 170, 250 - temp });
-	RENDER->CenterRender(IMAGE->FindImage("guide_note"), { 170, 650 - temp });
-	RENDER->CenterRender(IMAGE->FindImage("adven_note"), { 170, 1050 - temp });
-	RENDER->CenterRender(IMAGE->FindImage("develop_note"), { 170, 1450 - temp });
-	RENDER->CenterRender(IMAGE->FindImage("quit_note"), { 170, 1850 - temp });
+	MOUSE->Collider("start_button") ?
+		MOUSE->lStay ?
+		RENDER->CenterRender(IMAGE->FindImage("click_Start"), Vec2(600, 250 - temp)) :
+		RENDER->CenterRender(IMAGE->FindImage("over_Start"), Vec2(600, 250 - temp)) :
+		tempFunc(0);
+
+	MOUSE->Collider("guide_button") ?
+		MOUSE->lStay ?
+		RENDER->CenterRender(IMAGE->FindImage("click_Guide"), Vec2(600, 650 - temp)) :
+		RENDER->CenterRender(IMAGE->FindImage("over_Guide"), Vec2(600, 650 - temp)) :
+		tempFunc(1);
+
+	MOUSE->Collider("adven_button") ?
+		MOUSE->lStay ?
+		RENDER->CenterRender(IMAGE->FindImage("click_Adven"), Vec2(600, 1050 - temp)) :
+		RENDER->CenterRender(IMAGE->FindImage("over_Adven"), Vec2(600, 1050 - temp)) :
+		tempFunc(2);
+
+	MOUSE->Collider("develop_button") ?
+		MOUSE->lStay ?
+		RENDER->CenterRender(IMAGE->FindImage("click_Develop"), Vec2(600, 1450 - temp)) :
+		RENDER->CenterRender(IMAGE->FindImage("over_Develop"), Vec2(600, 1450 - temp)) :
+		tempFunc(3);
+
+	MOUSE->Collider("quit_button") ?
+		MOUSE->lStay ?
+		RENDER->CenterRender(IMAGE->FindImage("click_Quit"), Vec2(600, 1850 - temp)) :
+		RENDER->CenterRender(IMAGE->FindImage("over_Quit"), Vec2(600, 1850 - temp)) :
+		tempFunc(4);
 
 	if (guideUI)
 	{

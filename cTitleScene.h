@@ -30,6 +30,8 @@ public:
 
 	string arrowKey = "Arrow";
 
+	function<void(int index)> tempFunc;
+
 	virtual void Init() override;
 	virtual void Update() override;
 	virtual void Render() override;

@@ -100,9 +100,11 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
         break;
     case WM_LBUTTONDOWN:
         MOUSE->LButtonDown();
+        MOUSE->lStay = true;
         break;
     case WM_LBUTTONUP:
         MOUSE->LButtonUp();
+        MOUSE->lStay = false;
         break;
     }
     return 0;
