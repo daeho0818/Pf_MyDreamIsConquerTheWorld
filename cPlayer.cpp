@@ -44,7 +44,7 @@ void cPlayer::Init()
 
 	for (int y = WINSIZEY - 3; y != 1; --y)
 	{
-		for (int x = WINSIZEY -3; x != 1; --x)
+		for (int x = WINSIZEX - 3; x != 1; --x)
 		{
 			if (x == cellSize.left || x == cellSize.right || y == cellSize.top || y == cellSize.bottom)
 			{
@@ -123,7 +123,7 @@ void cPlayer::Update(Vec2 bossPos)
 void cPlayer::Render()
 {
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
-	if (coloring_per < 80)
+	//if (coloring_per < 80)
 		RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(player, m_pos, 0.2);
 
@@ -165,8 +165,11 @@ void cPlayer::KeyEvent()
 
 	if (INPUT->KeyDown(VK_SPACE))
 	{
-		draw_line = true;
-		startDrawPos = m_pos;
+		if (SCENE->Array[(int)m_pos.y][(int)m_pos.x] != 1)
+		{
+			draw_line = true;
+			startDrawPos = m_pos;
+		}
 	}
 	else if (INPUT->KeyUp(VK_SPACE))
 	{

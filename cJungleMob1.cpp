@@ -64,7 +64,7 @@ void cJungleMob1::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {3 * dir_x, 3 * dir_y};
+	m_pos += {2 * dir_x, 2 * dir_y};
 }
 
 void cJungleMob1::Render()

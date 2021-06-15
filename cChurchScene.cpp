@@ -37,6 +37,7 @@ void cChurchScene::Init()
 	IMAGE->AddImage("church_High", "Ingame/Church/high");
 	IMAGE->AddImage("church_Under", "Ingame/Church/under");
 	cTexture* ptr[2] = {IMAGE->FindImage("church_High"), IMAGE->FindImage("church_Under") };
+	BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cChurchScene");
@@ -60,7 +61,6 @@ void cChurchScene::Update()
 		{
 			isClear = true;
 			SCENE->m_rewards.find("Church")->second = 1;
-			DebugParam(L"%d", SCENE->m_rewards.find("Church")->second);
 		}
 
 		if (mob->isDestroy)
