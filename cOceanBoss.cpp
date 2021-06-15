@@ -8,6 +8,7 @@ cOceanBoss::cOceanBoss(Vec2 pos, vector<cBullet*>& bullet)
 	m_image = IMAGE->MakeVecImg("ocean_boss");
 	mobType = "Boss";
 	m_damage = 1;
+	speed = 2;
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
@@ -47,8 +48,10 @@ void cOceanBoss::CircleBullet(float interval, bool random)
 	}
 }
 
+
 void cOceanBoss::Update()
 {
+	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (m_Ani == nullptr)
 	{
 		m_Ani = new cTimer(0.1, [&]()->void {
@@ -59,29 +62,43 @@ void cOceanBoss::Update()
 	}
 	if (m_Ani != nullptr) m_Ani->Update();
 
-	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (pattern1)
 	{
-		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(3, [&]()->void {
-			Vec2 dir;
-			for (float i = -10; i < 10; i++)
-			{
-				dir = Vec2(-1, -1);
-				if (i != 0) dir = Vec2(-1 * i / 10, -1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
-				dir = Vec2(-1, 1);
-				if (i != 0) dir = Vec2(-1 * i / 10, 1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
-				dir = Vec2(1, -1);
-				if (i != 0) dir = Vec2(1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
-				dir = Vec2(-1, -1);
-				if (i != 0) dir = Vec2(-1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
-			}
-			t_Pattern1 = nullptr;
-			});
+		if (t_Pattern1 == nullptr)
+		{
+			t_Pattern1 = new cTimer(0.005, [&]()->void {
+				for (int i = 0; i < 360; i++)
+				{
+					Vec2 dir;
+
+					if (i % 90 == 0)
+					{
+						switch (dirIndex)
+						{
+						case 0:
+							dir = Vec2(-1, -1) - m_pos;
+							break;
+						case 1:
+							dir = Vec2(-1, WINSIZEY) - m_pos;
+							break;
+						case 2:
+							dir = Vec2(WINSIZEX, -1) - m_pos;
+							break;
+						case 3:
+							dir = Vec2(WINSIZEX, WINSIZEY) - m_pos;
+							break;
+						}
+						dirIndex++;
+						if (dirIndex == 4) dirIndex = 0;
+						D3DXVec2Normalize(&dir, &dir);
+						m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 5000));
+					}
+				}
+				t_Pattern1 = nullptr;
+				});
+		}
 	}
+
 
 	if (isStop) { CircleBullet(0, true); }
 
@@ -94,7 +111,7 @@ void cOceanBoss::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {speed* dir_x, speed* dir_y};
 }
 
 void cOceanBoss::Render()

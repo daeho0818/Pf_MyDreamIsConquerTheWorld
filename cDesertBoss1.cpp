@@ -49,7 +49,6 @@ void cDesertBoss1::CircleBullet(float interval, bool random)
 
 void cDesertBoss1::Update()
 {
-	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (m_Ani == nullptr)
 	{
 		m_Ani = new cTimer(0.1, [&]()->void {
@@ -60,18 +59,29 @@ void cDesertBoss1::Update()
 	}
 	if (m_Ani != nullptr) m_Ani->Update();
 
+	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (pattern1)
 	{
-		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.02, [&]()->void {
-			angle += rad;
+		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(3, [&]()->void {
+			Vec2 dir;
+			for (float i = -10; i < 10; i++)
+			{
+				dir = Vec2(-1, -1);
+				if (i != 0) dir = Vec2(-1 * i / 10, -1);
+				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				dir = Vec2(-1, 1);
+				if (i != 0) dir = Vec2(-1 * i / 10, 1);
+				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				dir = Vec2(1, -1);
+				if (i != 0) dir = Vec2(1, -1 * i / 10);
+				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				dir = Vec2(-1, -1);
+				if (i != 0) dir = Vec2(-1, -1 * i / 10);
+				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+			}
 			t_Pattern1 = nullptr;
 			});
 	}
-
-	Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5)), m_pos.y + (sinf(angle) * (5)));
-	direction = direction - m_pos;
-	D3DXVec2Normalize(&direction, &direction);
-	m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 2500));
 
 	if (isStop) { CircleBullet(0, true); }
 

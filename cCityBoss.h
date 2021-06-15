@@ -11,15 +11,17 @@ public:
 
 	float dir_x = 1;
 	float dir_y = 1;
-	float angle = 0;
-	float rad = D3DX_PI * 2 / 25;
 
 	bool isStop;
 	bool pattern1;
+	bool pattern2;
 
 	vector<cBullet*>& m_bullets;
 
-	void CircleBullet(float interval, bool random = false);
+	cTimer* t_Pattern2 = nullptr;
+	cBullet* bullets[4] = { nullptr, };
+
+	void CircleBullet(float interval, Vec2 pos = Vec2());
 
 	// cMob을(를) 통해 상속됨
 	virtual void Update() override;
