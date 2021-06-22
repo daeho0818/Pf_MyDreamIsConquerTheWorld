@@ -1,19 +1,21 @@
 #pragma once
 #include "cParticle.h"
 class cParticleAni
-	:public cParticle
+    :public cParticle
 {
 public:
-	cParticleAni(Vec2 pos, float size, int kind, float frameTime = 0.005);
-	virtual ~cParticleAni();
+    cParticleAni(Vec2 pos, float size, bool effect = false, int count = 0, int kind = 0, float frametime = 0.005);
+    ~cParticleAni();
 
-	vector<cTexture*> m_images;
-	cTimer* m_ani = nullptr;
-	int m_frame = 0;
-	bool m_bOnce = true;
-	float FrameTime;
+    vector<cTexture*> m_images;
+    cTimer* m_ani = nullptr;
+    int m_frame = 0;
+    int count;
 
-	// cParticle을(를) 통해 상속됨
-	virtual void Update() override;
-	virtual void Render() override;
+    bool m_bOnce = true;
+
+    float FrameTime;
+
+    virtual void Update() override;
+    virtual void Render() override;
 };

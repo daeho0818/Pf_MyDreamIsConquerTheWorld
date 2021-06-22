@@ -27,6 +27,7 @@ public:
 	cTimer* t_Delay = nullptr;
 
 	Vec2 logoPos = { WINSIZEX / 2, -500 };
+	Vec2 downPos;
 
 	string arrowKey = "Arrow";
 

@@ -17,6 +17,12 @@ void cParticleManager::AddParticle(Vec2 pos, float size, int kind, float frameTi
 	m_particles.push_back(par);
 }
 
+void cParticleManager::AddEffect(Vec2 pos, float size, int count)
+{
+	cParticle* par = new cParticleAni(pos, size, true, count);
+	m_particles.push_back(par);
+}
+
 void cParticleManager::Update()
 {
 	for (auto iter : m_particles) iter->Update();

@@ -123,8 +123,7 @@ void cPlayer::Update(Vec2 bossPos)
 void cPlayer::Render()
 {
 	RENDER->CenterRender(BG[1], { WINSIZEX / 2, WINSIZEY / 2 });
-	//if (coloring_per < 80)
-		RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
+	RENDER->CenterRender(BG[0], { WINSIZEX / 2, WINSIZEY / 2 });
 	RENDER->CenterRender(player, m_pos, 0.2);
 
 	char t_hp[5] = "";
@@ -402,6 +401,21 @@ void cPlayer::Move()
 								DrawTempLine(VK_LEFT);
 								if (!drawStart) startDrawPos = m_pos + Vec2(2, 0);
 								drawStart = true;
+								int random = 25;
+								if (m_pos.x + 155 <= cellSize.right)
+								{
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 50] == 1)
+										random = 50;
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 100] == 1)
+										random = 100;
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 150] == 1)
+										random = 150;
+								}
+								PART->AddEffect(m_pos + Vec2(10 + rand() % 1 + rand() % random, 18 + rand() % 10), 1, 1);
+								PART->AddEffect(m_pos + Vec2(-16 + rand() % random, -10 + rand() % 10), 1, 2);
+								PART->AddEffect(m_pos + Vec2(-7 + rand() % random, 13 + rand() % 10), 1, 3);
+								PART->AddEffect(m_pos + Vec2(9 + rand() % random, -13 + rand() % 10), 1, 4);
+								PART->AddEffect(m_pos + Vec2(), 1, 0);
 							}
 						}
 					}
@@ -428,6 +442,21 @@ void cPlayer::Move()
 								DrawTempLine(VK_RIGHT);
 								if (!drawStart) startDrawPos = m_pos - Vec2(2, 0);
 								drawStart = true;
+								int random = 25;
+								if (m_pos.x + 155 >= cellSize.left)
+								{
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 50] == 1)
+										random = 50;
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 100] == 1)
+										random = 100;
+									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 150] == 1)
+										random = 150;
+								}
+								PART->AddEffect(m_pos + Vec2(10 - rand() % random, 18 + rand() % 10), 1, 1);
+								PART->AddEffect(m_pos + Vec2(-16 - rand() % random, -10 + rand() % 10), 1, 2);
+								PART->AddEffect(m_pos + Vec2(-7 - rand() % random, 13 + rand() % 10), 1, 3);
+								PART->AddEffect(m_pos + Vec2(9 - rand() % random, -13 + rand() % 10), 1, 4);
+								PART->AddEffect(m_pos + Vec2(), 1, 0);
 							}
 						}
 					}
@@ -454,6 +483,21 @@ void cPlayer::Move()
 								DrawTempLine(VK_UP);
 								if (!drawStart) startDrawPos = m_pos + Vec2(0, 2);
 								drawStart = true;
+								int random = 25;
+								if (m_pos.y + 155 <= cellSize.bottom )
+								{
+									if (SCENE->Array[(int)m_pos.y + 50][(int)m_pos.x] == 1)
+										random = 50;
+									if (SCENE->Array[(int)m_pos.y + 100][(int)m_pos.x] == 1)
+										random = 100;
+									if (SCENE->Array[(int)m_pos.y + 150][(int)m_pos.x] == 1)
+										random = 150;
+								}
+								PART->AddEffect(m_pos + Vec2(10 + rand() % 10, 18 + rand() % random), 1, 1);
+								PART->AddEffect(m_pos + Vec2(-16 + rand() % 10, -10 + rand() % random), 1, 2);
+								PART->AddEffect(m_pos + Vec2(-7 + rand() % 10, 13 + rand() % random), 1, 3);
+								PART->AddEffect(m_pos + Vec2(9 + rand() % 10, -13 + rand() % random), 1, 4);
+								PART->AddEffect(m_pos + Vec2(), 1, 0);
 							}
 						}
 					}
@@ -480,6 +524,21 @@ void cPlayer::Move()
 								DrawTempLine(VK_DOWN);
 								if (!drawStart) startDrawPos = m_pos - Vec2(0, 2);
 								drawStart = true;
+								int random = 25;
+								if (m_pos.y - 155 >= cellSize.top)
+								{
+									if (SCENE->Array[(int)m_pos.y - 50][(int)m_pos.x] == 1)
+										random = 50;
+									if (SCENE->Array[(int)m_pos.y - 100][(int)m_pos.x] == 1)
+										random = 100;
+									if (SCENE->Array[(int)m_pos.y - 150][(int)m_pos.x] == 1)
+										random = 150;
+								}
+								PART->AddEffect(m_pos + Vec2(10 + rand() % 10, 18 - rand() % random), 1, 1);
+								PART->AddEffect(m_pos + Vec2(-16 + rand() % 10, -10 - rand() % random), 1, 2);
+								PART->AddEffect(m_pos + Vec2(-7 + rand() % 10, 13 - rand() % random), 1, 3);
+								PART->AddEffect(m_pos + Vec2(9 + rand() % 10, -13 - rand() % random), 1, 4);
+								PART->AddEffect(m_pos + Vec2(), 1, 0);
 							}
 						}
 					}

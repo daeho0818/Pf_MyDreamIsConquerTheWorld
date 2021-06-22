@@ -8,8 +8,9 @@ public:
 	~cMouseManager();
 
 	// Image의 key값 넘겨주면 충돌 여부 반환
-	bool Collider(string key);
-	bool CBColl(RECT rc);
+	bool Collider(string key, Vec2 pos = Vec2(0, 0));
+
+	bool CBColl(RECT rc, Vec2 pos = Vec2(0, 0));
 
 	void Update();
 	void Render();

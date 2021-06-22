@@ -570,6 +570,8 @@ void cLoadingScene::AddResource()
 		IMAGE->AddImage("click_Guide", "Title/click_Guide");
 
 		IMAGE->AddImage("click_Quit", "Title/click_Quit");
+
+		IMAGE->AddImage("Effect", "Effect");
 		bundle++;
 		t_Delay = nullptr;
 		isLoaded = true;

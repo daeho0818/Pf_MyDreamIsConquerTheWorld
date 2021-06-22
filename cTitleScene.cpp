@@ -104,36 +104,42 @@ void cTitleScene::Update()
 		}
 	}
 
+	if (MOUSE->lDown)
+	{
+		downPos = Vec2(MOUSE->mousePos.x, MOUSE->mousePos.y);
+		MOUSE->lDown = false;
+	}
+
 	if (MOUSE->lUp)
 	{
 		if (!buttonsMoved && movedEnd)
 		{
-			if (MOUSE->Collider("start_button"))
+			if (MOUSE->Collider("start_button") && MOUSE->Collider("start_button", downPos))
 			{
 				if (!guideUI && !advenUI)
 					SCENE->ChangeScene("cSelectStageScene");
 			}
-			else if (MOUSE->Collider("guide_button"))
+			else if (MOUSE->Collider("guide_button") && MOUSE->Collider("guide_button", downPos))
 			{
 				if (!guideUI && !advenUI)
 					guideUI = true;
 			}
-			else if (MOUSE->Collider("adven_button"))
+			else if (MOUSE->Collider("adven_button") && MOUSE->Collider("adven_button", downPos))
 			{
 				DebugParam(L"%d", SCENE->a_rewards[0]);
 				if (!advenUI && !guideUI)
 					advenUI = true;
 			}
-			else if (MOUSE->Collider("develop_button"))
+			else if (MOUSE->Collider("develop_button") && MOUSE->Collider("develop_button", downPos))
 			{
 				// 개발 노트 내용
 			}
-			else if (MOUSE->Collider("quit_button"))
+			else if (MOUSE->Collider("quit_button") && MOUSE->Collider("quit_button", downPos))
 			{
 				PostQuitMessage(0);
 			}
 		}
-		if (MOUSE->Collider("guide_close"))
+		if (MOUSE->Collider("guide_close") && MOUSE->Collider("guide_close", downPos))
 		{
 			if (guideUI)
 			{
@@ -165,31 +171,30 @@ void cTitleScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(arrowKey), Vec2(500, 2100 - temp), 1.5);
 
 	MOUSE->Collider("start_button") ?
-		MOUSE->lStay ?
+		MOUSE->lStay && MOUSE->Collider("start_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Start"), Vec2(600, 250 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Start"), Vec2(600, 250 - temp)) :
 		tempFunc(0);
 
 	MOUSE->Collider("guide_button") ?
-		MOUSE->lStay ?
+		MOUSE->lStay && MOUSE->Collider("guide_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Guide"), Vec2(600, 650 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Guide"), Vec2(600, 650 - temp)) :
 		tempFunc(1);
-
 	MOUSE->Collider("adven_button") ?
-		MOUSE->lStay ?
+		MOUSE->lStay && MOUSE->Collider("adven_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Adven"), Vec2(600, 1050 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Adven"), Vec2(600, 1050 - temp)) :
 		tempFunc(2);
 
 	MOUSE->Collider("develop_button") ?
-		MOUSE->lStay ?
+		MOUSE->lStay && MOUSE->Collider("develop_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Develop"), Vec2(600, 1450 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Develop"), Vec2(600, 1450 - temp)) :
 		tempFunc(3);
 
 	MOUSE->Collider("quit_button") ?
-		MOUSE->lStay ?
+		MOUSE->lStay && MOUSE->Collider("quit_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Quit"), Vec2(600, 1850 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Quit"), Vec2(600, 1850 - temp)) :
 		tempFunc(4);
