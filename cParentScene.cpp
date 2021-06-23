@@ -502,14 +502,6 @@ void cParentScene::StageStart(Vec2* curPos_, Vec2* curPos, Vec2* targetPos, floa
 	D3DXVec2Lerp(curPos_, curPos, targetPos, speed);
 }
 
-void cParentScene::StageClear()
-{
-}
-
-void cParentScene::StageFail()
-{
-}
-
 void cParentScene::SetPercent(float percent)
 {
 	this->percent = percent;

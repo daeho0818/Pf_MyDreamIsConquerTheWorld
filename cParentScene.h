@@ -10,8 +10,6 @@ public:
 	virtual void Render();
 
 	virtual void StageStart(Vec2* curPos_, Vec2* curPos, Vec2* targetPos, float speed);
-	virtual void StageClear();
-	virtual void StageFail();
 
 	virtual void SetPercent(float percent);
 	virtual void SetScore(float score);

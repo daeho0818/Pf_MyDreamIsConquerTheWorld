@@ -36,7 +36,6 @@ void cMainGame::Render()
 
 void cMainGame::Release()
 {
-	cImageManager::ReleaseInstance();
 	cInputManager::ReleaseInstance();
 	cParticleManager::ReleaseInstance();
 	cRenderManager::ReleaseInstance();
@@ -45,6 +44,7 @@ void cMainGame::Release()
 	cSoundManager::ReleaseInstance();
 	cMouseManager::ReleaseInstance();
 	cButtonManager::ReleaseInstance();
+	cImageManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()
