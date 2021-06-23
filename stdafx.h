@@ -12,6 +12,7 @@
 #include <time.h>
 #include <math.h>
 #include <cstdarg>
+#include <thread>
 
 #define g_device DXUTGetD3D9Device()
 #define Delta DXUTGetElapsedTime()

@@ -30,6 +30,7 @@ public:
 	int speed;
 	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
 	int FadeCount;
+	int effectCount[4] = { 0, };
 
 	float coloring_per = 0;
 

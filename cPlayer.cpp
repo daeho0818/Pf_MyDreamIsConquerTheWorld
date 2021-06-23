@@ -28,7 +28,7 @@ void cPlayer::Init()
 	hp = 3;
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
-	speed = 15;
+	speed = 20;
 	coloring_per = 0;
 	FadeCount = 0;
 	drawStart = false;
@@ -114,7 +114,9 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (returning) Returning();
 
-	Move();
+	thread t1(&cPlayer::Move, this);
+	t1.join();
+	//Move();
 
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
@@ -392,31 +394,30 @@ void cPlayer::Move()
 					{
 						m_pos.x--;
 						if (Current() == 2 && m_pos != startDrawPos)
+						{
 							DrawLine();
+						}
+
 						else
 						{
 							ChkLine();
-							if (!Near(VK_LEFT, 3))
-							{
-								DrawTempLine(VK_LEFT);
-								if (!drawStart) startDrawPos = m_pos + Vec2(2, 0);
-								drawStart = true;
-								int random = 25;
-								if (m_pos.x + 155 <= cellSize.right)
-								{
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 50] == 1)
-										random = 50;
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 100] == 1)
-										random = 100;
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x + 150] == 1)
-										random = 150;
-								}
-								PART->AddEffect(m_pos + Vec2(10 + rand() % 1 + rand() % random, 18 + rand() % 10), 1, 1);
-								PART->AddEffect(m_pos + Vec2(-16 + rand() % random, -10 + rand() % 10), 1, 2);
-								PART->AddEffect(m_pos + Vec2(-7 + rand() % random, 13 + rand() % 10), 1, 3);
-								PART->AddEffect(m_pos + Vec2(9 + rand() % random, -13 + rand() % 10), 1, 4);
-								PART->AddEffect(m_pos + Vec2(), 1, 0);
-							}
+							//thread th(&cPlayer::DrawTempLine, this, VK_LEFT);
+							//th.join();
+							DrawTempLine(VK_LEFT);
+
+							if (!drawStart) startDrawPos = m_pos + Vec2(2, 0);
+							drawStart = true;
+
+							int random_x = 25;
+							int random_y = rand() % 4;
+							if (random_y == 0) random_y = -20;
+							if (random_y == 1) random_y = -10;
+							if (random_y == 2) random_y = 10;
+							if (random_y == 3) random_y = 20;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, effectCount[0]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, effectCount[0]++);
+							PART->AddEffect(m_pos + Vec2(), 1, 0);
 						}
 					}
 				}
@@ -433,31 +434,29 @@ void cPlayer::Move()
 					{
 						m_pos.x++;
 						if (Current() == 2 && m_pos != startDrawPos)
+						{
 							DrawLine();
+						}
 						else
 						{
 							ChkLine();
-							if (!Near(VK_RIGHT, 3))
-							{
-								DrawTempLine(VK_RIGHT);
-								if (!drawStart) startDrawPos = m_pos - Vec2(2, 0);
-								drawStart = true;
-								int random = 25;
-								if (m_pos.x + 155 >= cellSize.left)
-								{
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 50] == 1)
-										random = 50;
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 100] == 1)
-										random = 100;
-									if (SCENE->Array[(int)m_pos.y][(int)m_pos.x - 150] == 1)
-										random = 150;
-								}
-								PART->AddEffect(m_pos + Vec2(10 - rand() % random, 18 + rand() % 10), 1, 1);
-								PART->AddEffect(m_pos + Vec2(-16 - rand() % random, -10 + rand() % 10), 1, 2);
-								PART->AddEffect(m_pos + Vec2(-7 - rand() % random, 13 + rand() % 10), 1, 3);
-								PART->AddEffect(m_pos + Vec2(9 - rand() % random, -13 + rand() % 10), 1, 4);
-								PART->AddEffect(m_pos + Vec2(), 1, 0);
-							}
+							//thread th(&cPlayer::DrawTempLine, this, VK_RIGHT);
+							//th.join();
+							DrawTempLine(VK_RIGHT);
+
+							if (!drawStart) startDrawPos = m_pos - Vec2(2, 0);
+							drawStart = true;
+
+							int random_x = 25;
+							int random_y = rand() % 4;
+							if (random_y == 0) random_y = -20;
+							if (random_y == 1) random_y = -10;
+							if (random_y == 2) random_y = 10;
+							if (random_y == 3) random_y = 20;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, effectCount[1]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, effectCount[1]++);
+							PART->AddEffect(m_pos + Vec2(), 1, 0);
 						}
 					}
 				}
@@ -474,31 +473,29 @@ void cPlayer::Move()
 					{
 						m_pos.y--;
 						if (Current() == 2 && m_pos != startDrawPos)
+						{
 							DrawLine();
+						}
 						else
 						{
 							ChkLine();
-							if (!Near(VK_UP, 3))
-							{
-								DrawTempLine(VK_UP);
-								if (!drawStart) startDrawPos = m_pos + Vec2(0, 2);
-								drawStart = true;
-								int random = 25;
-								if (m_pos.y + 155 <= cellSize.bottom )
-								{
-									if (SCENE->Array[(int)m_pos.y + 50][(int)m_pos.x] == 1)
-										random = 50;
-									if (SCENE->Array[(int)m_pos.y + 100][(int)m_pos.x] == 1)
-										random = 100;
-									if (SCENE->Array[(int)m_pos.y + 150][(int)m_pos.x] == 1)
-										random = 150;
-								}
-								PART->AddEffect(m_pos + Vec2(10 + rand() % 10, 18 + rand() % random), 1, 1);
-								PART->AddEffect(m_pos + Vec2(-16 + rand() % 10, -10 + rand() % random), 1, 2);
-								PART->AddEffect(m_pos + Vec2(-7 + rand() % 10, 13 + rand() % random), 1, 3);
-								PART->AddEffect(m_pos + Vec2(9 + rand() % 10, -13 + rand() % random), 1, 4);
-								PART->AddEffect(m_pos + Vec2(), 1, 0);
-							}
+							//thread th(&cPlayer::DrawTempLine, this, VK_UP);
+							//th.join();
+							DrawTempLine(VK_UP);
+
+							if (!drawStart) startDrawPos = m_pos + Vec2(0, 2);
+							drawStart = true;
+
+							int random_y = 25;
+							int random_x = rand() % 4;
+							if (random_x == 0) random_x = -20;
+							if (random_x == 1) random_x = -10;
+							if (random_x == 2) random_x = 10;
+							if (random_x == 3) random_x = 20;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, effectCount[2]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, effectCount[2]++);
+							PART->AddEffect(m_pos + Vec2(), 1, 0);
 						}
 					}
 				}
@@ -515,36 +512,39 @@ void cPlayer::Move()
 					{
 						m_pos.y++;
 						if (Current() == 2 && m_pos != startDrawPos)
+						{
 							DrawLine();
+						}
+
 						else
 						{
 							ChkLine();
-							if (!Near(VK_DOWN, 3))
-							{
-								DrawTempLine(VK_DOWN);
-								if (!drawStart) startDrawPos = m_pos - Vec2(0, 2);
-								drawStart = true;
-								int random = 25;
-								if (m_pos.y - 155 >= cellSize.top)
-								{
-									if (SCENE->Array[(int)m_pos.y - 50][(int)m_pos.x] == 1)
-										random = 50;
-									if (SCENE->Array[(int)m_pos.y - 100][(int)m_pos.x] == 1)
-										random = 100;
-									if (SCENE->Array[(int)m_pos.y - 150][(int)m_pos.x] == 1)
-										random = 150;
-								}
-								PART->AddEffect(m_pos + Vec2(10 + rand() % 10, 18 - rand() % random), 1, 1);
-								PART->AddEffect(m_pos + Vec2(-16 + rand() % 10, -10 - rand() % random), 1, 2);
-								PART->AddEffect(m_pos + Vec2(-7 + rand() % 10, 13 - rand() % random), 1, 3);
-								PART->AddEffect(m_pos + Vec2(9 + rand() % 10, -13 - rand() % random), 1, 4);
-								PART->AddEffect(m_pos + Vec2(), 1, 0);
-							}
+							//thread th(&cPlayer::DrawTempLine, this, VK_DOWN);
+							//th.join();
+							DrawTempLine(VK_DOWN);
+
+							if (!drawStart) startDrawPos = m_pos - Vec2(0, 2);
+							drawStart = true;
+
+							int random_y = 25;
+							int random_x = rand() % 4;
+							if (random_x == 0) random_x = -20;
+							if (random_x == 1) random_x = -10;
+							if (random_x == 2) random_x = 10;
+							if (random_x == 3) random_x = 20;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, effectCount[3]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, effectCount[3]++);
+							PART->AddEffect(m_pos + Vec2(), 1, 0);
 						}
 					}
 				}
 			}
 		}
+		if (!left) { effectCount[0] = 0; }
+		if (!right) { effectCount[1] = 0; }
+		if (!up) { effectCount[2] = 0; }
+		if (!down) { effectCount[3] = 0; }
 	}
 }
 
@@ -562,71 +562,74 @@ void cPlayer::Returning(bool isReturned)
 	for (int i = 0; i < speed; i++)
 	{
 		D3DXCOLOR targetPixel;
-		if (Near(VK_LEFT, 1))
+		for (int i = 0; i < 2; i++)
 		{
-			targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
-			textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
+			if (Near(VK_LEFT, 1))
+			{
+				targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
+				textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
-			textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
-			m_pos.x--;
-		}
-		else if (Near(VK_RIGHT, 1))
-		{
-			targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
-			textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
+				targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
+				textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
+				m_pos.x--;
+			}
+			else if (Near(VK_RIGHT, 1))
+			{
+				targetPixel = imgColor[(int)m_pos.y - 1][(int)m_pos.x];
+				textureColor[int(m_pos.y - 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y - 1)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
-			textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
-			m_pos.x++;
-		}
-		else if (Near(VK_DOWN, 1))
-		{
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
+				targetPixel = imgColor[(int)m_pos.y + 1][(int)m_pos.x];
+				textureColor[int(m_pos.y + 1) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y + 1)][int(m_pos.x)] = 0;
+				m_pos.x++;
+			}
+			else if (Near(VK_DOWN, 1))
+			{
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
-			m_pos.y++;
-		}
-		else if (Near(VK_UP, 1))
-		{
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
+				m_pos.y++;
+			}
+			else if (Near(VK_UP, 1))
+			{
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x - 1];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x - 1)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x - 1)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x)] = 0;
 
-			targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
-			textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
-			SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
-			m_pos.y--;
-		}
-		else
-		{
-			draw_line = false;
-			returning = false;
-			m_pos = startDrawPos;
+				targetPixel = imgColor[(int)m_pos.y][(int)m_pos.x + 1];
+				textureColor[int(m_pos.y) * WINSIZEX + int(m_pos.x + 1)] = targetPixel;
+				SCENE->Array[int(m_pos.y)][int(m_pos.x + 1)] = 0;
+				m_pos.y--;
+			}
+			else
+			{
+				draw_line = false;
+				returning = false;
+				m_pos = startDrawPos;
+			}
 		}
 	}
 	BG[0]->ptr->UnlockRect(0);

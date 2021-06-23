@@ -36,24 +36,26 @@ void cParticleAni::Update()
 	}
 	else
 	{
-		if (count == 1)
-		{
-			RenderSize = 0.5f;
-		}
-		else if (count == 2)
-		{
-			RenderSize = 0.3f;
-		}
-		else if (count == 3)
-		{
-			RenderSize = 0.2f;
-		}
-		else if (count == 4)
+		RenderSize = 0.7;
+		if (count <= 50)
 		{
 			RenderSize = 0.7f;
 		}
+		else if (count <= 100)
+		{
+			RenderSize = 0.5f;
+		}
+		else if (count <= 150)
+		{
+			RenderSize = 0.3f;
+		}
+		else
+		{
+			RenderSize = 0.1f;
+		}
+		RenderSize -= 0.1;
 		if (m_ani == nullptr)
-			m_ani = new cTimer(0.1f, [&]()->void {isDestroy = true; m_ani = nullptr; });
+			m_ani = new cTimer(0.3f, [&]()->void {isDestroy = true; m_ani = nullptr; });
 	}
 }
 
