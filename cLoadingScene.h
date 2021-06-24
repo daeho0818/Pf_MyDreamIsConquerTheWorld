@@ -6,10 +6,8 @@ public:
 	cLoadingScene();
 	~cLoadingScene();
 
+	bool isLoadStart = false;
 	bool isLoaded = false;
-	int bundle = 0;
-
-	cTimer* t_Delay = nullptr;
 
 	// cScene을(를) 통해 상속됨
 	virtual void Init() override;

@@ -23,11 +23,15 @@ void cMainGame::Update()
 	PART->Update();
 	SCENE->Update();
 	SOUND->Update();
+	THREAD->Update();
 }
 
 void cMainGame::Render()
 {
-	SCENE->Render();
+	thread th([=]()->void {SCENE->Render(); });
+	th.join();
+
+	//SCENE->Render();
 	PART->Render();
 	UI->Begin();
 	SCENE->UIRender();
@@ -45,6 +49,7 @@ void cMainGame::Release()
 	cMouseManager::ReleaseInstance();
 	cButtonManager::ReleaseInstance();
 	cImageManager::ReleaseInstance();
+	cThreadManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()

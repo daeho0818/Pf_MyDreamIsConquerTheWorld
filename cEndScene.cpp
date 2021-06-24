@@ -7,6 +7,11 @@ cEndScene::cEndScene()
 
 cEndScene::~cEndScene()
 {
+	for (auto iter : BUTTON->m_buttons)
+	{
+		SAFE_DELETE(iter);
+	}
+	BUTTON->m_buttons.clear();
 }
 
 void cEndScene::Init()

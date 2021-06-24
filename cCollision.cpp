@@ -24,7 +24,7 @@ void cCollision::MPColl()
 	{
 		if ((*iter))
 		{
-			if (250 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+			if (100 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 			{
 				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{

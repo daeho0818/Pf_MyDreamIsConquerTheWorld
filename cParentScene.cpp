@@ -12,6 +12,12 @@ cParentScene::~cParentScene()
 	SAFE_DELETE(t_Clear);
 	SAFE_DELETE(t_Over);
 	SAFE_DELETE(t_Delay);
+
+	for (auto iter : BUTTON->m_buttons)
+	{
+		SAFE_DELETE(iter);
+	}
+	BUTTON->m_buttons.clear();
 }
 
 void cParentScene::Init(string curScene)

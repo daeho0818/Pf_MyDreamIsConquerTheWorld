@@ -108,7 +108,6 @@ void cSelectStageScene::Update()
 void cSelectStageScene::Render()
 {
 	RENDER->CenterRender(IMAGE->FindImage("WorldMap"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
-	//RENDER->CenterRender(IMAGE->FindImage("WorldEmblem"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 800), 0.5);
 
 	RENDER->CenterRender(IMAGE->FindImage("church_lock"), Vec2(3100, 300), 0.6);
 	RENDER->CenterRender(IMAGE->FindImage("church_button"), Vec2(3100, 600), 0.6);
@@ -152,6 +151,11 @@ void cSelectStageScene::UIRender()
 
 void cSelectStageScene::Release()
 {
+	for (auto iter : BUTTON->m_buttons)
+	{
+		SAFE_DELETE(iter);
+	}
+	BUTTON->m_buttons.clear();
 }
 
 void cSelectStageScene::StageInfo(Stage stage)

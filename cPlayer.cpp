@@ -116,10 +116,8 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (returning) Returning();
 
-	thread t1(&cPlayer::Move, this);
-	t1.join();
-	//Move();
-	
+	Move();
+
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
 }

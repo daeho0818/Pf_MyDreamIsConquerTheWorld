@@ -136,7 +136,8 @@ void cTitleScene::Update()
 			}
 			else if (MOUSE->Collider("quit_button") && MOUSE->Collider("quit_button", downPos))
 			{
-				PostQuitMessage(0);
+				if (!advenUI && !guideUI)
+					PostQuitMessage(0);
 			}
 		}
 		if (MOUSE->Collider("guide_close") && MOUSE->Collider("guide_close", downPos))
@@ -157,7 +158,8 @@ void cTitleScene::Update()
 		}
 		if (MOUSE->Collider("Arrow") && !buttonsMoved)
 		{
-			buttonsMoved = true;
+			if (!guideUI && !advenUI)
+				buttonsMoved = true;
 		}
 	}
 }
@@ -181,6 +183,7 @@ void cTitleScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("click_Guide"), Vec2(600, 650 - temp)) :
 		RENDER->CenterRender(IMAGE->FindImage("over_Guide"), Vec2(600, 650 - temp)) :
 		tempFunc(1);
+
 	MOUSE->Collider("adven_button") ?
 		MOUSE->lStay && MOUSE->Collider("adven_button", downPos) ?
 		RENDER->CenterRender(IMAGE->FindImage("click_Adven"), Vec2(600, 1050 - temp)) :

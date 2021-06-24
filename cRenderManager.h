@@ -20,7 +20,7 @@ public:
 	Vec3 camPos, camLook, camUp, projPos;
 	D3DXMATRIXA16 matView, matProj;
 
-	void CenterRender(cTexture* ptr, Vec2 pos, float size = 1, float rot = 0);
+	void CenterRender(cTexture* ptr, Vec2 pos, float size = 1, float rot = 0, bool flip_x = false, bool flip_y = false);
 };
 
 #define RENDER cRenderManager::GetInstance()

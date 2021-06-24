@@ -28,7 +28,7 @@ cRenderManager::cRenderManager()
 	g_device->SetStreamSource(0, m_vb, 0, sizeof(VertexType));
 	g_device->SetFVF(VertexType::FVF);
 	g_device->SetIndices(m_ib);
-	
+
 	g_device->SetRenderState(D3DRS_LIGHTING, FALSE);
 	g_device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	g_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
@@ -52,11 +52,18 @@ cRenderManager::~cRenderManager()
 	m_vb->Release();
 }
 
-void cRenderManager::CenterRender(cTexture* ptr, Vec2 pos, float size, float rot)
+void cRenderManager::CenterRender(cTexture* ptr, Vec2 pos, float size, float rot, bool flip_x, bool flip_y)
 {
 	D3DXMATRIXA16 matScale, matRot, matPos, matWorld;
 	D3DXMatrixTranslation(&matPos, pos.x - WINSIZEX / 2, -(pos.y - WINSIZEY / 2), 0);
-    D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
+	if (flip_x)
+		D3DXMatrixScaling(&matScale, ptr->info.Width * size * -1, ptr->info.Height * size, 1);
+	else
+		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
+	if(flip_y)
+		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size * -1, 1);
+	else
+		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
 	D3DXMatrixRotationZ(&matRot, rot);
 	matWorld = matScale * matRot * matPos;
 
