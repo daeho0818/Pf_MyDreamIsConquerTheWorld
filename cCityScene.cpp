@@ -36,7 +36,7 @@ void cCityScene::Init()
 	IMAGE->AddImage("city_High", "Ingame/City/high");
 	IMAGE->AddImage("city_Under", "Ingame/City/under");
 	cTexture* ptr[2] = { IMAGE->FindImage("city_High"), IMAGE->FindImage("city_Under") };
-	BG = ptr[1];
+	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cCityScene");

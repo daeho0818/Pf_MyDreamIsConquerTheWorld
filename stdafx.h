@@ -46,6 +46,7 @@ static bool isWindowed = false;
 #include "cMouseManager.h"
 #include "cButtonManager.h"
 #include "cThreadManager.h"
+#include "cBGManager.h"
 
 #ifdef _DEBUG
 #define new new (_NORMAL_BLOCK, __FILE__, __LINE__)

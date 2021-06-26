@@ -28,11 +28,10 @@ void cMainGame::Update()
 
 void cMainGame::Render()
 {
-	thread th([=]()->void {SCENE->Render(); });
-	th.join();
-
-	//SCENE->Render();
+	if (!BG->isLoadScene)
+		BG->Render();
 	PART->Render();
+	SCENE->Render();
 	UI->Begin();
 	SCENE->UIRender();
 	UI->End();
@@ -50,6 +49,7 @@ void cMainGame::Release()
 	cButtonManager::ReleaseInstance();
 	cImageManager::ReleaseInstance();
 	cThreadManager::ReleaseInstance();
+	cBGManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()

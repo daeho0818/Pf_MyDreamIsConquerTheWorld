@@ -10,7 +10,6 @@ public:
 	Vec2 startDrawPos;
 
 	cTexture* player;
-	cTexture* BG[2];
 
 	string itemName;
 

@@ -37,7 +37,7 @@ void cJungleScene::Init()
 	IMAGE->AddImage("jungle_High", "Ingame/Jungle/high");
 	IMAGE->AddImage("jungle_Under", "Ingame/Jungle/under");
 	cTexture* ptr[2] = {IMAGE->FindImage("jungle_High"), IMAGE->FindImage("jungle_Under") };
-	BG = ptr[1];
+	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cJungleScene");

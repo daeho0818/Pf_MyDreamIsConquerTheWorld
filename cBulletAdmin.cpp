@@ -13,7 +13,32 @@ cBulletAdmin::~cBulletAdmin()
 
 void cBulletAdmin::Update()
 {
-	for (auto iter : m_bullets) iter->Update();
+	int random[2] = {rand() % 2, rand() % 2};
+
+	int random_x = 0, random_y = 0;
+
+	if (random[0] == 0)
+	{
+		random_x = rand() % -20;
+	}
+	else if (random[0] == 1)
+	{
+		random_x = rand() % 20;
+	}
+	if (random[1] == 0)
+	{
+		random_y = rand() % -20;
+	}
+	else if (random[1] == 1)
+	{
+		random_y = rand() % 20;
+	}
+
+	for (auto iter : m_bullets)
+	{
+		iter->Update();
+		PART->AddEffect(Vec2(iter->m_pos.x + random_x, iter->m_pos.y + random_y), 1, 100);
+	}
 	IsOut();
 	IsDestroy();
 }

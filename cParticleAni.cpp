@@ -36,22 +36,22 @@ void cParticleAni::Update()
 	}
 	else
 	{
-		RenderSize = 0.7;
+		RenderSize = 1.7f;
 		if (count <= 50)
 		{
-			RenderSize = 0.7f;
+			RenderSize = 1;
 		}
 		else if (count <= 100)
 		{
-			RenderSize = 0.5f;
+			RenderSize = 0.7f;
 		}
 		else if (count <= 150)
 		{
-			RenderSize = 0.3f;
+			RenderSize = 0.5f;
 		}
 		else
 		{
-			RenderSize = 0.1f;
+			RenderSize = 1.7f;
 		}
 		RenderSize -= 0.1;
 		if (m_ani == nullptr)

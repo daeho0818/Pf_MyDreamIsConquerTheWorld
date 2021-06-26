@@ -39,12 +39,19 @@ void cLoadingScene::Init()
 void cLoadingScene::Update()
 {
 	if (isLoaded)
+	{
+		//THREAD->ReleaseThread("AddResource");
 		SCENE->ChangeScene("cTitleScene");
+		BG->isLoadScene = false;
+		BG->ptr[0] = IMAGE->FindImage("player");
+		BG->ptr[1] = IMAGE->FindImage("player");
+	}
 
 	if (!isLoadStart)
 	{
 		isLoadStart = true;
-		THREAD->AddThread("AddResource", [&]()->void { AddResource(); });
+		//THREAD->AddThread("AddResource", [&]()->void { AddResource(); });
+		AddResource();
 
 		SCENE->AddScene("cTitleScene", new cTitleScene);
 		SCENE->AddScene("cSelectStageScene", new cSelectStageScene);
@@ -70,7 +77,6 @@ void cLoadingScene::UIRender()
 
 void cLoadingScene::Release()
 {
-	THREAD->ReleaseThread("AddResource");
 }
 
 

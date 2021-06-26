@@ -20,6 +20,13 @@ void cThreadManager::Update()
 
 void cThreadManager::AddThread(string str, function<void()> func)
 {
+	//auto find = th.find(str);
+	//if (find != th.end())
+	//{
+	//	find->second.join();
+	//	find = th.erase(find);
+	//}
+
 	th.insert(make_pair(str, func));
 }
 

@@ -388,6 +388,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cBGManager.cpp" />
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cButton.cpp" />
@@ -454,6 +455,7 @@
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp" />
     <ClCompile Include="cParentScene.cpp" />
     <ClCompile Include="singleton.cpp" />
+    <ClInclude Include="cBGManager.h" />
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cButton.h" />

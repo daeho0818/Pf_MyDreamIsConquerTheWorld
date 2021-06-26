@@ -46,7 +46,7 @@ public:
 	cTimer* t_Over = nullptr;
 	cTimer* t_Delay = nullptr;
 
-	cTexture* BG = nullptr;
+	cTexture* t_BG = nullptr;
 
 	Vec2 textsPos[7];
 };

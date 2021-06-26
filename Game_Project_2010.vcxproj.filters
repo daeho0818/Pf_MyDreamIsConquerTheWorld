@@ -8,10 +8,6 @@
     <Filter Include="DXUT">
       <UniqueIdentifier>{a43c5c25-0e86-4a20-b64a-883785ff74fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{2c3d4c8c-5d1a-459a-a05a-a4e4b608a44e}</UniqueIdentifier>
-      <Extensions>fx;fxh;hlsl</Extensions>
-    </Filter>
     <Filter Include="1. MainGame">
       <UniqueIdentifier>{59dfb187-9307-4cd5-902c-ab9d360e9c06}</UniqueIdentifier>
     </Filter>
@@ -224,6 +220,9 @@
     </Filter>
     <Filter Include="2. Manager\Thread">
       <UniqueIdentifier>{6ab747f3-b8b6-45d5-8498-a333d8b9a1c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Manager\BG">
+      <UniqueIdentifier>{6bf31f77-2fab-4f36-a2a1-a9b81072d34e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +483,9 @@
     <ClCompile Include="cThreadManager.cpp">
       <Filter>2. Manager\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="cBGManager.cpp">
+      <Filter>2. Manager\BG</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -683,6 +685,9 @@
     </ClInclude>
     <ClInclude Include="cThreadManager.h">
       <Filter>2. Manager\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="cBGManager.h">
+      <Filter>2. Manager\BG</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

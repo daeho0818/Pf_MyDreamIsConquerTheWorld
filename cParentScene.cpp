@@ -330,7 +330,7 @@ void cParentScene::Update()
 void cParentScene::Render()
 {
 	if (isClear)
-		RENDER->CenterRender(BG, Vec2(WINSIZEX / 2, WINSIZEY / 2)); 
+		RENDER->CenterRender(t_BG, Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	RENDER->CenterRender(IMAGE->FindImage("IngameBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	switch (hp)
 	{

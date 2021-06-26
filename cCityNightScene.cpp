@@ -37,7 +37,7 @@ void cCityNightScene::Init()
 	IMAGE->AddImage("city(night)_High", "Ingame/City(night)/high");
 	IMAGE->AddImage("city(night)_Under", "Ingame/City(night)/under");
 	cTexture* ptr[2] = {IMAGE->FindImage("city(night)_High"), IMAGE->FindImage("city(night)_Under") };
-	BG = ptr[1];
+	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cCityNightScene");

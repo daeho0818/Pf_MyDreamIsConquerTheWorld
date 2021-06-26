@@ -56,14 +56,7 @@ void cRenderManager::CenterRender(cTexture* ptr, Vec2 pos, float size, float rot
 {
 	D3DXMATRIXA16 matScale, matRot, matPos, matWorld;
 	D3DXMatrixTranslation(&matPos, pos.x - WINSIZEX / 2, -(pos.y - WINSIZEY / 2), 0);
-	if (flip_x)
-		D3DXMatrixScaling(&matScale, ptr->info.Width * size * -1, ptr->info.Height * size, 1);
-	else
-		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
-	if(flip_y)
-		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size * -1, 1);
-	else
-		D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
+	D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
 	D3DXMatrixRotationZ(&matRot, rot);
 	matWorld = matScale * matRot * matPos;
 
