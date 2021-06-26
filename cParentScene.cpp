@@ -379,7 +379,7 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3500, 250), 1.2);
 	sprintf(key, "%d", (int)percent % 10);
 	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3600, 250), 1.2);
-	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3700, 250), 1.2);
+	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3750, 250), 1.2);
 
 	char time[5] = "";
 	sprintf(time, "%d", timer / 60);
