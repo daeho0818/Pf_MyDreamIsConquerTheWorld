@@ -40,5 +40,5 @@ void cInputManager::SetMousePos()
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(DXUTGetHWND(), &pt);
-	MOUSE->mousePos = pt;
+	MOUSE->mousePos = Vec2(pt.x, pt.y);
 }

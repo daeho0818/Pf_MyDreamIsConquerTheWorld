@@ -21,33 +21,6 @@ cJungleBoss::~cJungleBoss()
 	SAFE_DELETE(m_Ani);
 }
 
-void cJungleBoss::CircleBullet(float interval, bool random)
-{
-	float angle = 0;
-	float rad = D3DX_PI * 2 / 25;
-
-	for (int i = 0; i < 365; i++, angle += rad)
-	{
-		if (random)
-		{
-			if (i == rand() % 365)
-			{
-				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
-				direction = direction - m_pos;
-				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-			}
-		}
-		else
-		{
-			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
-			direction = direction - m_pos;
-			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-		}
-	}
-}
-
 void cJungleBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
@@ -66,8 +39,8 @@ void cJungleBoss::Update()
 		{
 			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.05, [&]()->void {
 				isStop = true;
-				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, -1), IMAGE->FindImage("bullet_enemy"), m_damage, 0.1, 400, true));
-				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(1, -1), IMAGE->FindImage("bullet_enemy"), m_damage, 0.1, 400, true));
+				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, -1), "bullet_jungle_boss","jungle_boss_effect", m_damage, 0.5, 400, true));
+				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(1, -1), "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});

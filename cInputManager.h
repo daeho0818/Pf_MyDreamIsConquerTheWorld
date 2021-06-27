@@ -5,6 +5,8 @@ class cInputManager
 {
 	bool nowkey[256];
 	bool oldkey[256];
+
+	void SetMousePos();
 public:
 	cInputManager();
 	~cInputManager();
@@ -13,8 +15,6 @@ public:
 	bool KeyPress(int key);
 	bool KeyDown(int key);
 	bool KeyUp(int key);
-
-	void SetMousePos();
 };
 
 #define INPUT cInputManager::GetInstance()

@@ -20,33 +20,6 @@ cDesertBoss1::~cDesertBoss1()
 	SAFE_DELETE(m_Ani);
 }
 
-void cDesertBoss1::CircleBullet(float interval, bool random)
-{
-	float angle = 0;
-	float rad = D3DX_PI * 2 / 25;
-
-	for (int i = 0; i < 365; i++, angle += rad)
-	{
-		if (random)
-		{
-			if (i == rand() % 365)
-			{
-				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
-				direction = direction - m_pos;
-				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-			}
-		}
-		else
-		{
-			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
-			direction = direction - m_pos;
-			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-		}
-	}
-}
-
 void cDesertBoss1::Update()
 {
 	if (m_Ani == nullptr)
@@ -68,22 +41,20 @@ void cDesertBoss1::Update()
 			{
 				dir = Vec2(-1, -1);
 				if (i != 0) dir = Vec2(-1 * i / 10, -1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
 				dir = Vec2(-1, 1);
 				if (i != 0) dir = Vec2(-1 * i / 10, 1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
 				dir = Vec2(1, -1);
 				if (i != 0) dir = Vec2(1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
 				dir = Vec2(-1, -1);
 				if (i != 0) dir = Vec2(-1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
 			}
 			t_Pattern1 = nullptr;
 			});
 	}
-
-	if (isStop) { CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

@@ -100,10 +100,12 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
         break;
     case WM_LBUTTONDOWN:
         MOUSE->LButtonDown();
+        MOUSE->lDownPos = Vec2(MOUSE->mousePos.x, MOUSE->mousePos.y);
         MOUSE->lStay = true;
         break;
     case WM_LBUTTONUP:
         MOUSE->LButtonUp();
+        MOUSE->lUpPos = Vec2(MOUSE->mousePos.x, MOUSE->mousePos.y);
         MOUSE->lStay = false;
         break;
     }

@@ -56,11 +56,11 @@ void cParentScene::Init(string curScene)
 	t_Over = nullptr;
 	t_Delay = nullptr;
 
-	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540), "ingameB");
+	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 
-	BUTTON->AddButton("stop_back", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 300), "stopB");
-	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 400) + 400), "stopB");
-	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 500) + 800), "stopB");
+	BUTTON->AddButton("stop_back", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 300));
+	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 400) + 400));
+	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 500) + 800));
 }
 
 void cParentScene::Update()
@@ -264,27 +264,27 @@ void cParentScene::Update()
 	}
 	if (MOUSE->lDown)
 	{
-		if (MOUSE->Collider("CFnext") && (isClearEnd || isFailEnd))
+		if (MOUSE->LButtonClick("CFnext") && (isClearEnd || isFailEnd))
 		{
 			SCENE->ChangeScene("cEndScene");
 		}
 
 		if (isStop)
 		{
-			if (MOUSE->Collider("stop_back"))
+			if (MOUSE->LButtonClick("stop_back"))
 			{
 				isStop = false;
 				MOUSE->lDown = false;
 			}
 
-			if (MOUSE->Collider("stop_restart"))
+			if (MOUSE->LButtonClick("stop_restart"))
 			{
 				SCENE->ChangeScene(SCENE->curScene);
 				isStop = false;
 				MOUSE->lDown = false;
 			}
 
-			if (MOUSE->Collider("stop_worldmap"))
+			if (MOUSE->LButtonClick("stop_worldmap"))
 			{
 				SCENE->ChangeScene("cSelectStageScene");
 				isStop = false;
@@ -307,23 +307,6 @@ void cParentScene::Update()
 					});
 			}
 		}
-		//if (!isStart && !isStop)
-		//	StageStart(&textPos[textCount - 1][0], &textPos[textCount - 1][0], &textPos[textCount - 1][1], 0.1);
-
-		//if (t_TextAni == nullptr)
-		//{
-		//	if (textCount < 6)
-		//	{
-		//		float time = 0;
-		//		if (textCount == 1) time = 1;
-		//		t_TextAni = new cTimer(1 + time, [&]()->void {
-		//			t_TextAni = nullptr;
-		//			if (!isStop)
-		//				textCount++;
-		//			if (textCount == 6) isStart = true;
-		//			});
-		//	}
-		//}
 	}
 }
 

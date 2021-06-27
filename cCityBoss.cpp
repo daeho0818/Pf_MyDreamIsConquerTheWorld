@@ -34,7 +34,7 @@ void cCityBoss::CircleBullet(float interval, Vec2 pos)
 		Vec2 direction = Vec2(pos.x + (cosf(angle) * (5 + interval)), pos.y + (sinf(angle) * (5 + interval)));
 		direction = direction - pos;
 		D3DXVec2Normalize(&direction, &direction);
-		m_bullets.push_back(new cMBullet(pos, direction, m_damage, 0.1, 400));
+		m_bullets.push_back(new cMBullet(pos, direction, "bullet_city_boss", "city_boss_effect", m_damage, 0.5, 400));
 	}
 }
 
@@ -58,22 +58,22 @@ void cCityBoss::Update()
 		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(7, [&]()->void {
 			Vec2 dir = Vec2(0, 0) - m_pos;
 			D3DXVec2Normalize(&dir, &dir);
-			m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+			m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_city_boss", "city_boss_effect", m_damage, 0.5, 400));
 			bullets[0] = m_bullets.back();
 
 			dir = Vec2(WINSIZEX, 0) - m_pos;
 			D3DXVec2Normalize(&dir, &dir);
-			m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+			m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_city_boss", "city_boss_effect", m_damage, 0.5, 400));
 			bullets[1] = m_bullets.back();
 
 			dir = Vec2(0, WINSIZEY) - m_pos;
 			D3DXVec2Normalize(&dir, &dir);
-			m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+			m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_city_boss", "city_boss_effect", m_damage, 0.5, 400));
 			bullets[2] = m_bullets.back();
 
 			dir = Vec2(WINSIZEX, WINSIZEY) - m_pos;
 			D3DXVec2Normalize(&dir, &dir);
-			m_bullets.push_back(new cMBullet(m_pos, dir, m_damage, 0.1, 400));
+			m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_city_boss", "city_boss_effect", m_damage, 0.5, 400));
 			bullets[3] = m_bullets.back();
 
 			p1Count++;

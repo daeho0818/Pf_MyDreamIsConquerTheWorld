@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cButton.h"
 
-cButton::cButton(cTexture* ptr, Vec2 pos, string tag, float size)
-	:m_ptr(ptr), m_pos(pos), m_tag(tag), m_size(size)
+cButton::cButton(cTexture* ptr, Vec2 pos, float size)
+	:m_ptr(ptr), m_pos(pos), m_size(size)
 {
 	Init();
 }

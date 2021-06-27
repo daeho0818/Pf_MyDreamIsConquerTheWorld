@@ -17,10 +17,14 @@ public:
 	void LButtonDown();
 	void LButtonUp();
 
+	bool LButtonClick(string key);
+
 	bool render = false; Vec2 temp;
 	bool lUp = false, lDown = false, rUp = false, rDown = false;
 	bool lStay = false, rStay = false;
-	POINT mousePos;
+
+	Vec2 mousePos;
+	Vec2 lDownPos = { 0, 0 }, lUpPos = { 0, 0 };
 
 	cTimer* AS = nullptr;
 };

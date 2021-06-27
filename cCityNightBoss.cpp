@@ -20,33 +20,6 @@ cCityNightBoss::~cCityNightBoss()
 	SAFE_DELETE(m_Ani);
 }
 
-void cCityNightBoss::CircleBullet(float interval, bool random)
-{
-	float angle = 0;
-	float rad = D3DX_PI * 2 / 25;
-
-	for (int i = 0; i < 365; i++, angle += rad)
-	{
-		if (random)
-		{
-			if (i == rand() % 365)
-			{
-				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
-				direction = direction - m_pos;
-				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-			}
-		}
-		else
-		{
-			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
-			direction = direction - m_pos;
-			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-		}
-	}
-}
-
 void cCityNightBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
@@ -71,9 +44,7 @@ void cCityNightBoss::Update()
 	Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5)), m_pos.y + (sinf(angle) * (5)));
 	direction = direction - m_pos;
 	D3DXVec2Normalize(&direction, &direction);
-	m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 2500));
-
-	if (isStop) { CircleBullet(0, true); }
+	m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_city(night)_boss", "city(night)_boss_effect", m_damage, 0.4, 2500));
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

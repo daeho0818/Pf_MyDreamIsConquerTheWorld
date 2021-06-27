@@ -1,16 +1,13 @@
 #include "DXUT.h"
 #include "cParticleAni.h"
 
-cParticleAni::cParticleAni(Vec2 pos, float size, bool effect, int count, int kind, float frameTime)
-	:cParticle(pos, size, effect, kind, frameTime), count(count)
+cParticleAni::cParticleAni(Vec2 pos, float size, bool effect, string imgName, int count, float frameTime)
+	:cParticle(pos, size, effect, frameTime), count(count), imgName(imgName)
 {
 	FrameTime = frameTime;
-	if (kind == 0)
-		m_images = IMAGE->MakeVecImg("Effect");
-	else if (kind == 1)
-		m_images = IMAGE->MakeVecImg("Effect");
-	else if (kind == 2)
-		m_images = IMAGE->MakeVecImg("Effect");
+
+	m_images = IMAGE->MakeVecImg(imgName);
+
 	isDestroy = false;
 }
 
@@ -37,6 +34,7 @@ void cParticleAni::Update()
 	else
 	{
 		RenderSize = 1.7f;
+
 		if (count <= 50)
 		{
 			RenderSize = 1;
@@ -62,10 +60,10 @@ void cParticleAni::Update()
 void cParticleAni::Render()
 {
 	if (!effect)
-		RENDER->CenterRender(IMAGE->FindImage("Effect"), m_pos, RenderSize);
-	//RENDER->CenterRender(m_images[m_frame], m_pos, RenderSize);
+		RENDER->CenterRender(m_images[m_frame], m_pos, RenderSize);
+
 	else
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Effect"), m_pos, RenderSize);
+		RENDER->CenterRender(IMAGE->FindImage(imgName), m_pos, RenderSize);
 	}
 }

@@ -19,8 +19,6 @@ public:
 
 	vector<cBullet*>& m_bullets;
 
-	void CircleBullet(float interval, bool random = false);
-
 	// cMob을(를) 통해 상속됨
 	virtual void Update() override;
 	virtual void Render() override;

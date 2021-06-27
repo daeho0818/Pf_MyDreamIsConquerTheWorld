@@ -56,3 +56,9 @@ void cMouseManager::LButtonUp()
 		AS = nullptr;
 		});
 }
+
+bool cMouseManager::LButtonClick(string key)
+{
+	if (Collider(key, lDownPos) && Collider(key, MOUSE->mousePos)) return true;
+	return false;
+}

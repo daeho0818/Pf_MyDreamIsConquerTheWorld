@@ -25,10 +25,9 @@
 #include "cMobAdmin.h"
 
 cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
-	:m_bullets(bullet)
+	:m_bullets(bullet), stage(stage)
 {
 	isDestroy = false;
-	string asdf = stage;
 	if (stage == "cChurchScene")
 	{
 		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
@@ -90,6 +89,34 @@ void cMobAdmin::Update()
 		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 3)
 		{
 			iter->isDestroy = true;
+			if (stage == "cChurchScene")
+			{
+				PART->AddParticle(iter->m_pos, 1, "church_dead");
+			}
+			else if (stage == "cCityScene")
+			{
+				// PART->AddParticle(iter->m_pos, 1, "city_dead");
+			}
+			else if (stage == "cCityNightScene")
+			{
+				// PART->AddParticle(iter->m_pos, 1, "cirt(night)_dead");
+			}
+			else if (stage == "cDesertScene")
+			{
+				//PART->AddParticle(iter->m_pos, 1, "desert_dead");
+			}
+			else if (stage == "cIceScene")
+			{
+				PART->AddParticle(iter->m_pos, 1, "ice_dead", 0.01);
+			}
+			else if (stage == "cJungleScene")
+			{
+				//PART->AddParticle(iter->m_pos, 1, "jungle_dead");
+			}
+			else if (stage == "cOceanScene")
+			{
+				PART->AddParticle(iter->m_pos, 1, "ocean_dead");
+			}
 		}
 	}
 	IsDestroy();

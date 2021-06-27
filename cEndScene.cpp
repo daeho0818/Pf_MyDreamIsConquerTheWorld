@@ -16,24 +16,24 @@ cEndScene::~cEndScene()
 
 void cEndScene::Init()
 {
-	BUTTON->AddButton("end_restart", Vec2(WINSIZEX / 2 - ((WINSIZEX / 2) / 2), 2000), "endSceneB");
-	BUTTON->AddButton("end_title", Vec2(WINSIZEX / 2, 2000), "endSceneB");
-	BUTTON->AddButton("end_worldmap", Vec2(WINSIZEX / 2 + ((WINSIZEX / 2) / 2), 2000), "endSceneB");
+	BUTTON->AddButton("end_restart", Vec2(WINSIZEX / 2 - ((WINSIZEX / 2) / 2), 2000), 0.8);
+	BUTTON->AddButton("end_title", Vec2(WINSIZEX / 2, 2000), 0.8);
+	BUTTON->AddButton("end_worldmap", Vec2(WINSIZEX / 2 + ((WINSIZEX / 2) / 2), 2000), 0.8);
 }
 
 void cEndScene::Update()
 {
 	if (MOUSE->lUp)
 	{
-		if (MOUSE->Collider("end_restart"))
+		if (MOUSE->LButtonClick("end_restart"))
 		{
 			SCENE->ChangeScene(SCENE->curScene);
 		}
-		if (MOUSE->Collider("end_title"))
+		if (MOUSE->LButtonClick("end_title"))
 		{
 			SCENE->ChangeScene("cTitleScene");
 		}
-		if (MOUSE->Collider("end_worldmap"))
+		if (MOUSE->LButtonClick("end_worldmap"))
 		{
 			SCENE->ChangeScene("cSelectStageScene");
 		}

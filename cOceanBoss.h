@@ -16,11 +16,8 @@ public:
 	bool pattern1 = true;
 
 	int dirIndex = 0;
-	int speed;
 
 	vector<cBullet*>& m_bullets;
-
-	void CircleBullet(float interval, bool random = false);
 
 	// cMob을(를) 통해 상속됨
 	virtual void Update() override;

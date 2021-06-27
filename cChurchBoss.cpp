@@ -20,33 +20,6 @@ cChurchBoss::~cChurchBoss()
 	SAFE_DELETE(m_Ani);
 }
 
-void cChurchBoss::CircleBullet(float interval, bool random)
-{
-	float angle = 0;
-	float rad = D3DX_PI * 2 / 25;
-
-	for (int i = 0; i < 365; i++, angle += rad)
-	{
-		if (random)
-		{
-			if (i == rand() % 365)
-			{
-				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
-				direction = direction - m_pos;
-				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-			}
-		}
-		else
-		{
-			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
-			direction = direction - m_pos;
-			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
-		}
-	}
-}
-
 void cChurchBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
@@ -71,13 +44,11 @@ void cChurchBoss::Update()
 				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
 				direction = direction - m_pos;
 				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, m_damage, 0.1, 400));
+				m_bullets.push_back(new cMBullet(m_pos, direction,"bullet_church_boss", "church_boss_effect",  m_damage, 0.5, 400));
 				t_Pattern1 = nullptr;
 				});
 		}
 	}
-
-	if (isStop) { CircleBullet(0, true); }
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

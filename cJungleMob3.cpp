@@ -39,14 +39,14 @@ void cJungleMob3::Update()
 				{
 					if (i != 0)
 					{
-						dir = {-1, -1};
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, IMAGE->FindImage("bullet_enemy1"), m_damage, 0.1, 400, true));
-						dir = {-1, 1};
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, IMAGE->FindImage("bullet_enemy1"), m_damage, 0.1, 400, true));
-						dir = {1, 1};
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, IMAGE->FindImage("bullet_enemy1"), m_damage, 0.1, 400, true));
-						dir = {1, -1};
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, IMAGE->FindImage("bullet_enemy1"), m_damage, 0.1, 400, true));
+						dir = { -1, -1 };
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
+						dir = { -1, 1 };
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
+						dir = { 1, 1 };
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
+						dir = { 1, -1 };
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
 					}
 				}
 				p1Count++;

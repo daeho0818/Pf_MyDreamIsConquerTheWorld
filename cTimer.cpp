@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "cTimer.h"
 
-cTimer::cTimer(float time, function<void()> func, bool loop, int count)
+cTimer::cTimer(double time, function<void()> func, bool loop, int count)
 	:m_time(time * 1000), func(func), b_loop(loop), m_count(count)
 {
 	m_oldtime = GetTickCount();

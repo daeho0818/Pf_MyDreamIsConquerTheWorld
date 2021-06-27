@@ -4,11 +4,15 @@ class cParticleAni
     :public cParticle
 {
 public:
-    cParticleAni(Vec2 pos, float size, bool effect = false, int count = 0, int kind = 0, float frametime = 0.005);
+    cParticleAni(Vec2 pos, float size, bool effect = false, string imgName = "", int count = 0, float frametime = 0.005);
     ~cParticleAni();
 
     vector<cTexture*> m_images;
+
     cTimer* m_ani = nullptr;
+
+    string imgName;
+
     int m_frame = 0;
     int count;
 

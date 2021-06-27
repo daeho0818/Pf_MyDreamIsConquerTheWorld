@@ -14,6 +14,7 @@ public:
 
 	bool guideUI = false;
 	bool advenUI = false;
+	bool developUI = false;
 	bool buttonsMoved = false;
 	bool movedEnd = true;
 
@@ -27,7 +28,6 @@ public:
 	cTimer* t_Delay = nullptr;
 
 	Vec2 logoPos = { WINSIZEX / 2, -500 };
-	Vec2 downPos;
 
 	string arrowKey = "Arrow";
 

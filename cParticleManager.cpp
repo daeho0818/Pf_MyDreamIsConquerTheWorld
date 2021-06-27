@@ -11,15 +11,15 @@ cParticleManager::~cParticleManager()
 	Release();
 }
 
-void cParticleManager::AddParticle(Vec2 pos, float size, int kind, float frameTime)
+void cParticleManager::AddParticle(Vec2 pos, float size, string imgName, float frameTime)
 {
-	cParticle* par = new cParticleAni(pos, size, kind, frameTime);
+	cParticle* par = new cParticleAni(pos, size, false, imgName, frameTime);
 	m_particles.push_back(par);
 }
 
-void cParticleManager::AddEffect(Vec2 pos, float size, int count)
+void cParticleManager::AddEffect(Vec2 pos, float size, string imgName, int count)
 {
-	cParticle* par = new cParticleAni(pos, size, true, count);
+	cParticle* par = new cParticleAni(pos, size, true, imgName, count);
 	m_particles.push_back(par);
 }
 

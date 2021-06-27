@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cReflexBullet.h"
 
-cReflexBullet::cReflexBullet(Vec2 pos, Vec2 dir,cTexture* ptr, float damage, float size, float speed, bool dead)
-	:cBullet(pos, dir, size),ptr(ptr), m_speed(speed), dead(dead)
+cReflexBullet::cReflexBullet(Vec2 pos, Vec2 dir, string imgName, string effectName, float damage, float size, float speed, bool dead)
+	:cBullet(pos, dir, imgName, effectName, size), m_speed(speed), dead(dead)
 {
 	m_Damage = damage;
 	bulletType = "mob";
@@ -37,7 +37,7 @@ void cReflexBullet::Update()
 
 void cReflexBullet::Render()
 {
-	RENDER->CenterRender(ptr, m_pos, size, -m_angle);
+	RENDER->CenterRender(m_image, m_pos, size, -m_angle);
 }
 
 string cReflexBullet::ChkOut()
