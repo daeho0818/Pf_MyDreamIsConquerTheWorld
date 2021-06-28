@@ -35,12 +35,21 @@ void cJungleBoss::Update()
 	if (m_Ani != nullptr) m_Ani->Update();
 	if (pattern1)
 	{
-		if (p1Count < 100)
+		if (p1Count < 5)
 		{
-			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.05, [&]()->void {
+			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.5, [&]()->void {
 				isStop = true;
-				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(-1, -1), "bullet_jungle_boss","jungle_boss_effect", m_damage, 0.5, 400, true));
-				m_bullets.push_back(new cReflexBullet(m_pos, Vec2(1, -1), "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
+				Vec2 dir;
+				for (int i = -(WINSIZEX / 2); i <= WINSIZEY / 2; i += WINSIZEY / 5)
+				{
+					dir = {-WINSIZEX, (float)i};
+					D3DXVec2Normalize(&dir, &dir);
+					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
+
+					dir = {WINSIZEX, (float)i};
+					D3DXVec2Normalize(&dir, &dir);
+					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
+				}
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
@@ -49,7 +58,7 @@ void cJungleBoss::Update()
 		{
 			isStop = false;
 			if (t_Pattern1 == nullptr)
-				t_Pattern1 = new cTimer(5, [&]()->void {
+				t_Pattern1 = new cTimer(10, [&]()->void {
 				p1Count = 0;
 				t_Pattern1 = nullptr;
 					});

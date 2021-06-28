@@ -28,5 +28,4 @@ public:
 
 	cTimer* AS = nullptr;
 };
-
 #define MOUSE cMouseManager::GetInstance()

@@ -71,31 +71,31 @@ void cTitleScene::Update()
 
 	if (buttonsMoved)
 	{
-		if (t_Delay == nullptr && count <= 29)
+		if (t_Delay == nullptr && count <= 19)
 		{
-			t_Delay = new cTimer(0.0001, [&]()->void {
+			t_Delay = new cTimer(0.01, [&]()->void {
 				for (auto iter : BUTTON->m_buttons)
 				{
 					if (movedEnd)
-						iter->m_pos -= Vec2(0, 4000 * Delta);
+						iter->m_pos -= Vec2(0, 100);
 					else
-						iter->m_pos += Vec2(0, 4000 * Delta);
+						iter->m_pos += Vec2(0, 100);
 				}
 				if (movedEnd)
-					temp += 4000 * Delta;
+					temp += 100;
 				else
-					temp -= 4000 * Delta;
+					temp -= 100;
 
 				count++;
 				t_Delay = nullptr;
 				});
 		}
-		else if (count > 25)
+		else if (count > 19)
 		{
 			if (movedEnd)
-				BUTTON->ChangeBtnInfo("Arrow", { 500, 100 }, 1.5);
+				BUTTON->ChangeBtnInfo("Arrow", { 500, 100 }, 1.5f);
 			else
-				BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, 1.5);
+				BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, 1.5f);
 			movedEnd = !movedEnd;
 			if (!movedEnd)
 				arrowKey = "_Arrow";
