@@ -569,12 +569,17 @@ void cLoadingScene::AddResource()
 			IMAGE->AddImage("city(night)_mob2_effect", "Ingame/City(night)/bullets/mob2_effect");
 
 			// Jungle
+			IMAGE->AddImage("jungle_dead", "Ingame/Jungle/Effect/dead", 30);
+
 			IMAGE->AddImage("jungle_boss_effect", "Ingame/Jungle/bullets/boss_effect");
 			IMAGE->AddImage("jungle_mob1_effect", "Ingame/Jungle/bullets/mob1_effect");
 			IMAGE->AddImage("jungle_mob2_effect", "Ingame/Jungle/bullets/mob2_effect");
 			IMAGE->AddImage("jungle_mob3_effect", "Ingame/Jungle/bullets/mob3_effect");
 
 			// Desert
+			IMAGE->AddImage("desert_gold_dead", "Ingame/Jungle/Effect/gold/dead", 28);
+			IMAGE->AddImage("desert_silver_dead", "Ingame/Jungle/Effect/silver/dead", 30);
+
 			IMAGE->AddImage("desert_boss1_effect", "Ingame/Desert/bullets/boss1_effect");
 			IMAGE->AddImage("desert_boss2_effect", "Ingame/Desert/bullets/boss2_effect");
 			IMAGE->AddImage("desert_mob1_effect", "Ingame/Desert/bullets/mob1_effect");

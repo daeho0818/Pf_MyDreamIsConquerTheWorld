@@ -103,7 +103,10 @@ void cMobAdmin::Update()
 			}
 			else if (stage == "cDesertScene")
 			{
-				//PART->AddParticle(iter->m_pos, 1, "desert_dead");
+				if (iter->mobName == "gold")
+					PART->AddParticle(iter->m_pos, 1, "desert_gold_dead");
+				else if (iter->mobName == "silver")
+					PART->AddParticle(iter->m_pos, 1, "desert_silver_dead");
 			}
 			else if (stage == "cIceScene")
 			{
@@ -111,7 +114,7 @@ void cMobAdmin::Update()
 			}
 			else if (stage == "cJungleScene")
 			{
-				//PART->AddParticle(iter->m_pos, 1, "jungle_dead");
+				PART->AddParticle(iter->m_pos, 1, "jungle_dead");
 			}
 			else if (stage == "cOceanScene")
 			{

@@ -6,6 +6,7 @@ cDesertBoss2::cDesertBoss2(Vec2 pos, vector<cBullet*>& bullet)
 	: cMob(pos), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("desert_boss2");
+	mobName = "silver";
 	mobType = "Boss";
 	m_damage = 1;
 	isStop = false;

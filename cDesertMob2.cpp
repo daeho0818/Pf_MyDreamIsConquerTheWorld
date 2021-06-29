@@ -5,6 +5,7 @@
 cDesertMob2::cDesertMob2(Vec2 pos, vector<cBullet*>& bullets)
 	:cMob(pos), m_bullets(bullets)
 {
+	mobName = "gold";
 	m_image = IMAGE->MakeVecImg("desert_mob2");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
