@@ -1,15 +1,6 @@
 ﻿#include "DXUT.h"
 #include "cLoadingScene.h"
-#include "cTitleScene.h"
-#include "cSelectStageScene.h"
-#include "cIceScene.h"
-#include "cCityScene.h"
-#include "cCityNightScene.h"
-#include "cChurchScene.h"
-#include "cJungleScene.h"
-#include "cDesertScene.h"
-#include "cOceanScene.h"
-#include "cEndScene.h"
+
 
 cLoadingScene::cLoadingScene()
 {
@@ -34,41 +25,562 @@ void cLoadingScene::Init()
 
 	}
 	IMAGE->AddImage("percent", "Text/%");
+
+	// title
+	AddLoad("TitleBG", "title/TitleBG");
+
+	AddLoad("Logo", "title/Logo");
+
+	AddLoad("start_note", "title/start_note");
+
+	AddLoad("start_button", "title/start_button");
+
+	AddLoad("guide_note", "title/guide_note");
+
+	AddLoad("guide_button", "title/guide_button");
+
+	AddLoad("adven_note", "title/adven_note");
+
+	AddLoad("adven_button", "title/adven_button");
+
+	AddLoad("develop_note", "title/develop_note");
+
+	AddLoad("develop_button", "title/develop_button");
+
+	AddLoad("quit_note", "title/quit_note");
+
+	AddLoad("quit_button", "title/quit_button");
+
+	AddLoad("pattern", "title/pattern");
+
+	// guide Note
+	AddLoad("guide_BG", "title/GuideBook/BG");
+
+	AddLoad("guide_Arrow", "title/GuideBook/arrow");
+
+	AddLoad("guide_close", "title/GuideBook/close");
+
+	AddLoad("guide_text1", "title/GuideBook/text1");
+
+	AddLoad("guide_text2", "title/GuideBook/text2");
+
+	//adventure Note
+	AddLoad("adven_Back", "title/AdvenBook/back");
+
+	AddLoad("adven_BG", "title/AdvenBook/BG");
+
+	AddLoad("adven_BGRect", "title/AdvenBook/BGRect");
+
+	AddLoad("adven_Chain", "title/AdvenBook/chains");
+
+	AddLoad("adven_Lock", "title/AdvenBook/lock");
+
+	AddLoad("adven_CircleDown", "title/AdvenBook/circleDown");
+
+	AddLoad("adven_CircleUp", "title/AdvenBook/circleUp");
+
+	AddLoad("adven_CollectionPer", "title/AdvenBook/collectionPer");
+
+	AddLoad("adven_CollectionPerBG", "title/AdvenBook/collectionPerBG");
+
+	AddLoad("adven_CollectionPerRect", "title/AdvenBook/collectionPerRect");
+
+	AddLoad("adven_ContentRect", "title/AdvenBook/contentRect");
+
+	AddLoad("adven_ContentBG", "title/AdvenBook/contentBG");
+
+	AddLoad("adven_Handle", "title/AdvenBook/handle");
+
+	AddLoad("adven_HandleBG", "title/AdvenBook/handleBG");
+
+	AddLoad("adven_ItemRect", "title/AdvenBook/itemRect");
+
+	AddLoad("adven_DontClear", "title/AdvenBook/dontClear");
+
+	AddLoad("adven_textBG", "title/AdvenBook/textBG");
+
+	// world map
+	AddLoad("WorldMap", "WorldMap/map");
+
+	AddLoad("WorldEmblem", "WorldMap/Emblem");
+
+	AddLoad("X", "WorldMap/Details/public/x");
+
+	AddLoad("church_button", "WorldMap/church_button");
+
+	AddLoad("church_complete", "WorldMap/church_complete");
+
+	AddLoad("church_lock", "WorldMap/church_lock");
+
+	AddLoad("city(night)_button", "WorldMap/city(night)_button");
+
+	AddLoad("city(night)_complete", "WorldMap/city(night)_complete");
+
+	AddLoad("city(night)_lock", "WorldMap/city(night)_lock");
+
+	AddLoad("city_button", "WorldMap/city_button");
+
+	AddLoad("city_complete", "WorldMap/city_complete");
+
+	AddLoad("city_lock", "WorldMap/city_lock");
+
+	AddLoad("desert_button", "WorldMap/desert_button");
+
+	AddLoad("desert_complete", "WorldMap/desert_complete");
+
+	AddLoad("desert_lock", "WorldMap/desert_lock");
+
+	AddLoad("ice_button", "WorldMap/ice_button");
+
+	AddLoad("ice_complete", "WorldMap/ice_complete");
+
+	AddLoad("ice_lock", "WorldMap/ice_lock");
+
+	AddLoad("jungle_button", "WorldMap/jungle_button");
+
+	AddLoad("jungle_complete", "WorldMap/jungle_complete");
+
+	AddLoad("jungle_lock", "WorldMap/jungle_lock");
+
+	AddLoad("ocean_button", "WorldMap/ocean_button");
+
+	AddLoad("ocean_complete", "WorldMap/ocean_complete");
+
+	AddLoad("ocean_lock", "WorldMap/ocean_lock");
+
+	AddLoad("church_All", "WorldMap/Details/Church/All");
+
+	AddLoad("city_All", "WorldMap/Details/City/All");
+
+	AddLoad("city(night)_All", "WorldMap/Details/City(night)/All");
+
+	AddLoad("desert_All", "WorldMap/Details/Desert/All");
+
+	AddLoad("ice_All", "WorldMap/Details/Ice/All");
+
+	AddLoad("jungle_All", "WorldMap/Details/Jungle/All");
+
+	AddLoad("ocean_All", "WorldMap/Details/Ocean/All");
+
+	AddLoad("StageStartB", "WorldMap/Details/Public/Start");
+
+	AddLoad("cloud1", "WorldMap/cloud/cloud1");
+
+	AddLoad("cloud2", "WorldMap/cloud/cloud2");
+
+	AddLoad("cloud3", "WorldMap/cloud/cloud3");
+
+	AddLoad("cloud4", "WorldMap/cloud/cloud4");
+
+	// ingame
+	{
+		AddLoad("player", "Ingame/player");
+
+		AddLoad("h_player", "Ingame/h_player");
+
+
+		//  start
+		AddLoad("start_1", "Ingame/Start/1");
+
+		AddLoad("start_2", "Ingame/Start/2");
+
+		AddLoad("start_3", "Ingame/Start/3");
+
+		AddLoad("start_start", "Ingame/Start/start");
+
+		AddLoad("start_game", "Ingame/Start/game");
+
+
+		//  stop
+		AddLoad("stop_BG", "Ingame/Stop/BG");
+
+		AddLoad("stop_text", "Ingame/Stop/text");
+
+		AddLoad("stop_back", "Ingame/Stop/back");
+
+		AddLoad("stop_restart", "Ingame/Stop/restart");
+
+		AddLoad("stop_worldmap", "Ingame/Stop/worldmap");
+
+		AddLoad("stop_pointline", "Ingame/Stop/pointline");
+
+
+		// clear / fail
+		AddLoad("CFgetItem", "Ingame/Clear,Fail/getItem");
+
+		AddLoad("CFpercent", "Ingame/Clear,Fail/percent");
+
+		AddLoad("CFscore", "Ingame/Clear,Fail/score");
+
+		AddLoad("CFtime", "Ingame/Clear,Fail/time");
+
+		AddLoad("CFBG", "Ingame/Clear,Fail/BG");
+
+		AddLoad("CFnext", "Ingame/Clear,Fail/next");
+
+		// clear
+		{
+			AddLoad("Clear", "Ingame/Clear,Fail/Clear/clear");
+
+			AddLoad("C", "Ingame/Clear,Fail/Clear/1. c");
+
+			AddLoad("L", "Ingame/Clear,Fail/Clear/2. l");
+
+			AddLoad("E", "Ingame/Clear,Fail/Clear/3. e");
+
+			AddLoad("A", "Ingame/Clear,Fail/Clear/4. a");
+
+			AddLoad("R", "Ingame/Clear,Fail/Clear/5. r");
+
+			AddLoad("!", "Ingame/Clear,Fail/Clear/6. !");
+
+		}
+
+		// fail
+		{
+			AddLoad("Over", "Ingame/Clear,Fail/Fail/over");
+
+			AddLoad("O", "Ingame/Clear,Fail/Fail/1. o");
+
+			AddLoad("V", "Ingame/Clear,Fail/Fail/2. v");
+
+			AddLoad("OVER_E", "Ingame/Clear,Fail/Fail/3. e");
+
+			AddLoad("OVER_R", "Ingame/Clear,Fail/Fail/4. r");
+
+		}
+	}
+
+
+	// ice
+	{
+		AddLoad("ice_Under", "Ingame/Ice/under");
+
+		AddLoad("ice_High", "Ingame/Ice/high");
+
+
+		// mob
+		{
+			AddLoad("ice_mob1", "Ingame/Ice/mob/mob1/mob1", 6);
+
+			AddLoad("ice_mob2", "Ingame/Ice/mob/mob2/mob2", 6);
+
+			AddLoad("ice_boss", "Ingame/Ice/mob/boss/boss", 11);
+
+		}
+	}
+
+	// city
+	{
+		AddLoad("city_Under", "Ingame/City/under");
+
+		AddLoad("city_High", "Ingame/City/high");
+
+
+		//mob
+		{
+			AddLoad("city_mob1", "Ingame/City/mob/mob1/mob1", 15);
+
+			AddLoad("city_mob2", "Ingame/City/mob/mob2/mob2", 6);
+
+			AddLoad("city_boss", "Ingame/City/mob/boss/boss", 10);
+
+		}
+	}
+
+	// city(night)
+	{
+		AddLoad("city(night)_Under", "Ingame/city(night)/under");
+
+		AddLoad("city(night)_high", "Ingame/city(night)/high");
+
+
+		//mob
+		{
+			AddLoad("city(night)_mob1", "Ingame/city(night)/mob/mob1/mob1", 11);
+
+			AddLoad("city(night)_mob2", "Ingame/city(night)/mob/mob2/mob2", 8);
+
+			AddLoad("city(night)_boss", "Ingame/city(night)/mob/boss/boss", 8);
+
+		}
+	}
+
+	// ocean
+	{
+		AddLoad("ocean_Under", "Ingame/Ocean/under");
+
+		AddLoad("ocean_High", "Ingame/Ocean/high");
+
+
+		//mob
+		{
+			AddLoad("ocean_mob1", "Ingame/Ocean/mob/mob1/mob1", 7);
+
+			AddLoad("ocean_mob2", "Ingame/Ocean/mob/mob2/mob2", 9);
+
+			AddLoad("ocean_boss", "Ingame/Ocean/mob/boss/boss", 8);
+
+		}
+	}
+
+	// desert
+	{
+		AddLoad("desert_Under", "Ingame/Desert/desert_Under");
+
+		AddLoad("desert_High", "Ingame/Desert/desert_High");
+
+
+		//mob
+		{
+			AddLoad("desert_mob1", "Ingame/Desert/mob/mob1/mob1", 6);
+
+			AddLoad("desert_mob2", "Ingame/Desert/mob/mob2/mob2", 6);
+
+			AddLoad("desert_boss1", "Ingame/Desert/mob/boss/1/boss1", 8);
+
+			AddLoad("desert_boss2", "Ingame/Desert/mob/boss/2/boss2", 8);
+
+		}
+	}
+
+	// church
+	{
+		AddLoad("church_Under", "Ingame/Church/under");
+
+		AddLoad("church_high", "Ingame/Church/high");
+
+
+		//mob
+		{
+			AddLoad("church_mob1", "Ingame/Church/mob/mob1/mob1", 19);
+
+			AddLoad("church_mob2", "Ingame/Church/mob/mob2/mob2", 17);
+
+			AddLoad("church_boss", "Ingame/Church/mob/boss/boss", 10);
+
+		}
+	}
+
+	// jungle
+	{
+		AddLoad("jungle_Under", "Ingame/Jungle/under");
+
+		AddLoad("jungle_High", "Ingame/Jungle/high");
+
+
+		// mob
+		{
+			AddLoad("jungle_mob1", "Ingame/Jungle/mob/mob1/mob1", 14);
+
+			AddLoad("jungle_mob2", "Ingame/Jungle/mob/mob2/mob2", 10);
+
+			AddLoad("jungle_mob3", "Ingame/Jungle/mob/mob3/mob3", 5);
+
+			AddLoad("jungle_boss", "Ingame/Jungle/mob/boss/boss", 8);
+
+		}
+	}
+
+	// UI
+	AddLoad("IngameBG", "Ingame/UI/AllBG");
+
+	AddLoad("Ingame_HP", "Ingame/UI/HP");
+
+	AddLoad("Ingame_HP0", "Ingame/UI/HP0");
+
+	AddLoad("Ingame_HP1", "Ingame/UI/HP1");
+
+	AddLoad("Ingame_HP2", "Ingame/UI/HP2");
+
+	AddLoad("Ingame_HP3", "Ingame/UI/HP3");
+
+	AddLoad("Ingame_Item", "Ingame/UI/item");
+
+	AddLoad("colon", "Ingame/UI/colon");
+
+	// public
+	AddLoad("Arrow", "Public/Arrow");
+
+	AddLoad("_Arrow", "Public/_Arrow");
+
+	AddLoad("Blur", "Public/Blur");
+
+
+	// EndScene
+	AddLoad("end_restart", "EndScene/restart");
+
+	AddLoad("end_title", "EndScene/title");
+
+	AddLoad("end_worldmap", "EndScene/worldmap");
+
+	AddLoad("Boss", "Boss");
+
+	AddLoad("Hp+", "Hp+");
+
+	AddLoad("Speed+", "Speed+");
+
+	AddLoad("Invincibility", "Invincibility");
+
+	AddLoad("bullet_enemy", "bullet_enemy");
+
+	AddLoad("bullet_enemy1", "bullet_enemy1");
+
+	AddLoad("bullet_enemy2", "bullet_enemy2");
+
+	AddLoad("over_Start", "Title/over_Start");
+
+	AddLoad("over_Adven", "Title/over_Adven");
+
+	AddLoad("over_Develop", "Title/over_Develop");
+
+	AddLoad("over_Guide", "Title/over_Guide");
+
+	AddLoad("over_Quit", "Title/over_Quit");
+
+	AddLoad("click_Start", "Title/click_Start");
+
+	AddLoad("click_Adven", "Title/click_Adven");
+
+	AddLoad("click_Develop", "Title/click_Develop");
+
+	AddLoad("click_Guide", "Title/click_Guide");
+
+	AddLoad("click_Quit", "Title/click_Quit");
+
+	AddLoad("Credit", "Title/DevelopBook/Credit");
+
+	// Bullets
+	{
+		// Church
+		AddLoad("bullet_church_mob1", "Ingame/Church/bullets/mob1");
+		AddLoad("bullet_church_mob2", "Ingame/Church/bullets/mob2");
+		AddLoad("bullet_church_boss", "Ingame/Church/bullets/boss");
+
+		// City
+		AddLoad("bullet_city_mob1", "Ingame/City/bullets/mob1");
+		AddLoad("bullet_city_mob2", "Ingame/City/bullets/mob2");
+		AddLoad("bullet_city_boss", "Ingame/City/bullets/boss");
+
+		// City (Night)
+		AddLoad("bullet_city(night)_mob1", "Ingame/City(night)/bullets/mob1");
+		AddLoad("bullet_city(night)_mob2", "Ingame/City(night)/bullets/mob2");
+		AddLoad("bullet_city(night)_boss", "Ingame/City(night)/bullets/boss");
+
+		// Desert
+		AddLoad("bullet_desert_mob1", "Ingame/Desert/bullets/mob1");
+		AddLoad("bullet_desert_mob2", "Ingame/Desert/bullets/mob2");
+		AddLoad("bullet_desert_boss1", "Ingame/Desert/bullets/boss1");
+		AddLoad("bullet_desert_boss2", "Ingame/Desert/bullets/boss2");
+
+		// Ice
+		AddLoad("bullet_ice_mob1", "Ingame/Ice/bullets/mob1");
+		AddLoad("bullet_ice_mob2", "Ingame/Ice/bullets/mob2");
+		AddLoad("bullet_ice_boss", "Ingame/Ice/bullets/boss");
+
+		// Jungle
+		AddLoad("bullet_jungle_mob1", "Ingame/Jungle/bullets/mob1");
+		AddLoad("bullet_jungle_mob2", "Ingame/Jungle/bullets/mob2");
+		AddLoad("bullet_jungle_mob3", "Ingame/Jungle/bullets/mob3");
+		AddLoad("bullet_jungle_boss", "Ingame/Jungle/bullets/boss");
+
+		// Ocean
+		AddLoad("bullet_ocean_mob1", "Ingame/Ocean/bullets/mob1");
+		AddLoad("bullet_ocean_mob2", "Ingame/Ocean/bullets/mob2");
+		AddLoad("bullet_ocean_boss", "Ingame/Ocean/bullets/boss");
+	}
+
+	// Effect
+	{
+		// Church
+		AddLoad("church_dead", "Ingame/Church/Effect/dead", 41);
+
+		AddLoad("church_boss_effect", "Ingame/Church/bullets/boss_effect");
+		AddLoad("church_mob1_effect", "Ingame/Church/bullets/mob1_effect");
+		AddLoad("church_mob2_effect", "Ingame/Church/bullets/mob2_effect");
+
+		// City
+		AddLoad("city_boss_effect", "Ingame/City/bullets/boss_effect");
+		AddLoad("city_mob1_effect", "Ingame/City/bullets/mob1_effect");
+		AddLoad("city_mob2_effect", "Ingame/City/bullets/mob2_effect");
+
+		// City(Night)
+		AddLoad("city(night)_boss_effect", "Ingame/City(night)/bullets/boss_effect");
+		AddLoad("city(night)_mob1_effect", "Ingame/City(night)/bullets/mob1_effect");
+		AddLoad("city(night)_mob2_effect", "Ingame/City(night)/bullets/mob2_effect");
+
+		// Jungle
+		AddLoad("jungle_boss_effect", "Ingame/Jungle/bullets/boss_effect");
+		AddLoad("jungle_mob1_effect", "Ingame/Jungle/bullets/mob1_effect");
+		AddLoad("jungle_mob2_effect", "Ingame/Jungle/bullets/mob2_effect");
+		AddLoad("jungle_mob3_effect", "Ingame/Jungle/bullets/mob3_effect");
+
+		// Desert
+		AddLoad("desert_boss1_effect", "Ingame/Desert/bullets/boss1_effect");
+		AddLoad("desert_boss2_effect", "Ingame/Desert/bullets/boss2_effect");
+		AddLoad("desert_mob1_effect", "Ingame/Desert/bullets/mob1_effect");
+		AddLoad("desert_mob2_effect", "Ingame/Desert/bullets/mob2_effect");
+
+		// Ice
+		AddLoad("ice_dead", "Ingame/Ice/Effect/dead", 27);
+
+		AddLoad("ice_boss_effect", "Ingame/Ice/bullets/boss_effect");
+		AddLoad("ice_mob1_effect", "Ingame/Ice/bullets/mob1_effect");
+		AddLoad("ice_mob2_effect", "Ingame/Ice/bullets/mob2_effect");
+
+		// Ocean
+		AddLoad("ocean_dead", "Ingame/Ocean/Effect/dead", 15);
+
+		AddLoad("ocean_boss_effect", "Ingame/Ocean/bullets/boss_effect");
+		AddLoad("ocean_mob1_effect", "Ingame/Ocean/bullets/mob1_effect");
+		AddLoad("ocean_mob2_effect", "Ingame/Ocean/bullets/mob2_effect");
+
+		// Color
+		{
+			AddLoad("white_effect", "Effect/white_Effect");
+		}
+	}
+	listCount = loadList.size();
 }
 
 void cLoadingScene::Update()
 {
-	if (isLoaded)
+	if (!loadList.empty())
 	{
-		isLoaded = false;
+		LoadInfo load = loadList.back();
+		loadList.pop_back();
+
+		IMAGE->AddImage(load.key, load.path, load.count);
+	}
+	else
+	{
 		SCENE->ChangeScene("cTitleScene");
 
 		BG->isLoadScene = false;
 		BG->ptr[0] = IMAGE->FindImage("player");
 		BG->ptr[1] = IMAGE->FindImage("player");
 	}
-
-	if (!isLoadStart)
-	{
-		isLoadStart = true;
-		THREAD->AddThread("AddResource", [=]()->void {AddResource(); });
-		//AddResource();
-
-		SCENE->AddScene("cTitleScene", new cTitleScene);
-		SCENE->AddScene("cSelectStageScene", new cSelectStageScene);
-		SCENE->AddScene("cIceScene", new cIceScene);
-		SCENE->AddScene("cCityScene", new cCityScene);
-		SCENE->AddScene("cCityNightScene", new cCityNightScene);
-		SCENE->AddScene("cChurchScene", new cChurchScene);
-		SCENE->AddScene("cDesertScene", new cDesertScene);
-		SCENE->AddScene("cOceanScene", new cOceanScene);
-		SCENE->AddScene("cJungleScene", new cJungleScene);
-		SCENE->AddScene("cEndScene", new cEndScene);
-	}
 }
 
 void cLoadingScene::Render()
 {
+	int percent = 100 - (loadList.size() * 100 / listCount);
+
+	int hon, ten, one;
+	if (percent > 99) { hon = 1; ten = 0; one = 0; }
+	else { hon = 0; ten = percent / 10; one = percent % 10; }
+
+	char key[3];
+	sprintf(key, "%d", hon);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2));
+
+	sprintf(key, "%d", ten);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 50, WINSIZEY / 2));
+
+	sprintf(key, "%d", one);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 50, WINSIZEY / 2));
+
+	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 160, WINSIZEY / 2));
 }
 
 void cLoadingScene::UIRender()
@@ -77,538 +589,15 @@ void cLoadingScene::UIRender()
 
 void cLoadingScene::Release()
 {
-	THREAD->ReleaseThread("AddResource");
+	//THREAD->ReleaseThread("AddResource");
 }
 
 
+void cLoadingScene::AddLoad(string key, string path, int count)
+{
+	loadList.emplace_back(LoadInfo(key, path, count));
+}
+
 void cLoadingScene::AddResource()
 {
-	try
-	{
-		// title
-		IMAGE->AddImage("TitleBG", "title/TitleBG");
-
-		IMAGE->AddImage("Logo", "title/Logo");
-
-		IMAGE->AddImage("start_note", "title/start_note");
-
-		IMAGE->AddImage("start_button", "title/start_button");
-
-		IMAGE->AddImage("guide_note", "title/guide_note");
-
-		IMAGE->AddImage("guide_button", "title/guide_button");
-
-		IMAGE->AddImage("adven_note", "title/adven_note");
-
-		IMAGE->AddImage("adven_button", "title/adven_button");
-
-		IMAGE->AddImage("develop_note", "title/develop_note");
-
-		IMAGE->AddImage("develop_button", "title/develop_button");
-
-		IMAGE->AddImage("quit_note", "title/quit_note");
-
-		IMAGE->AddImage("quit_button", "title/quit_button");
-
-		IMAGE->AddImage("pattern", "title/pattern");
-
-		// guide Note
-		IMAGE->AddImage("guide_BG", "title/GuideBook/BG");
-
-		IMAGE->AddImage("guide_Arrow", "title/GuideBook/arrow");
-
-		IMAGE->AddImage("guide_close", "title/GuideBook/close");
-
-		IMAGE->AddImage("guide_text1", "title/GuideBook/text1");
-
-		IMAGE->AddImage("guide_text2", "title/GuideBook/text2");
-
-		//adventure Note
-		IMAGE->AddImage("adven_Back", "title/AdvenBook/back");
-
-		IMAGE->AddImage("adven_BG", "title/AdvenBook/BG");
-
-		IMAGE->AddImage("adven_BGRect", "title/AdvenBook/BGRect");
-
-		IMAGE->AddImage("adven_Chain", "title/AdvenBook/chains");
-
-		IMAGE->AddImage("adven_Lock", "title/AdvenBook/lock");
-
-		IMAGE->AddImage("adven_CircleDown", "title/AdvenBook/circleDown");
-
-		IMAGE->AddImage("adven_CircleUp", "title/AdvenBook/circleUp");
-
-		IMAGE->AddImage("adven_CollectionPer", "title/AdvenBook/collectionPer");
-
-		IMAGE->AddImage("adven_CollectionPerBG", "title/AdvenBook/collectionPerBG");
-
-		IMAGE->AddImage("adven_CollectionPerRect", "title/AdvenBook/collectionPerRect");
-
-		IMAGE->AddImage("adven_ContentRect", "title/AdvenBook/contentRect");
-
-		IMAGE->AddImage("adven_ContentBG", "title/AdvenBook/contentBG");
-
-		IMAGE->AddImage("adven_Handle", "title/AdvenBook/handle");
-
-		IMAGE->AddImage("adven_HandleBG", "title/AdvenBook/handleBG");
-
-		IMAGE->AddImage("adven_ItemRect", "title/AdvenBook/itemRect");
-
-		IMAGE->AddImage("adven_DontClear", "title/AdvenBook/dontClear");
-
-		IMAGE->AddImage("adven_textBG", "title/AdvenBook/textBG");
-
-		// world map
-		IMAGE->AddImage("WorldMap", "WorldMap/map");
-
-		IMAGE->AddImage("WorldEmblem", "WorldMap/Emblem");
-
-		IMAGE->AddImage("X", "WorldMap/Details/public/x");
-
-		IMAGE->AddImage("church_button", "WorldMap/church_button");
-
-		IMAGE->AddImage("church_complete", "WorldMap/church_complete");
-
-		IMAGE->AddImage("church_lock", "WorldMap/church_lock");
-
-		IMAGE->AddImage("city(night)_button", "WorldMap/city(night)_button");
-
-		IMAGE->AddImage("city(night)_complete", "WorldMap/city(night)_complete");
-
-		IMAGE->AddImage("city(night)_lock", "WorldMap/city(night)_lock");
-
-		IMAGE->AddImage("city_button", "WorldMap/city_button");
-
-		IMAGE->AddImage("city_complete", "WorldMap/city_complete");
-
-		IMAGE->AddImage("city_lock", "WorldMap/city_lock");
-
-		IMAGE->AddImage("desert_button", "WorldMap/desert_button");
-
-		IMAGE->AddImage("desert_complete", "WorldMap/desert_complete");
-
-		IMAGE->AddImage("desert_lock", "WorldMap/desert_lock");
-
-		IMAGE->AddImage("ice_button", "WorldMap/ice_button");
-
-		IMAGE->AddImage("ice_complete", "WorldMap/ice_complete");
-
-		IMAGE->AddImage("ice_lock", "WorldMap/ice_lock");
-
-		IMAGE->AddImage("jungle_button", "WorldMap/jungle_button");
-
-		IMAGE->AddImage("jungle_complete", "WorldMap/jungle_complete");
-
-		IMAGE->AddImage("jungle_lock", "WorldMap/jungle_lock");
-
-		IMAGE->AddImage("ocean_button", "WorldMap/ocean_button");
-
-		IMAGE->AddImage("ocean_complete", "WorldMap/ocean_complete");
-
-		IMAGE->AddImage("ocean_lock", "WorldMap/ocean_lock");
-
-		IMAGE->AddImage("church_All", "WorldMap/Details/Church/All");
-
-		IMAGE->AddImage("city_All", "WorldMap/Details/City/All");
-
-		IMAGE->AddImage("city(night)_All", "WorldMap/Details/City(night)/All");
-
-		IMAGE->AddImage("desert_All", "WorldMap/Details/Desert/All");
-
-		IMAGE->AddImage("ice_All", "WorldMap/Details/Ice/All");
-
-		IMAGE->AddImage("jungle_All", "WorldMap/Details/Jungle/All");
-
-		IMAGE->AddImage("ocean_All", "WorldMap/Details/Ocean/All");
-
-		IMAGE->AddImage("StageStartB", "WorldMap/Details/Public/Start");
-
-		IMAGE->AddImage("cloud1", "WorldMap/cloud/cloud1");
-
-		IMAGE->AddImage("cloud2", "WorldMap/cloud/cloud2");
-
-		IMAGE->AddImage("cloud3", "WorldMap/cloud/cloud3");
-
-		IMAGE->AddImage("cloud4", "WorldMap/cloud/cloud4");
-
-		// ingame
-		{
-			IMAGE->AddImage("player", "Ingame/player");
-
-			IMAGE->AddImage("h_player", "Ingame/h_player");
-
-
-			//  start
-			IMAGE->AddImage("start_1", "Ingame/Start/1");
-
-			IMAGE->AddImage("start_2", "Ingame/Start/2");
-
-			IMAGE->AddImage("start_3", "Ingame/Start/3");
-
-			IMAGE->AddImage("start_start", "Ingame/Start/start");
-
-			IMAGE->AddImage("start_game", "Ingame/Start/game");
-
-
-			//  stop
-			IMAGE->AddImage("stop_BG", "Ingame/Stop/BG");
-
-			IMAGE->AddImage("stop_text", "Ingame/Stop/text");
-
-			IMAGE->AddImage("stop_back", "Ingame/Stop/back");
-
-			IMAGE->AddImage("stop_restart", "Ingame/Stop/restart");
-
-			IMAGE->AddImage("stop_worldmap", "Ingame/Stop/worldmap");
-
-			IMAGE->AddImage("stop_pointline", "Ingame/Stop/pointline");
-
-
-			// clear / fail
-			IMAGE->AddImage("CFgetItem", "Ingame/Clear,Fail/getItem");
-
-			IMAGE->AddImage("CFpercent", "Ingame/Clear,Fail/percent");
-
-			IMAGE->AddImage("CFscore", "Ingame/Clear,Fail/score");
-
-			IMAGE->AddImage("CFtime", "Ingame/Clear,Fail/time");
-
-			IMAGE->AddImage("CFBG", "Ingame/Clear,Fail/BG");
-
-			IMAGE->AddImage("CFnext", "Ingame/Clear,Fail/next");
-
-			// clear
-			{
-				IMAGE->AddImage("Clear", "Ingame/Clear,Fail/Clear/clear");
-
-				IMAGE->AddImage("C", "Ingame/Clear,Fail/Clear/1. c");
-
-				IMAGE->AddImage("L", "Ingame/Clear,Fail/Clear/2. l");
-
-				IMAGE->AddImage("E", "Ingame/Clear,Fail/Clear/3. e");
-
-				IMAGE->AddImage("A", "Ingame/Clear,Fail/Clear/4. a");
-
-				IMAGE->AddImage("R", "Ingame/Clear,Fail/Clear/5. r");
-
-				IMAGE->AddImage("!", "Ingame/Clear,Fail/Clear/6. !");
-
-			}
-
-			// fail
-			{
-				IMAGE->AddImage("Over", "Ingame/Clear,Fail/Fail/over");
-
-				IMAGE->AddImage("O", "Ingame/Clear,Fail/Fail/1. o");
-
-				IMAGE->AddImage("V", "Ingame/Clear,Fail/Fail/2. v");
-
-				IMAGE->AddImage("OVER_E", "Ingame/Clear,Fail/Fail/3. e");
-
-				IMAGE->AddImage("OVER_R", "Ingame/Clear,Fail/Fail/4. r");
-
-			}
-		}
-
-
-		// ice
-		{
-			IMAGE->AddImage("ice_Under", "Ingame/Ice/under");
-
-			IMAGE->AddImage("ice_High", "Ingame/Ice/high");
-
-
-			// mob
-			{
-				IMAGE->AddImage("ice_mob1", "Ingame/Ice/mob/mob1/mob1", 6);
-
-				IMAGE->AddImage("ice_mob2", "Ingame/Ice/mob/mob2/mob2", 6);
-
-				IMAGE->AddImage("ice_boss", "Ingame/Ice/mob/boss/boss", 11);
-
-			}
-		}
-
-		// city
-		{
-			IMAGE->AddImage("city_Under", "Ingame/City/under");
-
-			IMAGE->AddImage("city_High", "Ingame/City/high");
-
-
-			//mob
-			{
-				IMAGE->AddImage("city_mob1", "Ingame/City/mob/mob1/mob1", 15);
-
-				IMAGE->AddImage("city_mob2", "Ingame/City/mob/mob2/mob2", 6);
-
-				IMAGE->AddImage("city_boss", "Ingame/City/mob/boss/boss", 10);
-
-			}
-		}
-
-		// city(night)
-		{
-			IMAGE->AddImage("city(night)_Under", "Ingame/city(night)/under");
-
-			IMAGE->AddImage("city(night)_high", "Ingame/city(night)/high");
-
-
-			//mob
-			{
-				IMAGE->AddImage("city(night)_mob1", "Ingame/city(night)/mob/mob1/mob1", 11);
-
-				IMAGE->AddImage("city(night)_mob2", "Ingame/city(night)/mob/mob2/mob2", 8);
-
-				IMAGE->AddImage("city(night)_boss", "Ingame/city(night)/mob/boss/boss", 8);
-
-			}
-		}
-
-		// ocean
-		{
-			IMAGE->AddImage("ocean_Under", "Ingame/Ocean/under");
-
-			IMAGE->AddImage("ocean_High", "Ingame/Ocean/high");
-
-
-			//mob
-			{
-				IMAGE->AddImage("ocean_mob1", "Ingame/Ocean/mob/mob1/mob1", 7);
-
-				IMAGE->AddImage("ocean_mob2", "Ingame/Ocean/mob/mob2/mob2", 9);
-
-				IMAGE->AddImage("ocean_boss", "Ingame/Ocean/mob/boss/boss", 8);
-
-			}
-		}
-
-		// desert
-		{
-			IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_Under");
-
-			IMAGE->AddImage("desert_High", "Ingame/Desert/desert_High");
-
-
-			//mob
-			{
-				IMAGE->AddImage("desert_mob1", "Ingame/Desert/mob/mob1/mob1", 6);
-
-				IMAGE->AddImage("desert_mob2", "Ingame/Desert/mob/mob2/mob2", 6);
-
-				IMAGE->AddImage("desert_boss1", "Ingame/Desert/mob/boss/1/boss1", 8);
-
-				IMAGE->AddImage("desert_boss2", "Ingame/Desert/mob/boss/2/boss2", 8);
-
-			}
-		}
-
-		// church
-		{
-			IMAGE->AddImage("church_Under", "Ingame/Church/under");
-
-			IMAGE->AddImage("church_high", "Ingame/Church/high");
-
-
-			//mob
-			{
-				IMAGE->AddImage("church_mob1", "Ingame/Church/mob/mob1/mob1", 19);
-
-				IMAGE->AddImage("church_mob2", "Ingame/Church/mob/mob2/mob2", 17);
-
-				IMAGE->AddImage("church_boss", "Ingame/Church/mob/boss/boss", 10);
-
-			}
-		}
-
-		// jungle
-		{
-			IMAGE->AddImage("jungle_Under", "Ingame/Jungle/under");
-
-			IMAGE->AddImage("jungle_High", "Ingame/Jungle/high");
-
-
-			// mob
-			{
-				IMAGE->AddImage("jungle_mob1", "Ingame/Jungle/mob/mob1/mob1", 14);
-
-				IMAGE->AddImage("jungle_mob2", "Ingame/Jungle/mob/mob2/mob2", 10);
-
-				IMAGE->AddImage("jungle_mob3", "Ingame/Jungle/mob/mob3/mob3", 5);
-
-				IMAGE->AddImage("jungle_boss", "Ingame/Jungle/mob/boss/boss", 8);
-
-			}
-		}
-
-		// UI
-		IMAGE->AddImage("IngameBG", "Ingame/UI/AllBG");
-
-		IMAGE->AddImage("Ingame_HP", "Ingame/UI/HP");
-
-		IMAGE->AddImage("Ingame_HP0", "Ingame/UI/HP0");
-
-		IMAGE->AddImage("Ingame_HP1", "Ingame/UI/HP1");
-
-		IMAGE->AddImage("Ingame_HP2", "Ingame/UI/HP2");
-
-		IMAGE->AddImage("Ingame_HP3", "Ingame/UI/HP3");
-
-		IMAGE->AddImage("Ingame_Item", "Ingame/UI/item");
-
-		IMAGE->AddImage("colon", "Ingame/UI/colon");
-
-		// public
-		IMAGE->AddImage("Arrow", "Public/Arrow");
-
-		IMAGE->AddImage("_Arrow", "Public/_Arrow");
-
-		IMAGE->AddImage("Blur", "Public/Blur");
-
-
-		// EndScene
-		IMAGE->AddImage("end_restart", "EndScene/restart");
-
-		IMAGE->AddImage("end_title", "EndScene/title");
-
-		IMAGE->AddImage("end_worldmap", "EndScene/worldmap");
-
-		IMAGE->AddImage("Boss", "Boss");
-
-		IMAGE->AddImage("Hp+", "Hp+");
-
-		IMAGE->AddImage("Speed+", "Speed+");
-
-		IMAGE->AddImage("Invincibility", "Invincibility");
-
-		IMAGE->AddImage("bullet_enemy", "bullet_enemy");
-
-		IMAGE->AddImage("bullet_enemy1", "bullet_enemy1");
-
-		IMAGE->AddImage("bullet_enemy2", "bullet_enemy2");
-
-		IMAGE->AddImage("over_Start", "Title/over_Start");
-
-		IMAGE->AddImage("over_Adven", "Title/over_Adven");
-
-		IMAGE->AddImage("over_Develop", "Title/over_Develop");
-
-		IMAGE->AddImage("over_Guide", "Title/over_Guide");
-
-		IMAGE->AddImage("over_Quit", "Title/over_Quit");
-
-		IMAGE->AddImage("click_Start", "Title/click_Start");
-
-		IMAGE->AddImage("click_Adven", "Title/click_Adven");
-
-		IMAGE->AddImage("click_Develop", "Title/click_Develop");
-
-		IMAGE->AddImage("click_Guide", "Title/click_Guide");
-
-		IMAGE->AddImage("click_Quit", "Title/click_Quit");
-
-		IMAGE->AddImage("Credit", "Title/DevelopBook/Credit");
-
-		// Bullets
-		{
-			// Church
-			IMAGE->AddImage("bullet_church_mob1", "Ingame/Church/bullets/mob1");
-			IMAGE->AddImage("bullet_church_mob2", "Ingame/Church/bullets/mob2");
-			IMAGE->AddImage("bullet_church_boss", "Ingame/Church/bullets/boss");
-
-			// City
-			IMAGE->AddImage("bullet_city_mob1", "Ingame/City/bullets/mob1");
-			IMAGE->AddImage("bullet_city_mob2", "Ingame/City/bullets/mob2");
-			IMAGE->AddImage("bullet_city_boss", "Ingame/City/bullets/boss");
-
-			// City (Night)
-			IMAGE->AddImage("bullet_city(night)_mob1", "Ingame/City(night)/bullets/mob1");
-			IMAGE->AddImage("bullet_city(night)_mob2", "Ingame/City(night)/bullets/mob2");
-			IMAGE->AddImage("bullet_city(night)_boss", "Ingame/City(night)/bullets/boss");
-
-			// Desert
-			IMAGE->AddImage("bullet_desert_mob1", "Ingame/Desert/bullets/mob1");
-			IMAGE->AddImage("bullet_desert_mob2", "Ingame/Desert/bullets/mob2");
-			IMAGE->AddImage("bullet_desert_boss1", "Ingame/Desert/bullets/boss1");
-			IMAGE->AddImage("bullet_desert_boss2", "Ingame/Desert/bullets/boss2");
-
-			// Ice
-			IMAGE->AddImage("bullet_ice_mob1", "Ingame/Ice/bullets/mob1");
-			IMAGE->AddImage("bullet_ice_mob2", "Ingame/Ice/bullets/mob2");
-			IMAGE->AddImage("bullet_ice_boss", "Ingame/Ice/bullets/boss");
-
-			// Jungle
-			IMAGE->AddImage("bullet_jungle_mob1", "Ingame/Jungle/bullets/mob1");
-			IMAGE->AddImage("bullet_jungle_mob2", "Ingame/Jungle/bullets/mob2");
-			IMAGE->AddImage("bullet_jungle_mob3", "Ingame/Jungle/bullets/mob3");
-			IMAGE->AddImage("bullet_jungle_boss", "Ingame/Jungle/bullets/boss");
-
-			// Ocean
-			IMAGE->AddImage("bullet_ocean_mob1", "Ingame/Ocean/bullets/mob1");
-			IMAGE->AddImage("bullet_ocean_mob2", "Ingame/Ocean/bullets/mob2");
-			IMAGE->AddImage("bullet_ocean_boss", "Ingame/Ocean/bullets/boss");
-		}
-
-		// Effect
-		{
-			// Church
-			IMAGE->AddImage("church_dead", "Ingame/Church/Effect/dead", 41);
-
-			IMAGE->AddImage("church_boss_effect", "Ingame/Church/bullets/boss_effect");
-			IMAGE->AddImage("church_mob1_effect", "Ingame/Church/bullets/mob1_effect");
-			IMAGE->AddImage("church_mob2_effect", "Ingame/Church/bullets/mob2_effect");
-
-			// City
-			IMAGE->AddImage("city_boss_effect", "Ingame/City/bullets/boss_effect");
-			IMAGE->AddImage("city_mob1_effect", "Ingame/City/bullets/mob1_effect");
-			IMAGE->AddImage("city_mob2_effect", "Ingame/City/bullets/mob2_effect");
-
-			// City(Night)
-			IMAGE->AddImage("city(night)_boss_effect", "Ingame/City(night)/bullets/boss_effect");
-			IMAGE->AddImage("city(night)_mob1_effect", "Ingame/City(night)/bullets/mob1_effect");
-			IMAGE->AddImage("city(night)_mob2_effect", "Ingame/City(night)/bullets/mob2_effect");
-
-			// Jungle
-			IMAGE->AddImage("jungle_dead", "Ingame/Jungle/Effect/dead", 30);
-
-			IMAGE->AddImage("jungle_boss_effect", "Ingame/Jungle/bullets/boss_effect");
-			IMAGE->AddImage("jungle_mob1_effect", "Ingame/Jungle/bullets/mob1_effect");
-			IMAGE->AddImage("jungle_mob2_effect", "Ingame/Jungle/bullets/mob2_effect");
-			IMAGE->AddImage("jungle_mob3_effect", "Ingame/Jungle/bullets/mob3_effect");
-
-			// Desert
-			IMAGE->AddImage("desert_gold_dead", "Ingame/Jungle/Effect/gold/dead", 28);
-			IMAGE->AddImage("desert_silver_dead", "Ingame/Jungle/Effect/silver/dead", 30);
-
-			IMAGE->AddImage("desert_boss1_effect", "Ingame/Desert/bullets/boss1_effect");
-			IMAGE->AddImage("desert_boss2_effect", "Ingame/Desert/bullets/boss2_effect");
-			IMAGE->AddImage("desert_mob1_effect", "Ingame/Desert/bullets/mob1_effect");
-			IMAGE->AddImage("desert_mob2_effect", "Ingame/Desert/bullets/mob2_effect");
-
-			// Ice
-			IMAGE->AddImage("ice_dead", "Ingame/Ice/Effect/dead", 27);
-
-			IMAGE->AddImage("ice_boss_effect", "Ingame/Ice/bullets/boss_effect");
-			IMAGE->AddImage("ice_mob1_effect", "Ingame/Ice/bullets/mob1_effect");
-			IMAGE->AddImage("ice_mob2_effect", "Ingame/Ice/bullets/mob2_effect");
-
-			// Ocean
-			IMAGE->AddImage("ocean_dead", "Ingame/Ocean/Effect/dead", 15);
-
-			IMAGE->AddImage("ocean_boss_effect", "Ingame/Ocean/bullets/boss_effect");
-			IMAGE->AddImage("ocean_mob1_effect", "Ingame/Ocean/bullets/mob1_effect");
-			IMAGE->AddImage("ocean_mob2_effect", "Ingame/Ocean/bullets/mob2_effect");
-
-			// Color
-			{
-				IMAGE->AddImage("white_effect", "Effect/white_Effect");
-			}
-		}
-		
-		isLoaded = true;
-	}
-	catch (exception e)
-	{
-		isLoaded = true;
-	}
 }
