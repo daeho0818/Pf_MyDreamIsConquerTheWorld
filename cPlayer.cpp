@@ -16,7 +16,6 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
-	srand(time(NULL));
 	memset(SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
 
@@ -142,16 +141,9 @@ void cPlayer::Update(Vec2 bossPos)
 					random_y = rand() % 75;
 				}
 			}
-
-			PART->AddEffect({ m_pos.x + random_x, m_pos.y + random_y }, 1, "white_effect", effectCount[1][i]++, 0.1);
+			float size = (rand() % 11) / 10;
+			PART->AddEffect({ m_pos.x + random_x, m_pos.y + random_y }, size, "white_effect", 0.1);
 		}
-	}
-	else
-	{
-		effectCount[1][0] = 0;
-		effectCount[1][1] = 0;
-		effectCount[1][2] = 0;
-		effectCount[1][3] = 0;
 	}
 
 	if (returning) Returning();
@@ -471,10 +463,11 @@ void cPlayer::Move()
 							if (random_y == 1) random_y = -10;
 							if (random_y == 2) random_y = 10;
 							if (random_y == 3) random_y = 20;
-							if (effectCount[0][0] > 150) random_y = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][0]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][0]++);
+							float size = (rand() % 11) / 10.0;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -509,10 +502,11 @@ void cPlayer::Move()
 							if (random_y == 1) random_y = -10;
 							if (random_y == 2) random_y = 10;
 							if (random_y == 3) random_y = 20;
-							if (effectCount[0][1] > 150) random_y = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][1]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][1]++);
+							float size = (rand() % 11) / 10.0;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -547,10 +541,11 @@ void cPlayer::Move()
 							if (random_x == 1) random_x = -10;
 							if (random_x == 2) random_x = 10;
 							if (random_x == 3) random_x = 20;
-							if (effectCount[0][2] > 150) random_x = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][2]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][2]++);
+							float size = (rand() % 11) / 10.0;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -586,20 +581,17 @@ void cPlayer::Move()
 							if (random_x == 1) random_x = -10;
 							if (random_x == 2) random_x = 10;
 							if (random_x == 3) random_x = 20;
-							if (effectCount[0][3] > 150) random_x = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][3]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][3]++);
+							float size = (rand() % 11) / 10.0;
+
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
 				}
 			}
 		}
-		if (!left) { effectCount[0][0] = 0; }
-		if (!right) { effectCount[0][1] = 0; }
-		if (!up) { effectCount[0][2] = 0; }
-		if (!down) { effectCount[0][3] = 0; }
 	}
 }
 

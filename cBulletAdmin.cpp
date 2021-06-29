@@ -37,7 +37,9 @@ void cBulletAdmin::Update()
 	for (auto iter : m_bullets)
 	{
 		iter->Update();
-		PART->AddEffect(Vec2(iter->m_pos.x + random_x, iter->m_pos.y + random_y), 1, iter->effectName, 50);
+
+		float size = (rand() % 11) / 10.0;
+		PART->AddEffect(Vec2(iter->m_pos.x + random_x, iter->m_pos.y + random_y), size, iter->effectName);
 	}
 	IsOut();
 	IsDestroy();

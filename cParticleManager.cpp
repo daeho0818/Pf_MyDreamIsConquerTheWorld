@@ -17,9 +17,9 @@ void cParticleManager::AddParticle(Vec2 pos, float size, string imgName, float f
 	m_particles.push_back(par);
 }
 
-void cParticleManager::AddEffect(Vec2 pos, float size, string imgName, int count, double deathTime)
+void cParticleManager::AddEffect(Vec2 pos, float size, string imgName, double deathTime)
 {
-	cParticle* par = new cParticleAni(pos, size, deathTime, true, imgName, count);
+	cParticle* par = new cParticleAni(pos, size, deathTime, true, imgName);
 	m_particles.push_back(par);
 }
 
