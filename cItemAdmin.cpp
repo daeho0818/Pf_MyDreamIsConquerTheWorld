@@ -44,14 +44,14 @@ void cItemAdmin::Update()
 	}
 	if (t_Speed == nullptr)
 	{
-		t_Speed = new cTimer(15, [&]()->void {
+		t_Speed = new cTimer(30, [&]()->void {
 			CreateItem("Speed");
 			t_Speed = nullptr;
 			});
 	}
 	if (t_Invincibility == nullptr)
 	{
-		t_Invincibility = new cTimer(20, [&]()->void {
+		t_Invincibility = new cTimer(40, [&]()->void {
 			CreateItem("Invincibility");
 			t_Invincibility = nullptr;
 			});
@@ -67,10 +67,16 @@ void cItemAdmin::Render()
 void cItemAdmin::CreateItem(string key)
 {
 	Vec2 r_Pos;
-	do
+	int random_x, random_y;
+	while (true)
 	{
-		r_Pos = { float(rand() % (40 + WINSIZEX) - 40), float(rand() % (WINSIZEY + 300) - 340) };
-	} while (SCENE->Array[(int)r_Pos.y][(int)r_Pos.x] == 3);
+		random_x = float(rand() % (40 + WINSIZEX) - 40);
+		random_y = float(rand() % (300 + WINSIZEY) - 300);
+		if (random_x > 40 && random_x < WINSIZEX - 40 && random_y > 300 && random_y < WINSIZEY - 300) 
+			if(SCENE->Array[random_y][random_x] == 0)
+				break;
+	}
+	r_Pos = { (float)random_x, (float)random_y };
 
 	if (key == "Heal")
 		m_items.push_back(new cHeal(r_Pos));

@@ -28,6 +28,12 @@ void cLoadingScene::Init()
 
 	IMAGE->AddImage("TitleBG", "title/TitleBG");
 
+	IMAGE->AddImage("LoadUI", "LoadScene/LoadUI");
+
+	IMAGE->AddImage("LoadBar", "LoadScene/LoadBar");
+
+	IMAGE->AddImage("BarContent", "LoadScene/BarContent");
+
 	// title
 	AddLoad("Logo", "title/Logo");
 
@@ -570,6 +576,8 @@ void cLoadingScene::Update()
 void cLoadingScene::Render()
 {
 	RENDER->CenterRender(IMAGE->FindImage("TitleBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
+
+	RENDER->CenterRender(IMAGE->FindImage("LoadUI"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 1.5);
 	int percent = 100 - (loadList.size() * 100 / listCount);
 
 	int hon, ten, one;
@@ -578,19 +586,35 @@ void cLoadingScene::Render()
 
 	char key[3];
 	sprintf(key, "%d", hon);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2));
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 - 50));
 
 	sprintf(key, "%d", ten);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 50, WINSIZEY / 2));
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 - 50, WINSIZEY / 2 - 50));
 
 	sprintf(key, "%d", one);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 50, WINSIZEY / 2));
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 50, WINSIZEY / 2 - 50));
 
-	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 160, WINSIZEY / 2));
+	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 160, WINSIZEY / 2 - 50));
 }
 
 void cLoadingScene::UIRender()
 {
+	float width = IMAGE->FindImage("LoadBar")->info.Width;
+	float height = IMAGE->FindImage("LoadBar")->info.Height;
+	RECT barRc = {
+		0,
+		0,
+		width,
+		height
+	};
+	RECT conRc = {
+		0,
+		0,
+		width / 100 * (100 - (loadList.size() * 100 / listCount)),
+		height
+	};
+	UI->CropRender(IMAGE->FindImage("BarContent"), Vec2(960, 580), conRc);
+	UI->CropRender(IMAGE->FindImage("LoadBar"), Vec2(960, 580), barRc);
 }
 
 void cLoadingScene::Release()

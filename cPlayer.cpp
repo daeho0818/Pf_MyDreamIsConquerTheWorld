@@ -16,6 +16,7 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
+	srand(time(NULL));
 	memset(SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
 
@@ -36,6 +37,7 @@ void cPlayer::Init()
 	draw_mode = false;
 	returning = false;
 	stop = false;
+	speedUp = false;
 	invincibility = false;
 	isAttacked = false;
 
@@ -108,9 +110,52 @@ void cPlayer::Update(Vec2 bossPos)
 		}
 	}
 
+	if (invincibility || speedUp)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			int random = rand() % 3;
+			int random_x = 0, random_y = 0;
+			if (random == 1) // x는 음수
+			{
+				random = rand() % 3;
+				random_x = -(rand() % 75);
+				if (random == 1) // y는 음수
+				{
+					random_y = -(rand() % 75);
+				}
+				else // y는 양수
+				{
+					random_y = rand() % 75;
+				}
+			}
+			else // x는 양수
+			{
+				random = rand() % 3;
+				random_x = rand() % 75;
+				if (random == 1) // y는 음수
+				{
+					random_y = -(rand() % 75);
+				}
+				else // y는 양수
+				{
+					random_y = rand() % 75;
+				}
+			}
+
+			PART->AddEffect({ m_pos.x + random_x, m_pos.y + random_y }, 1, "white_effect", effectCount[1][i]++, 0.1);
+		}
+	}
+	else
+	{
+		effectCount[1][0] = 0;
+		effectCount[1][1] = 0;
+		effectCount[1][2] = 0;
+		effectCount[1][3] = 0;
+	}
+
 	if (returning) Returning();
 
-	//THREAD->AddThread("Move", [&]()->void {Move(); });
 	Move();
 
 	if (t_Speed != nullptr) t_Speed->Update();
@@ -426,10 +471,10 @@ void cPlayer::Move()
 							if (random_y == 1) random_y = -10;
 							if (random_y == 2) random_y = 10;
 							if (random_y == 3) random_y = 20;
-							if (effectCount[0] > 150) random_y = 1;
+							if (effectCount[0][0] > 150) random_y = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0]++);
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][0]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][0]++);
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -464,10 +509,10 @@ void cPlayer::Move()
 							if (random_y == 1) random_y = -10;
 							if (random_y == 2) random_y = 10;
 							if (random_y == 3) random_y = 20;
-							if (effectCount[1] > 150) random_y = 1;
+							if (effectCount[0][1] > 150) random_y = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[1]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[1]++);
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][1]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][1]++);
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -502,10 +547,10 @@ void cPlayer::Move()
 							if (random_x == 1) random_x = -10;
 							if (random_x == 2) random_x = 10;
 							if (random_x == 3) random_x = 20;
-							if (effectCount[2] > 150) random_x = 1;
+							if (effectCount[0][2] > 150) random_x = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[2]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[2]++);
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][2]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][2]++);
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
@@ -541,20 +586,20 @@ void cPlayer::Move()
 							if (random_x == 1) random_x = -10;
 							if (random_x == 2) random_x = 10;
 							if (random_x == 3) random_x = 20;
-							if (effectCount[3] > 150) random_x = 1;
+							if (effectCount[0][3] > 150) random_x = 1;
 
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[3]++);
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[3]++);
+							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), 1, "white_effect", effectCount[0][3]++);
+							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), 1, "white_effect", effectCount[0][3]++);
 							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
 						}
 					}
 				}
 			}
 		}
-		if (!left) { effectCount[0] = 0; }
-		if (!right) { effectCount[1] = 0; }
-		if (!up) { effectCount[2] = 0; }
-		if (!down) { effectCount[3] = 0; }
+		if (!left) { effectCount[0][0] = 0; }
+		if (!right) { effectCount[0][1] = 0; }
+		if (!up) { effectCount[0][2] = 0; }
+		if (!down) { effectCount[0][3] = 0; }
 	}
 }
 
@@ -681,9 +726,11 @@ void cPlayer::EatItem(string key)
 	if (key == "Speed")
 	{
 		speed = 25;
+		speedUp = true;
 		if (t_Speed == nullptr)
 		{
 			t_Speed = new cTimer(5, [&]()->void {
+				speedUp = false;
 				speed = 15;
 				t_Speed = nullptr;
 				});

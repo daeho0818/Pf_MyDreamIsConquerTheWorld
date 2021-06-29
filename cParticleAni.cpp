@@ -1,8 +1,8 @@
 #include "DXUT.h"
 #include "cParticleAni.h"
 
-cParticleAni::cParticleAni(Vec2 pos, float size, bool effect, string imgName, int count, float frameTime)
-	:cParticle(pos, size, effect, frameTime), count(count), imgName(imgName)
+cParticleAni::cParticleAni(Vec2 pos, float size, double deathTime, bool effect, string imgName, int count, float frameTime)
+	:cParticle(pos, size, effect, frameTime), count(count), imgName(imgName), deathTime(deathTime)
 {
 	FrameTime = frameTime;
 
@@ -51,9 +51,8 @@ void cParticleAni::Update()
 		{
 			RenderSize = 1.7f;
 		}
-		RenderSize -= 0.1;
 		if (m_ani == nullptr)
-			m_ani = new cTimer(0.3f, [&]()->void {isDestroy = true; m_ani = nullptr; });
+			m_ani = new cTimer(deathTime, [&]()->void {isDestroy = true; m_ani = nullptr; });
 	}
 }
 

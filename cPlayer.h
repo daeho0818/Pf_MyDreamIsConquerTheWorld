@@ -29,7 +29,7 @@ public:
 	int speed;
 	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
 	int FadeCount;
-	int effectCount[4] = { 0, };
+	int effectCount[2][10] = { {0,}, };
 
 	float coloring_per = 0;
 
@@ -39,6 +39,7 @@ public:
 	bool draw_mode = false;
 	bool returning = false;
 	bool stop = false;
+	bool speedUp = false;
 	bool invincibility = false;
 	bool isAttacked;
 

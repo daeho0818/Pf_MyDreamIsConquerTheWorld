@@ -9,7 +9,7 @@ public:
     ~cParticleManager();
 
     void AddParticle(Vec2 pos, float size, string imgName = "", float frameTime = 0.005);
-    void AddEffect(Vec2 pos, float size, string imgName, int count);
+    void AddEffect(Vec2 pos, float size, string imgName, int count, double deathTime = 0.3);
     void Update();
     void Render();
     void Release();
