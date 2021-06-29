@@ -26,9 +26,9 @@ void cLoadingScene::Init()
 	}
 	IMAGE->AddImage("percent", "Text/%");
 
-	// title
-	AddLoad("TitleBG", "title/TitleBG");
+	IMAGE->AddImage("TitleBG", "title/TitleBG");
 
+	// title
 	AddLoad("Logo", "title/Logo");
 
 	AddLoad("start_note", "title/start_note");
@@ -510,12 +510,17 @@ void cLoadingScene::Init()
 		AddLoad("city(night)_mob2_effect", "Ingame/City(night)/bullets/mob2_effect");
 
 		// Jungle
+		AddLoad("jungle_dead", "Ingame/Jungle/Effect/dead", 30);
+
 		AddLoad("jungle_boss_effect", "Ingame/Jungle/bullets/boss_effect");
 		AddLoad("jungle_mob1_effect", "Ingame/Jungle/bullets/mob1_effect");
 		AddLoad("jungle_mob2_effect", "Ingame/Jungle/bullets/mob2_effect");
 		AddLoad("jungle_mob3_effect", "Ingame/Jungle/bullets/mob3_effect");
 
 		// Desert
+		AddLoad("desert_gold_dead", "Ingame/Desert/Effect/gold/dead", 28);
+		AddLoad("desert_silver_dead", "Ingame/Desert/Effect/silver/dead", 30);
+
 		AddLoad("desert_boss1_effect", "Ingame/Desert/bullets/boss1_effect");
 		AddLoad("desert_boss2_effect", "Ingame/Desert/bullets/boss2_effect");
 		AddLoad("desert_mob1_effect", "Ingame/Desert/bullets/mob1_effect");
@@ -564,6 +569,7 @@ void cLoadingScene::Update()
 
 void cLoadingScene::Render()
 {
+	RENDER->CenterRender(IMAGE->FindImage("TitleBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	int percent = 100 - (loadList.size() * 100 / listCount);
 
 	int hon, ten, one;

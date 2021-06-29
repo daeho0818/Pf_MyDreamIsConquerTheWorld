@@ -668,10 +668,6 @@ void cPlayer::Returning(bool isReturned)
 void cPlayer::ItemUpdate()
 {
 	if (hp <= 0) hp = 0;
-	if (itemName == "Heal" || itemName == "Speed" || itemName == "invincibility")
-	{
-		EatItem(itemName);
-	}
 }
 
 void cPlayer::EatItem(string key)
@@ -698,10 +694,13 @@ void cPlayer::EatItem(string key)
 	if (key == "Invincibility")
 	{
 		invincibility = true;
-		t_Invincibility = new cTimer(5, [&]()->void {
-			invincibility = false;
-			t_Invincibility = nullptr;
-			});
+		if (t_Invincibility == nullptr)
+		{
+			t_Invincibility = new cTimer(5, [&]()->void {
+				invincibility = false;
+				t_Invincibility = nullptr;
+				});
+		}
 		SCENE->score += 100;
 	}
 	itemName = "none";

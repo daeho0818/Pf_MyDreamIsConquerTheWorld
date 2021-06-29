@@ -28,6 +28,7 @@ void cCollision::MPColl()
 			{
 				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{
+					DebugLog(L"MPColl");
 					m_player->hp -= (*iter)->m_damage;
 					m_player->returning = true;
 					m_player->isAttacked = true;
@@ -52,6 +53,7 @@ void cCollision::MBPColl()
 			{
 				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{
+					DebugLog(L"MBPColl");
 					m_player->hp -= (*iter)->m_Damage;
 					m_player->returning = true;
 					(*iter)->isDestroy = true;
@@ -69,7 +71,7 @@ void cCollision::IPColl()
 	{
 		if (7 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
 		{
-			m_player->itemName = (*iter)->itemName;
+			m_player->EatItem((*iter)->itemName);
 			(*iter)->isDestroy = true;
 		}
 		iter++;

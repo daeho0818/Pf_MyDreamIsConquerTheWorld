@@ -252,9 +252,7 @@ void cTitleScene::Render()
 		}
 
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CircleDown"), Vec2(350, WINSIZEY - 420), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CircleUp"), Vec2(350, WINSIZEY - 420), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.5);
+		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.7);
 
 		RENDER->CenterRender(IMAGE->FindImage("X"), Vec2(3330, WINSIZEY / 2 - 1023), 0.6);
 		BUTTON->ChangeBtnInfo("X", Vec2(3330, WINSIZEY / 2 - 1023), 0.6);
