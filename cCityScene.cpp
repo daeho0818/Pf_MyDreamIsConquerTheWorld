@@ -69,13 +69,16 @@ void cCityScene::Update()
 		}
 	}
 
-	if (isStart && !isStop && !isClear && !isFail)
+	if (isStart && !isStop)
 	{
-		player->Update(mob->bossPos);
-		bullet->Update();
 		mob->Update();
-		item->Update();
-		coll->Update();
+		if (!isClear && !isFail)
+		{
+			player->Update(mob->bossPos);
+			bullet->Update();
+			item->Update();
+			coll->Update();
+		}
 	}
 
 	cParentScene::Update();
@@ -83,9 +86,9 @@ void cCityScene::Update()
 
 void cCityScene::Render()
 {
-	player->Render();
 	if (isStart && !isStop && !isClear && !isFail)
 	{
+		player->Render();
 		bullet->Render();
 		mob->Render();
 		item->Render();

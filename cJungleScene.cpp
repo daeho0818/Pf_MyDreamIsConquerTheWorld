@@ -36,7 +36,7 @@ void cJungleScene::Init()
 	IMAGE->DeleteImage("jungle_Under");
 	IMAGE->AddImage("jungle_High", "Ingame/Jungle/high");
 	IMAGE->AddImage("jungle_Under", "Ingame/Jungle/under");
-	cTexture* ptr[2] = {IMAGE->FindImage("jungle_High"), IMAGE->FindImage("jungle_Under") };
+	cTexture* ptr[2] = { IMAGE->FindImage("jungle_High"), IMAGE->FindImage("jungle_Under") };
 	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
@@ -70,13 +70,16 @@ void cJungleScene::Update()
 		}
 	}
 
-	if (isStart && !isStop && !isClear && !isFail)
+	if (isStart && !isStop)
 	{
-		player->Update(mob->bossPos);
-		bullet->Update();
 		mob->Update();
-		item->Update();
-		coll->Update();
+		if (!isClear && !isFail)
+		{
+			player->Update(mob->bossPos);
+			bullet->Update();
+			item->Update();
+			coll->Update();
+		}
 	}
 
 	cParentScene::Update();
@@ -84,9 +87,9 @@ void cJungleScene::Update()
 
 void cJungleScene::Render()
 {
-	player->Render();
 	if (isStart && !isStop && !isClear && !isFail)
 	{
+		player->Render();
 		bullet->Render();
 		mob->Render();
 		item->Render();

@@ -11,6 +11,8 @@ public:
 
 	cTexture* ptr[2];
 
+	cTexture* high_BG = nullptr;
+
 	void Render();
 };
 #define BG cBGManager::GetInstance()

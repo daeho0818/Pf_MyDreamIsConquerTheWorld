@@ -105,6 +105,34 @@ void cLoadingScene::Init()
 
 	AddLoad("adven_textBG", "title/AdvenBook/textBG");
 
+	AddLoad("symbol_church", "title/AdvenBook/Symbol/church");
+
+	AddLoad("symbol_church_name", "title/AdvenBook/Symbol/church_name");
+
+	AddLoad("symbol_city", "title/AdvenBook/Symbol/city");
+
+	AddLoad("symbol_city_name", "title/AdvenBook/Symbol/city_name");
+
+	AddLoad("symbol_city(night)", "title/AdvenBook/Symbol/city(night)");
+
+	AddLoad("symbol_city(night)_name", "title/AdvenBook/Symbol/city(night)_name");
+
+	AddLoad("symbol_desert", "title/AdvenBook/Symbol/desert");
+
+	AddLoad("symbol_desert_name", "title/AdvenBook/Symbol/desert_name");
+
+	AddLoad("symbol_ice", "title/AdvenBook/Symbol/ice");
+
+	AddLoad("symbol_ice_name", "title/AdvenBook/Symbol/ice_name");
+
+	AddLoad("symbol_ocean", "title/AdvenBook/Symbol/ocean");
+
+	AddLoad("symbol_ocean_name", "title/AdvenBook/Symbol/ocean_name");
+
+	AddLoad("symbol_jungle", "title/AdvenBook/Symbol/jungle");
+
+	AddLoad("symbol_jungle_name", "title/AdvenBook/Symbol/jungle_name");
+		
 	// world map
 	AddLoad("WorldMap", "WorldMap/map");
 
@@ -506,6 +534,8 @@ void cLoadingScene::Init()
 		AddLoad("church_mob2_effect", "Ingame/Church/bullets/mob2_effect");
 
 		// City
+		AddLoad("city_dead", "Ingame/City/Effect/dead", 24);
+
 		AddLoad("city_boss_effect", "Ingame/City/bullets/boss_effect");
 		AddLoad("city_mob1_effect", "Ingame/City/bullets/mob1_effect");
 		AddLoad("city_mob2_effect", "Ingame/City/bullets/mob2_effect");

@@ -36,7 +36,7 @@ void cOceanScene::Init()
 	IMAGE->DeleteImage("ocean_Under");
 	IMAGE->AddImage("ocean_High", "Ingame/Ocean/high");
 	IMAGE->AddImage("ocean_Under", "Ingame/Ocean/under");
-	cTexture* ptr[2] = {IMAGE->FindImage("ocean_High"), IMAGE->FindImage("ocean_Under") };
+	cTexture* ptr[2] = { IMAGE->FindImage("ocean_High"), IMAGE->FindImage("ocean_Under") };
 	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
@@ -70,13 +70,16 @@ void cOceanScene::Update()
 		mob->isDestroy = false;
 	}
 
-	if (isStart && !isStop && !isClear && !isFail)
+	if (isStart && !isStop)
 	{
-		player->Update(mob->bossPos);
-		bullet->Update();
 		mob->Update();
-		item->Update();
-		coll->Update();
+		if (!isClear && !isFail)
+		{
+			player->Update(mob->bossPos);
+			bullet->Update();
+			item->Update();
+			coll->Update();
+		}
 	}
 
 	cParentScene::Update();
@@ -84,9 +87,9 @@ void cOceanScene::Update()
 
 void cOceanScene::Render()
 {
-	player->Render();
 	if (isStart && !isStop && !isClear && !isFail)
 	{
+		player->Render();
 		bullet->Render();
 		mob->Render();
 		item->Render();

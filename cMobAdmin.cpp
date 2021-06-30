@@ -85,17 +85,18 @@ void cMobAdmin::Update()
 	for (auto iter : m_mobs)
 	{
 		iter->Update();
+
 		if (iter->mobType == "Boss") bossPos = iter->m_pos;
+
 		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 3)
 		{
-			iter->isDestroy = true;
 			if (stage == "cChurchScene")
 			{
 				PART->AddParticle(iter->m_pos, 1, "church_dead");
 			}
 			else if (stage == "cCityScene")
 			{
-				// PART->AddParticle(iter->m_pos, 1, "city_dead");
+				PART->AddParticle(iter->m_pos, 1, "city_dead");
 			}
 			else if (stage == "cCityNightScene")
 			{
@@ -120,6 +121,7 @@ void cMobAdmin::Update()
 			{
 				PART->AddParticle(iter->m_pos, 1, "ocean_dead");
 			}
+			iter->isDestroy = true;
 		}
 	}
 	IsDestroy();

@@ -36,7 +36,7 @@ void cChurchScene::Init()
 	IMAGE->DeleteImage("church_Under");
 	IMAGE->AddImage("church_High", "Ingame/Church/high");
 	IMAGE->AddImage("church_Under", "Ingame/Church/under");
-	cTexture* ptr[2] = {IMAGE->FindImage("church_High"), IMAGE->FindImage("church_Under") };
+	cTexture* ptr[2] = { IMAGE->FindImage("church_High"), IMAGE->FindImage("church_Under") };
 	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
@@ -70,13 +70,16 @@ void cChurchScene::Update()
 		}
 	}
 
-	if (isStart && !isStop && !isClear && !isFail)
+	if (isStart && !isStop)
 	{
-		player->Update(mob->bossPos);
-		bullet->Update();
 		mob->Update();
-		item->Update();
-		coll->Update();
+		if (!isClear && !isFail)
+		{
+			player->Update(mob->bossPos);
+			bullet->Update();
+			item->Update();
+			coll->Update();
+		}
 	}
 
 	cParentScene::Update();
@@ -84,9 +87,9 @@ void cChurchScene::Update()
 
 void cChurchScene::Render()
 {
-	player->Render();
 	if (isStart && !isStop && !isClear && !isFail)
 	{
+		player->Render();
 		bullet->Render();
 		mob->Render();
 		item->Render();

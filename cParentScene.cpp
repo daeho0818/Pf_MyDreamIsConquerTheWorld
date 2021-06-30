@@ -94,6 +94,12 @@ void cParentScene::Update()
 	{
 		if (t_Clear != nullptr) t_Clear->Update();
 
+		for (int x = 40; x < WINSIZEX - 40; x++)
+			for (int y = 300; y < WINSIZEY - 40; y++)
+				SCENE->Array[y][x] = 3;
+
+		BG->high_BG = t_BG;
+
 		if (delay)
 		{
 			if (delayCount < 7)
@@ -149,6 +155,10 @@ void cParentScene::Update()
 		{
 			textsPos[6].x += speed;
 		}
+	}
+	else
+	{
+		BG->high_BG = nullptr;
 	}
 
 	if (isFail)
@@ -312,8 +322,6 @@ void cParentScene::Update()
 
 void cParentScene::Render()
 {
-	if (isClear)
-		RENDER->CenterRender(t_BG, Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	RENDER->CenterRender(IMAGE->FindImage("IngameBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 	switch (hp)
 	{
@@ -378,9 +386,9 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 190));
 	sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
 	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2900, 190));
-	sprintf(t_score, "%d", (score- ((score / 100) * 100)) / 10);
+	sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
 	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3000, 190));
-	sprintf(t_score, "%d",( score - ((score / 100) * 100)) % 10);
+	sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
 	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3100, 190));
 
 	if (isStop)

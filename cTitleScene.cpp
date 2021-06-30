@@ -28,7 +28,9 @@ void cTitleScene::Init()
 	buttonsMoved = false;
 	movedEnd = true;
 	temp = 0;
-	logoPos = { WINSIZEX / 2, 500 };
+	count = 0;
+	logoPos = { WINSIZEX / 2, 500 }; 
+	arrowKey = "Arrow";
 	memset(move, false, sizeof(move));
 	move[0] = true; speed = 1;
 
@@ -233,7 +235,7 @@ void cTitleScene::Render()
 			{
 				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
 				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1525, 450 * i), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1400, 450 * i), 0.25);
 			}
 		}
 
@@ -247,9 +249,30 @@ void cTitleScene::Render()
 			{
 				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
 				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2805, 450 * i), 0.3);
+				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 450 * i), 0.25);
 			}
 		}
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_church"), Vec2(1850, 410), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_church_name"), Vec2(1850, 530), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city"), Vec2(1850, 860), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city_name"), Vec2(1850, 970), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)"), Vec2(1850, 1310), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)_name"), Vec2(1850, 1420), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_desert"), Vec2(1850, 1750), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_desert_name"), Vec2(1850, 1860), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle"), Vec2(3140, 400), 0.25);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle_name"), Vec2(3140, 510), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ice"), Vec2(3140, 860), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ice_name"), Vec2(3140, 970), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean"), Vec2(3140, 1300), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean_name"), Vec2(3140, 1410), 0.25);
 
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
 		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.7);

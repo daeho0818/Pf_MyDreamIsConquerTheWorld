@@ -36,7 +36,7 @@ void cCityNightScene::Init()
 	IMAGE->DeleteImage("city(night)_Under");
 	IMAGE->AddImage("city(night)_High", "Ingame/City(night)/high");
 	IMAGE->AddImage("city(night)_Under", "Ingame/City(night)/under");
-	cTexture* ptr[2] = {IMAGE->FindImage("city(night)_High"), IMAGE->FindImage("city(night)_Under") };
+	cTexture* ptr[2] = { IMAGE->FindImage("city(night)_High"), IMAGE->FindImage("city(night)_Under") };
 	t_BG = ptr[1];
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
@@ -70,13 +70,16 @@ void cCityNightScene::Update()
 		}
 	}
 
-	if (isStart && !isStop && !isClear && !isFail)
+	if (isStart && !isStop)
 	{
-		player->Update(mob->bossPos);
-		bullet->Update();
 		mob->Update();
-		item->Update();
-		coll->Update();
+		if (!isClear && !isFail)
+		{
+			player->Update(mob->bossPos);
+			bullet->Update();
+			item->Update();
+			coll->Update();
+		}
 	}
 
 	cParentScene::Update();
@@ -84,9 +87,9 @@ void cCityNightScene::Update()
 
 void cCityNightScene::Render()
 {
-	player->Render();
 	if (isStart && !isStop && !isClear && !isFail)
 	{
+		player->Render();
 		bullet->Render();
 		mob->Render();
 		item->Render();
