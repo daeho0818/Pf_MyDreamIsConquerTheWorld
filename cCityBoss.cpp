@@ -3,8 +3,8 @@
 #include "cMBullet.h"
 #include "cReflexBullet.h"
 
-cCityBoss::cCityBoss(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cCityBoss::cCityBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("city_boss");
 	mobType = "Boss";
@@ -18,9 +18,7 @@ cCityBoss::cCityBoss(Vec2 pos, vector<cBullet*>& bullet)
 
 cCityBoss::~cCityBoss()
 {
-	SAFE_DELETE(t_Pattern1);
 	SAFE_DELETE(t_Pattern2);
-	SAFE_DELETE(m_Ani);
 }
 
 void cCityBoss::CircleBullet(float interval, Vec2 pos)
@@ -42,16 +40,6 @@ void cCityBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (t_Pattern2 != nullptr) t_Pattern2->Update();
-
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-	if (m_Ani != nullptr) m_Ani->Update();
 
 	if (pattern1)
 	{
@@ -113,5 +101,5 @@ void cCityBoss::Update()
 
 void cCityBoss::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

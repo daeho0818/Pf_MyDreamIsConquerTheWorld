@@ -2,8 +2,8 @@
 #include "cJungleMob2.h"
 #include "cReflexBullet.h"
 
-cJungleMob2::cJungleMob2(Vec2 pos, vector<cBullet*>& bullets)
-	:cMob(pos), m_bullets(bullets)
+cJungleMob2::cJungleMob2(Vec2 pos, vector<cBullet*>& bullets, float size)
+	:cMob(pos, size), m_bullets(bullets)
 {
 	m_image = IMAGE->MakeVecImg("jungle_mob2");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
@@ -12,22 +12,10 @@ cJungleMob2::cJungleMob2(Vec2 pos, vector<cBullet*>& bullets)
 
 cJungleMob2::~cJungleMob2()
 {
-	SAFE_DELETE(m_Ani);
 }
 
 void cJungleMob2::Update()
 {
-	if (m_Ani != nullptr) m_Ani->Update();
-
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (p1Count < 5)
 	{
@@ -47,7 +35,6 @@ void cJungleMob2::Update()
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
-
 		}
 	}
 	else
@@ -69,5 +56,5 @@ void cJungleMob2::Update()
 
 void cJungleMob2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 1.5);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

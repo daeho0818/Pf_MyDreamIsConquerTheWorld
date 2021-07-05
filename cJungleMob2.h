@@ -3,7 +3,7 @@ class cJungleMob2
 	:public cMob
 {
 public:
-	cJungleMob2(Vec2 pos, vector<cBullet*>& bullets);
+	cJungleMob2(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cJungleMob2();
 	
 	float dir_x = 1;

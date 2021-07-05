@@ -2,8 +2,8 @@
 #include "cChurchMob2.h"
 #include "cReflexBullet.h"
 
-cChurchMob2::cChurchMob2(Vec2 pos, vector<cBullet*>& bullets)
-	:cMob(pos), m_bullets(bullets)
+cChurchMob2::cChurchMob2(Vec2 pos, vector<cBullet*>& bullets, float size)
+	:cMob(pos, size), m_bullets(bullets)
 {
 	m_image = IMAGE->MakeVecImg("church_mob2");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
@@ -13,23 +13,10 @@ cChurchMob2::cChurchMob2(Vec2 pos, vector<cBullet*>& bullets)
 
 cChurchMob2::~cChurchMob2()
 {
-	SAFE_DELETE(m_Ani);
-	SAFE_DELETE(t_Pattern1);
 }
 
 void cChurchMob2::Update()
 {
-	if (m_Ani != nullptr) m_Ani->Update();
-
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (p1Count < 5)
 	{
@@ -49,7 +36,6 @@ void cChurchMob2::Update()
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
-
 		}
 	}
 	else
@@ -71,5 +57,5 @@ void cChurchMob2::Update()
 
 void cChurchMob2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 1.5);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

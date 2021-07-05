@@ -3,7 +3,7 @@ class cCityNightMob1
 	:public cMob
 {
 public:
-	cCityNightMob1(Vec2 pos, vector<cBullet*>& bullets);
+	cCityNightMob1(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cCityNightMob1();
 	
 	float dir_x = 1;

@@ -4,7 +4,7 @@ class cOceanBoss
 	:public cMob
 {
 public:
-	cOceanBoss(Vec2 pos, vector<cBullet*>& bullet);
+	cOceanBoss(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cOceanBoss();
 
 	float dir_x = 1;

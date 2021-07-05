@@ -4,7 +4,7 @@ class cDesertBoss1
 	:public cMob
 {
 public:
-	cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet);
+	cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cDesertBoss1();
 
 	float dir_x = 1;

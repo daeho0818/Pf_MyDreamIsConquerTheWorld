@@ -2,7 +2,7 @@
 class cParticle
 {
 public:
-	cParticle(Vec2 pos, float size, bool effect, float frameTime = 0.005);
+	cParticle(Vec2 pos, float size, bool effect, float frameTime);
 	virtual ~cParticle();
 
 	virtual void Update() = 0;
@@ -13,6 +13,7 @@ public:
 	vector<cTexture*> m_images;
 
 	float RenderSize;
+	float frameTime;
 
 	bool effect;
 	bool isDestroy = false;

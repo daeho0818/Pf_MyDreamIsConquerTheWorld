@@ -6,8 +6,20 @@ public:
 	cSelectStageScene();
 	~cSelectStageScene();
 
+	// cScene을(를) 통해 상속됨
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Render() override;
+	virtual void UIRender() override;
+	virtual void Release() override;
+
+private:
 	bool isFirst = true;
+	bool stageOpen = false;
+
 	int speed;
+
+	float operY;
 
 	enum Stage
 	{
@@ -21,16 +33,9 @@ public:
 		None
 	};
 	Stage stage = Stage::None;
-	bool stageOpen = false;
 
 	Vec2 cloudsPos[4];
-
-	// cScene을(를) 통해 상속됨
-	virtual void Init() override;
-	virtual void Update() override;
-	virtual void Render() override;
-	virtual void UIRender() override;
-	virtual void Release() override;
+	Vec2 operPos;
 
 	void StageInfo(Stage stage);
 	void SceneChange(Stage stage);

@@ -224,6 +224,9 @@
     <Filter Include="2. Manager\BG">
       <UniqueIdentifier>{6bf31f77-2fab-4f36-a2a1-a9b81072d34e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Manager\Camera">
+      <UniqueIdentifier>{4384cb1d-0d63-47d1-95fd-3a3fbd9f8a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -486,6 +489,9 @@
     <ClCompile Include="cBGManager.cpp">
       <Filter>2. Manager\BG</Filter>
     </ClCompile>
+    <ClCompile Include="cCameraManager.cpp">
+      <Filter>2. Manager\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -688,6 +694,9 @@
     </ClInclude>
     <ClInclude Include="cBGManager.h">
       <Filter>2. Manager\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="cCameraManager.h">
+      <Filter>2. Manager\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

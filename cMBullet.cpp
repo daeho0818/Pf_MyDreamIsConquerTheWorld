@@ -6,6 +6,7 @@ cMBullet::cMBullet(Vec2 pos, Vec2 dir, string imgName, string effectName, float 
 {
 	m_Damage = damage;
 	bulletType = "mob";
+	m_angle = atan2(m_Dir.y, m_Dir.x);
 }
 
 cMBullet::~cMBullet()
@@ -15,7 +16,8 @@ cMBullet::~cMBullet()
 void cMBullet::Update()
 {
 	m_pos += m_Dir * m_speed * Delta;
-	m_angle = atan2(m_Dir.y, m_Dir.x);
+
+	m_angle += 0.1;
 }
 
 void cMBullet::Render()

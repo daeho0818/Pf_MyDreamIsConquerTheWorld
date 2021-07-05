@@ -2,8 +2,8 @@
 #include "cCityNightMob2.h"
 #include "cReflexBullet.h"
 
-cCityNightMob2::cCityNightMob2(Vec2 pos, vector<cBullet*>& bullets)
-	:cMob(pos), m_bullets(bullets)
+cCityNightMob2::cCityNightMob2(Vec2 pos, vector<cBullet*>& bullets, float size)
+	:cMob(pos, size), m_bullets(bullets)
 {
 	m_image = IMAGE->MakeVecImg("city(night)_mob2");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
@@ -12,22 +12,10 @@ cCityNightMob2::cCityNightMob2(Vec2 pos, vector<cBullet*>& bullets)
 
 cCityNightMob2::~cCityNightMob2()
 {
-	SAFE_DELETE(m_Ani);
 }
 
 void cCityNightMob2::Update()
 {
-	if (m_Ani != nullptr) m_Ani->Update();
-
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (p1Count < 5)
 	{
@@ -69,5 +57,5 @@ void cCityNightMob2::Update()
 
 void cCityNightMob2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 1.5);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

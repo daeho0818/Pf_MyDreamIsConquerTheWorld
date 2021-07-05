@@ -3,8 +3,8 @@
 #include "cReflexBullet.h"
 #include "cMBullet.h"
 
-cJungleBoss::cJungleBoss(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cJungleBoss::cJungleBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("jungle_boss");
 	mobType = "Boss";
@@ -17,22 +17,12 @@ cJungleBoss::cJungleBoss(Vec2 pos, vector<cBullet*>& bullet)
 
 cJungleBoss::~cJungleBoss()
 {
-	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(m_Ani);
 }
 
 void cJungleBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-	if (m_Ani != nullptr) m_Ani->Update();
+
 	if (pattern1)
 	{
 		if (p1Count < 5)
@@ -40,7 +30,7 @@ void cJungleBoss::Update()
 			if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(0.5, [&]()->void {
 				isStop = true;
 				Vec2 dir;
-				for (int i = -(WINSIZEX / 2); i <= WINSIZEY / 2; i += WINSIZEY / 5)
+				for (int i = -WINSIZEY; i <= WINSIZEY; i += WINSIZEY / 5)
 				{
 					dir = {-WINSIZEX, (float)i};
 					D3DXVec2Normalize(&dir, &dir);
@@ -79,5 +69,5 @@ void cJungleBoss::Update()
 
 void cJungleBoss::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

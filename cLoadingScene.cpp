@@ -433,6 +433,8 @@ void cLoadingScene::Init()
 
 	AddLoad("colon", "Ingame/UI/colon");
 
+	AddLoad("time_blind", "Ingame/UI/time_blind");
+
 	// public
 	AddLoad("Arrow", "Public/Arrow");
 
@@ -455,12 +457,6 @@ void cLoadingScene::Init()
 	AddLoad("Speed+", "Speed+");
 
 	AddLoad("Invincibility", "Invincibility");
-
-	AddLoad("bullet_enemy", "bullet_enemy");
-
-	AddLoad("bullet_enemy1", "bullet_enemy1");
-
-	AddLoad("bullet_enemy2", "bullet_enemy2");
 
 	AddLoad("over_Start", "Title/over_Start");
 

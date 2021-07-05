@@ -3,7 +3,7 @@ class cIceMob2
 	:public cMob
 {
 public:
-	cIceMob2(Vec2 pos, vector<cBullet*>& bullets);
+	cIceMob2(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cIceMob2();
 	
 	float dir_x = 1;

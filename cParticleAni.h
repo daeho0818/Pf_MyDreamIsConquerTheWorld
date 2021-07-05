@@ -4,7 +4,7 @@ class cParticleAni
     :public cParticle
 {
 public:
-    cParticleAni(Vec2 pos, float size, double deathTime, bool effect = false, string imgName = "", float frametime = 0.005);
+    cParticleAni(Vec2 pos, float size, double deathTime, double frametime, bool effect = false, string imgName = "");
     ~cParticleAni();
 
     vector<cTexture*> m_images;
@@ -18,8 +18,6 @@ public:
     bool m_bOnce = true;
 
     double deathTime;
-
-    float FrameTime;
 
     virtual void Update() override;
     virtual void Render() override;

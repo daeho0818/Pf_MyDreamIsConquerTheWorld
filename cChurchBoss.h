@@ -4,7 +4,7 @@ class cChurchBoss
 	:public cMob
 {
 public:
-	cChurchBoss(Vec2 pos, vector<cBullet*>& bullet);
+	cChurchBoss(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cChurchBoss();
 
 	int p1Count = 0;

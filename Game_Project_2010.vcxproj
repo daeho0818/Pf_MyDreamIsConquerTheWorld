@@ -393,6 +393,7 @@
     <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cButton.cpp" />
     <ClCompile Include="cButtonManager.cpp" />
+    <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cChurchBoss.cpp" />
     <ClCompile Include="cChurchMob1.cpp" />
     <ClCompile Include="cChurchMob2.cpp" />
@@ -460,6 +461,7 @@
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cButton.h" />
     <ClInclude Include="cButtonManager.h" />
+    <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cChurchBoss.h" />
     <ClInclude Include="cChurchMob1.h" />
     <ClInclude Include="cChurchMob2.h" />

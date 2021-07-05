@@ -2,8 +2,8 @@
 #include "cDesertBoss2.h"
 #include "cMBullet.h"
 
-cDesertBoss2::cDesertBoss2(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cDesertBoss2::cDesertBoss2(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("desert_boss2");
 	mobName = "silver";
@@ -19,9 +19,7 @@ cDesertBoss2::cDesertBoss2(Vec2 pos, vector<cBullet*>& bullet)
 
 cDesertBoss2::~cDesertBoss2()
 {
-	SAFE_DELETE(t_Pattern1);
 	SAFE_DELETE(t_Pattern2);
-	SAFE_DELETE(m_Ani);
 }
 
 void cDesertBoss2::CircleBullet(float interval, bool random)
@@ -56,15 +54,7 @@ void cDesertBoss2::Update()
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (t_Pattern2 != nullptr) t_Pattern2->Update();
 	if (t_Pattern3 != nullptr) t_Pattern3->Update();
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-	if (m_Ani != nullptr) m_Ani->Update();
+
 	if (pattern1)
 	{
 		if (p1Count < 10)
@@ -128,5 +118,5 @@ void cDesertBoss2::Update()
 
 void cDesertBoss2::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

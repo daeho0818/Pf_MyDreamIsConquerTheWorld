@@ -12,5 +12,18 @@ public:
 	virtual void Render() override;
 	virtual void UIRender() override;
 	virtual void Release() override;
+
+private:
+	int index = 0;
+	int count = 0;
+	int operY[9] = { 0, };
+
+	bool isAniStart = true;
+	bool isTextUp = true;
+
+	cTimer* t_AniTerm = nullptr;
+	cTimer* t_AniDelay = nullptr;
+
+	void TextUpOrDown();
 };
 

@@ -2,8 +2,8 @@
 #include "cChurchBoss.h"
 #include "cMBullet.h"
 
-cChurchBoss::cChurchBoss(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cChurchBoss::cChurchBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("church_boss");
 	mobType = "Boss";
@@ -16,23 +16,11 @@ cChurchBoss::cChurchBoss(Vec2 pos, vector<cBullet*>& bullet)
 
 cChurchBoss::~cChurchBoss()
 {
-	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(m_Ani);
 }
 
 void cChurchBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-
-	if (m_Ani != nullptr) m_Ani->Update();
 
 	if (pattern1)
 	{
@@ -64,5 +52,5 @@ void cChurchBoss::Update()
 
 void cChurchBoss::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

@@ -17,14 +17,21 @@ public:
 	void PlayerInit();
 	void Cheat();
 
+private:
 	map< string, cScene*> m_scenes;
+
 	cScene* nowScene = nullptr;
 	cScene* nextScene = nullptr;
+
+public:
 	int Array[WINSIZEY][WINSIZEX];
 	int score;
 	int a_rewards[7];
+
 	string curScene = "";
+
 	map<string, int> m_rewards;
+
 	string mapNames[7];
 };
 

@@ -2,7 +2,7 @@
 class cMob abstract
 {
 public:
-	cMob(Vec2 pos) : m_pos(pos) {}
+	cMob(Vec2 pos, float size) : m_pos(pos), m_size(size) { }
 	virtual ~cMob() { SAFE_DELETE(t_Pattern1); }
 
 	Vec2 m_pos;
