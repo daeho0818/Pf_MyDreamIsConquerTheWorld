@@ -44,6 +44,7 @@ void cMainGame::Update()
 	SCENE->Update();
 	SOUND->Update();
 	THREAD->Update();
+	CAM->Update();
 }
 
 void cMainGame::Render()
@@ -55,6 +56,7 @@ void cMainGame::Render()
 	UI->Begin();
 	SCENE->UIRender();
 	UI->End();
+	CAM->Render();
 }
 
 void cMainGame::Release()
@@ -70,6 +72,7 @@ void cMainGame::Release()
 	cImageManager::ReleaseInstance();
 	cThreadManager::ReleaseInstance();
 	cBGManager::ReleaseInstance();
+	cCameraManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()

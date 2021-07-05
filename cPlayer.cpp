@@ -16,14 +16,12 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
+	CAM->MoveCam({ WINSIZEX / 2, WINSIZEY / 2 });
+
 	memset(SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
 
 	player = IMAGE->FindImage("player");
-
-	t_Speed = nullptr;
-	t_Invincibility = nullptr;
-	t_Fade = nullptr;
 
 	hp = 3;
 	coloring_cells = 0;
@@ -31,6 +29,7 @@ void cPlayer::Init()
 	speed = 15;
 	coloring_per = 0;
 	FadeCount = 0;
+
 	drawStart = false;
 	draw_line = false;
 	draw_mode = false;
@@ -39,9 +38,39 @@ void cPlayer::Init()
 	speedUp = false;
 	invincibility = false;
 	isAttacked = false;
+	camEvent = true;
 
-	m_pos = { 40, 300 };
+	m_pos = { 40, WINSIZEY / 2 };
 	cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
+
+	if (SCENE->curScene == "cChurchScene")
+	{
+		lineColor = D3DCOLOR_RGBA(255, 255, 150, 255);
+	}
+	else if (SCENE->curScene == "cCityNightScene")
+	{
+		lineColor = D3DCOLOR_RGBA(255, 255, 255, 255);
+	}
+	else if (SCENE->curScene == "cCityScene")
+	{
+		lineColor = D3DCOLOR_RGBA(255, 124, 170, 255);
+	}
+	else if (SCENE->curScene == "cDesertScene")
+	{
+		lineColor = D3DCOLOR_RGBA(100, 0, 50, 255);
+	}
+	else if (SCENE->curScene == "cIceScene")
+	{
+		lineColor = D3DCOLOR_RGBA(255, 255, 150, 255);
+	}
+	else if (SCENE->curScene == "cJungleScene")
+	{
+		lineColor = D3DCOLOR_RGBA(173, 77, 255, 255);
+	}
+	else if (SCENE->curScene == "cOceanScene")
+	{
+		lineColor = D3DCOLOR_RGBA(255, 150, 0, 255);
+	}
 
 	for (int y = WINSIZEY - 12; y != 9; --y)
 	{
@@ -71,11 +100,13 @@ void cPlayer::Init()
 	DrawLine(true);
 
 	ChkLine();
+	CAM->ZoomCam(1, 2, false, { WINSIZEX / 2, WINSIZEY / 2 });
 }
 
 void cPlayer::Update(Vec2 bossPos)
 {
 	if (t_Fade != nullptr) t_Fade->Update();
+
 	ItemUpdate();
 
 	this->bossPos = bossPos;
@@ -152,6 +183,7 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
+	if (t_PFadeDelay != nullptr) t_PFadeDelay->Update();
 }
 
 void cPlayer::Render()
@@ -172,8 +204,7 @@ void cPlayer::Release()
 	SAFE_DELETE(t_Speed);
 	SAFE_DELETE(t_Invincibility);
 	SAFE_DELETE(t_Fade);
-
-	//THREAD->ReleaseThread("Move");
+	SAFE_DELETE(t_PFadeDelay);
 }
 
 void cPlayer::KeyEvent()
@@ -295,7 +326,7 @@ void cPlayer::DrawLine(bool isFilled)
 				}
 				else
 				{
-					targetPixel = D3DXCOLOR(0, 0, 0, 1);
+					targetPixel = lineColor;
 					SCENE->Array[y][x] = 2;
 					last_x = x;
 					last_y = y;
@@ -303,8 +334,12 @@ void cPlayer::DrawLine(bool isFilled)
 				}
 				break;
 			case 3:
-				targetPixel = D3DXCOLOR(0, 0, 0, 0);
-				textureColor[y * WINSIZEX + x] = targetPixel;
+				textureColor[y * WINSIZEX + x] = D3DCOLOR_RGBA(0, 0, 0, 0);
+				if (x % 10 == 0 && y % 10 == 0)
+				{
+					PART->AddEffect({ (float)x, (float)y }, 1, "white_effect");
+				}
+				SCENE->Array[y][x] = 4;
 				break;
 			case 9:
 				if (returning)
@@ -315,7 +350,7 @@ void cPlayer::DrawLine(bool isFilled)
 				}
 				else
 				{
-					targetPixel = D3DXCOLOR(0, 0, 0, 1);
+					targetPixel = lineColor;
 					SCENE->Array[y][x] = 2;
 					last_x = x;
 					last_y = y;
@@ -325,8 +360,11 @@ void cPlayer::DrawLine(bool isFilled)
 			}
 		}
 	}
+
 	BG->ptr[0]->ptr->UnlockRect(0);
+
 	if (isFilled) return;
+
 	if (last_x != cellSize.left && last_y != cellSize.top)
 	{
 		drawStart = false;
@@ -349,6 +387,7 @@ void cPlayer::DrawLine(bool isFilled)
 
 void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 {
+	int temp_Coloring_Cell = 0;
 	if (target == change) return;
 	ChkLine();
 	queue<Vec2> v2q;
@@ -357,7 +396,10 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 
 	v2q.push(pos);
 	if (!isFilled)
+	{
 		coloring_cells++;
+		temp_Coloring_Cell++;
+	}
 
 	while (!v2q.empty())
 	{
@@ -369,14 +411,20 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 			SCENE->Array[(int)n.y][(int)n.x - 1] = change;
 			v2q.push({ n.x - 1, n.y });
 			if (!isFilled)
+			{
 				coloring_cells++;
+				temp_Coloring_Cell++;
+			}
 		}
 		if (SCENE->Array[(int)n.y][(int)n.x + 1] == target && n.x + 1 < cellSize.right)
 		{
 			SCENE->Array[(int)n.y][(int)n.x + 1] = change;
 			v2q.push({ n.x + 1, n.y });
 			if (!isFilled)
+			{
 				coloring_cells++;
+				temp_Coloring_Cell++;
+			}
 		}
 
 		if (SCENE->Array[(int)n.y - 1][(int)n.x] == target && n.y - 1 > cellSize.top)
@@ -384,14 +432,20 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 			SCENE->Array[(int)n.y - 1][(int)n.x] = change;
 			v2q.push({ n.x, n.y - 1 });
 			if (!isFilled)
+			{
 				coloring_cells++;
+				temp_Coloring_Cell++;
+			}
 		}
 		if (SCENE->Array[(int)n.y + 1][(int)n.x] == target && n.y + 1 < cellSize.bottom)
 		{
 			SCENE->Array[(int)n.y + 1][(int)n.x] = change;
 			v2q.push({ n.x, n.y + 1 });
 			if (!isFilled)
+			{
 				coloring_cells++;
+				temp_Coloring_Cell++;
+			}
 		}
 	}
 	if (!isFilled)
@@ -399,7 +453,7 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 		float temp1 = coloring_cells * 100;
 		float temp2 = real_cells;
 		coloring_per = temp1 / temp2;
-		SCENE->score += coloring_per * 10;
+		SCENE->score += temp_Coloring_Cell / 1000;
 
 		draw_mode = true;
 		DrawLine(true);
@@ -439,7 +493,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_LEFT, 3))
+				if (!Near(VK_LEFT, 3) && !Near(VK_LEFT, 4))
 				{
 					if (Near(VK_LEFT, 2) || !Near(VK_LEFT, 1) && draw_line)
 					{
@@ -454,21 +508,10 @@ void cPlayer::Move()
 							ChkLine();
 							DrawTempLine(VK_LEFT);
 
-							if (!drawStart) startDrawPos = m_pos + Vec2(11, 0);
+							if (!drawStart) startDrawPos = m_pos + Vec2(2, 0);
 							drawStart = true;
 
-							int random_x = 25;
-							int random_y = rand() % 4;
-							if (random_y == 0) random_y = -20;
-							if (random_y == 1) random_y = -10;
-							if (random_y == 2) random_y = 10;
-							if (random_y == 3) random_y = 20;
-
-							float size = (rand() % 11) / 10.0;
-
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
+							PART->AddEffect(m_pos, 1, "white_effect");
 						}
 					}
 				}
@@ -479,7 +522,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_RIGHT, 3))
+				if (!Near(VK_RIGHT, 3) && !Near(VK_RIGHT, 4))
 				{
 					if (Near(VK_RIGHT, 2) || !Near(VK_RIGHT, 1) && draw_line)
 					{
@@ -493,21 +536,10 @@ void cPlayer::Move()
 							ChkLine();
 							DrawTempLine(VK_RIGHT);
 
-							if (!drawStart) startDrawPos = m_pos - Vec2(11, 0);
+							if (!drawStart) startDrawPos = m_pos - Vec2(2, 0);
 							drawStart = true;
 
-							int random_x = 25;
-							int random_y = rand() % 4;
-							if (random_y == 0) random_y = -20;
-							if (random_y == 1) random_y = -10;
-							if (random_y == 2) random_y = 10;
-							if (random_y == 3) random_y = 20;
-
-							float size = (rand() % 11) / 10.0;
-
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
+							PART->AddEffect(m_pos, 1, "white_effect");
 						}
 					}
 				}
@@ -518,7 +550,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_UP, 3))
+				if (!Near(VK_UP, 3) && !Near(VK_UP, 4))
 				{
 					if (Near(VK_UP, 2) || !Near(VK_UP, 1) && draw_line)
 					{
@@ -532,21 +564,10 @@ void cPlayer::Move()
 							ChkLine();
 							DrawTempLine(VK_UP);
 
-							if (!drawStart) startDrawPos = m_pos + Vec2(0, 11);
+							if (!drawStart) startDrawPos = m_pos + Vec2(0, 2);
 							drawStart = true;
 
-							int random_y = 25;
-							int random_x = rand() % 4;
-							if (random_x == 0) random_x = -20;
-							if (random_x == 1) random_x = -10;
-							if (random_x == 2) random_x = 10;
-							if (random_x == 3) random_x = 20;
-
-							float size = (rand() % 11) / 10.0;
-
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
+							PART->AddEffect(m_pos, 1, "white_effect");
 						}
 					}
 				}
@@ -557,7 +578,7 @@ void cPlayer::Move()
 			for (int i = 0; i < speed; i++)
 			{
 				ChkLine();
-				if (!Near(VK_DOWN, 3))
+				if (!Near(VK_DOWN, 3) && !Near(VK_DOWN, 4))
 				{
 					if (Near(VK_DOWN, 2) || !Near(VK_DOWN, 1) && draw_line)
 					{
@@ -572,21 +593,10 @@ void cPlayer::Move()
 							ChkLine();
 							DrawTempLine(VK_DOWN);
 
-							if (!drawStart) startDrawPos = m_pos - Vec2(0, 11);
+							if (!drawStart) startDrawPos = m_pos - Vec2(0, 2);
 							drawStart = true;
 
-							int random_y = 25;
-							int random_x = rand() % 4;
-							if (random_x == 0) random_x = -20;
-							if (random_x == 1) random_x = -10;
-							if (random_x == 2) random_x = 10;
-							if (random_x == 3) random_x = 20;
-
-							float size = (rand() % 11) / 10.0;
-
-							PART->AddEffect(m_pos + Vec2(rand() % random_x, rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(-rand() % random_x, -rand() % random_y), size, "white_effect");
-							PART->AddEffect(m_pos + Vec2(), 1, "white_effect", 0);
+							PART->AddEffect(m_pos, 1, "white_effect");
 						}
 					}
 				}
@@ -694,9 +704,9 @@ void cPlayer::Returning(bool isReturned)
 		}
 		else
 		{
+			m_pos = startDrawPos;
 			draw_line = false;
 			returning = false;
-			m_pos = startDrawPos;
 		}
 	}
 	BG->ptr[0]->ptr->UnlockRect(0);
@@ -742,5 +752,18 @@ void cPlayer::EatItem(string key)
 		}
 		SCENE->score += 100;
 	}
-	itemName = "none";
+}
+
+void cPlayer::CamEvent()
+{
+	if (t_camMoveDelay != nullptr) t_camMoveDelay->Update();
+	
+	if (camEvent && t_camMoveDelay == nullptr)
+	{
+		t_camMoveDelay = new cTimer(2, [&]()->void {
+			CAM->MoveCam({ m_pos.x + WINSIZEX / 4 - 50, m_pos.y });
+			camEvent = false;
+			t_camMoveDelay = nullptr;
+			});
+	}
 }

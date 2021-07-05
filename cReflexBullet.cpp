@@ -6,6 +6,8 @@ cReflexBullet::cReflexBullet(Vec2 pos, Vec2 dir, string imgName, string effectNa
 {
 	m_Damage = damage;
 	bulletType = "mob";
+
+	m_angle = atan2(m_Dir.y, m_Dir.x);
 }
 
 cReflexBullet::~cReflexBullet()
@@ -23,7 +25,6 @@ void cReflexBullet::Update()
 			t_Dead = new cTimer(10, [&]()->void { t_Dead = nullptr; isDestroy = true; });
 	}
 	m_pos += m_Dir * m_speed * Delta;
-	m_angle = atan2(m_Dir.y, m_Dir.x);
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
@@ -33,6 +34,7 @@ void cReflexBullet::Update()
 	{
 		m_Dir.y *= -1;
 	}
+	m_angle += 0.1;
 }
 
 void cReflexBullet::Render()

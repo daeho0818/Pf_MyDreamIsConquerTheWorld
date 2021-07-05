@@ -5,6 +5,9 @@ public:
 	cTimer(double time, function<void()> func, bool loop = false, int count = 0);
 	~cTimer();
 
+	void Update();
+
+private:
 	int m_count;
 	int m_count_t = 0;
 	double m_time;
@@ -12,6 +15,4 @@ public:
 	double m_oldtime;
 	bool b_loop;
 	function<void()> func;
-
-	void Update();
 };

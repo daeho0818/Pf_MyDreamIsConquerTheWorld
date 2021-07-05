@@ -4,7 +4,7 @@ class cIceBoss
 	:public cMob
 {
 public:
-	cIceBoss(Vec2 pos, vector<cBullet*>& bullet);
+	cIceBoss(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cIceBoss();
 
 	int p1Count;

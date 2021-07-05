@@ -30,97 +30,112 @@ cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 	isDestroy = false;
 	if (stage == "cChurchScene")
 	{
-		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cChurchMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cChurchBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cChurchMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cChurchBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cCityScene")
 	{
-		m_mobs.push_back(new cCityMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cCityMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cCityBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cCityMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cCityMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cCityBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cCityNightScene")
 	{
-		m_mobs.push_back(new cCityNightMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cCityNightMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cCityNightBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cCityNightMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cCityNightMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cCityNightBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cDesertScene")
 	{
-		m_mobs.push_back(new cDesertMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cDesertMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cDesertBoss1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cDesertBoss2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cDesertMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cDesertMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cDesertBoss1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.push_back(new cDesertBoss2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cIceScene")
 	{
-		m_mobs.push_back(new cIceMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cIceMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cIceBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cIceMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cIceMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cIceBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cJungleScene")
 	{
-		m_mobs.push_back(new cJungleMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cJungleMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cJungleMob3({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cJungleBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cJungleMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cJungleMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cJungleMob3({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cJungleBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 	else if (stage == "cOceanScene")
 	{
-		m_mobs.push_back(new cOceanMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cOceanMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
-		m_mobs.push_back(new cOceanBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets));
+		m_mobs.push_back(new cOceanMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cOceanMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.push_back(new cOceanBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
 	}
 }
 
 cMobAdmin::~cMobAdmin()
 {
-	for (auto iter : m_mobs) SAFE_DELETE(iter);
+	SAFE_DELETE(t_DeadDelay);
+	for (auto iter : m_mobs)
+	{
+		SAFE_DELETE(iter->m_Ani);
+		SAFE_DELETE(iter->t_Pattern1);
+		SAFE_DELETE(iter);
+	}
 	m_mobs.clear();
 }
 
 void cMobAdmin::Update()
 {
+	if (t_DeadDelay != nullptr) t_DeadDelay->Update();
+
 	for (auto iter : m_mobs)
 	{
 		iter->Update();
 
 		if (iter->mobType == "Boss") bossPos = iter->m_pos;
 
-		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 3)
+		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 4)
 		{
 			if (stage == "cChurchScene")
 			{
-				PART->AddParticle(iter->m_pos, 1, "church_dead");
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "church_dead", 0.05);
 			}
 			else if (stage == "cCityScene")
 			{
-				PART->AddParticle(iter->m_pos, 1, "city_dead");
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "city_dead", 0.05);
 			}
 			else if (stage == "cCityNightScene")
 			{
-				// PART->AddParticle(iter->m_pos, 1, "cirt(night)_dead");
+				// PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "cirt(night)_dead", 0.05);
 			}
 			else if (stage == "cDesertScene")
 			{
 				if (iter->mobName == "gold")
-					PART->AddParticle(iter->m_pos, 1, "desert_gold_dead");
+					PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "desert_gold_dead", 0.05);
 				else if (iter->mobName == "silver")
-					PART->AddParticle(iter->m_pos, 1, "desert_silver_dead");
+					PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "desert_silver_dead", 0.05);
 			}
 			else if (stage == "cIceScene")
 			{
-				PART->AddParticle(iter->m_pos, 1, "ice_dead", 0.01);
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "ice_dead", 0.05);
 			}
 			else if (stage == "cJungleScene")
 			{
-				PART->AddParticle(iter->m_pos, 1, "jungle_dead");
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "jungle_dead", 0.05);
 			}
 			else if (stage == "cOceanScene")
 			{
-				PART->AddParticle(iter->m_pos, 1, "ocean_dead");
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "ocean_dead", 0.05);
 			}
+
+			if (iter->mobType == "Boss")
+			{
+				CAM->ShakeCam(0.3);
+				CAM->ZoomCam(0.05, 0.05, false, { WINSIZEX / 2, WINSIZEY / 2 });
+			}
+
 			iter->isDestroy = true;
 		}
 	}
@@ -142,10 +157,26 @@ void cMobAdmin::IsDestroy()
 	{
 		if ((*iter)->isDestroy)
 		{
+			SAFE_DELETE((*iter)->m_Ani);
+			SAFE_DELETE((*iter)->t_Pattern1);
 			SAFE_DELETE(*iter);
 			iter = m_mobs.erase(iter);
 		}
 		else
 			iter++;
+	}
+}
+
+void cMobAdmin::Animation()
+{
+	for (auto iter : m_mobs)
+	{
+		if (iter->m_Ani != nullptr) iter->m_Ani->Update();
+
+		if (iter->m_Ani == nullptr) iter->m_Ani = new cTimer(0.1, [&]()->void {
+			iter->index++;
+			if (iter->index == iter->m_image.size()) iter->index = 0;
+			iter->m_Ani = nullptr;
+			});
 	}
 }

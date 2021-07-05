@@ -15,16 +15,18 @@ void cDesertScene::Init()
 	cParentScene::Init("cDesertScene");
 
 	srand(time(NULL));
-	left = false; right = true; pos_x = 0;
+
+	pos_x = 0;
 	textCount = 1;
 	percent = 0;
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
 	delayCount = 0;
-	hp = 3;
 	SCENE->score = 0;
+	SetHP(3);
 
+	left = false; right = true;
 	isStart = false;
 	isStop = false;
 	isClear = false;
@@ -32,12 +34,15 @@ void cDesertScene::Init()
 	isClearEnd = false;
 	isFailEnd = false;
 	delay = false;
+
 	IMAGE->DeleteImage("desert_High");
 	IMAGE->DeleteImage("desert_Under");
 	IMAGE->AddImage("desert_High", "Ingame/Desert/desert_high");
 	IMAGE->AddImage("desert_Under", "Ingame/Desert/desert_under");
+
 	cTexture* ptr[2] = { IMAGE->FindImage("desert_High"), IMAGE->FindImage("desert_Under") };
 	t_BG = ptr[1];
+
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cDesertScene");
@@ -47,9 +52,11 @@ void cDesertScene::Init()
 
 void cDesertScene::Update()
 {
-	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(SCENE->score);
-	cParentScene::SetHP(player->hp);
+	SetPercent(player->coloring_per);
+	SetScore(SCENE->score);
+	SetHP(player->hp);
+	SetBossPos(mob->bossPos);
+
 	if (isStart)
 	{
 		if (timer <= 0 || player->hp <= 0)
@@ -60,7 +67,6 @@ void cDesertScene::Update()
 		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
-			SCENE->m_rewards.find("Desert")->second = 1;
 		}
 
 		if (mob->isDestroy)
@@ -70,9 +76,11 @@ void cDesertScene::Update()
 		}
 	}
 
+	mob->Animation();
 	if (isStart && !isStop)
 	{
 		mob->Update();
+		player->CamEvent();
 		if (!isClear && !isFail)
 		{
 			player->Update(mob->bossPos);
@@ -89,11 +97,11 @@ void cDesertScene::Render()
 {
 	if (isStart && !isStop && !isClear && !isFail)
 	{
-		player->Render();
 		bullet->Render();
-		mob->Render();
 		item->Render();
 	}
+	player->Render();
+	mob->Render();
 	cParentScene::Render();
 }
 
@@ -101,6 +109,8 @@ void cDesertScene::UIRender()
 {
 	player->UIRender();
 	mob->UIRender();
+
+	cParentScene::UIRender();
 }
 
 void cDesertScene::Release()
@@ -110,4 +120,6 @@ void cDesertScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	cParentScene::Release();
 }

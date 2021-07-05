@@ -2,8 +2,8 @@
 #include "cOceanBoss.h"
 #include "cMBullet.h"
 
-cOceanBoss::cOceanBoss(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cOceanBoss::cOceanBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("ocean_boss");
 	mobType = "Boss";
@@ -16,22 +16,11 @@ cOceanBoss::cOceanBoss(Vec2 pos, vector<cBullet*>& bullet)
 
 cOceanBoss::~cOceanBoss()
 {
-	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(m_Ani);
 }
 
 void cOceanBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-	if (m_Ani != nullptr) m_Ani->Update();
 
 	if (pattern1)
 	{
@@ -70,7 +59,6 @@ void cOceanBoss::Update()
 		}
 	}
 
-
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
 		dir_x *= -1;
@@ -85,5 +73,5 @@ void cOceanBoss::Update()
 
 void cOceanBoss::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

@@ -59,6 +59,8 @@ void cTitleScene::Init()
 			break;
 		}
 	};
+
+	BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, 1.5f);
 }
 
 void cTitleScene::Update()
@@ -99,10 +101,10 @@ void cTitleScene::Update()
 			else
 				BUTTON->ChangeBtnInfo("Arrow", { 500, 2100 }, 1.5f);
 			movedEnd = !movedEnd;
-			if (!movedEnd)
-				arrowKey = "_Arrow";
-			else
+			if (movedEnd)
 				arrowKey = "Arrow";
+			else
+				arrowKey = "_Arrow";
 			buttonsMoved = false;
 			count = 0;
 		}
@@ -133,7 +135,7 @@ void cTitleScene::Update()
 			}
 			else if (MOUSE->LButtonClick("quit_button"))
 			{
-				if (!advenUI && !guideUI)
+				if (!advenUI && !guideUI && !developUI)
 					PostQuitMessage(0);
 			}
 			else if (MOUSE->LButtonClick("guide_close"))

@@ -3,7 +3,7 @@ class cDesertMob1
 	:public cMob
 {
 public:
-	cDesertMob1(Vec2 pos, vector<cBullet*>& bullets);
+	cDesertMob1(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cDesertMob1();
 	
 	float dir_x = 1;

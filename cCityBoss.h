@@ -4,7 +4,7 @@ class cCityBoss
 	:public cMob
 {
 public:
-	cCityBoss(Vec2 pos, vector<cBullet*>& bullet);
+	cCityBoss(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cCityBoss();
 
 	int p1Count = 0;

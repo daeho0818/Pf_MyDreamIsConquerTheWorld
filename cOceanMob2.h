@@ -3,7 +3,7 @@ class cOceanMob2
 	:public cMob
 {
 public:
-	cOceanMob2(Vec2 pos, vector<cBullet*>& bullets);
+	cOceanMob2(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cOceanMob2();
 	
 	float dir_x = 1;

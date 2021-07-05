@@ -33,17 +33,6 @@ cRenderManager::cRenderManager()
 	g_device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	g_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	g_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-
-	projPos = { -WINSIZEX, WINSIZEY, 100 };
-	D3DXMatrixOrthoLH(&matProj, projPos.x, projPos.y, 0, projPos.z);
-	g_device->SetTransform(D3DTS_PROJECTION, &matProj);
-
-	camPos = { 0, 0, 1 };
-	camLook = { 0, 0, 0 };
-	camUp = { 0, 1, 0 };
-
-	D3DXMatrixLookAtLH(&matView, &camPos, &camLook, &camUp);
-	g_device->SetTransform(D3DTS_VIEW, &matView);
 }
 
 cRenderManager::~cRenderManager()

@@ -8,8 +8,11 @@ cButtonManager::cButtonManager()
 cButtonManager::~cButtonManager()
 {
 	for (auto iter : m_buttons) SAFE_DELETE(iter);
+
 	m_buttons.clear();
+
 	buttonPos.clear();
+
 	buttonRects.clear();
 }
 

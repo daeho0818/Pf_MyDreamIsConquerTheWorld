@@ -29,7 +29,7 @@ void cItemAdmin::Update()
 	for (auto iter : m_items)
 	{
 		iter->Update();
-		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 3)
+		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 4)
 		{
 			m_player->EatItem(iter->itemName);
 			iter->isDestroy = true;

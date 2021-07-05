@@ -20,18 +20,40 @@ void cCollision::Update()
 
 void cCollision::MPColl()
 {
+	float length;
 	for (auto iter = m_mobs.begin(); iter != m_mobs.end();)
 	{
 		if ((*iter))
 		{
-			if (65 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+			// Circle Collider 구현한거.. 남겨놓음...
+
+			//length = (pow((*iter)->m_image.front()->info.Width, 2) +
+			//	pow((*iter)->m_image.front()->info.Height, 2)) * (*iter)->m_size;
+			//length /= 2;
+			// 하고 그냥 length 넣지 말고 제곱근 넣으면 됨
+
+			length = (*iter)->m_image.front()->info.Height / 2 * (*iter)->m_size;
+
+			if (abs(m_player->m_pos.y - (*iter)->m_pos.y) <= (*iter)->m_image.front()->info.Height / 2 * (*iter)->m_size)
+				length = (*iter)->m_image.front()->info.Height / 2 * (*iter)->m_size;
+
+			else if (abs(m_player->m_pos.x - (*iter)->m_pos.x) <= (*iter)->m_image.front()->info.Width / 2 * (*iter)->m_size)
+				length = (*iter)->m_image.front()->info.Width / 2 * (*iter)->m_size;
+
+				length /= 1.5;
+
+			if (length >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 			{
 				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{
-					DebugLog(L"MPColl");
-					m_player->hp -= (*iter)->m_damage;
-					m_player->returning = true;
-					m_player->isAttacked = true;
+					if (SCENE->Array[(int)m_player->m_pos.y][(int)m_player->m_pos.x] != 2)
+					{
+						DebugLog(L"MPColl");
+						CAM->ShakeCam(0.3);
+						m_player->hp -= (*iter)->m_damage;
+						m_player->returning = true;
+						m_player->isAttacked = true;
+					}
 				}
 			}
 		}
@@ -49,15 +71,19 @@ void cCollision::MBPColl()
 	{
 		if ((*iter)->bulletType == "mob")
 		{
-			if (50 + (*iter)->size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+			if (50 + (*iter)->size >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 			{
 				if (!m_player->invincibility && m_player->draw_line && !m_player->returning && m_player->hp > 0)
 				{
-					DebugLog(L"MBPColl");
-					m_player->hp -= (*iter)->m_Damage;
-					m_player->returning = true;
-					(*iter)->isDestroy = true;
-					m_player->isAttacked = true;
+					if (SCENE->Array[(int)m_player->m_pos.y][(int)m_player->m_pos.x] != 2)
+					{
+						DebugLog(L"MBPColl");
+						CAM->ShakeCam(0.3);
+						m_player->hp -= (*iter)->m_Damage;
+						m_player->returning = true;
+						(*iter)->isDestroy = true;
+						m_player->isAttacked = true;
+					}
 				}
 			}
 		}
@@ -69,7 +95,7 @@ void cCollision::IPColl()
 {
 	for (auto iter = m_item.begin(); iter != m_item.end();)
 	{
-		if (7 + (*iter)->m_size >= D3DXVec2Length(&(m_player->m_pos - (*iter)->m_pos)))
+		if (7 + (*iter)->m_size >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 		{
 			m_player->EatItem((*iter)->itemName);
 			(*iter)->isDestroy = true;

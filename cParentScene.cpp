@@ -7,17 +7,6 @@ cParentScene::cParentScene()
 
 cParentScene::~cParentScene()
 {
-	SAFE_DELETE(t_TextAni);
-	SAFE_DELETE(t_Timer);
-	SAFE_DELETE(t_Clear);
-	SAFE_DELETE(t_Over);
-	SAFE_DELETE(t_Delay);
-
-	for (auto iter : BUTTON->m_buttons)
-	{
-		SAFE_DELETE(iter);
-	}
-	BUTTON->m_buttons.clear();
 }
 
 void cParentScene::Init(string curScene)
@@ -49,12 +38,8 @@ void cParentScene::Init(string curScene)
 	isClearEnd = false;
 	isFailEnd = false;
 	delay = false;
-
-	t_TextAni = nullptr;
-	t_Timer = nullptr;
-	t_Clear = nullptr;
-	t_Over = nullptr;
-	t_Delay = nullptr;
+	waitToStart = true;
+	isFadeOut = true;
 
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 
@@ -65,19 +50,37 @@ void cParentScene::Init(string curScene)
 
 void cParentScene::Update()
 {
+	if (t_Timer != nullptr) t_Timer->Update();
+	if (t_Delay != nullptr) t_Delay->Update();
+	if (t_WaitToStart != nullptr) t_WaitToStart->Update();
+	if (t_TimeFade != nullptr) t_TimeFade->Update();
+
+	if (waitToStart)
+	{
+		if (t_WaitToStart == nullptr)
+			t_WaitToStart = new cTimer(4, [&]()->void {waitToStart = false;  t_WaitToStart = nullptr; });
+
+	}
+	if (!isStart)
+	{
+		if (t_TimeFade == nullptr)
+		{
+			t_TimeFade = new cTimer(0.5, [&]()->void {isFadeOut = !isFadeOut; t_TimeFade = nullptr; });
+			DebugLog(L"asdf");
+		}
+	}
+	else isFadeOut = false;
+
 	if (INPUT->KeyDown('G')) isClear = true;
 	if (INPUT->KeyDown('H')) isFail = true;
 
-	if (INPUT->KeyDown(VK_ESCAPE))
+	if (INPUT->KeyDown(VK_ESCAPE) && isStart)
 	{
 		if (!isClear && !isFail)
 		{
 			isStop = !isStop;
 		}
 	}
-
-	if (t_Timer != nullptr) t_Timer->Update();
-	if (t_Delay != nullptr) t_Delay->Update();
 
 	if (isStart && !isFail && !isStop && !isClear)
 	{
@@ -93,10 +96,9 @@ void cParentScene::Update()
 	if (isClear)
 	{
 		if (t_Clear != nullptr) t_Clear->Update();
-
 		for (int x = 40; x < WINSIZEX - 40; x++)
 			for (int y = 300; y < WINSIZEY - 40; y++)
-				SCENE->Array[y][x] = 3;
+				SCENE->Array[y][x] = 4;
 
 		BG->high_BG = t_BG;
 
@@ -276,6 +278,8 @@ void cParentScene::Update()
 	{
 		if (MOUSE->LButtonClick("CFnext") && (isClearEnd || isFailEnd))
 		{
+			if (isClearEnd)
+				SCENE->m_rewards[SCENE->curScene] = 1;
 			SCENE->ChangeScene("cEndScene");
 		}
 
@@ -302,7 +306,7 @@ void cParentScene::Update()
 			}
 		}
 	}
-	if (!isStart)
+	if (!waitToStart && !isStart)
 	{
 		if (t_TextAni != nullptr) t_TextAni->Update();
 
@@ -340,9 +344,9 @@ void cParentScene::Render()
 	}
 	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250));
 
-	RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1200, 75));
+	RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
 
-	if (!isStart)
+	if (!waitToStart && !isStart)
 	{
 		RENDER->CenterRender(IMAGE->FindImage("start_game"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 125));
 		switch (textCount)
@@ -372,13 +376,17 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3600, 250), 1.2);
 	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3750, 250), 1.2);
 
-	char time[5] = "";
-	sprintf(time, "%d", timer / 60);
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 200, 320), 1.3);
-	sprintf(time, "%d", (timer % 60) / 10);
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 30, 320), 1.3);
-	sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
-	RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 130, 320), 1.3);
+	//if (!isFadeOut)
+	{
+		char time[5] = "";
+		sprintf(time, "%d", timer / 60);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 200, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 - 90, 320), 1.3);
+		sprintf(time, "%d", (timer % 60) / 10);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 30, 320), 1.3);
+		sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 130, 320), 1.3);
+	}
 
 	char t_score[5] = "";
 	if (score > 9999) score = 9999;
@@ -459,39 +467,87 @@ void cParentScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("CFBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 		RENDER->CenterRender(IMAGE->FindImage("CFpercent"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2 - 150));
 		sprintf(key, "%d", int(percent) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 160, WINSIZEY / 2 - 150));
+		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 170, WINSIZEY / 2 - 150));
 		sprintf(key, "%d", int(percent) % 10);
-		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 240, WINSIZEY / 2 - 150));
+		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 - 150));
 		RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 - 150));
 
 		RENDER->CenterRender(IMAGE->FindImage("CFscore"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2));
 		char t_score[5] = "";
 		sprintf(t_score, "%d", score / 1000);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 40, WINSIZEY / 2));
+		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 115, WINSIZEY / 2));
 		sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 140, WINSIZEY / 2));
+		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 195, WINSIZEY / 2));
 		sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 240, WINSIZEY / 2));
+		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 275, WINSIZEY / 2));
 		sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2));
+		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 350, WINSIZEY / 2));
 
 		char t_time[5] = "";
 		int useTime = 180 - timer;
-		sprintf(t_time, "%d", abs((useTime % 60) - (((useTime % 60) / 10) * 10)));
+		sprintf(t_time, "%d", abs((useTime % 60) - (((useTime % 60) / 10) * 10))); // 1초의 자리..
 		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 + 150));
-		sprintf(t_time, "%d", (useTime % 60) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 240, WINSIZEY / 2 + 150));
-		sprintf(t_time, "%d", useTime / 60);
-		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 + 165, WINSIZEY / 2 + 150));
-		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 90, WINSIZEY / 2 + 150));
-		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
-		RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
+		sprintf(t_time, "%d", (useTime % 60) / 10); // 10초의 자리..
+		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 260, WINSIZEY / 2 + 150));
+		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 + 190, WINSIZEY / 2 + 150));
+		sprintf(t_time, "%d", useTime / 60); // 1분의 자리..
+		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 125, WINSIZEY / 2 + 150));
 
-		(isClearEnd) ? RENDER->CenterRender(IMAGE->FindImage("Clear"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500)) :
-			RENDER->CenterRender(IMAGE->FindImage("Over"), Vec2(WINSIZEX / 2, WINSIZEY / 2 - 500));
+		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
+		if (SCENE->m_rewards[SCENE->curScene] != 1)
+			RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
 
 		RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 	}
+}
+
+bool fadeOut = true;
+void cParentScene::UIRender()
+{
+	if (alphaColor >= 250)
+	{
+		fadeOut = true;
+	}
+
+	else if (alphaColor <= 5)
+	{
+		fadeOut = false;
+	}
+
+	if (!waitToStart && !isStart)
+		UI->CenterRender(IMAGE->FindImage("time_blind"),
+			Vec2(1920 / 2 - 10, 160),
+			0.5,
+			D3DCOLOR_RGBA(255, 255, 255, fadeOut ? alphaColor -= 5 : alphaColor += 5));
+
+	if (isClearEnd)
+	{
+		UI->CenterRender(IMAGE->FindImage("Clear"),
+			Vec2(1920 / 2, 1080 / 2 - 225),
+			0.4,
+			D3DCOLOR_RGBA(255, 255, 255,
+				fadeOut ? alphaColor -= 5 : alphaColor += 5));
+	}
+
+	else if (isFailEnd)
+	{
+		UI->CenterRender(IMAGE->FindImage("Over"),
+			Vec2(1920 / 2, 1080 / 2 - 225),
+			0.4,
+			D3DCOLOR_RGBA(255, 255, 255,
+				fadeOut ? alphaColor -= 2.5 : alphaColor += 2.5));
+	}
+}
+
+void cParentScene::Release()
+{
+	SAFE_DELETE(t_TextAni);
+	SAFE_DELETE(t_Timer);
+	SAFE_DELETE(t_Clear);
+	SAFE_DELETE(t_Over);
+	SAFE_DELETE(t_Delay);
+	SAFE_DELETE(t_TimeFade);
+	SAFE_DELETE(t_WaitToStart);
 }
 
 void cParentScene::StageStart(Vec2* curPos_, Vec2* curPos, Vec2* targetPos, float speed)
@@ -512,4 +568,9 @@ void cParentScene::SetScore(float score)
 void cParentScene::SetHP(int hp)
 {
 	this->hp = hp;
+}
+
+void cParentScene::SetBossPos(Vec2 bossPos)
+{
+	this->bossPos = bossPos;
 }

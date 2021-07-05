@@ -4,7 +4,7 @@ class cJungleBoss
 	:public cMob
 {
 public:
-	cJungleBoss(Vec2 pos, vector<cBullet*>& bullet);
+	cJungleBoss(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cJungleBoss();
 
 	float dir_x = 1;

@@ -2,8 +2,8 @@
 #include "cDesertBoss1.h"
 #include "cMBullet.h"
 
-cDesertBoss1::cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet)
-	: cMob(pos), m_bullets(bullet)
+cDesertBoss1::cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet, float size)
+	: cMob(pos, size), m_bullets(bullet)
 {
 	m_image = IMAGE->MakeVecImg("desert_boss1");
 	mobName = "gold";
@@ -17,22 +17,10 @@ cDesertBoss1::cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet)
 
 cDesertBoss1::~cDesertBoss1()
 {
-	SAFE_DELETE(t_Pattern1);
-	SAFE_DELETE(m_Ani);
 }
 
 void cDesertBoss1::Update()
 {
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-	if (m_Ani != nullptr) m_Ani->Update();
-
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (pattern1)
 	{
@@ -71,5 +59,5 @@ void cDesertBoss1::Update()
 
 void cDesertBoss1::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 2);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

@@ -15,15 +15,15 @@ void cChurchScene::Init()
 	cParentScene::Init("cChurchScene");
 
 	srand(time(NULL));
-	left = false; right = true; pos_x = 0;
+
 	textCount = 1;
 	percent = 0;
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
 	delayCount = 0;
-	hp = 3;
 	SCENE->score = 0;
+	SetHP(3);
 
 	isStart = false;
 	isStop = false;
@@ -32,12 +32,15 @@ void cChurchScene::Init()
 	isClearEnd = false;
 	isFailEnd = false;
 	delay = false;
+
 	IMAGE->DeleteImage("church_High");
 	IMAGE->DeleteImage("church_Under");
 	IMAGE->AddImage("church_High", "Ingame/Church/high");
 	IMAGE->AddImage("church_Under", "Ingame/Church/under");
+
 	cTexture* ptr[2] = { IMAGE->FindImage("church_High"), IMAGE->FindImage("church_Under") };
 	t_BG = ptr[1];
+
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cChurchScene");
@@ -47,9 +50,11 @@ void cChurchScene::Init()
 
 void cChurchScene::Update()
 {
-	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(SCENE->score);
-	cParentScene::SetHP(player->hp);
+	SetPercent(player->coloring_per);
+	SetScore(SCENE->score);
+	SetHP(player->hp);
+	SetBossPos(mob->bossPos);
+
 	if (isStart)
 	{
 		if (timer <= 0 || player->hp <= 0)
@@ -60,7 +65,6 @@ void cChurchScene::Update()
 		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
-			SCENE->m_rewards.find("Church")->second = 1;
 		}
 
 		if (mob->isDestroy)
@@ -70,6 +74,8 @@ void cChurchScene::Update()
 		}
 	}
 
+	mob->Animation();
+	player->CamEvent();
 	if (isStart && !isStop)
 	{
 		mob->Update();
@@ -81,7 +87,6 @@ void cChurchScene::Update()
 			coll->Update();
 		}
 	}
-
 	cParentScene::Update();
 }
 
@@ -89,11 +94,11 @@ void cChurchScene::Render()
 {
 	if (isStart && !isStop && !isClear && !isFail)
 	{
-		player->Render();
 		bullet->Render();
-		mob->Render();
 		item->Render();
 	}
+	player->Render();
+	mob->Render();
 	cParentScene::Render();
 }
 
@@ -101,6 +106,8 @@ void cChurchScene::UIRender()
 {
 	player->UIRender();
 	mob->UIRender();
+
+	cParentScene::UIRender();
 }
 
 void cChurchScene::Release()
@@ -110,4 +117,6 @@ void cChurchScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	cParentScene::Release();
 }

@@ -2,8 +2,8 @@
 #include "cDesertMob1.h"
 #include "cReflexBullet.h"
 
-cDesertMob1::cDesertMob1(Vec2 pos, vector<cBullet*>& bullets)
-	:cMob(pos), m_bullets(bullets)
+cDesertMob1::cDesertMob1(Vec2 pos, vector<cBullet*>& bullets, float size)
+	:cMob(pos, size), m_bullets(bullets)
 {
 	mobName = "silver";
 	m_image = IMAGE->MakeVecImg("desert_mob1");
@@ -13,22 +13,10 @@ cDesertMob1::cDesertMob1(Vec2 pos, vector<cBullet*>& bullets)
 
 cDesertMob1::~cDesertMob1()
 {
-	SAFE_DELETE(m_Ani);
 }
 
 void cDesertMob1::Update()
 {
-	if (m_Ani != nullptr) m_Ani->Update();
-
-	if (m_Ani == nullptr)
-	{
-		m_Ani = new cTimer(0.1, [&]()->void {
-			index++;
-			if (index == m_image.size()) index = 0;
-			m_Ani = nullptr;
-			});
-	}
-
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (p1Count < 5)
 	{
@@ -48,7 +36,6 @@ void cDesertMob1::Update()
 				p1Count++;
 				t_Pattern1 = nullptr;
 				});
-
 		}
 	}
 	else
@@ -70,5 +57,5 @@ void cDesertMob1::Update()
 
 void cDesertMob1::Render()
 {
-	RENDER->CenterRender(m_image[index], m_pos, 1.5);
+	RENDER->CenterRender(m_image[index], m_pos, m_size);
 }

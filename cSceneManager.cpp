@@ -4,13 +4,13 @@
 cSceneManager::cSceneManager()
 {
 	score = 0;
-	mapNames[0] = "Church";
-	mapNames[1] = "City";
-	mapNames[2] = "CityNight";
-	mapNames[3] = "Desert";
-	mapNames[4] = "Jungle";
-	mapNames[5] = "Ice";
-	mapNames[6] = "Ocean";
+	mapNames[0] = "cChurchScene";
+	mapNames[1] = "cCityScene";
+	mapNames[2] = "cCityNightScene";
+	mapNames[3] = "cDesertScene";
+	mapNames[4] = "cJungleScene";
+	mapNames[5] = "cIceScene";
+	mapNames[6] = "cOceanScene";
 
 	for (int i = 0; i < 7; i++)
 	{
@@ -33,7 +33,9 @@ void cSceneManager::Update()
 		nowScene = nextScene;
 		nextScene = nullptr;
 	}
+
 	Cheat();
+
 	for (int i = 0; i < 7; i++)
 		a_rewards[i] = m_rewards.find(mapNames[i])->second;
 }
@@ -41,16 +43,13 @@ void cSceneManager::Update()
 void cSceneManager::Render()
 {
 	if (nowScene) nowScene->Render();
-	RENDER->CenterRender(IMAGE->FindImage("Cursor"),
-		{
-			float(MOUSE->mousePos.x * 2.1),
-			float(MOUSE->mousePos.y * 2.1)
-		}, 0.2);
 }
 
 void cSceneManager::UIRender()
 {
 	if (nowScene) nowScene->UIRender();
+
+	UI->CenterRender(IMAGE->FindImage("Cursor"), MOUSE->mousePos, 0.1);
 }
 
 void cSceneManager::Release()

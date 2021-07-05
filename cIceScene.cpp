@@ -15,16 +15,18 @@ void cIceScene::Init()
 	cParentScene::Init("cIceScene");
 
 	srand(time(NULL));
-	left = false; right = true; pos_x = 0;
+
+	pos_x = 0;
 	textCount = 1;
 	percent = 0;
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
 	delayCount = 0;
-	hp = 3;
 	SCENE->score = 0;
+	SetHP(3);
 
+	left = false; right = true;
 	isStart = false;
 	isStop = false;
 	isClear = false;
@@ -32,12 +34,15 @@ void cIceScene::Init()
 	isClearEnd = false;
 	isFailEnd = false;
 	delay = false;
+
 	IMAGE->DeleteImage("ice_High");
 	IMAGE->DeleteImage("ice_Under");
 	IMAGE->AddImage("ice_High", "Ingame/Ice/high");
 	IMAGE->AddImage("ice_Under", "Ingame/Ice/under");
+
 	cTexture* ptr[2] = { IMAGE->FindImage("ice_High"), IMAGE->FindImage("ice_Under") };
 	t_BG = ptr[1];
+
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
 	mob = new cMobAdmin(bullet->m_bullets, "cIceScene");
@@ -50,6 +55,8 @@ void cIceScene::Update()
 	cParentScene::SetPercent(player->coloring_per);
 	cParentScene::SetScore(SCENE->score);
 	cParentScene::SetHP(player->hp);
+	cParentScene::SetBossPos(mob->bossPos);
+
 	if (isStart)
 	{
 		if (timer <= 0 || player->hp <= 0)
@@ -60,7 +67,6 @@ void cIceScene::Update()
 		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
-			SCENE->m_rewards.find("Ice")->second = 1;
 		}
 
 		if (mob->isDestroy)
@@ -70,6 +76,8 @@ void cIceScene::Update()
 		}
 	}
 
+	mob->Animation();
+	player->CamEvent();
 	if (isStart && !isStop)
 	{
 		mob->Update();
@@ -89,11 +97,11 @@ void cIceScene::Render()
 {
 	if (isStart && !isStop && !isClear && !isFail)
 	{
-		player->Render();
 		bullet->Render();
-		mob->Render();
 		item->Render();
 	}
+	player->Render();
+	mob->Render();
 	cParentScene::Render();
 }
 
@@ -101,6 +109,8 @@ void cIceScene::UIRender()
 {
 	player->UIRender();
 	mob->UIRender();
+
+	cParentScene::UIRender();
 }
 
 void cIceScene::Release()
@@ -110,4 +120,6 @@ void cIceScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	cParentScene::Release();
 }

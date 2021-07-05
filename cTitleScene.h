@@ -10,20 +10,25 @@ public:
 	cTitleScene();
 	~cTitleScene();
 
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Render() override;
+	virtual void UIRender() override;
+	virtual void Release() override;
+
+private:
 	int select = 1;
+	int count = 0;
 
 	bool guideUI = false;
 	bool advenUI = false;
 	bool developUI = false;
 	bool buttonsMoved = false;
 	bool movedEnd = true;
-
 	bool move[7] = { false, };
+
 	float speed = 0;
-
 	float temp = 0;
-
-	int count = 0;
 
 	cTimer* t_Delay = nullptr;
 
@@ -32,10 +37,4 @@ public:
 	string arrowKey = "Arrow";
 
 	function<void(int index)> tempFunc;
-
-	virtual void Init() override;
-	virtual void Update() override;
-	virtual void Render() override;
-	virtual void UIRender() override;
-	virtual void Release() override;
 };
