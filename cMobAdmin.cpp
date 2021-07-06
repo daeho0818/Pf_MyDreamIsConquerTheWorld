@@ -27,50 +27,98 @@
 cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
 	:m_bullets(bullet), stage(stage)
 {
+	Vec2 dir[4] = { Vec2(1, 1), Vec2(1, -1), Vec2(-1, 1), Vec2(-1, -1) };
+
 	isDestroy = false;
 	if (stage == "cChurchScene")
 	{
 		m_mobs.push_back(new cChurchMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cChurchMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cChurchBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 	}
 	else if (stage == "cCityScene")
 	{
 		m_mobs.push_back(new cCityMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cCityMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cCityBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 	}
 	else if (stage == "cCityNightScene")
 	{
 		m_mobs.push_back(new cCityNightMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cCityNightMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cCityNightBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 	}
 	else if (stage == "cDesertScene")
 	{
 		m_mobs.push_back(new cDesertMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cDesertMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cDesertBoss1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 		m_mobs.push_back(new cDesertBoss2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[3].x;
+		m_mobs.back()->dir_y = dir[3].y;
 	}
 	else if (stage == "cIceScene")
 	{
 		m_mobs.push_back(new cIceMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cIceMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cIceBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 	}
 	else if (stage == "cJungleScene")
 	{
 		m_mobs.push_back(new cJungleMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cJungleMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cJungleMob3({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 		m_mobs.push_back(new cJungleBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[3].x;
+		m_mobs.back()->dir_y = dir[3].y;
 	}
 	else if (stage == "cOceanScene")
 	{
 		m_mobs.push_back(new cOceanMob1({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[0].x;
+		m_mobs.back()->dir_y = dir[0].y;
 		m_mobs.push_back(new cOceanMob2({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 1.5));
+		m_mobs.back()->dir_x = dir[1].x;
+		m_mobs.back()->dir_y = dir[1].y;
 		m_mobs.push_back(new cOceanBoss({ WINSIZEX / 2, WINSIZEY / 2 }, m_bullets, 2));
+		m_mobs.back()->dir_x = dir[2].x;
+		m_mobs.back()->dir_y = dir[2].y;
 	}
 }
 
@@ -133,7 +181,7 @@ void cMobAdmin::Update()
 			if (iter->mobType == "Boss")
 			{
 				CAM->ShakeCam(0.3);
-				CAM->ZoomCam(0.05, 0.05, false, { WINSIZEX / 2, WINSIZEY / 2 });
+				CAM->ZoomCam(0.05, 0.05, { WINSIZEX / 2, WINSIZEY / 2 });
 			}
 
 			iter->isDestroy = true;

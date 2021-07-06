@@ -8,6 +8,8 @@ public:
 	cBulletAdmin();
 	~cBulletAdmin();
 	
+	float temp = 0;
+
 	void Update();
 	void Render();
 	void IsOut();

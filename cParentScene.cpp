@@ -29,6 +29,7 @@ void cParentScene::Init(string curScene)
 	speed = 100;
 	score = 0;
 	delayCount = 0;
+	effectCount = 0;
 	hp = 3;
 
 	isStart = false;
@@ -40,6 +41,8 @@ void cParentScene::Init(string curScene)
 	delay = false;
 	waitToStart = true;
 	isFadeOut = true;
+	isdead = false;
+	once = true;
 
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 
@@ -54,6 +57,8 @@ void cParentScene::Update()
 	if (t_Delay != nullptr) t_Delay->Update();
 	if (t_WaitToStart != nullptr) t_WaitToStart->Update();
 	if (t_TimeFade != nullptr) t_TimeFade->Update();
+	if (t_CamMove != nullptr) t_CamMove->Update();
+	if (t_EffectDelay != nullptr) t_EffectDelay->Update();
 
 	if (waitToStart)
 	{
@@ -66,13 +71,9 @@ void cParentScene::Update()
 		if (t_TimeFade == nullptr)
 		{
 			t_TimeFade = new cTimer(0.5, [&]()->void {isFadeOut = !isFadeOut; t_TimeFade = nullptr; });
-			DebugLog(L"asdf");
 		}
 	}
 	else isFadeOut = false;
-
-	if (INPUT->KeyDown('G')) isClear = true;
-	if (INPUT->KeyDown('H')) isFail = true;
 
 	if (INPUT->KeyDown(VK_ESCAPE) && isStart)
 	{
@@ -161,6 +162,20 @@ void cParentScene::Update()
 	else
 	{
 		BG->high_BG = nullptr;
+	}
+
+	if (isdead && once)
+	{
+		once = false;
+		Vec2 movePos = playerPos;
+
+		// playerPos.x, playerPos.y 가 확대했을 때 맵 밖을 보여지는 위치라면.. 그거 검사해서 조건문 거셈
+
+		CAM->ZoomCam(0.1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
+		CAM->MoveCam(movePos);
+
+
+		t_CamMove = new cTimer(3, [&]()->void {t_CamMove = nullptr; isFail = true; });
 	}
 
 	if (isFail)
@@ -548,11 +563,7 @@ void cParentScene::Release()
 	SAFE_DELETE(t_Delay);
 	SAFE_DELETE(t_TimeFade);
 	SAFE_DELETE(t_WaitToStart);
-}
-
-void cParentScene::StageStart(Vec2* curPos_, Vec2* curPos, Vec2* targetPos, float speed)
-{
-	D3DXVec2Lerp(curPos_, curPos, targetPos, speed);
+	SAFE_DELETE(t_EffectDelay);
 }
 
 void cParentScene::SetPercent(float percent)
@@ -573,4 +584,29 @@ void cParentScene::SetHP(int hp)
 void cParentScene::SetBossPos(Vec2 bossPos)
 {
 	this->bossPos = bossPos;
+}
+
+void cParentScene::SetPlayerPos(Vec2 playerPos)
+{
+	this->playerPos = playerPos;
+}
+
+void cParentScene::PlayerDead(cPlayer* player)
+{
+	if (t_EffectDelay == nullptr && effectCount < 3)
+	{
+		DebugLog(L"effecting");
+		t_EffectDelay = new cTimer(0.5, [&]()->void {
+			for (int j = 0; j < 150; j++)
+			{
+				PART->AddEffect(playerPos + Vec2(rand() % 200 - 100, rand() % 200 - 100), 2, "red_effect");
+			}
+			effectCount++;
+			t_EffectDelay = nullptr;
+			});
+	}
+	else if (effectCount >= 3)
+	{
+		player->render = false;
+	}
 }

@@ -39,6 +39,7 @@ void cPlayer::Init()
 	invincibility = false;
 	isAttacked = false;
 	camEvent = true;
+	render = true;
 
 	m_pos = { 40, WINSIZEY / 2 };
 	cellSize = { 40, 300, WINSIZEX - 40, WINSIZEY - 40 };
@@ -100,7 +101,7 @@ void cPlayer::Init()
 	DrawLine(true);
 
 	ChkLine();
-	CAM->ZoomCam(1, 2, false, { WINSIZEX / 2, WINSIZEY / 2 });
+	CAM->ZoomCam(1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
 }
 
 void cPlayer::Update(Vec2 bossPos)
@@ -188,7 +189,8 @@ void cPlayer::Update(Vec2 bossPos)
 
 void cPlayer::Render()
 {
-	RENDER->CenterRender(player, m_pos, 0.2);
+	if (render)
+		RENDER->CenterRender(player, m_pos, 0.2);
 
 	char t_hp[5] = "";
 	sprintf(t_hp, "%d", hp);
@@ -757,7 +759,7 @@ void cPlayer::EatItem(string key)
 void cPlayer::CamEvent()
 {
 	if (t_camMoveDelay != nullptr) t_camMoveDelay->Update();
-	
+
 	if (camEvent && t_camMoveDelay == nullptr)
 	{
 		t_camMoveDelay = new cTimer(2, [&]()->void {

@@ -15,9 +15,6 @@ public:
 	cLoadingScene();
 	~cLoadingScene();
 
-	list<LoadInfo> loadList;
-
-	int listCount;
 
 	// cScene을(를) 통해 상속됨
 	virtual void Init() override;
@@ -26,7 +23,14 @@ public:
 	virtual void UIRender() override;
 	virtual void Release() override;
 
+private:
 	void AddLoad(string key, string path, int count = 0);
 	void AddResource();
+
+	list<LoadInfo> loadList;
+
+	cThreadPool* thread = nullptr;
+
+	int listCount;
 };
 

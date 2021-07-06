@@ -12,6 +12,9 @@ public:
 	float m_damage = 1;
 	float m_size;
 
+	float dir_x = 1;
+	float dir_y = 1;
+
 	int p1Count = 0;
 	int index = 0;
 

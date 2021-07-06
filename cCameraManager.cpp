@@ -46,16 +46,14 @@ void cCameraManager::ShakeCam(float time)
 	t_ShakeDelay = new cTimer(time, [&]()->void { isShake = false; camPos = { 0, 0 }; t_ShakeDelay = nullptr; });
 }
 
-void cCameraManager::ZoomCam(float time, float delay, bool zoomOut, Vec2 pos)
+void cCameraManager::ZoomCam(float time, float delay, Vec2 pos)
 {
 	isZoom = true;
-	isZoomEnd = false;
 
 	m_time = time;
 	m_delay = delay;
-	this->zoomOut = zoomOut;
 
-	camPos = pos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
+	m_targetPos = pos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
 
 	t_Zoom = new cTimer(time, [&]()->void {
 		isZoom = false;
@@ -81,19 +79,9 @@ void cCameraManager::Zooming()
 	if (t_Zoom != nullptr) t_Zoom->Update();
 	if (t_ZoomDelay != nullptr) t_ZoomDelay->Update();
 
-	if (zoomOut)
+	if (isZoom && zoom > 0.5f)
 	{
-		if (isZoom && zoom < 1.0f)
-		{
-			zoom += 0.01 / m_time;
-		}
-	}
-	else
-	{
-		if (isZoom && zoom > 0.5f)
-		{
-			zoom -= 0.01 / m_time;
-		}
+		zoom -= 0.01 / m_time;
 	}
 
 	if (!isZoom && zoom != 1)
@@ -104,9 +92,8 @@ void cCameraManager::Zooming()
 	if (isZoomWait)
 	{
 		zoom = 1;
-		MoveCam({ WINSIZEX / 2, WINSIZEY / 2 });
+		MoveCam(Vec2(WINSIZEX / 2, WINSIZEY / 2));
 		isZoomWait = false;
-		isZoomEnd = true;
 	}
 }
 

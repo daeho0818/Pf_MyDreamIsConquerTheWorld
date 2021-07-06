@@ -13,6 +13,11 @@
 #include <math.h>
 #include <cstdarg>
 #include <thread>
+#include <mutex>
+#include <chrono>
+#include <future>
+#include <condition_variable>
+#include <cstdio>
 
 #define g_device DXUTGetD3D9Device()
 #define Delta DXUTGetElapsedTime()
@@ -35,6 +40,7 @@ static bool isWindowed = false;
 #include "cMob.h"
 #include "cButton.h"
 #include "DebugLog.h"
+#include "cThreadPool.h"
 
 #include "cImageManager.h"
 #include "cInputManager.h"
@@ -45,7 +51,6 @@ static bool isWindowed = false;
 #include "cSceneManager.h"
 #include "cMouseManager.h"
 #include "cButtonManager.h"
-#include "cThreadManager.h"
 #include "cBGManager.h"
 #include "cCameraManager.h"
 

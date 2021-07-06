@@ -227,6 +227,9 @@
     <Filter Include="2. Manager\Camera">
       <UniqueIdentifier>{4384cb1d-0d63-47d1-95fd-3a3fbd9f8a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Object\Thread">
+      <UniqueIdentifier>{5e78b83a-6c2d-4097-a46b-3491ac6eac62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -483,14 +486,14 @@
     <ClCompile Include="cReflexBullet.cpp">
       <Filter>3. Object\Bullet\ReflexBullet</Filter>
     </ClCompile>
-    <ClCompile Include="cThreadManager.cpp">
-      <Filter>2. Manager\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="cBGManager.cpp">
       <Filter>2. Manager\BG</Filter>
     </ClCompile>
     <ClCompile Include="cCameraManager.cpp">
       <Filter>2. Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="cThreadPool.cpp">
+      <Filter>3. Object\Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -689,14 +692,14 @@
     <ClInclude Include="cReflexBullet.h">
       <Filter>3. Object\Bullet\ReflexBullet</Filter>
     </ClInclude>
-    <ClInclude Include="cThreadManager.h">
-      <Filter>2. Manager\Thread</Filter>
-    </ClInclude>
     <ClInclude Include="cBGManager.h">
       <Filter>2. Manager\BG</Filter>
     </ClInclude>
     <ClInclude Include="cCameraManager.h">
       <Filter>2. Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="cThreadPool.h">
+      <Filter>3. Object\Thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

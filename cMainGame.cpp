@@ -43,7 +43,6 @@ void cMainGame::Update()
 	PART->Update();
 	SCENE->Update();
 	SOUND->Update();
-	THREAD->Update();
 	CAM->Update();
 }
 
@@ -70,7 +69,6 @@ void cMainGame::Release()
 	cMouseManager::ReleaseInstance();
 	cButtonManager::ReleaseInstance();
 	cImageManager::ReleaseInstance();
-	cThreadManager::ReleaseInstance();
 	cBGManager::ReleaseInstance();
 	cCameraManager::ReleaseInstance();
 }

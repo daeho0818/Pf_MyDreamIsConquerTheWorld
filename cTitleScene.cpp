@@ -29,7 +29,7 @@ void cTitleScene::Init()
 	movedEnd = true;
 	temp = 0;
 	count = 0;
-	logoPos = { WINSIZEX / 2, 500 }; 
+	logoPos = { WINSIZEX / 2, 500 };
 	arrowKey = "Arrow";
 	memset(move, false, sizeof(move));
 	move[0] = true; speed = 1;
@@ -212,8 +212,11 @@ void cTitleScene::Render()
 			tempFunc(i);
 	}
 
+
 	if (guideUI)
 	{
+		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
+
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
 		RENDER->CenterRender(IMAGE->FindImage("guide_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
 		RENDER->CenterRender(IMAGE->FindImage("guide_text1"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
@@ -223,55 +226,66 @@ void cTitleScene::Render()
 	{
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
 		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2 + 25, WINSIZEY / 2), 0.8);
-		RENDER->CenterRender(IMAGE->FindImage("adven_BGRect"), Vec2(WINSIZEX / 2 + 25, WINSIZEY / 2), 0.8);
 
-		for (int i = 1; i < 5; i++)
+		if (SCENE->a_rewards[0] != 1)
 		{
-			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(900, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(1525, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(1525, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(1525, 450 * i), 0.3);
-			if (SCENE->a_rewards[i - 1] == 1)
-				printf("heehee");
-			else
-			{
-				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(900, 450 * i), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(900, 450 * i + 40), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1400, 450 * i), 0.25);
-			}
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 500), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 500), 0.25);
 		}
 
-		for (int i = 1; i < 4; i++)
+		if (SCENE->a_rewards[1] != 1)
 		{
-			RENDER->CenterRender(IMAGE->FindImage("adven_ItemRect"), Vec2(2180, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentBG"), Vec2(2805, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_textBG"), Vec2(2805, 450 * i), 0.3);
-			RENDER->CenterRender(IMAGE->FindImage("adven_ContentRect"), Vec2(2805, 450 * i), 0.3);
-			if (SCENE->a_rewards[(i - 1) + 4] != 1)
-			{
-				RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2180, 450 * i), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_Lock"), Vec2(2180, 450 * i + 40), 0.3);
-				RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 450 * i), 0.25);
-			}
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 912), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 912), 0.25);
 		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_church"), Vec2(1850, 410), 0.2);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_church_name"), Vec2(1850, 530), 0.25);
+		if (SCENE->a_rewards[2] != 1)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 1330), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 1330), 0.25);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_city"), Vec2(1850, 860), 0.2);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_city_name"), Vec2(1850, 970), 0.25);
+		if (SCENE->a_rewards[3] != 1)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 1748), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 1748), 0.25);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)"), Vec2(1850, 1310), 0.2);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)_name"), Vec2(1850, 1420), 0.25);
+		if (SCENE->a_rewards[4] != 1)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 500), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 500), 0.25);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_desert"), Vec2(1850, 1750), 0.2);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_desert_name"), Vec2(1850, 1860), 0.25);
+		if (SCENE->a_rewards[5] != 1)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 912), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 912), 0.25);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle"), Vec2(3140, 400), 0.25);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle_name"), Vec2(3140, 510), 0.25);
+		if (SCENE->a_rewards[6] != 1)
+		{
+			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 1330), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 1330), 0.25);
+		}
 
-		RENDER->CenterRender(IMAGE->FindImage("symbol_ice"), Vec2(3140, 860), 0.2);
-		RENDER->CenterRender(IMAGE->FindImage("symbol_ice_name"), Vec2(3140, 970), 0.25);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_church"), Vec2(1850, 460), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_church_name"), Vec2(1850, 580), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city"), Vec2(1850, 880), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city_name"), Vec2(1850, 990), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)"), Vec2(1850, 1290), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_city(night)_name"), Vec2(1850, 1400), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_desert"), Vec2(1850, 1720), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_desert_name"), Vec2(1850, 1820), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle"), Vec2(3140, 450), 0.25);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_jungle_name"), Vec2(3140, 560), 0.25);
+
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ice"), Vec2(3140, 890), 0.2);
+		RENDER->CenterRender(IMAGE->FindImage("symbol_ice_name"), Vec2(3140, 1000), 0.25);
 
 		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean"), Vec2(3140, 1300), 0.2);
 		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean_name"), Vec2(3140, 1410), 0.25);

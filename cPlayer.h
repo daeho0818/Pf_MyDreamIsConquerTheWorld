@@ -70,4 +70,5 @@ public:
 	bool returning = false;
 	bool invincibility = false;
 	bool isAttacked;
+	bool render = true;
 };

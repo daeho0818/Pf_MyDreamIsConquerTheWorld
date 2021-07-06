@@ -7,9 +7,6 @@ public:
 	cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cDesertBoss1();
 
-	float dir_x = 1;
-	float dir_y = 1;
-
 	bool isStop;
 	bool pattern1;
 

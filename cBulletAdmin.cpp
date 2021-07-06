@@ -13,7 +13,7 @@ cBulletAdmin::~cBulletAdmin()
 
 void cBulletAdmin::Update()
 {
-	int random[2] = {rand() % 2, rand() % 2};
+	int random[2] = { rand() % 2, rand() % 2 };
 
 	int random_x = 0, random_y = 0;
 
@@ -38,8 +38,7 @@ void cBulletAdmin::Update()
 	{
 		iter->Update();
 
-		float size = (rand() % 11) / 10.0;
-		PART->AddEffect(Vec2(iter->m_pos.x + random_x, iter->m_pos.y + random_y), size, iter->effectName);
+		PART->AddEffect(Vec2(iter->m_pos.x + random_x, iter->m_pos.y + random_y), 1, iter->effectName);
 	}
 	IsOut();
 	IsDestroy();

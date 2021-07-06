@@ -5,9 +5,6 @@ class cIceMob1
 public:
 	cIceMob1(Vec2 pos, vector<cBullet*>& bullets, float size = 1);
 	~cIceMob1();
-	
-	float dir_x = 1;
-	float dir_y = 1;
 
 	vector<cBullet*>& m_bullets;
 

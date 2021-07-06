@@ -52,16 +52,19 @@ void cIceScene::Init()
 
 void cIceScene::Update()
 {
-	cParentScene::SetPercent(player->coloring_per);
-	cParentScene::SetScore(SCENE->score);
-	cParentScene::SetHP(player->hp);
-	cParentScene::SetBossPos(mob->bossPos);
+	SetPercent(player->coloring_per);
+	SetScore(SCENE->score);
+	SetHP(player->hp);
+	SetBossPos(mob->bossPos);
+	SetPlayerPos(player->m_pos);
 
 	if (isStart)
 	{
-		if (timer <= 0 || player->hp <= 0)
+		if (timer <= 0 || player->hp <= 0 || INPUT->KeyDown('H'))
 		{
-			isFail = true;
+			player->hp = 0;
+			isdead = true;
+			PlayerDead(player);
 		}
 
 		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
@@ -80,9 +83,9 @@ void cIceScene::Update()
 	player->CamEvent();
 	if (isStart && !isStop)
 	{
-		mob->Update();
-		if (!isClear && !isFail)
+		if (!isClear && !isdead && !isFail)
 		{
+			mob->Update();
 			player->Update(mob->bossPos);
 			bullet->Update();
 			item->Update();

@@ -12,10 +12,8 @@ public:
 	void Render();
 
 	void ShakeCam(float time);
-	void ZoomCam(float time, float delay,bool zoomOut, Vec2 pos);
+	void ZoomCam(float time, float delay, Vec2 pos);
 	void MoveCam(Vec2 targetPos);
-
-	bool isZoomEnd;
 
 private:
 	Vec3 projPos;
@@ -32,7 +30,6 @@ private:
 
 	bool isShake = false;
 	bool isZoom = false;
-	bool zoomOut = false;
 	bool isZoomWait = false;
 
 	float zoom = 1;

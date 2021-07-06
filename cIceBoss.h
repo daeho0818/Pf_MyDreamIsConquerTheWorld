@@ -9,9 +9,6 @@ public:
 
 	int p1Count;
 
-	float dir_x = 1;
-	float dir_y = 1;
-
 	bool isStop;
 	bool pattern1 = true;
 

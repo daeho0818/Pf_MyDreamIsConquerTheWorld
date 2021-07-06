@@ -11,9 +11,6 @@ public:
 	int p2Count = 0;
 	int p3Count = 0;
 
-	float dir_x = 1;
-	float dir_y = 1;
-
 	bool isStop;
 	bool pattern1 = false;
 	bool pattern2 = true;

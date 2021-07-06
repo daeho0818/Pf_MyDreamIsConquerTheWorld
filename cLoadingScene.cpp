@@ -71,15 +71,11 @@ void cLoadingScene::Init()
 	AddLoad("guide_text2", "title/GuideBook/text2");
 
 	//adventure Note
+	AddLoad("adven_BG", "title/AdvenBook/AllBG");
+
 	AddLoad("adven_Back", "title/AdvenBook/back");
 
-	AddLoad("adven_BG", "title/AdvenBook/BG");
-
-	AddLoad("adven_BGRect", "title/AdvenBook/BGRect");
-
-	AddLoad("adven_Chain", "title/AdvenBook/chains");
-
-	AddLoad("adven_Lock", "title/AdvenBook/lock");
+	AddLoad("adven_Chain", "title/AdvenBook/lock_chains");
 
 	AddLoad("adven_CircleDown", "title/AdvenBook/circleDown");
 
@@ -93,17 +89,7 @@ void cLoadingScene::Init()
 
 	AddLoad("adven_ContentRect", "title/AdvenBook/contentRect");
 
-	AddLoad("adven_ContentBG", "title/AdvenBook/contentBG");
-
-	AddLoad("adven_Handle", "title/AdvenBook/handle");
-
-	AddLoad("adven_HandleBG", "title/AdvenBook/handleBG");
-
-	AddLoad("adven_ItemRect", "title/AdvenBook/itemRect");
-
 	AddLoad("adven_DontClear", "title/AdvenBook/dontClear");
-
-	AddLoad("adven_textBG", "title/AdvenBook/textBG");
 
 	AddLoad("symbol_church", "title/AdvenBook/Symbol/church");
 
@@ -132,7 +118,7 @@ void cLoadingScene::Init()
 	AddLoad("symbol_jungle", "title/AdvenBook/Symbol/jungle");
 
 	AddLoad("symbol_jungle_name", "title/AdvenBook/Symbol/jungle_name");
-		
+
 	// world map
 	AddLoad("WorldMap", "WorldMap/map");
 
@@ -575,28 +561,17 @@ void cLoadingScene::Init()
 		// Color
 		{
 			AddLoad("white_effect", "Effect/white_Effect");
+			AddLoad("red_effect", "Effect/red_Effect");
 		}
 	}
 	listCount = loadList.size();
+
+	thread = new cThreadPool(1);
+	thread->EnqueueJob([&]()->void {AddResource(); });
 }
 
 void cLoadingScene::Update()
 {
-	if (!loadList.empty())
-	{
-		LoadInfo load = loadList.back();
-		loadList.pop_back();
-
-		IMAGE->AddImage(load.key, load.path, load.count);
-	}
-	else
-	{
-		SCENE->ChangeScene("cTitleScene");
-
-		BG->isLoadScene = false;
-		BG->ptr[0] = IMAGE->FindImage("player");
-		BG->ptr[1] = IMAGE->FindImage("player");
-	}
 }
 
 void cLoadingScene::Render()
@@ -645,7 +620,7 @@ void cLoadingScene::UIRender()
 
 void cLoadingScene::Release()
 {
-	//THREAD->ReleaseThread("AddResource");
+	SAFE_DELETE(thread);
 }
 
 
@@ -656,4 +631,17 @@ void cLoadingScene::AddLoad(string key, string path, int count)
 
 void cLoadingScene::AddResource()
 {
+	while (!loadList.empty())
+	{
+		LoadInfo load = loadList.back();
+		loadList.pop_back();
+
+		IMAGE->AddImage(load.key, load.path, load.count);
+	}
+
+	BG->isLoadScene = false;
+	BG->ptr[0] = IMAGE->FindImage("player");
+	BG->ptr[1] = IMAGE->FindImage("player");
+
+	SCENE->ChangeScene("cTitleScene");
 }

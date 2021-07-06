@@ -11,8 +11,6 @@ public:
 	int p2Count = 0;
 	int p3Count = 0;
 
-	float dir_x = 1;
-	float dir_y = 1;
 	float angle = 0;
 	float rad = D3DX_PI * 2 / 25;
 
