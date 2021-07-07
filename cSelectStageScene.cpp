@@ -124,37 +124,86 @@ void cSelectStageScene::Render()
 	(SCENE->m_rewards.find("cChurchScene")->second != 1) ?
 		RENDER->CenterRender(IMAGE->FindImage("church_lock"), Vec2(3100, 300) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("church_complete"), Vec2(3100, 300), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("church_button"), Vec2(3100, 600), 0.6);
+	if (MOUSE->Collider("church_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("church_button_over"), Vec2(3100, 600), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("church_button_down"), Vec2(3100, 600), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cCityNightScene")->second != 1) ?
 		RENDER->CenterRender(IMAGE->FindImage("city(night)_lock"), Vec2(1200, 1000) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("city(night)_complete"), Vec2(1200, 1000), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("city(night)_button"), Vec2(1200, 1300), 0.6);
+	if (MOUSE->Collider("city(night)_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("city(night)_button_over"), Vec2(1200, 1300), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("city(night)_button_down"), Vec2(1200, 1300), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cCityScene")->second != 1) ?
-		RENDER->CenterRender(IMAGE->FindImage("city_lock"), Vec2(2400, 600) + operPos, 0.6):
+		RENDER->CenterRender(IMAGE->FindImage("city_lock"), Vec2(2400, 600) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("city_complete"), Vec2(2400, 600), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("city_button"), Vec2(2400, 900), 0.6);
+	if (MOUSE->Collider("city_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("city_button_over"), Vec2(2400, 900), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("city_button_down"), Vec2(2400, 900), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cDesertScene")->second != 1) ?
-		RENDER->CenterRender(IMAGE->FindImage("desert_lock"), Vec2(3500, 1500) + operPos, 0.6):
+		RENDER->CenterRender(IMAGE->FindImage("desert_lock"), Vec2(3500, 1500) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("desert_complete"), Vec2(3500, 1500), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("desert_button"), Vec2(3500, 1800), 0.6);
+	if (MOUSE->Collider("desert_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("desert_button_over"), Vec2(3500, 1800), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("desert_button_down"), Vec2(3500, 1800), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cIceScene")->second != 1) ?
-		RENDER->CenterRender(IMAGE->FindImage("ice_lock"), Vec2(600, 1600) + operPos, 0.6):
+		RENDER->CenterRender(IMAGE->FindImage("ice_lock"), Vec2(600, 1600) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("ice_complete"), Vec2(600, 1600), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("ice_button"), Vec2(600, 1900), 0.6);
+	if (MOUSE->Collider("ice_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("ice_button_over"), Vec2(600, 1900), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("ice_button_down"), Vec2(600, 1900), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cOceanScene")->second != 1) ?
 		RENDER->CenterRender(IMAGE->FindImage("ocean_lock"), Vec2(1000, 300) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("ocean_complete"), Vec2(1000, 300), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("ocean_button"), Vec2(1000, 600), 0.6);
+	if (MOUSE->Collider("ocean_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("ocean_button_over"), Vec2(1000, 600), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("ocean_button_down"), Vec2(1000, 600), 0.6);
+	}
 
 	(SCENE->m_rewards.find("cJungleScene")->second != 1) ?
-		RENDER->CenterRender(IMAGE->FindImage("jungle_lock"), Vec2(3100, WINSIZEY / 2 - 200) + operPos, 0.6):
+		RENDER->CenterRender(IMAGE->FindImage("jungle_lock"), Vec2(3100, WINSIZEY / 2 - 200) + operPos, 0.6) :
 		RENDER->CenterRender(IMAGE->FindImage("jungle_complete"), Vec2(3100, WINSIZEY / 2 - 200), 0.6);
+
 	RENDER->CenterRender(IMAGE->FindImage("jungle_button"), Vec2(3100, WINSIZEY / 2 + 100), 0.6);
+	if (MOUSE->Collider("jungle_button") && stage == Stage::None)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("jungle_button_over"), Vec2(3100, WINSIZEY / 2 + 100), 0.6);
+		if (MOUSE->lStay)
+			RENDER->CenterRender(IMAGE->FindImage("jungle_button_down"), Vec2(3100, WINSIZEY / 2 + 100), 0.6);
+	}
 
 
 	RENDER->CenterRender(IMAGE->FindImage("cloud1"), cloudsPos[0]);

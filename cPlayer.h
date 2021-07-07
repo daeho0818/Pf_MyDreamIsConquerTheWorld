@@ -17,6 +17,7 @@ public:
 private:
 	Vec2 startDrawPos;
 
+	cTimer* t_Hp = nullptr;
 	cTimer* t_Speed = nullptr;
 	cTimer* t_Invincibility = nullptr;
 	cTimer* t_Fade = nullptr;
@@ -38,7 +39,6 @@ private:
 	bool drawStart;
 	bool draw_mode = false;
 	bool stop = false;
-	bool speedUp = false;
 	bool camEvent = true;
 
 	void KeyEvent();
@@ -68,6 +68,8 @@ public:
 
 	bool draw_line = false;
 	bool returning = false;
+	bool isHp = false;
+	bool speedUp = false;
 	bool invincibility = false;
 	bool isAttacked;
 	bool render = true;

@@ -71,6 +71,7 @@ void cMainGame::Release()
 	cImageManager::ReleaseInstance();
 	cBGManager::ReleaseInstance();
 	cCameraManager::ReleaseInstance();
+	cMouseManager::ReleaseInstance();
 }
 
 void cMainGame::ResetDevice()

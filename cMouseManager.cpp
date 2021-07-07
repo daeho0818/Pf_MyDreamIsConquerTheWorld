@@ -22,7 +22,9 @@ void cMouseManager::Render()
 
 bool cMouseManager::Collider(string key, Vec2 pos)
 {
-	return CBColl(BUTTON->buttonRects.find(key)->second, pos);
+	if (BUTTON->buttonRects.find(key) != BUTTON->buttonRects.end())
+		return CBColl(BUTTON->buttonRects.find(key)->second, pos);
+	return false;
 }
 
 bool cMouseManager::CBColl(RECT rc, Vec2 pos)

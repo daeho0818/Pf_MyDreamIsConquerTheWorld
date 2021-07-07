@@ -28,6 +28,8 @@ public:
 	int score;
 	int a_rewards[7];
 
+	bool gameClear = false;
+
 	string curScene = "";
 
 	map<string, int> m_rewards;

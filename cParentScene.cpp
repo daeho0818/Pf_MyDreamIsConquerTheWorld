@@ -11,6 +11,8 @@ cParentScene::~cParentScene()
 
 void cParentScene::Init(string curScene)
 {
+	srand(time(NULL));
+
 	SCENE->curScene = curScene;
 
 	for (int i = 0; i < 7; i++)
@@ -22,6 +24,8 @@ void cParentScene::Init(string curScene)
 	memset(over, false, sizeof(over));
 	memset(textRender, false, sizeof(textRender));
 
+	alphaColor = 255;
+	effectCount = 0;
 	textCount = 1;
 	percent = 0;
 	timer = 180;
@@ -29,30 +33,29 @@ void cParentScene::Init(string curScene)
 	speed = 100;
 	score = 0;
 	delayCount = 0;
-	effectCount = 0;
 	hp = 3;
 
-	isStart = false;
-	isStop = false;
-	isClear = false;
-	isFail = false;
-	isClearEnd = false;
-	isFailEnd = false;
-	delay = false;
 	waitToStart = true;
 	isFadeOut = true;
-	isdead = false;
 	once = true;
+	isStart = isStop = isClear = isFail = isClearEnd = isFailEnd = delay = isdead = false;
 
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 
 	BUTTON->AddButton("stop_back", Vec2(WINSIZEX / 2, WINSIZEY / 2 - 300));
 	BUTTON->AddButton("stop_restart", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 400) + 400));
 	BUTTON->AddButton("stop_worldmap", Vec2(WINSIZEX / 2, (WINSIZEY / 2 - 500) + 800));
+
 }
 
 void cParentScene::Update()
 {
+	percent = player->coloring_per;
+	hp = player->hp;
+	playerPos = player->m_pos;
+	score = SCENE->score;
+	bossPos = mob->bossPos;
+
 	if (t_Timer != nullptr) t_Timer->Update();
 	if (t_Delay != nullptr) t_Delay->Update();
 	if (t_WaitToStart != nullptr) t_WaitToStart->Update();
@@ -60,11 +63,12 @@ void cParentScene::Update()
 	if (t_CamMove != nullptr) t_CamMove->Update();
 	if (t_EffectDelay != nullptr) t_EffectDelay->Update();
 
+	SceneUpdate();
+
 	if (waitToStart)
 	{
 		if (t_WaitToStart == nullptr)
 			t_WaitToStart = new cTimer(4, [&]()->void {waitToStart = false;  t_WaitToStart = nullptr; });
-
 	}
 	if (!isStart)
 	{
@@ -96,6 +100,7 @@ void cParentScene::Update()
 
 	if (isClear)
 	{
+		SCENE->gameClear = true;
 		if (t_Clear != nullptr) t_Clear->Update();
 		for (int x = 40; x < WINSIZEX - 40; x++)
 			for (int y = 300; y < WINSIZEY - 40; y++)
@@ -169,17 +174,21 @@ void cParentScene::Update()
 		once = false;
 		Vec2 movePos = playerPos;
 
-		// playerPos.x, playerPos.y 가 확대했을 때 맵 밖을 보여지는 위치라면.. 그거 검사해서 조건문 거셈
+		if (movePos.x >= 3000) movePos.x = 3000;
+		else if (movePos.x <= 1000) movePos.x = 1000;
+
+		if (movePos.y <= 1350) movePos.y = 1350;
+		else if (movePos.y >= 600) movePos.y = 600;
 
 		CAM->ZoomCam(0.1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
 		CAM->MoveCam(movePos);
-
 
 		t_CamMove = new cTimer(3, [&]()->void {t_CamMove = nullptr; isFail = true; });
 	}
 
 	if (isFail)
 	{
+		SCENE->gameClear = false;
 		if (t_Over != nullptr) t_Over->Update();
 
 		if (t_Over == nullptr)
@@ -341,7 +350,10 @@ void cParentScene::Update()
 
 void cParentScene::Render()
 {
+	SceneRender();
+
 	RENDER->CenterRender(IMAGE->FindImage("IngameBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	RENDER->CenterRender(IMAGE->FindImage("hp_blind"), Vec2(270, 250));
 	switch (hp)
 	{
 	case 3:
@@ -359,7 +371,22 @@ void cParentScene::Render()
 	}
 	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250));
 
-	RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
+	if (player->isHp)
+	{
+	}
+	else
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(820, 125));
+
+	if (player->speedUp)
+	{
+	}
+	else
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
+	if (player->invincibility)
+	{
+	}
+	else
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125));
 
 	if (!waitToStart && !isStart)
 	{
@@ -509,7 +536,7 @@ void cParentScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 125, WINSIZEY / 2 + 150));
 
 		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
-		if (SCENE->m_rewards[SCENE->curScene] != 1)
+		if (SCENE->m_rewards[SCENE->curScene] != 1 && !isFail)
 			RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
 
 		RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
@@ -519,6 +546,8 @@ void cParentScene::Render()
 bool fadeOut = true;
 void cParentScene::UIRender()
 {
+	SceneUIRender();
+
 	if (alphaColor >= 250)
 	{
 		fadeOut = true;
@@ -566,32 +595,12 @@ void cParentScene::Release()
 	SAFE_DELETE(t_EffectDelay);
 }
 
-void cParentScene::SetPercent(float percent)
-{
-	this->percent = percent;
-}
-
-void cParentScene::SetScore(float score)
-{
-	this->score = score;
-}
-
-void cParentScene::SetHP(int hp)
-{
-	this->hp = hp;
-}
-
 void cParentScene::SetBossPos(Vec2 bossPos)
 {
 	this->bossPos = bossPos;
 }
 
-void cParentScene::SetPlayerPos(Vec2 playerPos)
-{
-	this->playerPos = playerPos;
-}
-
-void cParentScene::PlayerDead(cPlayer* player)
+void cParentScene::PlayerDead()
 {
 	if (t_EffectDelay == nullptr && effectCount < 3)
 	{
@@ -609,4 +618,67 @@ void cParentScene::PlayerDead(cPlayer* player)
 	{
 		player->render = false;
 	}
+}
+
+void cParentScene::SceneUpdate()
+{
+	if (isStart)
+	{
+		if (timer <= 0 || player->hp <= 0 || INPUT->KeyDown('H'))
+		{
+			player->hp = 0;
+			isdead = true;
+			PlayerDead();
+		}
+
+		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
+		{
+			isClear = true;
+		}
+
+		if (mob->isDestroy)
+		{
+			SCENE->score += 300;
+			mob->isDestroy = false;
+		}
+	}
+
+	mob->Animation();
+	player->CamEvent();
+	if (isStart && !isStop)
+	{
+		if (!isdead && !isFail)
+		{
+			mob->Update();
+			if (!isClear)
+			{
+				player->Update(mob->bossPos);
+				bullet->Update();
+				item->Update();
+				coll->Update();
+			}
+		}
+	}
+}
+
+void cParentScene::SceneRender()
+{
+	if (isStart && !isStop && !isFail && !isClear)
+	{
+		if (!isdead)
+		{
+			bullet->Render();
+			item->Render();
+		}
+	}
+	player->Render();
+
+	if (!isClear)
+		mob->Render();
+}
+
+void cParentScene::SceneUIRender()
+{
+	player->UIRender();
+	mob->UIRender();
 }

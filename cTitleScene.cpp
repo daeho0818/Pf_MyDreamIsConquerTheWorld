@@ -215,8 +215,6 @@ void cTitleScene::Render()
 
 	if (guideUI)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("adven_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
-
 		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2{ WINSIZEX / 2, WINSIZEY / 2 });
 		RENDER->CenterRender(IMAGE->FindImage("guide_BG"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
 		RENDER->CenterRender(IMAGE->FindImage("guide_text1"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 0.8);
@@ -298,7 +296,7 @@ void cTitleScene::Render()
 	}
 	else if (developUI)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Credit"), Vec2(WINSIZEX / 2, WINSIZEY / 2), 2.5);
+		RENDER->CenterRender(IMAGE->FindImage("Credit"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
 		RENDER->CenterRender(IMAGE->FindImage("X"), Vec2(3900, WINSIZEY / 2 - 1023), 0.6);
 		BUTTON->ChangeBtnInfo("X", Vec2(3900, WINSIZEY / 2 - 1023), 0.6);
 	}

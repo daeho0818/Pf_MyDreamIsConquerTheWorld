@@ -1,5 +1,9 @@
 #pragma once
 #include "cPlayer.h"
+#include "cMobAdmin.h"
+#include "cItemAdmin.h"
+#include "cBulletAdmin.h"
+#include "cCollision.h"
 class cParentScene
 {
 public:
@@ -12,24 +16,15 @@ public:
 	virtual void UIRender();
 	virtual void Release();
 
-	void SetPercent(float percent);
-	void SetScore(float score);
-	void SetHP(int hp);
 	void SetBossPos(Vec2 bossPos);
-	void SetPlayerPos(Vec2 playerPos);
 
-	void PlayerDead(cPlayer* player);
-
-	int textCount;
-	int timer;
-	int CFCount;
-	int delayCount;
+	void PlayerDead();
 
 private:
 	int score;
 	int alphaColor = 255;
-	int hp;
 	int effectCount = 0;
+	int hp;
 
 	bool waitToStart = true;
 	bool clear[7];
@@ -37,6 +32,8 @@ private:
 	bool textRender[7];
 	bool isFadeOut = true;
 	bool once = false;
+
+	float percent;
 
 	cTimer* t_TextAni = nullptr;
 	cTimer* t_Timer = nullptr;
@@ -52,7 +49,16 @@ private:
 	Vec2 bossPos;
 	Vec2 playerPos;
 
+	void SceneUpdate();
+	void SceneRender();
+	void SceneUIRender();
+
 public:
+	int textCount;
+	int timer;
+	int CFCount;
+	int delayCount;
+
 	bool isStart;
 	bool isStop;
 	bool isdead;
@@ -62,9 +68,18 @@ public:
 	bool isFailEnd;
 	bool delay;
 
-	float percent;
 	float speed;
 
 	cTexture* t_BG = nullptr;
+
+	cPlayer* player = nullptr;
+
+	cMobAdmin* mob = nullptr;
+
+	cItemAdmin* item = nullptr;
+
+	cBulletAdmin* bullet = nullptr;
+
+	cCollision* coll = nullptr;
 };
 

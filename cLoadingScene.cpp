@@ -128,11 +128,19 @@ void cLoadingScene::Init()
 
 	AddLoad("church_button", "WorldMap/church_button");
 
+	AddLoad("church_button_over", "WorldMap/church_button_over");
+
+	AddLoad("church_button_down", "WorldMap/church_button_down");
+
 	AddLoad("church_complete", "WorldMap/church_complete");
 
 	AddLoad("church_lock", "WorldMap/church_lock");
 
 	AddLoad("city(night)_button", "WorldMap/city(night)_button");
+
+	AddLoad("city(night)_button_over", "WorldMap/city(night)_button_over");
+
+	AddLoad("city(night)_button_down", "WorldMap/city(night)_button_down");
 
 	AddLoad("city(night)_complete", "WorldMap/city(night)_complete");
 
@@ -140,11 +148,19 @@ void cLoadingScene::Init()
 
 	AddLoad("city_button", "WorldMap/city_button");
 
+	AddLoad("city_button_over", "WorldMap/city_button_over");
+
+	AddLoad("city_button_down", "WorldMap/city_button_down");
+
 	AddLoad("city_complete", "WorldMap/city_complete");
 
 	AddLoad("city_lock", "WorldMap/city_lock");
 
 	AddLoad("desert_button", "WorldMap/desert_button");
+
+	AddLoad("desert_button_over", "WorldMap/desert_button_over");
+
+	AddLoad("desert_button_down", "WorldMap/desert_button_down");
 
 	AddLoad("desert_complete", "WorldMap/desert_complete");
 
@@ -152,17 +168,29 @@ void cLoadingScene::Init()
 
 	AddLoad("ice_button", "WorldMap/ice_button");
 
+	AddLoad("ice_button_over", "WorldMap/ice_button_over");
+
+	AddLoad("ice_button_down", "WorldMap/ice_button_down");
+
 	AddLoad("ice_complete", "WorldMap/ice_complete");
 
 	AddLoad("ice_lock", "WorldMap/ice_lock");
 
 	AddLoad("jungle_button", "WorldMap/jungle_button");
 
+	AddLoad("jungle_button_over", "WorldMap/jungle_button_over");
+
+	AddLoad("jungle_button_down", "WorldMap/jungle_button_down");
+
 	AddLoad("jungle_complete", "WorldMap/jungle_complete");
 
 	AddLoad("jungle_lock", "WorldMap/jungle_lock");
 
 	AddLoad("ocean_button", "WorldMap/ocean_button");
+
+	AddLoad("ocean_button_over", "WorldMap/ocean_button_over");
+
+	AddLoad("ocean_button_down", "WorldMap/ocean_button_down");
 
 	AddLoad("ocean_complete", "WorldMap/ocean_complete");
 
@@ -242,6 +270,10 @@ void cLoadingScene::Init()
 		{
 			AddLoad("Clear", "Ingame/Clear,Fail/Clear/clear");
 
+			AddLoad("G", "Ingame/Clear,Fail/Clear/g");
+
+			AddLoad("M", "Ingame/Clear,Fail/Clear/m");
+
 			AddLoad("C", "Ingame/Clear,Fail/Clear/1. c");
 
 			AddLoad("L", "Ingame/Clear,Fail/Clear/2. l");
@@ -259,6 +291,12 @@ void cLoadingScene::Init()
 		// fail
 		{
 			AddLoad("Over", "Ingame/Clear,Fail/Fail/over");
+
+			AddLoad("OVER_G", "Ingame/Clear,Fail/Fail/g");
+
+			AddLoad("OVER_A", "Ingame/Clear,Fail/Fail/a");
+
+			AddLoad("OVER_M", "Ingame/Clear,Fail/Fail/m");
 
 			AddLoad("O", "Ingame/Clear,Fail/Fail/1. o");
 
@@ -404,6 +442,8 @@ void cLoadingScene::Init()
 
 	// UI
 	AddLoad("IngameBG", "Ingame/UI/AllBG");
+
+	AddLoad("hp_blind", "Ingame/UI/blind");
 
 	AddLoad("Ingame_HP", "Ingame/UI/HP");
 
@@ -566,12 +606,28 @@ void cLoadingScene::Init()
 	}
 	listCount = loadList.size();
 
-	thread = new cThreadPool(1);
-	thread->EnqueueJob([&]()->void {AddResource(); });
+	//thread = new cThreadPool(1);
+	//thread->EnqueueJob([&]()->void {AddResource(); });
 }
 
 void cLoadingScene::Update()
 {
+	if (!loadList.empty())
+	{
+		LoadInfo load = loadList.back();
+		loadList.pop_back();
+
+		IMAGE->AddImage(load.key, load.path, load.count);
+	}
+
+	else
+	{
+		BG->isLoadScene = false;
+		BG->ptr[0] = IMAGE->FindImage("player");
+		BG->ptr[1] = IMAGE->FindImage("player");
+
+		SCENE->ChangeScene("cTitleScene");
+	}
 }
 
 void cLoadingScene::Render()
@@ -631,7 +687,7 @@ void cLoadingScene::AddLoad(string key, string path, int count)
 
 void cLoadingScene::AddResource()
 {
-	while (!loadList.empty())
+	while(!loadList.empty())
 	{
 		LoadInfo load = loadList.back();
 		loadList.pop_back();

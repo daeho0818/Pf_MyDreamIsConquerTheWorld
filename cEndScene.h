@@ -21,7 +21,7 @@ private:
 	bool isAniStart = true;
 	bool isTextUp = true;
 
-	cTimer* t_AniTerm = nullptr;
+	//cTimer* t_AniTerm = nullptr;
 	cTimer* t_AniDelay = nullptr;
 
 	void TextUpOrDown();

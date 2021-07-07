@@ -35,6 +35,7 @@ void cPlayer::Init()
 	draw_mode = false;
 	returning = false;
 	stop = false;
+	isHp = false;
 	speedUp = false;
 	invincibility = false;
 	isAttacked = false;
@@ -107,6 +108,7 @@ void cPlayer::Init()
 void cPlayer::Update(Vec2 bossPos)
 {
 	if (t_Fade != nullptr) t_Fade->Update();
+	if (t_Hp != nullptr) t_Hp->Update();
 
 	ItemUpdate();
 
@@ -203,6 +205,7 @@ void cPlayer::UIRender()
 
 void cPlayer::Release()
 {
+	SAFE_DELETE(t_Hp);
 	SAFE_DELETE(t_Speed);
 	SAFE_DELETE(t_Invincibility);
 	SAFE_DELETE(t_Fade);
@@ -723,8 +726,16 @@ void cPlayer::EatItem(string key)
 {
 	if (key == "Heal")
 	{
+		isHp = true;
 		if (hp < 3) hp += 1;
 		SCENE->score += 50;
+		if (t_Hp == nullptr)
+		{
+			t_Hp = new cTimer(1, [&]()->void {
+				isHp = false;
+				t_Hp = nullptr;
+				});
+		}
 	}
 
 	if (key == "Speed")
@@ -763,7 +774,7 @@ void cPlayer::CamEvent()
 	if (camEvent && t_camMoveDelay == nullptr)
 	{
 		t_camMoveDelay = new cTimer(2, [&]()->void {
-			CAM->MoveCam({ m_pos.x + WINSIZEX / 4 - 50, m_pos.y });
+			CAM->MoveCam({ 1000, m_pos.y });
 			camEvent = false;
 			t_camMoveDelay = nullptr;
 			});
