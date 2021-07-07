@@ -196,6 +196,34 @@ void cLoadingScene::Init()
 
 	AddLoad("ocean_lock", "WorldMap/ocean_lock");
 
+	AddLoad("church_item", "Title/AdvenBook/성소");
+
+	AddLoad("city_item", "Title/AdvenBook/도시낮");
+
+	AddLoad("city(night)_item", "Title/AdvenBook/도시밤");
+
+	AddLoad("desert_item", "Title/AdvenBook/사막");
+
+	AddLoad("ice_item", "Title/AdvenBook/남극");
+
+	AddLoad("jungle_item", "Title/AdvenBook/정글");
+
+	AddLoad("ocean_item", "Title/AdvenBook/바다");
+
+	AddLoad("church_con", "Title/AdvenBook/성소설명");
+
+	AddLoad("city_con", "Title/AdvenBook/도시(낮)설명");
+
+	AddLoad("city(night)_con", "Title/AdvenBook/도시(밤)설명");
+
+	AddLoad("desert_con", "Title/AdvenBook/사막설명");
+
+	AddLoad("ice_con", "Title/AdvenBook/남극설명");
+
+	AddLoad("jungle_con", "Title/AdvenBook/정글설명");
+
+	AddLoad("ocean_con", "Title/AdvenBook/바다설명");
+
 	AddLoad("church_All", "WorldMap/Details/Church/All");
 
 	AddLoad("city_All", "WorldMap/Details/City/All");
@@ -563,6 +591,8 @@ void cLoadingScene::Init()
 		AddLoad("city_mob2_effect", "Ingame/City/bullets/mob2_effect");
 
 		// City(Night)
+		AddLoad("city(night)_dead", "Ingame/City(night)/Effect/dead", 33);
+
 		AddLoad("city(night)_boss_effect", "Ingame/City(night)/bullets/boss_effect");
 		AddLoad("city(night)_mob1_effect", "Ingame/City(night)/bullets/mob1_effect");
 		AddLoad("city(night)_mob2_effect", "Ingame/City(night)/bullets/mob2_effect");
@@ -604,6 +634,11 @@ void cLoadingScene::Init()
 			AddLoad("red_effect", "Effect/red_Effect");
 		}
 	}
+
+	SOUND->AddSound("draw_line", L"draw_line");
+	SOUND->AddSound("button", L"button");
+	SOUND->AddSound("fillplace", L"fillplace");
+		
 	listCount = loadList.size();
 
 	//thread = new cThreadPool(1);

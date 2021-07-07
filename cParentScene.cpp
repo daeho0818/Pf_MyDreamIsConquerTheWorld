@@ -373,17 +373,20 @@ void cParentScene::Render()
 
 	if (player->isHp)
 	{
+		RENDER->CenterRender(IMAGE->FindImage("Hp+"), Vec2(820, 125));
 	}
 	else
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(820, 125));
 
 	if (player->speedUp)
 	{
+		RENDER->CenterRender(IMAGE->FindImage("Speed+"), Vec2(1020, 125));
 	}
 	else
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
 	if (player->invincibility)
 	{
+		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125	));
 	}
 	else
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125));
@@ -537,7 +540,23 @@ void cParentScene::Render()
 
 		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
 		if (SCENE->m_rewards[SCENE->curScene] != 1 && !isFail)
+		{
 			RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
+			if (SCENE->curScene == "cChurchScene")
+				RENDER->CenterRender(IMAGE->FindImage("church_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
+			else if(SCENE->curScene == "cCityScene")
+				RENDER->CenterRender(IMAGE->FindImage("city_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
+			else if(SCENE->curScene == "cCityNightScene")
+				RENDER->CenterRender(IMAGE->FindImage("city(night)_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
+			else if(SCENE->curScene == "cDesertScene")
+				RENDER->CenterRender(IMAGE->FindImage("desert_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
+			else if(SCENE->curScene == "cIceScene")
+				RENDER->CenterRender(IMAGE->FindImage("ice_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
+			else if(SCENE->curScene == "cJungleScene")
+				RENDER->CenterRender(IMAGE->FindImage("jungle_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
+			else if(SCENE->curScene == "cOceanScene")
+				RENDER->CenterRender(IMAGE->FindImage("ocean_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
+		}
 
 		RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 	}
@@ -593,11 +612,6 @@ void cParentScene::Release()
 	SAFE_DELETE(t_TimeFade);
 	SAFE_DELETE(t_WaitToStart);
 	SAFE_DELETE(t_EffectDelay);
-}
-
-void cParentScene::SetBossPos(Vec2 bossPos)
-{
-	this->bossPos = bossPos;
 }
 
 void cParentScene::PlayerDead()

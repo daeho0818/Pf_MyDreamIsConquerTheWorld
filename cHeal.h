@@ -3,7 +3,7 @@ class cHeal
 	:public cItem
 {
 public:
-	cHeal(Vec2 pos);
+	cHeal(Vec2 pos, float size);
 	~cHeal();
 };
 

@@ -44,14 +44,14 @@ void cItemAdmin::Update()
 	}
 	if (t_Speed == nullptr)
 	{
-		t_Speed = new cTimer(30, [&]()->void {
+		t_Speed = new cTimer(20, [&]()->void {
 			CreateItem("Speed");
 			t_Speed = nullptr;
 			});
 	}
 	if (t_Invincibility == nullptr)
 	{
-		t_Invincibility = new cTimer(40, [&]()->void {
+		t_Invincibility = new cTimer(30, [&]()->void {
 			CreateItem("Invincibility");
 			t_Invincibility = nullptr;
 			});
@@ -79,11 +79,11 @@ void cItemAdmin::CreateItem(string key)
 	r_Pos = { (float)random_x, (float)random_y };
 
 	if (key == "Heal")
-		m_items.push_back(new cHeal(r_Pos));
+		m_items.push_back(new cHeal(r_Pos, 0.5));
 	else if (key == "Speed")
-		m_items.push_back(new cSpeed(r_Pos));
+		m_items.push_back(new cSpeed(r_Pos, 0.5));
 	else if (key == "Invincibility")
-		m_items.push_back(new cInvincibility(r_Pos));
+		m_items.push_back(new cInvincibility(r_Pos, 0.5));
 }
 
 void cItemAdmin::IsDestroy()

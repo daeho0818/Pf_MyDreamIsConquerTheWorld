@@ -93,9 +93,18 @@ void cCollision::MBPColl()
 
 void cCollision::IPColl()
 {
+	float length;
 	for (auto iter = m_item.begin(); iter != m_item.end();)
 	{
-		if (7 + (*iter)->m_size >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
+		length = ((*iter)->m_image->info.Height / 2) * (*iter)->m_size;
+
+		if (abs(m_player->m_pos.y - (*iter)->m_pos.y) <= (*iter)->m_image->info.Height / 2 * (*iter)->m_size)
+			length = (*iter)->m_image->info.Height / 2 * (*iter)->m_size;
+
+		else if (abs(m_player->m_pos.x - (*iter)->m_pos.x) <= (*iter)->m_image->info.Width / 2 * (*iter)->m_size)
+			length = (*iter)->m_image->info.Width / 2 * (*iter)->m_size;
+
+		if (length + (*iter)->m_size >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 		{
 			m_player->EatItem((*iter)->itemName);
 			(*iter)->isDestroy = true;

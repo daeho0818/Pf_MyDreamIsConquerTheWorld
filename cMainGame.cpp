@@ -44,6 +44,7 @@ void cMainGame::Update()
 	SCENE->Update();
 	SOUND->Update();
 	CAM->Update();
+	SOUND->Update();
 }
 
 void cMainGame::Render()

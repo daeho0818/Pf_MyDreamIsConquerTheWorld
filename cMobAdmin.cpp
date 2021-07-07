@@ -156,7 +156,7 @@ void cMobAdmin::Update()
 			}
 			else if (stage == "cCityNightScene")
 			{
-				// PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "cirt(night)_dead", 0.05);
+				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "city(night)_dead", 0.05);
 			}
 			else if (stage == "cDesertScene")
 			{

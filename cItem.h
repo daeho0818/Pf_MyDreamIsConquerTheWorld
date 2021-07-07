@@ -2,14 +2,14 @@
 class cItem
 {
 public:
-	cItem(Vec2 pos);
+	cItem(Vec2 pos, float size);
 	virtual ~cItem();
 
 	string itemName;
 	Vec2 m_pos;
 	cTexture* m_image;
 	bool isDestroy = false;
-	float m_size = 30;
+	float m_size;
 
 	void Update();
 	void Render();

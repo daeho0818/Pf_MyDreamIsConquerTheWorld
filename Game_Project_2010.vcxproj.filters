@@ -218,9 +218,6 @@
     <Filter Include="3. Object\Bullet\ReflexBullet">
       <UniqueIdentifier>{b7e80057-096e-48fe-9a40-d3ef9fbd4392}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Manager\Thread">
-      <UniqueIdentifier>{6ab747f3-b8b6-45d5-8498-a333d8b9a1c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Manager\BG">
       <UniqueIdentifier>{6bf31f77-2fab-4f36-a2a1-a9b81072d34e}</UniqueIdentifier>
     </Filter>

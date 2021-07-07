@@ -13,13 +13,13 @@ cSoundManager::~cSoundManager()
 
 void cSoundManager::Init()
 {
-	m_Manager.Initialize(DXUTGetHWND(), 0);
+	m_Manager.Initialize(DXUTGetHWND(), 1);
 }
 
 void cSoundManager::Update()
 {
 	DWORD status;
-	for (auto iter = m_channels.begin(); iter != m_channels.end();)
+	for (auto& iter = m_channels.begin(); iter != m_channels.end();)
 	{
 		(*iter)->GetStatus(&status);
 		if (!(status & DSBSTATUS_PLAYING))
@@ -38,10 +38,11 @@ void cSoundManager::Release()
 	for (auto iter : m_channels) iter->Release();
 }
 
-LPDIRECTSOUNDBUFFER cSoundManager::Play(string key, bool loop)
+LPDIRECTSOUNDBUFFER cSoundManager::Play(string key,float volume, bool loop)
 {
 	LPDIRECTSOUNDBUFFER sb;
 	m_Manager.GetDirectSound()->DuplicateSoundBuffer(m_sounds[key]->GetBuffer(0), &sb);
+	sb->SetVolume(volume);
 	sb->Play(0, 0, loop == true ? DSBPLAY_LOOPING : 0);
 	m_channels.push_back(sb);
 	return sb;
@@ -59,5 +60,5 @@ void cSoundManager::AddSound(string key, wstring path)
 	wchar_t Path[128];
 	swprintf(Path, L"./Resource/Sound/%s.wav", path.c_str());
 	m_Manager.Create(&sound, Path, DSBCAPS_CTRLVOLUME);
-	m_sounds[key] = sound;
+	m_sounds.insert(make_pair(key, sound));
 }

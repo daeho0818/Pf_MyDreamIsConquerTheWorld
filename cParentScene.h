@@ -16,8 +16,6 @@ public:
 	virtual void UIRender();
 	virtual void Release();
 
-	void SetBossPos(Vec2 bossPos);
-
 	void PlayerDead();
 
 private:

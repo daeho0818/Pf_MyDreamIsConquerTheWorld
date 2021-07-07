@@ -4,10 +4,6 @@ class cSoundManager
 	:public singleton<cSoundManager>
 {
 public:
-	CSoundManager m_Manager;
-	list<LPDIRECTSOUNDBUFFER> m_channels;
-	map<string, CSound*> m_sounds;
-
 	cSoundManager();
 	~cSoundManager();
 
@@ -15,7 +11,11 @@ public:
 	void Update();
 	void Release();
 
-	LPDIRECTSOUNDBUFFER Play(string key, bool loop = false);
+	CSoundManager m_Manager;
+	list < LPDIRECTSOUNDBUFFER> m_channels;
+	map<string, CSound*> m_sounds;
+
+	LPDIRECTSOUNDBUFFER Play(string key,float volume = 1, bool loop = false);
 	void StopAll();
 	void AddSound(string key, wstring path);
 };

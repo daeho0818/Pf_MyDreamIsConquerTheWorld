@@ -230,11 +230,21 @@ void cTitleScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 500), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 500), 0.25);
 		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("church_item"), Vec2(920, 500), 0.4);
+			RENDER->CenterRender(IMAGE->FindImage("church_con"), Vec2(1450, 500), 0.4);
+		}
 
 		if (SCENE->a_rewards[1] != 1)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 912), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 912), 0.25);
+		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("city_item"), Vec2(920, 912), 0.4);
+			RENDER->CenterRender(IMAGE->FindImage("city_con"), Vec2(1450, 912), 0.4);
 		}
 
 		if (SCENE->a_rewards[2] != 1)
@@ -242,11 +252,21 @@ void cTitleScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 1330), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 1330), 0.25);
 		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("city(night)_item"), Vec2(920, 1330), 0.4);
+			RENDER->CenterRender(IMAGE->FindImage("city(night)_con"), Vec2(1450, 1330), 0.4);
+		}
 
 		if (SCENE->a_rewards[3] != 1)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(920, 1748), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(1450, 1748), 0.25);
+		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("desert_item"), Vec2(920, 1748), 0.3);
+			RENDER->CenterRender(IMAGE->FindImage("desert_con"), Vec2(1450, 1748), 0.4);
 		}
 
 		if (SCENE->a_rewards[4] != 1)
@@ -254,17 +274,32 @@ void cTitleScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 500), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 500), 0.25);
 		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("jungle_item"), Vec2(2220, 500), 0.4);
+			RENDER->CenterRender(IMAGE->FindImage("jungle_con"), Vec2(2725, 500), 0.4);
+		}
 
 		if (SCENE->a_rewards[5] != 1)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 912), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 912), 0.25);
 		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("ice_item"), Vec2(2220, 912), 0.35);
+			RENDER->CenterRender(IMAGE->FindImage("ice_con"), Vec2(2725, 912), 0.4);
+		}
 
 		if (SCENE->a_rewards[6] != 1)
 		{
 			RENDER->CenterRender(IMAGE->FindImage("adven_Chain"), Vec2(2220, 1330), 0.3);
 			RENDER->CenterRender(IMAGE->FindImage("adven_DontClear"), Vec2(2725, 1330), 0.25);
+		}
+		else
+		{
+			RENDER->CenterRender(IMAGE->FindImage("ocean_item"), Vec2(2220, 1330), 0.35);
+			RENDER->CenterRender(IMAGE->FindImage("ocean_con"), Vec2(2725, 1330), 0.4);
 		}
 
 		RENDER->CenterRender(IMAGE->FindImage("symbol_church"), Vec2(1850, 460), 0.2);
@@ -288,8 +323,8 @@ void cTitleScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean"), Vec2(3140, 1300), 0.2);
 		RENDER->CenterRender(IMAGE->FindImage("symbol_ocean_name"), Vec2(3140, 1410), 0.25);
 
-		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
-		RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.7);
+		//RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPerBG"), Vec2(350, WINSIZEY - 420), 0.5);
+		//RENDER->CenterRender(IMAGE->FindImage("adven_CollectionPer"), Vec2(350, WINSIZEY - 420), 0.7);
 
 		RENDER->CenterRender(IMAGE->FindImage("X"), Vec2(3330, WINSIZEY / 2 - 1023), 0.6);
 		BUTTON->ChangeBtnInfo("X", Vec2(3330, WINSIZEY / 2 - 1023), 0.6);
