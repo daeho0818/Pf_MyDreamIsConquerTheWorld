@@ -30,6 +30,8 @@ private:
 	
 	D3DXCOLOR lineColor;
 
+	cThreadPool* thread = nullptr;
+
 	int last_x = 0, last_y = 0;
 
 	int real_cells = (WINSIZEX - 80) * (WINSIZEY - 370);
@@ -50,7 +52,7 @@ private:
 
 	void Move();
 	void ChkLine();
-	void Returning(bool isReturned = false );
+	void Returning();
 	void ItemUpdate();
 
 public:

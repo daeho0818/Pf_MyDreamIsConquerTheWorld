@@ -102,9 +102,11 @@ void cPlayer::Init()
 	DrawLine(true);
 
 	ChkLine();
-	CAM->ZoomCam(1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
+	thread = new cThreadPool(1);
+	thread->EnqueueJob([&]()->void {
+		CAM->ZoomCam(1.5, 2, { WINSIZEX / 2, WINSIZEY / 2 });
+		});
 }
-
 void cPlayer::Update(Vec2 bossPos)
 {
 	if (t_Fade != nullptr) t_Fade->Update();
@@ -182,6 +184,8 @@ void cPlayer::Update(Vec2 bossPos)
 
 	if (returning) Returning();
 
+	if (!draw_mode) SOUND->Stop("draw_line");
+
 	Move();
 
 	if (t_Speed != nullptr) t_Speed->Update();
@@ -210,6 +214,7 @@ void cPlayer::Release()
 	SAFE_DELETE(t_Invincibility);
 	SAFE_DELETE(t_Fade);
 	SAFE_DELETE(t_PFadeDelay);
+	SAFE_DELETE(thread);
 }
 
 void cPlayer::KeyEvent()
@@ -248,12 +253,21 @@ void cPlayer::KeyEvent()
 			returning = true;
 		}
 	}
+
+	if (INPUT->KeyPress(VK_F1))
+		speed = 25;
+	if (INPUT->KeyPress(VK_F2))
+		invincibility = true;
 }
 
 D3DLOCKED_RECT lr;
 void cPlayer::DrawTempLine(BYTE dir)
 {
-	if (!draw_mode) draw_mode = true;
+	if (!draw_mode)
+	{
+		draw_mode = true;
+		SOUND->Play("draw_line", true);
+	}
 	BG->ptr[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
 
@@ -616,8 +630,9 @@ void cPlayer::ChkLine()
 	if (m_pos.y >= cellSize.bottom) m_pos.y = cellSize.bottom; if (m_pos.y <= cellSize.top) m_pos.y = cellSize.top;
 }
 
-void cPlayer::Returning(bool isReturned)
+void cPlayer::Returning()
 {
+	SOUND->Stop("draw_line");
 	D3DLOCKED_RECT lr;
 	BG->ptr[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
@@ -740,13 +755,13 @@ void cPlayer::EatItem(string key)
 
 	if (key == "Speed")
 	{
-		speed = 25;
-		speedUp = true;
 		if (t_Speed == nullptr)
 		{
+			speed = 25;
+			speedUp = true;
 			t_Speed = new cTimer(5, [&]()->void {
 				speedUp = false;
-				speed = 15;
+				speed =15;
 				t_Speed = nullptr;
 				});
 		}
