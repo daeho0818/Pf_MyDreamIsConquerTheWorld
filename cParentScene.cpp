@@ -31,7 +31,7 @@ void cParentScene::Init(string curScene)
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
-	score = 0;
+	SCENE->score = 0;
 	delayCount = 0;
 	hp = 3;
 
@@ -171,6 +171,7 @@ void cParentScene::Update()
 
 	if (isdead && once)
 	{
+		SOUND->Stop("draw_line");
 		once = false;
 		Vec2 movePos = playerPos;
 
@@ -421,28 +422,28 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3600, 250), 1.2);
 	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3750, 250), 1.2);
 
-	//if (!isFadeOut)
+	if (!isFadeOut)
 	{
 		char time[5] = "";
 		sprintf(time, "%d", timer / 60);
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 200, 320), 1.3);
-		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 - 90, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 165, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 - 55, 320), 1.3);
 		sprintf(time, "%d", (timer % 60) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 30, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 65, 320), 1.3);
 		sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 130, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 165, 320), 1.3);
 	}
 
 	char t_score[5] = "";
 	if (score > 9999) score = 9999;
 	sprintf(t_score, "%d", score / 1000);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 190));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 175));
 	sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2900, 190));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2900, 175));
 	sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3000, 190));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3000, 175));
 	sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3100, 190));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3100, 175));
 
 	if (isStop)
 	{
@@ -577,11 +578,11 @@ void cParentScene::UIRender()
 		fadeOut = false;
 	}
 
-	if (!waitToStart && !isStart)
-		UI->CenterRender(IMAGE->FindImage("time_blind"),
-			Vec2(1920 / 2 - 10, 160),
-			0.5,
-			D3DCOLOR_RGBA(255, 255, 255, fadeOut ? alphaColor -= 5 : alphaColor += 5));
+	//if (!waitToStart && !isStart)
+	//	UI->CenterRender(IMAGE->FindImage("time_blind"),
+	//		Vec2(1920 / 2 - 10, 160),
+	//		0.5,
+	//		D3DCOLOR_RGBA(255, 255, 255, fadeOut ? alphaColor -= 5 : alphaColor += 5));
 
 	if (isClearEnd)
 	{
@@ -624,6 +625,7 @@ void cParentScene::PlayerDead()
 			{
 				PART->AddEffect(playerPos + Vec2(rand() % 200 - 100, rand() % 200 - 100), 2, "red_effect");
 			}
+			SOUND->Play("attack");
 			effectCount++;
 			t_EffectDelay = nullptr;
 			});

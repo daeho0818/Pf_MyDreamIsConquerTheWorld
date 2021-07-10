@@ -50,6 +50,7 @@ void cCollision::MPColl()
 					{
 						DebugLog(L"MPColl");
 						CAM->ShakeCam(0.3);
+						SOUND->Play("attack");
 						m_player->hp -= (*iter)->m_damage;
 						m_player->returning = true;
 						m_player->isAttacked = true;
@@ -79,6 +80,7 @@ void cCollision::MBPColl()
 					{
 						DebugLog(L"MBPColl");
 						CAM->ShakeCam(0.3);
+						SOUND->Play("attack");
 						m_player->hp -= (*iter)->m_Damage;
 						m_player->returning = true;
 						(*iter)->isDestroy = true;

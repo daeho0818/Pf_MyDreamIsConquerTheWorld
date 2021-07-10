@@ -638,6 +638,7 @@ void cLoadingScene::Init()
 	SOUND->AddSound("draw_line", L"draw_line");
 	SOUND->AddSound("button", L"button");
 	SOUND->AddSound("fillplace", L"fillplace");
+	SOUND->AddSound("attack", L"attack");
 		
 	listCount = loadList.size();
 

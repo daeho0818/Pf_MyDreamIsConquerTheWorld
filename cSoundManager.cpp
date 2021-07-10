@@ -21,10 +21,10 @@ void cSoundManager::Update()
 	DWORD status;
 	for (auto& iter = m_channels.begin(); iter != m_channels.end();)
 	{
-		(*iter)->GetStatus(&status);
+		(*iter).second->GetStatus(&status);
 		if (!(status & DSBSTATUS_PLAYING))
 		{
-			(*iter)->Release();
+			(*iter).second->Release();
 			iter = m_channels.erase(iter);
 		}
 		else
@@ -35,7 +35,7 @@ void cSoundManager::Update()
 void cSoundManager::Release()
 {
 	for (auto iter : m_sounds) delete iter.second;
-	for (auto iter : m_channels) iter->Release();
+	for (auto iter : m_channels) iter.second->Release();
 }
 
 LPDIRECTSOUNDBUFFER cSoundManager::Play(string key,float volume, bool loop)
@@ -44,13 +44,21 @@ LPDIRECTSOUNDBUFFER cSoundManager::Play(string key,float volume, bool loop)
 	m_Manager.GetDirectSound()->DuplicateSoundBuffer(m_sounds[key]->GetBuffer(0), &sb);
 	sb->SetVolume(volume);
 	sb->Play(0, 0, loop == true ? DSBPLAY_LOOPING : 0);
-	m_channels.push_back(sb);
+	m_channels.insert(make_pair(key, sb));
 	return sb;
+}
+
+void cSoundManager::Stop(string key)
+{
+	auto find = m_channels.find(key);
+	if (find == m_channels.end()) return;
+	find->second->Release();
+	find = m_channels.erase(find);
 }
 
 void cSoundManager::StopAll()
 {
-	for (auto iter : m_channels) iter->Release();
+	for (auto iter : m_channels) iter.second->Release();
 	m_channels.clear();
 }
 

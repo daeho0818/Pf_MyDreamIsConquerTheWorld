@@ -63,6 +63,7 @@ bool cMouseManager::LButtonClick(string key)
 {
 	if (Collider(key, lDownPos) && Collider(key, MOUSE->mousePos))
 	{
+		SOUND->Play("button");
 		return true;
 	}
 	return false;
