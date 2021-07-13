@@ -23,6 +23,7 @@ void cSelectStageScene::Init()
 	BUTTON->AddButton("StageStartB", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 800), 0.6);
 	BUTTON->AddButton("end_title", Vec2(WINSIZEX / 2, 2000), 0.8);
 	BUTTON->AddButton("X", Vec2(WINSIZEX / 2 + 1060, WINSIZEY / 2 - 780), 0.6);
+
 	stageOpen = false;
 	stage = Stage::None;
 
@@ -50,7 +51,7 @@ void cSelectStageScene::Update()
 
 	if (MOUSE->lUp)
 	{
-		if (MOUSE->LButtonClick("guide_close"))
+		if (isFirst && MOUSE->LButtonClick("guide_close"))
 		{
 			isFirst = false;
 		}
@@ -92,12 +93,7 @@ void cSelectStageScene::Update()
 		}
 		else
 		{
-			Vec2 mousePos = Vec2(MOUSE->mousePos.x * 2.1, MOUSE->mousePos.y * 2.1);
-			Vec2 buttonPos = { WINSIZEX / 2 + 1060, WINSIZEY / 2 - 780 };
-			if (mousePos.x >= buttonPos.x - (IMAGE->FindImage("X")->info.Width * 0.6 / 2) &&
-				mousePos.x <= buttonPos.x + (IMAGE->FindImage("X")->info.Width * 0.6 / 2) &&
-				mousePos.y >= buttonPos.y - (IMAGE->FindImage("X")->info.Height * 0.6 / 2) &&
-				mousePos.y <= buttonPos.y + (IMAGE->FindImage("X")->info.Height * 0.6 / 2))
+			if (stage != Stage::None && MOUSE->LButtonClick("X"))
 			{
 				stage = Stage::None;
 				MOUSE->lUp = false;
@@ -230,11 +226,6 @@ void cSelectStageScene::UIRender()
 
 void cSelectStageScene::Release()
 {
-	for (auto iter : BUTTON->m_buttons)
-	{
-		SAFE_DELETE(iter);
-	}
-	BUTTON->m_buttons.clear();
 }
 
 void cSelectStageScene::StageInfo(Stage stage)

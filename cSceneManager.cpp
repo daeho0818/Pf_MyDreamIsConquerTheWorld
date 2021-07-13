@@ -29,6 +29,13 @@ void cSceneManager::Update()
 	if (nextScene)
 	{
 		if (nowScene) nowScene->Release();
+
+		for (auto iter : BUTTON->m_buttons)
+			SAFE_DELETE(iter);
+		BUTTON->m_buttons.clear();
+		BUTTON->buttonRects.clear();
+		BUTTON->buttonPos.clear();
+
 		nextScene->Init();
 		nowScene = nextScene;
 		nextScene = nullptr;

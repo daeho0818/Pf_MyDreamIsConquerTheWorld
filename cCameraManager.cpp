@@ -63,6 +63,7 @@ void cCameraManager::ZoomCam(float time, float delay, Vec2 pos)
 
 void cCameraManager::MoveCam(Vec2 targetPos)
 {
+	SOUND->Play("camMove", -2000);
 	m_targetPos = targetPos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
 }
 
@@ -92,7 +93,8 @@ void cCameraManager::Zooming()
 	if (isZoomWait)
 	{
 		zoom = 1;
-		MoveCam(Vec2(WINSIZEX / 2, WINSIZEY / 2));
+		m_targetPos = { 0, 0 };
+		/*MoveCam(Vec2(WINSIZEX / 2, WINSIZEY / 2));*/
 		isZoomWait = false;
 	}
 }

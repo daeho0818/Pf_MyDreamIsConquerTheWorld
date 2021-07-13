@@ -38,7 +38,7 @@ void cSoundManager::Release()
 	for (auto iter : m_channels) iter.second->Release();
 }
 
-LPDIRECTSOUNDBUFFER cSoundManager::Play(string key,float volume, bool loop)
+LPDIRECTSOUNDBUFFER cSoundManager::Play(string key, LONG volume, bool loop)
 {
 	LPDIRECTSOUNDBUFFER sb;
 	m_Manager.GetDirectSound()->DuplicateSoundBuffer(m_sounds[key]->GetBuffer(0), &sb);

@@ -40,7 +40,7 @@ void cCollision::MPColl()
 			else if (abs(m_player->m_pos.x - (*iter)->m_pos.x) <= (*iter)->m_image.front()->info.Width / 2 * (*iter)->m_size)
 				length = (*iter)->m_image.front()->info.Width / 2 * (*iter)->m_size;
 
-				length /= 1.5;
+			length /= 1.5;
 
 			if (length >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 			{
@@ -50,7 +50,8 @@ void cCollision::MPColl()
 					{
 						DebugLog(L"MPColl");
 						CAM->ShakeCam(0.3);
-						SOUND->Play("attack");
+						if (m_player->hp > 1)
+							SOUND->Play("attack", -3000);
 						m_player->hp -= (*iter)->m_damage;
 						m_player->returning = true;
 						m_player->isAttacked = true;
@@ -80,7 +81,8 @@ void cCollision::MBPColl()
 					{
 						DebugLog(L"MBPColl");
 						CAM->ShakeCam(0.3);
-						SOUND->Play("attack");
+						if (m_player->hp > 1)
+							SOUND->Play("attack", -3000);
 						m_player->hp -= (*iter)->m_Damage;
 						m_player->returning = true;
 						(*iter)->isDestroy = true;

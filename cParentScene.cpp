@@ -34,6 +34,7 @@ void cParentScene::Init(string curScene)
 	SCENE->score = 0;
 	delayCount = 0;
 	hp = 3;
+	score = 0;
 
 	waitToStart = true;
 	isFadeOut = true;
@@ -100,6 +101,8 @@ void cParentScene::Update()
 
 	if (isClear)
 	{
+		SOUND->Stop("draw_line");
+
 		SCENE->gameClear = true;
 		if (t_Clear != nullptr) t_Clear->Update();
 		for (int x = 40; x < WINSIZEX - 40; x++)
@@ -301,11 +304,14 @@ void cParentScene::Update()
 	}
 	if (MOUSE->lDown)
 	{
-		if (MOUSE->LButtonClick("CFnext") && (isClearEnd || isFailEnd))
+		if (isClearEnd || isFailEnd)
 		{
-			if (isClearEnd)
-				SCENE->m_rewards[SCENE->curScene] = 1;
-			SCENE->ChangeScene("cEndScene");
+			if (MOUSE->LButtonClick("CFnext"))
+			{
+				if (isClearEnd)
+					SCENE->m_rewards[SCENE->curScene] = 1;
+				SCENE->ChangeScene("cEndScene");
+			}
 		}
 
 		if (isStop)
@@ -387,7 +393,7 @@ void cParentScene::Render()
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
 	if (player->invincibility)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125	));
+		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125));
 	}
 	else
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125));
@@ -545,17 +551,17 @@ void cParentScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
 			if (SCENE->curScene == "cChurchScene")
 				RENDER->CenterRender(IMAGE->FindImage("church_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if(SCENE->curScene == "cCityScene")
+			else if (SCENE->curScene == "cCityScene")
 				RENDER->CenterRender(IMAGE->FindImage("city_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if(SCENE->curScene == "cCityNightScene")
+			else if (SCENE->curScene == "cCityNightScene")
 				RENDER->CenterRender(IMAGE->FindImage("city(night)_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if(SCENE->curScene == "cDesertScene")
+			else if (SCENE->curScene == "cDesertScene")
 				RENDER->CenterRender(IMAGE->FindImage("desert_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
-			else if(SCENE->curScene == "cIceScene")
+			else if (SCENE->curScene == "cIceScene")
 				RENDER->CenterRender(IMAGE->FindImage("ice_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if(SCENE->curScene == "cJungleScene")
+			else if (SCENE->curScene == "cJungleScene")
 				RENDER->CenterRender(IMAGE->FindImage("jungle_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if(SCENE->curScene == "cOceanScene")
+			else if (SCENE->curScene == "cOceanScene")
 				RENDER->CenterRender(IMAGE->FindImage("ocean_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
 		}
 
@@ -625,7 +631,7 @@ void cParentScene::PlayerDead()
 			{
 				PART->AddEffect(playerPos + Vec2(rand() % 200 - 100, rand() % 200 - 100), 2, "red_effect");
 			}
-			SOUND->Play("attack");
+			SOUND->Play("attack", -3000);
 			effectCount++;
 			t_EffectDelay = nullptr;
 			});

@@ -32,9 +32,10 @@ void cTitleScene::Init()
 	logoPos = { WINSIZEX / 2, 500 };
 	arrowKey = "Arrow";
 	memset(move, false, sizeof(move));
-	move[0] = true; speed = 1;
+	move[0] = true; 
+	speed = 1;
 
-	tempFunc = [=](int index) -> void {
+	tempFunc = [&](int index) -> void {
 		switch (index)
 		{
 		case 0:
@@ -125,7 +126,6 @@ void cTitleScene::Update()
 			}
 			else if (MOUSE->LButtonClick("adven_button"))
 			{
-				DebugParam(L"%d", SCENE->a_rewards[0]);
 				if (!advenUI && !guideUI && !developUI)
 					advenUI = true;
 			}
@@ -344,7 +344,4 @@ void cTitleScene::UIRender()
 
 void cTitleScene::Release()
 {
-	for (auto iter : BUTTON->m_buttons) SAFE_DELETE(iter);
-	BUTTON->m_buttons.clear();
-	SAFE_DELETE(t_Delay);
 }

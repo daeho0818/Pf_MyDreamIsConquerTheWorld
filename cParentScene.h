@@ -24,12 +24,12 @@ private:
 	int effectCount = 0;
 	int hp;
 
-	bool waitToStart = true;
+	bool waitToStart;
 	bool clear[7];
 	bool over[4];
 	bool textRender[7];
-	bool isFadeOut = true;
-	bool once = false;
+	bool isFadeOut;
+	bool once;
 
 	float percent;
 

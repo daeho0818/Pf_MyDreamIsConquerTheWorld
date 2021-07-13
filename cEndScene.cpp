@@ -101,7 +101,6 @@ void cEndScene::UIRender()
 
 void cEndScene::Release()
 {
-	SAFE_DELETE(t_AniDelay);
 }
 
 void cEndScene::TextUpOrDown()

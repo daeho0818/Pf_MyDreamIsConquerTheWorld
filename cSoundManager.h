@@ -15,7 +15,7 @@ public:
 	map <string, LPDIRECTSOUNDBUFFER> m_channels;
 	map<string, CSound*> m_sounds;
 
-	LPDIRECTSOUNDBUFFER Play(string key,float volume = 1, bool loop = false);
+	LPDIRECTSOUNDBUFFER Play(string key,LONG volume = DSBVOLUME_MAX, bool loop = false);
 	void Stop(string key);
 	void StopAll();
 	void AddSound(string key, wstring path);

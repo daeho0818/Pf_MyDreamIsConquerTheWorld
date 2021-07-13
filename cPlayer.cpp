@@ -16,8 +16,6 @@ cPlayer::~cPlayer()
 
 void cPlayer::Init()
 {
-	CAM->MoveCam({ WINSIZEX / 2, WINSIZEY / 2 });
-
 	memset(SCENE->Array, 0, sizeof(SCENE->Array));
 	right = false; left = false; up = false; down = false;
 
@@ -266,7 +264,7 @@ void cPlayer::DrawTempLine(BYTE dir)
 	if (!draw_mode)
 	{
 		draw_mode = true;
-		SOUND->Play("draw_line", true);
+		SOUND->Play("draw_line", -3000, true);
 	}
 	BG->ptr[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
@@ -387,6 +385,7 @@ void cPlayer::DrawLine(bool isFilled)
 	if (last_x != cellSize.left && last_y != cellSize.top)
 	{
 		drawStart = false;
+		bool temp = true;
 		FillPlace({ (float)bossPos.x, (float)bossPos.y }, 0, 4, true);
 		for (int y = cellSize.bottom - 1; y != cellSize.top; --y)
 		{
@@ -395,6 +394,11 @@ void cPlayer::DrawLine(bool isFilled)
 				if (SCENE->Array[y][x] == 0)
 				{
 					FillPlace({ (float)x, (float)y }, 0, 3);
+					if (temp)
+					{
+						SOUND->Play("fillplace");
+						temp = false;
+					}
 				}
 			}
 		}
@@ -761,7 +765,7 @@ void cPlayer::EatItem(string key)
 			speedUp = true;
 			t_Speed = new cTimer(5, [&]()->void {
 				speedUp = false;
-				speed =15;
+				speed = 15;
 				t_Speed = nullptr;
 				});
 		}

@@ -639,6 +639,7 @@ void cLoadingScene::Init()
 	SOUND->AddSound("button", L"button");
 	SOUND->AddSound("fillplace", L"fillplace");
 	SOUND->AddSound("attack", L"attack");
+	SOUND->AddSound("camMove", L"camMove");
 		
 	listCount = loadList.size();
 
