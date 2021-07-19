@@ -12,7 +12,7 @@ public:
 	void Render();
 
 	void ShakeCam(float time);
-	void ZoomCam(float time, float delay, Vec2 pos);
+	void ZoomCam(float time, float delay, Vec2 pos, bool dontExit = false);
 	void MoveCam(Vec2 targetPos);
 
 private:

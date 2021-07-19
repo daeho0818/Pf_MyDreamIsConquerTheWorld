@@ -100,11 +100,9 @@ void cPlayer::Init()
 	DrawLine(true);
 
 	ChkLine();
-	thread = new cThreadPool(1);
-	thread->EnqueueJob([&]()->void {
-		CAM->ZoomCam(1.5, 2, { WINSIZEX / 2, WINSIZEY / 2 });
-		});
+	CAM->ZoomCam(1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
 }
+
 void cPlayer::Update(Vec2 bossPos)
 {
 	if (t_Fade != nullptr) t_Fade->Update();

@@ -48,7 +48,6 @@ void cCollision::MPColl()
 				{
 					if (SCENE->Array[(int)m_player->m_pos.y][(int)m_player->m_pos.x] != 2)
 					{
-						DebugLog(L"MPColl");
 						CAM->ShakeCam(0.3);
 						if (m_player->hp > 1)
 							SOUND->Play("attack", -3000);
@@ -79,7 +78,6 @@ void cCollision::MBPColl()
 				{
 					if (SCENE->Array[(int)m_player->m_pos.y][(int)m_player->m_pos.x] != 2)
 					{
-						DebugLog(L"MBPColl");
 						CAM->ShakeCam(0.3);
 						if (m_player->hp > 1)
 							SOUND->Play("attack", -3000);

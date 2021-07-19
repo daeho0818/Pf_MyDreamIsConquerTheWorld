@@ -7,9 +7,6 @@ public:
 	cDesertBoss1(Vec2 pos, vector<cBullet*>& bullet, float size = 1);
 	~cDesertBoss1();
 
-	bool isStop;
-	bool pattern1;
-
 	vector<cBullet*>& m_bullets;
 
 	// cMob을(를) 통해 상속됨

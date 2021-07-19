@@ -443,7 +443,9 @@ void cLoadingScene::Init()
 
 			AddLoad("church_mob2", "Ingame/Church/mob/mob2/mob2", 17);
 
-			AddLoad("church_boss", "Ingame/Church/mob/boss/boss", 10);
+			AddLoad("church_boss", "Ingame/Church/mob/boss/boss", 11);
+
+			AddLoad("church_boss_disappear", "Ingame/Church/mob/boss/disappear/boss", 11);
 
 		}
 	}
@@ -659,6 +661,7 @@ void cLoadingScene::Update()
 
 	else
 	{
+		IMAGE->MakeVecImg("church_boss_disappear", true, 11);
 		BG->isLoadScene = false;
 		BG->ptr[0] = IMAGE->FindImage("player");
 		BG->ptr[1] = IMAGE->FindImage("player");

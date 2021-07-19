@@ -11,15 +11,7 @@ public:
 	int p2Count = 0;
 	int p3Count = 0;
 
-	bool isStop;
-	bool pattern1 = false;
-	bool pattern2 = true;
-	bool pattern3 = false;
-
 	vector<cBullet*>& m_bullets;
-
-	cTimer* t_Pattern2 = nullptr;
-	cTimer* t_Pattern3 = nullptr;
 
 	void CircleBullet(float interval, bool random = false);
 

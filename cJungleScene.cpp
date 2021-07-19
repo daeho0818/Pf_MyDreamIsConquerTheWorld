@@ -24,7 +24,7 @@ void cJungleScene::Init()
 
 	player = new cPlayer(ptr);
 	bullet = new cBulletAdmin();
-	mob = new cMobAdmin(bullet->m_bullets, "cJungleScene");
+	mob = new cMobAdmin(player, bullet->m_bullets, "cJungleScene");
 	item = new cItemAdmin(player);
 	coll = new cCollision(mob->m_bullets, mob->m_mobs, player, item);
 

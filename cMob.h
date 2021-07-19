@@ -19,12 +19,18 @@ public:
 	int index = 0;
 
 	bool isDestroy = false;
+	bool isStop;
+	bool pattern1;
+	bool pattern2;
+	bool pattern3;
 
 	string mobType;
 	string mobName;
 	
 	cTimer* m_Ani = nullptr;
 	cTimer* t_Pattern1 = nullptr;
+	cTimer* t_Pattern2 = nullptr;
+	cTimer* t_Pattern3 = nullptr;
 
 	vector<cTexture*> m_image;
 

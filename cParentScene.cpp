@@ -93,7 +93,8 @@ void cParentScene::Update()
 		if (t_Timer == nullptr)
 		{
 			t_Timer = new cTimer(1, [&]()->void {
-				timer--;
+				if (timer > 0)
+					timer--;
 				t_Timer = nullptr;
 				});
 		}
@@ -177,12 +178,6 @@ void cParentScene::Update()
 		SOUND->Stop("draw_line");
 		once = false;
 		Vec2 movePos = playerPos;
-
-		if (movePos.x >= 3000) movePos.x = 3000;
-		else if (movePos.x <= 1000) movePos.x = 1000;
-
-		if (movePos.y <= 1350) movePos.y = 1350;
-		else if (movePos.y >= 600) movePos.y = 600;
 
 		CAM->ZoomCam(0.1, 2, { WINSIZEX / 2, WINSIZEY / 2 });
 		CAM->MoveCam(movePos);

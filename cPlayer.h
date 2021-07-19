@@ -40,7 +40,6 @@ private:
 	bool left, right, up, down;
 	bool drawStart;
 	bool draw_mode = false;
-	bool stop = false;
 	bool camEvent = true;
 
 	void KeyEvent();
@@ -68,6 +67,7 @@ public:
 
 	float coloring_per = 0;
 
+	bool stop = false;
 	bool draw_line = false;
 	bool returning = false;
 	bool isHp = false;

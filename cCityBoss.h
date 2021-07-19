@@ -9,13 +9,8 @@ public:
 
 	int p1Count = 0;
 
-	bool isStop;
-	bool pattern1;
-	bool pattern2;
-
 	vector<cBullet*>& m_bullets;
 
-	cTimer* t_Pattern2 = nullptr;
 	cBullet* bullets[4] = { nullptr, };
 
 	void CircleBullet(float interval, Vec2 pos = Vec2());

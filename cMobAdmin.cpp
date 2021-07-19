@@ -24,8 +24,8 @@
 #include "cOceanBoss.h"
 #include "cMobAdmin.h"
 
-cMobAdmin::cMobAdmin(vector<cBullet*>& bullet, string stage)
-	:m_bullets(bullet), stage(stage)
+cMobAdmin::cMobAdmin(cPlayer* player, vector<cBullet*>& bullet, string stage)
+	:m_player(player), m_bullets(bullet), stage(stage)
 {
 	Vec2 dir[4] = { Vec2(1, 1), Vec2(1, -1), Vec2(-1, 1), Vec2(-1, -1) };
 
@@ -219,11 +219,39 @@ void cMobAdmin::Animation()
 {
 	for (auto iter : m_mobs)
 	{
+		repeat = true;
+		if (iter->mobType == "Boss")
+		{
+			if (stage == "cChurchScene")
+			{
+				if (((cChurchBoss*)(iter))->disappear)
+				{
+					m_player->invincibility = true;
+					m_player->stop = true;
+					repeat = false;
+				}
+				else
+				{
+					m_player->invincibility = false;
+					m_player->stop = false;
+					repeat = true;
+				}
+			}
+		}
+
 		if (iter->m_Ani != nullptr) iter->m_Ani->Update();
 
 		if (iter->m_Ani == nullptr) iter->m_Ani = new cTimer(0.1, [&]()->void {
-			iter->index++;
-			if (iter->index == iter->m_image.size()) iter->index = 0;
+
+			if (iter->index < iter->m_image.size() - 1)
+			{
+				iter->index++;
+			}
+			else
+			{
+				if (repeat)
+					iter->index = 0;
+			}
 			iter->m_Ani = nullptr;
 			});
 	}

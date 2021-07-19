@@ -448,6 +448,7 @@
     <ClCompile Include="cSelectStageScene.cpp" />
     <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="cSpeed.cpp" />
+    <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="cThreadPool.cpp" />
     <ClCompile Include="cTimer.cpp" />
     <ClCompile Include="cTitleScene.cpp" />
@@ -517,6 +518,7 @@
     <ClInclude Include="cSelectStageScene.h" />
     <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="cSpeed.h" />
+    <ClInclude Include="cTexture.h" />
     <ClInclude Include="cThreadPool.h" />
     <ClInclude Include="cTimer.h" />
     <ClInclude Include="cTitleScene.h" />

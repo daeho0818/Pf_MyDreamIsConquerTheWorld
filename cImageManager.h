@@ -10,7 +10,7 @@ public:
 
 	void AddImage(const string& key, const string& path, int count = 0);
 	cTexture* FindImage(const string& key);
-	vector<cTexture*> MakeVecImg(const string& key);
+	vector<cTexture*> MakeVecImg(const string& key, bool reverse = false, int count = 0);
 	void DeleteImage(const string& key);
 };
 

@@ -46,16 +46,19 @@ void cCameraManager::ShakeCam(float time)
 	t_ShakeDelay = new cTimer(time, [&]()->void { isShake = false; camPos = { 0, 0 }; t_ShakeDelay = nullptr; });
 }
 
-void cCameraManager::ZoomCam(float time, float delay, Vec2 pos)
+void cCameraManager::ZoomCam(float time, float delay, Vec2 pos, bool dontExit)
 {
 	isZoom = true;
 
 	m_time = time;
 	m_delay = delay;
 
-	m_targetPos = pos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
+	dontExit ?
+		MoveCam(pos) :
+		m_targetPos = pos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
 
 	t_Zoom = new cTimer(time, [&]()->void {
+		zoom = 0.5;
 		isZoom = false;
 		t_Zoom = nullptr;
 		});
@@ -64,7 +67,15 @@ void cCameraManager::ZoomCam(float time, float delay, Vec2 pos)
 void cCameraManager::MoveCam(Vec2 targetPos)
 {
 	SOUND->Play("camMove", -2000);
-	m_targetPos = targetPos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
+
+	Vec2 movePos = targetPos;
+	if (movePos.x >= 3000) movePos.x = 3000;
+	else if (movePos.x <= 1000) movePos.x = 1000;
+
+	if (movePos.y <= 1350) movePos.y = 1350;
+	else if (movePos.y >= 600) movePos.y = 600;
+
+	m_targetPos = movePos - Vec2(WINSIZEX / 2, WINSIZEY / 2);
 }
 
 void cCameraManager::Shaking()

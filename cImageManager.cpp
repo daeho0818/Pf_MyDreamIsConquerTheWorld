@@ -63,17 +63,21 @@ cTexture* cImageManager::FindImage(const string& key)
 	return find->second;
 }
 
-vector<cTexture*> cImageManager::MakeVecImg(const string& key)
+vector<cTexture*> cImageManager::MakeVecImg(const string& key, bool reverse, int count)
 {
 	vector<cTexture*> m_vecimg;
+
+	char Key[128];
+
 	for (int i = 0; ; i++)
 	{
-		char Key[128];
 		sprintf(Key, "%s%d", key.c_str(), i);
 		auto find = FindImage(Key);
 		if (find == nullptr) break;
 		m_vecimg.push_back(find);
 	}
+
+	if (reverse) std::reverse(m_vecimg.begin(), m_vecimg.end());
 	return m_vecimg;
 }
 

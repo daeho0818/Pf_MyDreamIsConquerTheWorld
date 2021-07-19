@@ -492,6 +492,9 @@
     <ClCompile Include="cThreadPool.cpp">
       <Filter>3. Object\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="cTexture.cpp">
+      <Filter>2. Manager\Image</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -697,6 +700,9 @@
     </ClInclude>
     <ClInclude Include="cThreadPool.h">
       <Filter>3. Object\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="cTexture.h">
+      <Filter>2. Manager\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

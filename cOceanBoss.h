@@ -10,9 +10,6 @@ public:
 	float angle = 0;
 	float rad = D3DX_PI * 2 / 25;
 
-	bool isStop;
-	bool pattern1 = true;
-
 	int dirIndex = 0;
 
 	vector<cBullet*>& m_bullets;

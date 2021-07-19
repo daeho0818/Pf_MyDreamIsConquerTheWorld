@@ -1,8 +1,9 @@
 #pragma once
+#include "cPlayer.h"
 class cMobAdmin
 {
 public:
-	cMobAdmin(vector<cBullet*>& bullet, string stage);
+	cMobAdmin(cPlayer* player, vector<cBullet*>& bullet, string stage);
 	~cMobAdmin();
 
 	void Update();
@@ -20,6 +21,10 @@ public:
 
 private:
 	string stage;
+
+	bool repeat;
+
+	cPlayer* m_player;
 
 	cTimer* t_DeadDelay = nullptr;
 
