@@ -14,11 +14,12 @@ cCityBoss::cCityBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
 	pattern1 = true;
 	pattern2 = false;
+	pattern3 = false;
+	moveToTarget = false;
 }
 
 cCityBoss::~cCityBoss()
 {
-	SAFE_DELETE(t_Pattern2);
 }
 
 void cCityBoss::CircleBullet(float interval, Vec2 pos)
@@ -40,8 +41,10 @@ void cCityBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 	if (t_Pattern2 != nullptr) t_Pattern2->Update();
+	if (t_Pattern3 != nullptr) t_Pattern3->Update();
+	if (t_ReturnDelay != nullptr) t_ReturnDelay->Update();
 
-	if (pattern1)
+	if (pattern1 && !pattern3)
 	{
 		if (t_Pattern1 == nullptr) t_Pattern1 = new cTimer(7, [&]()->void {
 			Vec2 dir = Vec2(0, 0) - m_pos;
@@ -70,7 +73,7 @@ void cCityBoss::Update()
 			pattern1 = false;
 			});
 	}
-	if (pattern2)
+	if (pattern2 && !pattern3)
 	{
 		if (t_Pattern2 == nullptr)
 		{
@@ -86,6 +89,60 @@ void cCityBoss::Update()
 				});
 		}
 	}
+	if (pattern3)
+	{
+		if (t_Pattern3 == nullptr && delayCount > -1)
+		{
+			t_Pattern3 = new cTimer(1, [&]()->void {
+				delayCount--;
+				isStop = true;
+
+				if (delayCount == 2)
+				{
+					beforePos = m_pos;
+				}
+				else if (delayCount == 1)
+				{
+					targetPos = playerPos;
+				}
+				else if (delayCount == 0)
+				{
+					moveToTarget = true;
+				}
+				else if (delayCount == -1)
+				{
+					if (t_ReturnDelay == nullptr)
+					{
+						t_ReturnDelay = new cTimer(1, [&]()->void {
+							m_pos = beforePos;
+							moveToTarget = false;
+							isStop = false;
+							delayCount = 3;
+							pattern3 = false;
+							t_ReturnDelay = nullptr;
+							});
+					}
+				}
+				t_Pattern3 = nullptr;
+				});
+		}
+	}
+	else
+	{
+		if (t_Pattern3 == nullptr)
+		{
+			t_Pattern3 = new cTimer(7, [&]()->void {
+				pattern3 = true;
+				t_Pattern3 = nullptr;
+				});
+		}
+	}
+
+	if (moveToTarget)
+	{
+		D3DXVec2Lerp(&m_pos, &m_pos, &targetPos, 0.5f);
+	}
+
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{
@@ -102,4 +159,10 @@ void cCityBoss::Update()
 void cCityBoss::Render()
 {
 	RENDER->CenterRender(m_image[index], m_pos, m_size);
+	if (pattern3 && delayCount > 0)
+	{
+		char count[3];
+		sprintf(count, "%d", delayCount);
+		RENDER->CenterRender(IMAGE->FindImage(count), Vec2(m_pos.x, m_pos.y - 230), 1.5f);
+	}
 }

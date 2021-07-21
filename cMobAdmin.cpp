@@ -129,6 +129,8 @@ cMobAdmin::~cMobAdmin()
 	{
 		SAFE_DELETE(iter->m_Ani);
 		SAFE_DELETE(iter->t_Pattern1);
+		SAFE_DELETE(iter->t_Pattern2);
+		SAFE_DELETE(iter->t_Pattern3);
 		SAFE_DELETE(iter);
 	}
 	m_mobs.clear();
@@ -142,7 +144,14 @@ void cMobAdmin::Update()
 	{
 		iter->Update();
 
-		if (iter->mobType == "Boss") bossPos = iter->m_pos;
+		if (iter->mobType == "Boss")
+		{
+			bossPos = iter->m_pos;
+			if (stage == "cCityScene")
+			{
+				((cCityBoss*)(iter))->playerPos = m_player->m_pos;
+			}
+		}
 
 		if (SCENE->Array[(int)iter->m_pos.y][(int)iter->m_pos.x] == 4)
 		{
@@ -152,6 +161,13 @@ void cMobAdmin::Update()
 			}
 			else if (stage == "cCityScene")
 			{
+				if (iter->mobType == "Boss")
+				{
+					if (((cCityBoss*)(iter))->moveToTarget)
+					{
+						continue;
+					}
+				}
 				PART->AddParticle(iter->m_pos, (iter->mobType == "Boss") ? 0.7 : 0.3, "city_dead", 0.05);
 			}
 			else if (stage == "cCityNightScene")

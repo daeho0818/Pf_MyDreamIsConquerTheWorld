@@ -26,7 +26,7 @@ public:
 
 	string mobType;
 	string mobName;
-	
+
 	cTimer* m_Ani = nullptr;
 	cTimer* t_Pattern1 = nullptr;
 	cTimer* t_Pattern2 = nullptr;

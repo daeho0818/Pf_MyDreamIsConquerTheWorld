@@ -43,6 +43,7 @@ cRenderManager::~cRenderManager()
 
 void cRenderManager::CenterRender(cTexture* ptr, Vec2 pos, float size, float rot, bool flip_x, bool flip_y)
 {
+	if (flip_x && flip_y) size *= -1;
 	D3DXMATRIXA16 matScale, matRot, matPos, matWorld;
 	D3DXMatrixTranslation(&matPos, pos.x - WINSIZEX / 2, -(pos.y - WINSIZEY / 2), 0);
 	D3DXMatrixScaling(&matScale, ptr->info.Width * size, ptr->info.Height * size, 1);
