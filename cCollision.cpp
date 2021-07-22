@@ -70,7 +70,7 @@ void cCollision::MBPColl()
 {
 	for (auto iter = m_bullets.begin(); iter != m_bullets.end();)
 	{
-		if ((*iter)->bulletType == "mob")
+		if ((*iter)->bulletType == "mob" || (*iter)->bulletType == "boss")
 		{
 			if (50 + (*iter)->size >= D3DXVec2Length(&Vec2(m_player->m_pos - (*iter)->m_pos)))
 			{
@@ -85,6 +85,14 @@ void cCollision::MBPColl()
 						m_player->returning = true;
 						(*iter)->isDestroy = true;
 						m_player->isAttacked = true;
+
+						if (SCENE->curScene == "cCityNightScene")
+						{
+							if ((*iter)->bulletType == "boss")
+							{
+								m_player->waitToSlow = true;
+							}
+						}
 					}
 				}
 			}

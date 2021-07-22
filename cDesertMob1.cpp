@@ -30,7 +30,7 @@ void cDesertMob1::Update()
 					{
 						dir = { 1 * (float)i, 0 };
 						D3DXVec2Normalize(&dir, &dir);
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_desert_mob1", "desert_mob1_effect", m_damage, 0.5, 400, true));
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_desert_mob1", "desert_mob1_effect", "mob", m_damage, 0.5, 400, true));
 					}
 				}
 				p1Count++;

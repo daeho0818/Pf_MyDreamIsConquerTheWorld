@@ -30,16 +30,16 @@ void cDesertBoss1::Update()
 			{
 				dir = Vec2(-1, -1);
 				if (i != 0) dir = Vec2(-1 * i / 10, -1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", "boss", m_damage, 0.5, 400));
 				dir = Vec2(-1, 1);
 				if (i != 0) dir = Vec2(-1 * i / 10, 1);
-				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", "boss", m_damage, 0.5, 400));
 				dir = Vec2(1, -1);
 				if (i != 0) dir = Vec2(1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", "boss", m_damage, 0.5, 400));
 				dir = Vec2(-1, -1);
 				if (i != 0) dir = Vec2(-1, -1 * i / 10);
-				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_desert_boss1", "desert_boss1_effect", "boss", m_damage, 0.5, 400));
 			}
 			t_Pattern1 = nullptr;
 			});

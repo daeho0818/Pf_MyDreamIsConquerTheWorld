@@ -23,6 +23,7 @@ private:
 	cTimer* t_Fade = nullptr;
 	cTimer* t_PFadeDelay = nullptr;
 	cTimer* t_camMoveDelay = nullptr;
+	cTimer* t_SlowDelay = nullptr;
 
 	D3DXCOLOR imgColor[WINSIZEY][WINSIZEX];
 
@@ -75,4 +76,5 @@ public:
 	bool invincibility = false;
 	bool isAttacked;
 	bool render = true;
+	bool waitToSlow = false;
 };

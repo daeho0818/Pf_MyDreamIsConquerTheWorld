@@ -32,7 +32,7 @@ void cCityNightBoss::Update()
 	Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5)), m_pos.y + (sinf(angle) * (5)));
 	direction = direction - m_pos;
 	D3DXVec2Normalize(&direction, &direction);
-	m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_city(night)_boss", "city(night)_boss_effect", m_damage, 0.4, 1500));
+	m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_city(night)_boss", "city(night)_boss_effect", "boss", m_damage, 0.4, 1500));
 
 	if (ChkOut() == "Left" || ChkOut() == "Right")
 	{

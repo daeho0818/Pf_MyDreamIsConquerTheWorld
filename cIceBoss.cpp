@@ -41,7 +41,7 @@ void cIceBoss::Update()
 			if (rand_x == 0) rand_x = -2;
 			float rand_y = rand() % 4 - 1;
 			if (rand_y == 0) rand_y = -2;
-			m_bullets.push_back(new cReflexBullet(m_pos, Vec2(rand_x, rand_y), "bullet_ice_boss", "ice_boss_effect", m_damage, 0.5, 400));
+			m_bullets.push_back(new cReflexBullet(m_pos, Vec2(rand_x, rand_y), "bullet_ice_boss", "ice_boss_effect", "boss", m_damage, 0.5, 400));
 			p1Count++;
 			t_Pattern1 = nullptr;
 			});

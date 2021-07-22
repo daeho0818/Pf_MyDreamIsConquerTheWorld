@@ -184,15 +184,37 @@ void cPlayer::Update(Vec2 bossPos)
 
 	Move();
 
+	if (!returning)
+	{
+		if (waitToSlow)
+		{
+			if (t_SlowDelay == nullptr)
+			{
+				speed -= 5;
+				t_SlowDelay = new cTimer(3, [&]()->void {
+					waitToSlow = false;
+					speed += 5;
+					t_SlowDelay = nullptr;
+					});
+			}
+		}
+	}
+
 	if (t_Speed != nullptr) t_Speed->Update();
 	if (t_Invincibility != nullptr) t_Invincibility->Update();
 	if (t_PFadeDelay != nullptr) t_PFadeDelay->Update();
+	if (t_SlowDelay != nullptr) t_SlowDelay->Update();
 }
 
 void cPlayer::Render()
 {
 	if (render)
 		RENDER->CenterRender(player, m_pos, 0.2);
+
+	if (waitToSlow)
+	{
+		RENDER->CenterRender(IMAGE->FindImage("Blur"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	}
 
 	char t_hp[5] = "";
 	sprintf(t_hp, "%d", hp);

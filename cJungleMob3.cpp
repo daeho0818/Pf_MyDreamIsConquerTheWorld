@@ -23,18 +23,13 @@ void cJungleMob3::Update()
 		{
 			t_Pattern1 = new cTimer(0.4, [&]()->void {
 				Vec2 dir;
+				Vec2 dirs[4] = { Vec2(-1, -1), Vec2(-1, 1), Vec2(1, 1), Vec2(1, -1) };
 				for (int i = 0; i <= 5; i++)
 				{
-					if (i != 0)
+					for (int j = 0; j < 4; j++)
 					{
-						dir = { -1, -1 };
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
-						dir = { -1, 1 };
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
-						dir = { 1, 1 };
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
-						dir = { 1, -1 };
-						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", m_damage, 0.5, 400, true));
+						dir = dirs[j];
+						m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_mob3", "jungle_mob3_effect", "mob", m_damage, 0.5, 400, true));
 					}
 				}
 				p1Count++;

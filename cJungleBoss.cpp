@@ -34,11 +34,11 @@ void cJungleBoss::Update()
 				{
 					dir = {-WINSIZEX, (float)i};
 					D3DXVec2Normalize(&dir, &dir);
-					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
+					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", "boss", m_damage, 0.5, 400, true));
 
 					dir = {WINSIZEX, (float)i};
 					D3DXVec2Normalize(&dir, &dir);
-					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", m_damage, 0.5, 400, true));
+					m_bullets.push_back(new cReflexBullet(m_pos, dir, "bullet_jungle_boss", "jungle_boss_effect", "boss", m_damage, 0.5, 400, true));
 				}
 				p1Count++;
 				t_Pattern1 = nullptr;

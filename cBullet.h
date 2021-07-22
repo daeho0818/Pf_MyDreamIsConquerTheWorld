@@ -16,7 +16,7 @@ public:
 
 	cTexture* m_image;
 
-	cBullet(Vec2 pos, Vec2 dir, string imgName, string effectName, float size);
+	cBullet(Vec2 pos, Vec2 dir, string imgName, string effectName, string bulletType, float size);
 	virtual ~cBullet();
 
 	bool IsOutMap();

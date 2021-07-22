@@ -38,7 +38,7 @@ void cChurchBoss::Update()
 				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
 				direction = direction - m_pos;
 				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_church_boss", "church_boss_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_church_boss", "church_boss_effect", "boss", m_damage, 0.5, 400));
 				t_Pattern1 = nullptr;
 				});
 		}

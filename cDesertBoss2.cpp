@@ -36,7 +36,7 @@ void cDesertBoss2::CircleBullet(float interval, bool random)
 				Vec2 direction = Vec2(m_pos.x + (cosf(angle) * 5), m_pos.y + (sinf(angle) * 5));
 				direction = direction - m_pos;
 				D3DXVec2Normalize(&direction, &direction);
-				m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_desert_boss2", "desert_boss2_effect", m_damage, 0.5, 400));
+				m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_desert_boss2", "desert_boss2_effect", "boss", m_damage, 0.5, 400));
 			}
 		}
 		else
@@ -44,7 +44,7 @@ void cDesertBoss2::CircleBullet(float interval, bool random)
 			Vec2 direction = Vec2(m_pos.x + (cosf(angle) * (5 + interval)), m_pos.y + (sinf(angle) * (5 + interval)));
 			direction = direction - m_pos;
 			D3DXVec2Normalize(&direction, &direction);
-			m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_desert_boss2", "desert_boss2_effect", m_damage, 0.5, 400));
+			m_bullets.push_back(new cMBullet(m_pos, direction, "bullet_desert_boss2", "desert_boss2_effect", "boss", m_damage, 0.5, 400));
 		}
 	}
 }

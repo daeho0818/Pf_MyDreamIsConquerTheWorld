@@ -52,7 +52,7 @@ void cOceanBoss::Update()
 
 					D3DXVec2Normalize(&dir, &dir);
 
-					m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_ocean_boss", "ocean_boss_effect", m_damage, 0.5, 5000));
+					m_bullets.push_back(new cMBullet(m_pos, dir, "bullet_ocean_boss", "ocean_boss_effect", "boss", m_damage, 0.5, 5000));
 				}
 				t_Pattern1 = nullptr;
 				});
