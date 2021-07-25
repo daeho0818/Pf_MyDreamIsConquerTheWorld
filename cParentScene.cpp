@@ -35,6 +35,7 @@ void cParentScene::Init(string curScene)
 	delayCount = 0;
 	hp = 3;
 	score = 0;
+	operValue = -1500;
 
 	waitToStart = true;
 	isFadeOut = true;
@@ -510,57 +511,63 @@ void cParentScene::Render()
 
 	if (isClearEnd || isFailEnd)
 	{
-		char key[5] = "";
-		RENDER->CenterRender(IMAGE->FindImage("CFBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
-		RENDER->CenterRender(IMAGE->FindImage("CFpercent"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2 - 150));
-		sprintf(key, "%d", int(percent) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 170, WINSIZEY / 2 - 150));
-		sprintf(key, "%d", int(percent) % 10);
-		RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 - 150));
-		RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 - 150));
+		RENDER->CenterRender(IMAGE->FindImage("CFBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + operValue));
 
-		RENDER->CenterRender(IMAGE->FindImage("CFscore"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2));
-		char t_score[5] = "";
-		sprintf(t_score, "%d", score / 1000);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 115, WINSIZEY / 2));
-		sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 195, WINSIZEY / 2));
-		sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 275, WINSIZEY / 2));
-		sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
-		RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 350, WINSIZEY / 2));
-
-		char t_time[5] = "";
-		int useTime = 180 - timer;
-		sprintf(t_time, "%d", abs((useTime % 60) - (((useTime % 60) / 10) * 10))); // 1초의 자리..
-		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 + 150));
-		sprintf(t_time, "%d", (useTime % 60) / 10); // 10초의 자리..
-		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 260, WINSIZEY / 2 + 150));
-		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 + 190, WINSIZEY / 2 + 150));
-		sprintf(t_time, "%d", useTime / 60); // 1분의 자리..
-		RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 125, WINSIZEY / 2 + 150));
-
-		RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 150));
-		if (SCENE->m_rewards[SCENE->curScene] != 1 && !isFail)
+		if (operValue < 0)
+			operValue += 50;
+		else
 		{
-			RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 300));
-			if (SCENE->curScene == "cChurchScene")
-				RENDER->CenterRender(IMAGE->FindImage("church_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if (SCENE->curScene == "cCityScene")
-				RENDER->CenterRender(IMAGE->FindImage("city_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if (SCENE->curScene == "cCityNightScene")
-				RENDER->CenterRender(IMAGE->FindImage("city(night)_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if (SCENE->curScene == "cDesertScene")
-				RENDER->CenterRender(IMAGE->FindImage("desert_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
-			else if (SCENE->curScene == "cIceScene")
-				RENDER->CenterRender(IMAGE->FindImage("ice_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if (SCENE->curScene == "cJungleScene")
-				RENDER->CenterRender(IMAGE->FindImage("jungle_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.4);
-			else if (SCENE->curScene == "cOceanScene")
-				RENDER->CenterRender(IMAGE->FindImage("ocean_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 300), 0.3);
-		}
+			char key[5] = "";
+			RENDER->CenterRender(IMAGE->FindImage("CFpercent"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2 - 170));
+			sprintf(key, "%d", int(percent) / 10);
+			RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 170, WINSIZEY / 2 - 170));
+			sprintf(key, "%d", int(percent) % 10);
+			RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 - 170));
+			RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 - 170));
 
-		RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
+			RENDER->CenterRender(IMAGE->FindImage("CFscore"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2));
+			char t_score[5] = "";
+			sprintf(t_score, "%d", score / 1000);
+			RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 115, WINSIZEY / 2));
+			sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
+			RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 195, WINSIZEY / 2));
+			sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
+			RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 275, WINSIZEY / 2));
+			sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
+			RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(WINSIZEX / 2 + 350, WINSIZEY / 2));
+
+			char t_time[5] = "";
+			int useTime = 180 - timer;
+			sprintf(t_time, "%d", abs((useTime % 60) - (((useTime % 60) / 10) * 10))); // 1초의 자리..
+			RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 340, WINSIZEY / 2 + 170));
+			sprintf(t_time, "%d", (useTime % 60) / 10); // 10초의 자리..
+			RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 260, WINSIZEY / 2 + 170));
+			RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 + 190, WINSIZEY / 2 + 170));
+			sprintf(t_time, "%d", useTime / 60); // 1분의 자리..
+			RENDER->CenterRender(IMAGE->FindImage(t_time), Vec2(WINSIZEX / 2 + 125, WINSIZEY / 2 + 170));
+
+			RENDER->CenterRender(IMAGE->FindImage("CFtime"), Vec2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 170));
+			if (SCENE->m_rewards[SCENE->curScene] != 1 && !isFail)
+			{
+				RENDER->CenterRender(IMAGE->FindImage("CFgetItem"), Vec2(WINSIZEX / 2 - 150, WINSIZEY / 2 + 340));
+				if (SCENE->curScene == "cChurchScene")
+					RENDER->CenterRender(IMAGE->FindImage("church_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.4);
+				else if (SCENE->curScene == "cCityScene")
+					RENDER->CenterRender(IMAGE->FindImage("city_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.4);
+				else if (SCENE->curScene == "cCityNightScene")
+					RENDER->CenterRender(IMAGE->FindImage("city(night)_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.4);
+				else if (SCENE->curScene == "cDesertScene")
+					RENDER->CenterRender(IMAGE->FindImage("desert_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.3);
+				else if (SCENE->curScene == "cIceScene")
+					RENDER->CenterRender(IMAGE->FindImage("ice_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.4);
+				else if (SCENE->curScene == "cJungleScene")
+					RENDER->CenterRender(IMAGE->FindImage("jungle_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.4);
+				else if (SCENE->curScene == "cOceanScene")
+					RENDER->CenterRender(IMAGE->FindImage("ocean_item"), Vec2(WINSIZEX / 2 + 250, WINSIZEY / 2 + 340), 0.3);
+			}
+
+			RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
+		}
 	}
 }
 

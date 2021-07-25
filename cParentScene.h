@@ -32,6 +32,7 @@ private:
 	bool once;
 
 	float percent;
+	float operValue;
 
 	cTimer* t_TextAni = nullptr;
 	cTimer* t_Timer = nullptr;
