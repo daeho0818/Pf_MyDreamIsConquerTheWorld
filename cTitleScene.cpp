@@ -32,7 +32,7 @@ void cTitleScene::Init()
 	logoPos = { WINSIZEX / 2, 500 };
 	arrowKey = "Arrow";
 	memset(move, false, sizeof(move));
-	move[0] = true; 
+	move[0] = true;
 	speed = 1;
 
 	tempFunc = [&](int index) -> void {
@@ -114,33 +114,32 @@ void cTitleScene::Update()
 	{
 		if (!buttonsMoved && movedEnd)
 		{
-			if (MOUSE->LButtonClick("start_button"))
+			if (!guideUI && !advenUI && !developUI)
 			{
-				if (!guideUI && !advenUI && !developUI)
+				if (MOUSE->LButtonClick("start_button"))
+				{
 					SCENE->ChangeScene("cSelectStageScene");
-			}
-			else if (MOUSE->LButtonClick("guide_button"))
-			{
-				if (!guideUI && !advenUI && !developUI)
+				}
+				else if (MOUSE->LButtonClick("guide_button"))
+				{
 					guideUI = true;
-			}
-			else if (MOUSE->LButtonClick("adven_button"))
-			{
-				if (!advenUI && !guideUI && !developUI)
+				}
+				else if (MOUSE->LButtonClick("adven_button"))
+				{
 					advenUI = true;
-			}
-			else if (MOUSE->LButtonClick("develop_button"))
-			{
-				developUI = true;
-			}
-			else if (MOUSE->LButtonClick("quit_button"))
-			{
-				if (!advenUI && !guideUI && !developUI)
+				}
+				else if (MOUSE->LButtonClick("quit_button"))
+				{
 					PostQuitMessage(0);
+				}
+				else if (MOUSE->LButtonClick("develop_button"))
+				{
+					developUI = true;
+				}
 			}
-			else if (MOUSE->LButtonClick("guide_close"))
+			else if (guideUI)
 			{
-				if (guideUI)
+				if (MOUSE->LButtonClick("guide_close"))
 				{
 					guideUI = false;
 				}
