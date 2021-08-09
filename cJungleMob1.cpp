@@ -8,6 +8,8 @@ cJungleMob1::cJungleMob1(Vec2 pos, vector < cBullet*>& bullets, float size)
 	m_image = IMAGE->MakeVecImg("jungle_mob1");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
+
+	speed = 2;
 }
 
 cJungleMob1::~cJungleMob1()
@@ -51,7 +53,7 @@ void cJungleMob1::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {2 * dir_x, 2 * dir_y};
+	m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cJungleMob1::Render()

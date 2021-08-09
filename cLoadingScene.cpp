@@ -645,8 +645,8 @@ void cLoadingScene::Init()
 		
 	listCount = loadList.size();
 
-	//thread = new cThreadPool(1);
-	//thread->EnqueueJob([&]()->void {AddResource(); });
+	// thread = new cThreadPool(1);
+	// thread->EnqueueJob([&]()->void {AddResource(); });
 }
 
 void cLoadingScene::Update()
@@ -655,17 +655,16 @@ void cLoadingScene::Update()
 	{
 		LoadInfo load = loadList.back();
 		loadList.pop_back();
-
+	
 		IMAGE->AddImage(load.key, load.path, load.count);
 	}
-
+	
 	else
 	{
-		IMAGE->MakeVecImg("church_boss_disappear", true, 11);
 		BG->isLoadScene = false;
 		BG->ptr[0] = IMAGE->FindImage("player");
 		BG->ptr[1] = IMAGE->FindImage("player");
-
+	
 		SCENE->ChangeScene("cTitleScene");
 	}
 }

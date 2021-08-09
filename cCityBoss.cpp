@@ -8,7 +8,10 @@ cCityBoss::cCityBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
 {
 	m_image = IMAGE->MakeVecImg("city_boss");
 	mobType = "Boss";
+
 	m_damage = 1;
+	speed = 1;
+
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
@@ -140,7 +143,8 @@ void cCityBoss::Update()
 
 	if (moveToTarget)
 	{
-		D3DXVec2Lerp(&m_pos, &m_pos, &targetPos, 0.5f);
+		if (D3DXVec2Length(&(targetPos - m_pos)) >= 50)
+			D3DXVec2Lerp(&m_pos, &m_pos, &targetPos, 0.5f);
 	}
 
 
@@ -153,7 +157,7 @@ void cCityBoss::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {speed* dir_x, speed* dir_y};
 }
 
 void cCityBoss::Render()

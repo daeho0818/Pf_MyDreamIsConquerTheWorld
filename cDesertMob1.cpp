@@ -9,6 +9,7 @@ cDesertMob1::cDesertMob1(Vec2 pos, vector<cBullet*>& bullets, float size)
 	m_image = IMAGE->MakeVecImg("desert_mob1");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
+	speed = 2;
 }
 
 cDesertMob1::~cDesertMob1()
@@ -52,7 +53,7 @@ void cDesertMob1::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {2 * dir_x, 2 * dir_y};
+	m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cDesertMob1::Render()

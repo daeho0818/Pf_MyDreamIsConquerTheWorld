@@ -8,6 +8,7 @@ cCityMob2::cCityMob2(Vec2 pos, vector<cBullet*>& bullets, float size)
 	m_image = IMAGE->MakeVecImg("city_mob2");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
+	speed = 2;
 }
 
 cCityMob2::~cCityMob2()
@@ -52,7 +53,7 @@ void cCityMob2::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {2 * dir_x, 2 * dir_y};
+	m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cCityMob2::Render()

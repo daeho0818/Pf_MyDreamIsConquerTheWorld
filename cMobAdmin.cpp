@@ -241,17 +241,9 @@ void cMobAdmin::Animation()
 			if (stage == "cChurchScene")
 			{
 				if (((cChurchBoss*)(iter))->disappear)
-				{
-					m_player->invincibility = true;
-					m_player->stop = true;
 					repeat = false;
-				}
 				else
-				{
-					m_player->invincibility = false;
-					m_player->stop = false;
 					repeat = true;
-				}
 			}
 		}
 

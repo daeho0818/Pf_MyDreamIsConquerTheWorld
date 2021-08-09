@@ -17,6 +17,7 @@ public:
 
 	int p1Count = 0;
 	int index = 0;
+	int speed;
 
 	bool isDestroy = false;
 	bool isStop;

@@ -7,7 +7,10 @@ cOceanBoss::cOceanBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
 {
 	m_image = IMAGE->MakeVecImg("ocean_boss");
 	mobType = "Boss";
+
 	m_damage = 1;
+	speed = 1;
+
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
@@ -22,7 +25,7 @@ void cOceanBoss::Update()
 {
 	if (t_Pattern1 != nullptr) t_Pattern1->Update();
 
-	if (pattern1)
+	else if (pattern1)
 	{
 		if (t_Pattern1 == nullptr)
 		{
@@ -68,7 +71,7 @@ void cOceanBoss::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cOceanBoss::Render()

@@ -28,6 +28,8 @@ public:
 	int score;
 	int a_rewards[7];
 
+	float coloring_per = 0;
+
 	bool gameClear = false;
 
 	string curScene = "";

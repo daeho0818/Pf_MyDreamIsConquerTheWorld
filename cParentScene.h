@@ -31,7 +31,6 @@ private:
 	bool isFadeOut;
 	bool once;
 
-	float percent;
 	float operValue;
 
 	cTimer* t_TextAni = nullptr;

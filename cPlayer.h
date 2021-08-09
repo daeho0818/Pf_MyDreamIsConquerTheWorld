@@ -66,8 +66,6 @@ public:
 	int tempCount = 0;
 	int speed;
 
-	float coloring_per = 0;
-
 	bool stop = false;
 	bool draw_line = false;
 	bool returning = false;

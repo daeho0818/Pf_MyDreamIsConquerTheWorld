@@ -8,6 +8,7 @@ cIceMob1::cIceMob1(Vec2 pos, vector<cBullet*>& bullets, float size)
 	m_image = IMAGE->MakeVecImg("ice_mob1");
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
+	speed = 2;
 }
 
 cIceMob1::~cIceMob1()
@@ -54,7 +55,7 @@ void cIceMob1::Update()
 	{
 		dir_y *= -1;
 	}
-	m_pos += {2 * dir_x, 2 * dir_y};
+	m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cIceMob1::Render()

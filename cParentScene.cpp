@@ -27,7 +27,6 @@ void cParentScene::Init(string curScene)
 	alphaColor = 255;
 	effectCount = 0;
 	textCount = 1;
-	percent = 0;
 	timer = 180;
 	CFCount = 0;
 	speed = 100;
@@ -52,7 +51,6 @@ void cParentScene::Init(string curScene)
 
 void cParentScene::Update()
 {
-	percent = player->coloring_per;
 	hp = player->hp;
 	playerPos = player->m_pos;
 	score = SCENE->score;
@@ -416,8 +414,9 @@ void cParentScene::Render()
 		}
 	}
 
+	float percent = SCENE->coloring_per;
 	char key[5] = "";
-	if (percent >= 100) percent = 95;
+	if (percent >= 100) { percent = 99; SCENE->coloring_per = percent; }
 	sprintf(key, "%d", (int)percent / 10);
 	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3500, 250), 1.2);
 	sprintf(key, "%d", (int)percent % 10);
@@ -517,7 +516,7 @@ void cParentScene::Render()
 			operValue += 50;
 		else
 		{
-			char key[5] = "";
+			char key[5] = ""; float percent = SCENE->coloring_per;
 			RENDER->CenterRender(IMAGE->FindImage("CFpercent"), Vec2(WINSIZEX / 2 - 240, WINSIZEY / 2 - 170));
 			sprintf(key, "%d", int(percent) / 10);
 			RENDER->CenterRender(IMAGE->FindImage(key), Vec2(WINSIZEX / 2 + 170, WINSIZEY / 2 - 170));
@@ -655,7 +654,7 @@ void cParentScene::SceneUpdate()
 			PlayerDead();
 		}
 
-		if (player->coloring_per >= 80 || INPUT->KeyDown('G'))
+		if (SCENE->coloring_per >= 80 || INPUT->KeyDown('G'))
 		{
 			isClear = true;
 		}

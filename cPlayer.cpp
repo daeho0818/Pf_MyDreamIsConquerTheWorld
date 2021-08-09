@@ -25,7 +25,7 @@ void cPlayer::Init()
 	coloring_cells = 0;
 	last_x = 0, last_y = 0;
 	speed = 15;
-	coloring_per = 0;
+	SCENE->coloring_per = 0;
 	FadeCount = 0;
 
 	drawStart = false;
@@ -495,7 +495,7 @@ void cPlayer::FillPlace(Vec2 pos, int target, int change, bool isFilled)
 	{
 		float temp1 = coloring_cells * 100;
 		float temp2 = real_cells;
-		coloring_per = temp1 / temp2;
+		SCENE->coloring_per = temp1 / temp2;
 		SCENE->score += temp_Coloring_Cell / 1000;
 
 		draw_mode = true;

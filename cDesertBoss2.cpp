@@ -8,7 +8,10 @@ cDesertBoss2::cDesertBoss2(Vec2 pos, vector<cBullet*>& bullet, float size)
 	m_image = IMAGE->MakeVecImg("desert_boss2");
 	mobName = "silver";
 	mobType = "Boss";
+
 	m_damage = 1;
+	speed = 1;
+
 	isStop = false;
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
@@ -113,7 +116,7 @@ void cDesertBoss2::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cDesertBoss2::Render()

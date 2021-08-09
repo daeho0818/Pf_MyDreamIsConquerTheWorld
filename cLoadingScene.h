@@ -32,5 +32,7 @@ private:
 	cThreadPool* thread = nullptr;
 
 	int listCount;
+
+	bool loadStart = false;
 };
 

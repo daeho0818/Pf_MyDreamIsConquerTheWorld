@@ -7,7 +7,9 @@ cChurchBoss::cChurchBoss(Vec2 pos, vector<cBullet*>& bullet, float size)
 {
 	m_image = IMAGE->MakeVecImg("church_boss");
 	mobType = "Boss";
+
 	m_damage = 1;
+	speed = 1;
 
 	rand() % 2 == 1 ? dir_x = 1 : dir_x = -1;
 	rand() % 2 == 1 ? dir_y = 1 : dir_y = -1;
@@ -76,7 +78,6 @@ void cChurchBoss::Update()
 			isStop = true;
 			disappear = true;
 			m_image = IMAGE->MakeVecImg("church_boss_disappear");
-			CAM->ZoomCam(0.1, 2, m_pos, true);
 
 			t_Pattern2 = new cTimer(3, [&]() ->void {
 				index = 0;
@@ -91,7 +92,6 @@ void cChurchBoss::Update()
 						if (SCENE->Array[(int)random_y][(int)random_x] == 0)
 						{
 							m_pos = { random_x, random_y };
-							CAM->ZoomCam(0.1, 2, m_pos, true);
 							break;
 						}
 
@@ -112,7 +112,7 @@ void cChurchBoss::Update()
 		dir_y *= -1;
 	}
 	if (!isStop)
-		m_pos += {1 * dir_x, 1 * dir_y};
+		m_pos += {speed * dir_x, speed * dir_y};
 }
 
 void cChurchBoss::Render()
