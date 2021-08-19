@@ -17,7 +17,7 @@ void cParentScene::Init(string curScene)
 
 	for (int i = 0; i < 7; i++)
 	{
-		textsPos[i] = Vec2(-100, WINSIZEY / 2);
+		textsPos[i] = Vec2(0, WINSIZEY / 2);
 	}
 
 	memset(clear, false, sizeof(clear));
@@ -84,6 +84,7 @@ void cParentScene::Update()
 		if (!isClear && !isFail)
 		{
 			isStop = !isStop;
+			if (isStop) SOUND->Play("stop");
 		}
 	}
 
@@ -119,6 +120,7 @@ void cParentScene::Update()
 				{
 					t_Delay = new cTimer(0.2, [&]()->void {
 						clear[delayCount] = true;
+						SOUND->Play("whoosh", -2500);
 						delayCount++;
 						t_Delay = nullptr;
 						});
@@ -133,6 +135,7 @@ void cParentScene::Update()
 				t_Clear = new cTimer(0.2, [&]()->void {
 					textRender[CFCount] = true;
 					clear[CFCount] = true;
+					SOUND->Play("whoosh", -2500);
 					CFCount++;
 					t_Clear = nullptr;
 					});
@@ -196,6 +199,7 @@ void cParentScene::Update()
 				t_Over = new cTimer(0.2, [&]()->void {
 					textRender[CFCount] = true;
 					over[CFCount] = true;
+					SOUND->Play("whoosh", -2500);
 					CFCount++;
 					t_Over = nullptr;
 					});
@@ -210,6 +214,7 @@ void cParentScene::Update()
 				{
 					t_Delay = new cTimer(0.2, [&]()->void {
 						over[delayCount] = true;
+						SOUND->Play("whoosh", -2500);
 						delayCount++;
 						t_Delay = nullptr;
 						});

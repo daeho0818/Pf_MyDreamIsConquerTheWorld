@@ -36,6 +36,7 @@ void cSoundManager::Release()
 {
 	for (auto iter : m_sounds) delete iter.second;
 	for (auto iter : m_channels) iter.second->Release();
+	m_channels.clear();
 }
 
 LPDIRECTSOUNDBUFFER cSoundManager::Play(string key, LONG volume, bool loop)

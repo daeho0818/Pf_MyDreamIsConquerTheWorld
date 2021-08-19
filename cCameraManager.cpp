@@ -66,8 +66,6 @@ void cCameraManager::ZoomCam(float time, float delay, Vec2 pos, bool dontExit)
 
 void cCameraManager::MoveCam(Vec2 targetPos)
 {
-	SOUND->Play("camMove", -2000);
-
 	Vec2 movePos = targetPos;
 	if (movePos.x >= 3000) movePos.x = 3000;
 	else if (movePos.x <= 1000) movePos.x = 1000;

@@ -641,32 +641,34 @@ void cLoadingScene::Init()
 	SOUND->AddSound("button", L"button");
 	SOUND->AddSound("fillplace", L"fillplace");
 	SOUND->AddSound("attack", L"attack");
-	SOUND->AddSound("camMove", L"camMove");
+	SOUND->AddSound("lineDraw", L"lineDraw");
+	SOUND->AddSound("stop", L"stop");
+	SOUND->AddSound("e_dead", L"e_dead");
 		
 	listCount = loadList.size();
 
-	thread = new cThreadPool(1);
-	thread->EnqueueJob([&]()->void {AddResource(); });
+	// thread = new cThreadPool(1);
+	// thread->EnqueueJob([&]()->void {AddResource(); });
 }
 
 void cLoadingScene::Update()
 {
-	// if (!loadList.empty())
-	// {
-	// 	LoadInfo load = loadList.back();
-	// 	loadList.pop_back();
-	// 
-	// 	IMAGE->AddImage(load.key, load.path, load.count);
-	// }
-	// 
-	// else
-	// {
-	// 	BG->isLoadScene = false;
-	// 	BG->ptr[0] = IMAGE->FindImage("player");
-	// 	BG->ptr[1] = IMAGE->FindImage("player");
-	// 
-	// 	SCENE->ChangeScene("cTitleScene");
-	// }
+	if (!loadList.empty())
+	{
+		LoadInfo load = loadList.back();
+		loadList.pop_back();
+	
+		IMAGE->AddImage(load.key, load.path, load.count);
+	}
+	
+	else
+	{
+		BG->isLoadScene = false;
+		BG->ptr[0] = IMAGE->FindImage("player");
+		BG->ptr[1] = IMAGE->FindImage("player");
+	
+		SCENE->ChangeScene("cTitleScene");
+	}
 }
 
 void cLoadingScene::Render()

@@ -221,6 +221,7 @@ void cMobAdmin::IsDestroy()
 	{
 		if ((*iter)->isDestroy)
 		{
+			SOUND->Play("e_dead");
 			SAFE_DELETE((*iter)->m_Ani);
 			SAFE_DELETE((*iter)->t_Pattern1);
 			SAFE_DELETE(*iter);
@@ -240,7 +241,7 @@ void cMobAdmin::Animation()
 		{
 			if (stage == "cChurchScene")
 			{
-				if (((cChurchBoss*)(iter))->disappear)
+				if ((dynamic_cast<cChurchBoss*>(iter))->disappear)
 					repeat = false;
 				else
 					repeat = true;
