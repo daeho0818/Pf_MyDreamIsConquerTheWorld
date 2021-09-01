@@ -18,6 +18,7 @@ void cSoundManager::Init()
 
 void cSoundManager::Update()
 {
+	if (INPUT->KeyDown(VK_RETURN)) Release();
 	DWORD status;
 	for (auto& iter = m_channels.begin(); iter != m_channels.end();)
 	{
@@ -34,7 +35,7 @@ void cSoundManager::Update()
 
 void cSoundManager::Release()
 {
-	for (auto iter : m_sounds) delete iter.second;
+	// for (auto iter : m_sounds) SAFE_DELETE(iter.second);
 	for (auto iter : m_channels) iter.second->Release();
 	m_channels.clear();
 }

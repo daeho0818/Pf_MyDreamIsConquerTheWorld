@@ -637,13 +637,13 @@ void cLoadingScene::Init()
 		}
 	}
 
-	SOUND->AddSound("draw_line", L"draw_line");
-	SOUND->AddSound("button", L"button");
-	SOUND->AddSound("fillplace", L"fillplace");
 	SOUND->AddSound("attack", L"attack");
-	SOUND->AddSound("lineDraw", L"lineDraw");
-	SOUND->AddSound("stop", L"stop");
+	SOUND->AddSound("button", L"button");
+	SOUND->AddSound("draw_line", L"draw_line");
+	SOUND->AddSound("fillplace", L"fillplace");
 	SOUND->AddSound("e_dead", L"e_dead");
+	SOUND->AddSound("stop", L"stop");
+	SOUND->AddSound("whoosh", L"whoosh");
 		
 	listCount = loadList.size();
 
