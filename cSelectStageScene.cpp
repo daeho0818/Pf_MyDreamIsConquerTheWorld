@@ -37,6 +37,9 @@ void cSelectStageScene::Init()
 	cloudsPos[1] = { WINSIZEX - 500, 500 };
 	cloudsPos[2] = { WINSIZEX - 500, WINSIZEY };
 	cloudsPos[3] = { 500, WINSIZEY };
+
+	SOUND->StopAll();
+	SOUND->Play("Main", DSBVOLUME_MAX, true);
 }
 
 void cSelectStageScene::Update()
@@ -46,7 +49,19 @@ void cSelectStageScene::Update()
 	if (INPUT->KeyDown(VK_ESCAPE))
 	{
 		isFirst = false;
-		stage = Stage::None;
+
+		if (stage != Stage::None)
+		{
+			SOUND->Stop("ChurchSelect");
+			SOUND->Stop("CitySelect");
+			SOUND->Stop("CityNightSelect");
+			SOUND->Stop("DesertSelect");
+			SOUND->Stop("IceSelect");
+			SOUND->Stop("JungleSelect");
+			SOUND->Stop("OceanSelect");
+			SOUND->Play("Main", DSBVOLUME_MAX, true);
+			stage = Stage::None;
+		}
 	}
 
 	if (MOUSE->lUp)
@@ -61,30 +76,44 @@ void cSelectStageScene::Update()
 			if (MOUSE->LButtonClick("church_button"))
 			{
 				stage = Stage::Church;
+				SOUND->Stop("Main");
+				SOUND->Play("ChurchSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("city_button"))
 			{
 				stage = Stage::City;
+				SOUND->Stop("Main");
+				SOUND->Play("CitySelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("city(night)_button"))
 			{
 				stage = Stage::City_Night;
+				SOUND->Stop("Main");
+				SOUND->Play("CityNightSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("desert_button"))
 			{
 				stage = Stage::Desert;
+				SOUND->Stop("Main");
+				SOUND->Play("DesertSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("ice_button"))
 			{
 				stage = Stage::Ice;
+				SOUND->Stop("Main");
+				SOUND->Play("IceSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("ocean_button"))
 			{
 				stage = Stage::Ocean;
+				SOUND->Stop("Main");
+				SOUND->Play("OceanSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("jungle_button"))
 			{
 				stage = Stage::Jungle;
+				SOUND->Stop("Main");
+				SOUND->Play("JungleSelect", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("end_title") && stage == Stage::None)
 			{
@@ -96,7 +125,14 @@ void cSelectStageScene::Update()
 			if (stage != Stage::None && MOUSE->LButtonClick("X"))
 			{
 				stage = Stage::None;
-				MOUSE->lUp = false;
+				SOUND->Stop("ChurchSelect");
+				SOUND->Stop("CitySelect");
+				SOUND->Stop("CityNightSelect");
+				SOUND->Stop("DesertSelect");
+				SOUND->Stop("IceSelect");
+				SOUND->Stop("JungleSelect");
+				SOUND->Stop("OceanSelect");
+				SOUND->Play("Main", DSBVOLUME_MAX, true);
 			}
 			if (MOUSE->LButtonClick("StageStartB"))
 			{

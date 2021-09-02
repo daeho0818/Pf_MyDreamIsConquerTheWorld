@@ -284,7 +284,7 @@ void cPlayer::DrawTempLine(BYTE dir)
 	if (!draw_mode)
 	{
 		draw_mode = true;
-		SOUND->Play("draw_line", -3000, true);
+		SOUND->Play("draw_line", DSBVOLUME_MAX, true);
 	}
 	BG->ptr[0]->ptr->LockRect(0, &lr, 0, D3DLOCK_DISCARD);
 	DWORD* textureColor = (DWORD*)lr.pBits;
@@ -416,7 +416,7 @@ void cPlayer::DrawLine(bool isFilled)
 					FillPlace({ (float)x, (float)y }, 0, 3);
 					if (temp)
 					{
-						SOUND->Play("fillplace");
+						SOUND->Play("fillplace", DSBVOLUME_MAX);
 						temp = false;
 					}
 				}

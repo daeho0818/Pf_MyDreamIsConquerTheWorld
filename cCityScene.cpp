@@ -33,6 +33,9 @@ void cCityScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("City", DSBVOLUME_MAX, true);
 }
 
 void cCityScene::Update()
@@ -57,6 +60,8 @@ void cCityScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("City");
 
 	cParentScene::Release();
 }

@@ -33,6 +33,9 @@ void cChurchScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("Church", DSBVOLUME_MAX, true);
 }
 
 void cChurchScene::Update()
@@ -57,6 +60,8 @@ void cChurchScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("Church");
 
 	cParentScene::Release();
 }

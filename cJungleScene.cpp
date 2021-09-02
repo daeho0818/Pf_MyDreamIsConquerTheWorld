@@ -33,6 +33,9 @@ void cJungleScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("Jungle", DSBVOLUME_MAX, true);
 }
 
 void cJungleScene::Update()
@@ -57,6 +60,8 @@ void cJungleScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("Jungle");
 
 	cParentScene::Release();
 }

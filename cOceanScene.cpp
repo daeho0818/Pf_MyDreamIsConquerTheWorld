@@ -33,6 +33,9 @@ void cOceanScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("Ocean", DSBVOLUME_MAX, true);
 }
 
 void cOceanScene::Update()
@@ -57,6 +60,8 @@ void cOceanScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("Ocean");
 
 	cParentScene::Release();
 }

@@ -26,6 +26,8 @@ void cEndScene::Init()
 	BUTTON->AddButton("end_restart", Vec2(WINSIZEX / 2 - ((WINSIZEX / 2) / 2), 2000), 0.8);
 	BUTTON->AddButton("end_title", Vec2(WINSIZEX / 2, 2000), 0.8);
 	BUTTON->AddButton("end_worldmap", Vec2(WINSIZEX / 2 + ((WINSIZEX / 2) / 2), 2000), 0.8);
+
+	SOUND->Play("Title", DSBVOLUME_MAX, true);
 }
 
 void cEndScene::Update()

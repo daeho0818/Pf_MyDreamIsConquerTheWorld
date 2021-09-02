@@ -644,6 +644,27 @@ void cLoadingScene::Init()
 	SOUND->AddSound("e_dead", L"e_dead");
 	SOUND->AddSound("stop", L"stop");
 	SOUND->AddSound("whoosh", L"whoosh");
+
+	SOUND->AddSound("Title", L"BGM/Title");
+	SOUND->AddSound("Main", L"BGM/Main");
+
+	SOUND->AddSound("Church", L"BGM/Stage/Church");
+	SOUND->AddSound("City", L"BGM/Stage/City");
+	SOUND->AddSound("CityNight", L"BGM/Stage/CityNight");
+	SOUND->AddSound("Ocean", L"BGM/Stage/Ocean");
+	SOUND->AddSound("Desert", L"BGM/Stage/Desert");
+	SOUND->AddSound("Jungle", L"BGM/Stage/Jungle");
+	// SOUND->AddSound("Ice", L"BGM/Stage/Ice");
+
+	SOUND->AddSound("ChurchSelect", L"BGM/SelectStage/Church");
+	SOUND->AddSound("CitySelect", L"BGM/SelectStage/City");
+	SOUND->AddSound("CityNightSelect", L"BGM/SelectStage/CityNight");
+	SOUND->AddSound("OceanSelect", L"BGM/SelectStage/Ocean");
+	SOUND->AddSound("DesertSelect", L"BGM/SelectStage/Desert");
+	SOUND->AddSound("JungleSelect", L"BGM/SelectStage/Jungle");
+	SOUND->AddSound("IceSelect", L"BGM/SelectStage/Ice");
+
+	SOUND->Play("Title", DSBVOLUME_MAX, true);
 		
 	listCount = loadList.size();
 

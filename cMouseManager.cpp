@@ -63,7 +63,7 @@ bool cMouseManager::LButtonClick(string key)
 {
 	if (Collider(key, lDownPos) && Collider(key, MOUSE->mousePos))
 	{
-		SOUND->Play("button");
+		SOUND->Play("button", DSBVOLUME_MAX);
 		return true;
 	}
 	return false;

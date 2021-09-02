@@ -33,6 +33,9 @@ void cDesertScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("Desert", DSBVOLUME_MAX, true);
 }
 
 void cDesertScene::Update()
@@ -58,6 +61,8 @@ void cDesertScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("Desert");
 
 	cParentScene::Release();
 }

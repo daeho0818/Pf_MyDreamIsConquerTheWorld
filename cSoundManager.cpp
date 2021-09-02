@@ -16,12 +16,27 @@ void cSoundManager::Init()
 	m_Manager.Initialize(DXUTGetHWND(), 1);
 }
 
+LONG volume = 0L;
 void cSoundManager::Update()
 {
-	if (INPUT->KeyDown(VK_RETURN)) Release();
+	if (INPUT->KeyDown(VK_F9))
+	{
+		volume = DSBVOLUME_MAX;
+	}
+	else if (INPUT->KeyDown(VK_F10))
+	{
+		volume = -2500L;
+	}
+
+	if (INPUT->KeyDown(VK_BACK))
+	{
+		SOUND->StopAll();
+	}
+
 	DWORD status;
 	for (auto& iter = m_channels.begin(); iter != m_channels.end();)
 	{
+		(*iter).second->SetVolume(volume);
 		(*iter).second->GetStatus(&status);
 		if (!(status & DSBSTATUS_PLAYING))
 		{

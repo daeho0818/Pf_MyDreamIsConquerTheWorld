@@ -33,6 +33,9 @@ void cIceScene::Init()
 	cParentScene::item = this->item;
 	cParentScene::bullet = this->bullet;
 	cParentScene::coll = this->coll;
+
+	SOUND->StopAll();
+	SOUND->Play("IceSelect", DSBVOLUME_MAX, true);
 }
 
 void cIceScene::Update()
@@ -57,6 +60,8 @@ void cIceScene::Release()
 	SAFE_DELETE(mob);
 	SAFE_DELETE(item);
 	SAFE_DELETE(coll);
+
+	SOUND->Stop("IceSelect");
 
 	cParentScene::Release();
 }
