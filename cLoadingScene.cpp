@@ -471,6 +471,10 @@ void cLoadingScene::Init()
 	}
 
 	// UI
+	AddLoad("ingame_ui_bg", "Ingame/UI/ui_bg");
+
+	AddLoad("ingame_ui_high", "Ingame/UI/highUI");
+
 	AddLoad("IngameBG", "Ingame/UI/AllBG");
 
 	AddLoad("hp_blind", "Ingame/UI/blind");

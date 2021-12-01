@@ -25,7 +25,11 @@ void cSoundManager::Update()
 	}
 	else if (INPUT->KeyDown(VK_F10))
 	{
-		volume = -2500L;
+		volume = -1000;
+	}
+	else if (INPUT->KeyDown(VK_F11))
+	{
+		volume = DSBVOLUME_MIN;
 	}
 
 	if (INPUT->KeyDown(VK_BACK))

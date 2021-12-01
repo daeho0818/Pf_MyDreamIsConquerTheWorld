@@ -57,6 +57,8 @@ public:
 	int CFCount;
 	int delayCount;
 
+	float speed;
+
 	bool isStart;
 	bool isStop;
 	bool isdead;
@@ -66,7 +68,6 @@ public:
 	bool isFailEnd;
 	bool delay;
 
-	float speed;
 
 	cTexture* t_BG = nullptr;
 
@@ -79,5 +80,10 @@ public:
 	cBulletAdmin* bullet = nullptr;
 
 	cCollision* coll = nullptr;
+
+	Vec2 ui_operation_position;
+
+	cTexture* ui_bg_image;
+	cTexture* high_ui_image;
 };
 

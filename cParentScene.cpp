@@ -36,10 +36,15 @@ void cParentScene::Init(string curScene)
 	score = 0;
 	operValue = -1500;
 
+	ui_operation_position = Vec2(0, 0);
+
 	waitToStart = true;
 	isFadeOut = true;
 	once = true;
 	isStart = isStop = isClear = isFail = isClearEnd = isFailEnd = delay = isdead = false;
+
+	ui_bg_image = IMAGE->FindImage("ingame_ui_bg");
+	high_ui_image = IMAGE->FindImage("ingame_ui_high");
 
 	BUTTON->AddButton("CFnext", Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 
@@ -352,50 +357,52 @@ void cParentScene::Update()
 			}
 		}
 	}
+	if (player->m_pos.y <= 320)
+		D3DXVec2Lerp(&ui_operation_position, &ui_operation_position, &Vec2(0, -250), 0.5f);
+
+	else
+		D3DXVec2Lerp(&ui_operation_position, &ui_operation_position, &Vec2(0, 0), 0.5f);
 }
 
 void cParentScene::Render()
 {
 	SceneRender();
 
-	RENDER->CenterRender(IMAGE->FindImage("IngameBG"), Vec2(WINSIZEX / 2, WINSIZEY / 2));
-	RENDER->CenterRender(IMAGE->FindImage("hp_blind"), Vec2(270, 250));
+	RENDER->CenterRender(ui_bg_image, Vec2(WINSIZEX / 2, WINSIZEY / 2));
+	RENDER->CenterRender(high_ui_image, Vec2(WINSIZEX / 2, WINSIZEY / 2) + ui_operation_position);
+	RENDER->CenterRender(IMAGE->FindImage("hp_blind"), Vec2(270, 250) + ui_operation_position);
+
 	switch (hp)
 	{
 	case 3:
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP3"), Vec2(270, 250));
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP3"), Vec2(270, 250) + +ui_operation_position);
 		break;
 	case 2:
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP2"), Vec2(270, 250));
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP2"), Vec2(270, 250) + +ui_operation_position);
 		break;
 	case 1:
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP1"), Vec2(270, 250));
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP1"), Vec2(270, 250) + +ui_operation_position);
 		break;
 	case 0:
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP0"), Vec2(270, 250));
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_HP0"), Vec2(270, 250) + +ui_operation_position);
 		break;
 	}
-	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250));
+	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250) + +ui_operation_position);
 
 	if (player->isHp)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Hp+"), Vec2(820, 125));
+		RENDER->CenterRender(IMAGE->FindImage("Hp+"), Vec2(820, 125) + ui_operation_position);
 	}
-	else
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(820, 125));
-
-	if (player->speedUp)
+	else if (player->speedUp)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Speed+"), Vec2(1020, 125));
+		RENDER->CenterRender(IMAGE->FindImage("Speed+"), Vec2(1020, 125) + ui_operation_position);
 	}
-	else
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125));
-	if (player->invincibility)
+	else if (player->invincibility)
 	{
-		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125));
+		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125) + ui_operation_position);
 	}
 	else
-		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125));
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125) + ui_operation_position);
 
 	if (!waitToStart && !isStart)
 	{
@@ -423,33 +430,33 @@ void cParentScene::Render()
 	char key[5] = "";
 	if (percent >= 100) { percent = 99; SCENE->coloring_per = percent; }
 	sprintf(key, "%d", (int)percent / 10);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3500, 250), 1.2);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3500, 250) + ui_operation_position, 1.2);
 	sprintf(key, "%d", (int)percent % 10);
-	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3600, 250), 1.2);
-	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3750, 250), 1.2);
+	RENDER->CenterRender(IMAGE->FindImage(key), Vec2(3600, 250) + ui_operation_position, 1.2);
+	RENDER->CenterRender(IMAGE->FindImage("percent"), Vec2(3750, 250) + ui_operation_position, 1.2);
 
 	if (!isFadeOut)
 	{
 		char time[5] = "";
 		sprintf(time, "%d", timer / 60);
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 165, 320), 1.3);
-		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 - 55, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 - 165, 320) + ui_operation_position, 1.3);
+		RENDER->CenterRender(IMAGE->FindImage("colon"), Vec2(WINSIZEX / 2 - 55, 320) + ui_operation_position, 1.3);
 		sprintf(time, "%d", (timer % 60) / 10);
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 65, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 65, 320) + ui_operation_position, 1.3);
 		sprintf(time, "%d", abs((timer % 60) - (((timer % 60) / 10) * 10)));
-		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 165, 320), 1.3);
+		RENDER->CenterRender(IMAGE->FindImage(time), Vec2(WINSIZEX / 2 + 165, 320) + ui_operation_position, 1.3);
 	}
 
 	char t_score[5] = "";
 	if (score > 9999) score = 9999;
 	sprintf(t_score, "%d", score / 1000);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 175));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2800, 175) + ui_operation_position);
 	sprintf(t_score, "%d", (score - ((score / 1000) * 1000)) / 100);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2900, 175));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(2900, 175) + ui_operation_position);
 	sprintf(t_score, "%d", (score - ((score / 100) * 100)) / 10);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3000, 175));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3000, 175) + ui_operation_position);
 	sprintf(t_score, "%d", (score - ((score / 100) * 100)) % 10);
-	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3100, 175));
+	RENDER->CenterRender(IMAGE->FindImage(t_score), Vec2(3100, 175) + ui_operation_position);
 
 	if (isStop)
 	{
@@ -573,6 +580,7 @@ void cParentScene::Render()
 			RENDER->CenterRender(IMAGE->FindImage("CFnext"), Vec2(WINSIZEX / 2, WINSIZEY / 2 + 540));
 		}
 	}
+
 }
 
 bool fadeOut = true;

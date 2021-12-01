@@ -118,6 +118,8 @@ void cSelectStageScene::Update()
 			if (MOUSE->LButtonClick("end_title") && stage == Stage::None)
 			{
 				SCENE->ChangeScene("cTitleScene");
+				SOUND->Stop("Main");
+				SOUND->Play("Title", DSBVOLUME_MAX, true);
 			}
 		}
 		else
