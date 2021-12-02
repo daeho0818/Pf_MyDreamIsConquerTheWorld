@@ -390,17 +390,17 @@ void cParentScene::Render()
 	RENDER->CenterRender(IMAGE->FindImage("Ingame_HP"), Vec2(270, 250) + +ui_operation_position);
 
 	if (player->isHp)
-	{
 		RENDER->CenterRender(IMAGE->FindImage("Hp+"), Vec2(820, 125) + ui_operation_position);
-	}
-	else if (player->speedUp)
-	{
+	else 
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(820, 125) + ui_operation_position);
+
+	if (player->speedUp)
 		RENDER->CenterRender(IMAGE->FindImage("Speed+"), Vec2(1020, 125) + ui_operation_position);
-	}
-	else if (player->invincibility)
-	{
+	else
+		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1020, 125) + ui_operation_position);
+
+	if (player->invincibility)
 		RENDER->CenterRender(IMAGE->FindImage("Invincibility"), Vec2(1220, 125) + ui_operation_position);
-	}
 	else
 		RENDER->CenterRender(IMAGE->FindImage("Ingame_Item"), Vec2(1220, 125) + ui_operation_position);
 
