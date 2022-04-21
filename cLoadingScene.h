@@ -1,5 +1,16 @@
 #pragma once
 
+#include "cTitleScene.h"
+#include "cSelectStageScene.h"
+#include "cIceScene.h"
+#include "cCityScene.h"
+#include "cCityNightScene.h"
+#include "cChurchScene.h"
+#include "cJungleScene.h"
+#include "cDesertScene.h"
+#include "cOceanScene.h"
+#include "cEndScene.h"
+
 struct LoadInfo
 {
 	LoadInfo(string key, string path, int count) : key(key), path(path), count(count) {}
@@ -25,11 +36,9 @@ public:
 
 private:
 	void AddLoad(string key, string path, int count = 0);
-	void AddResource();
 
 	list<LoadInfo> loadList;
-
-	cThreadPool* thread = nullptr;
+	list <function<void()>> loadScenes;
 
 	int listCount;
 
